@@ -1,8 +1,0 @@
-Package: quickgui
-Version: 1.0.0-1
-Section: base
-Priority: optional
-Architecture: amd64
-Maintainer: Yannick Mauray <yannick@frenchguy.ch>
-Description: Flutter frontend for Quickget
-
