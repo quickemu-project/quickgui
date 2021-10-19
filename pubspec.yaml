@@ -39,6 +39,7 @@ dependencies:
       url: git://github.com/google/flutter-desktop-embedding.git
       path: plugins/window_size
   quiver: ^3.0.1+1
+  tuple: ^2.0.0
 
 dev_dependencies:
   flutter_test:

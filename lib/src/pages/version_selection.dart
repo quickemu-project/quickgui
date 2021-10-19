@@ -1,9 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:quickgui/src/model/operating_system.dart';
 import 'package:quickgui/src/model/version.dart';
-import 'package:quiver/iterables.dart';
+import 'package:quickgui/src/pages/option_selection.dart';
+import 'package:tuple/tuple.dart';
 
 class VersionSelection extends StatefulWidget {
   const VersionSelection({Key? key, required this.operatingSystem}) : super(key: key);
@@ -15,65 +14,44 @@ class VersionSelection extends StatefulWidget {
 }
 
 class _VersionSelectionState extends State<VersionSelection> {
-  late Future<List<Version>> _future;
-
-  @override
-  void initState() {
-    _future = loadOperatingSystemVersions();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Select version for ${widget.operatingSystem.name}'),
       ),
-      body: FutureBuilder<List<Version>>(
-        future: _future,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index) {
-                      var item = snapshot.data![index];
-                      return Card(
-                        child: ListTile(
-                          title: Text(item.name),
-                          onTap: () {
-                            Navigator.of(context).pop(item);
-                          },
-                        ),
-                      );
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: widget.operatingSystem.versions.length,
+              itemBuilder: (context, index) {
+                var item = widget.operatingSystem.versions[index];
+                return Card(
+                  child: ListTile(
+                    title: Text(item.version),
+                    onTap: () {
+                      if (widget.operatingSystem.versions[index].options.length > 1) {
+                        Navigator.of(context)
+                            .push<String>(
+                                MaterialPageRoute(fullscreenDialog: true, builder: (context) => OptionSelection(widget.operatingSystem.versions[index])))
+                            .then((selection) {
+                          if (selection != null) {
+                            Navigator.of(context).pop(Tuple2<Version, String?>(item, selection));
+                          }
+                        });
+                      } else {
+                        Navigator.of(context).pop(Tuple2<Version, String?>(item, null));
+                      }
                     },
                   ),
-                ],
-              ),
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
-  }
-
-  Future<List<Version>> loadOperatingSystemVersions() async {
-    return Process.run('quickget', [widget.operatingSystem.code!, 'dummy']).then<List<Version>>((process) {
-      var stdout = process.stdout as String;
-      var versions = stdout.split('\n')[1].split(' ');
-      var names =
-          versions.map((version) => version.toLowerCase().split('-').map((e) => e[0].toUpperCase() + e.substring(1)).join(' ').split('_').join('.')).toList();
-      List<Version> items = [];
-      items.addAll(zip([versions, names]).map((e) => Version(code: e[0], name: e[1])));
-
-      return items;
-    });
   }
 }

@@ -7,6 +7,7 @@ import 'package:quickgui/src/model/version.dart';
 import 'package:quickgui/src/pages/operating_system_selection.dart';
 import 'package:quickgui/src/pages/version_selection.dart';
 import 'package:quickgui/src/widgets/home_page_button.dart';
+import 'package:tuple/tuple.dart';
 
 class HomePageButtons extends StatefulWidget {
   const HomePageButtons({Key? key}) : super(key: key);
@@ -16,10 +17,16 @@ class HomePageButtons extends StatefulWidget {
 }
 
 class _HomePageButtonsState extends State<HomePageButtons> {
+  OperatingSystem? _selectedOperatingSystem;
+  Version? _selectedVersion;
+  String? _selectedOption;
+
   @override
   Widget build(BuildContext context) {
-    OperatingSystem? _selectedOperatingSystem;
-    Version? _selectedVersion;
+    var _versionButtonLabel = _selectedVersion?.version ?? 'Select...';
+    if (_selectedOption != null) {
+      _versionButtonLabel = "$_versionButtonLabel ($_selectedOption)";
+    }
     return Row(
       children: [
         HomePageButton(
@@ -27,14 +34,13 @@ class _HomePageButtonsState extends State<HomePageButtons> {
           text: _selectedOperatingSystem?.name ?? 'Select...',
           onPressed: () {
             Navigator.of(context)
-                .push<OperatingSystem>(MaterialPageRoute(
-                    fullscreenDialog: true,
-                    builder: (context) => const OperatingSystemSelection()))
+                .push<OperatingSystem>(MaterialPageRoute(fullscreenDialog: true, builder: (context) => const OperatingSystemSelection()))
                 .then((selection) {
               if (selection != null) {
                 setState(() {
                   _selectedOperatingSystem = selection;
                   _selectedVersion = null;
+                  _selectedOption = null;
                 });
               }
             });
@@ -42,19 +48,19 @@ class _HomePageButtonsState extends State<HomePageButtons> {
         ),
         HomePageButton(
           label: "Version",
-          text: _selectedVersion?.name ?? 'Select...',
+          text: _versionButtonLabel, //_selectedVersion?.version ?? 'Select...',
           onPressed: (_selectedOperatingSystem != null)
               ? () {
                   Navigator.of(context)
-                      .push<Version>(MaterialPageRoute(
+                      .push<Tuple2<Version, String?>>(MaterialPageRoute(
                     fullscreenDialog: true,
-                    builder: (context) => VersionSelection(
-                        operatingSystem: _selectedOperatingSystem!),
+                    builder: (context) => VersionSelection(operatingSystem: _selectedOperatingSystem!),
                   ))
                       .then((selection) {
                     if (selection != null) {
                       setState(() {
-                        _selectedVersion = selection;
+                        _selectedVersion = selection.item1;
+                        _selectedOption = selection.item2;
                       });
                     }
                   });
@@ -68,14 +74,9 @@ class _HomePageButtonsState extends State<HomePageButtons> {
               ? null
               : () async {
                   showLoadingIndicator(text: 'Downloading');
-                  await Process.run('quickget', [
-                    _selectedOperatingSystem!.code!,
-                    _selectedVersion!.code!
-                  ]);
+                  await Process.run('quickget', [_selectedOperatingSystem!.code, _selectedVersion!.version]);
                   hideLoadingIndicator();
-                  showDoneDialog(
-                      operatingSystem: _selectedOperatingSystem!.code!,
-                      version: _selectedVersion!.code!);
+                  showDoneDialog(operatingSystem: _selectedOperatingSystem!.code, version: _selectedVersion!.version);
                 },
         ),
       ],
@@ -101,21 +102,14 @@ class _HomePageButtonsState extends State<HomePageButtons> {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 32),
-                  child: Text('Downloading...',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1
-                          ?.copyWith(color: Colors.white)),
+                  child: Text('Downloading...', style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.white)),
                 ),
                 const CircularProgressIndicator(),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 32),
                   child: Text(
                     'Target : ${Directory.current.absolute.path}',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        ?.copyWith(color: Colors.white),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.white),
                   ),
                 ),
               ],
@@ -130,8 +124,7 @@ class _HomePageButtonsState extends State<HomePageButtons> {
     Navigator.of(context).pop();
   }
 
-  void showDoneDialog(
-      {required String operatingSystem, required String version}) {
+  void showDoneDialog({required String operatingSystem, required String version}) {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -149,18 +142,10 @@ class _HomePageButtonsState extends State<HomePageButtons> {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 32),
-                  child: Text('Done !',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1
-                          ?.copyWith(color: Colors.white)),
+                  child: Text('Done !', style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.white)),
                 ),
-                Text(
-                    'Now run "quickemu --vm $operatingSystem-$version" to start the VM',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        ?.copyWith(color: Colors.white)),
+                Text('Now run "quickemu --vm $operatingSystem-$version" to start the VM',
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.white)),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 32),
                   child: ElevatedButton(
@@ -169,10 +154,7 @@ class _HomePageButtonsState extends State<HomePageButtons> {
                     },
                     child: Text(
                       'Dismiss',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1
-                          ?.copyWith(color: Colors.white),
+                      style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.white),
                     ),
                   ),
                 ),

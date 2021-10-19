@@ -1,6 +1,6 @@
 class Version {
-  Version({required this.name, this.code});
+  Version(this.version) : options = [];
 
-  final String name;
-  final String? code;
+  final String version;
+  final List<String> options;
 }

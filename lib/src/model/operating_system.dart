@@ -1,7 +1,11 @@
+import 'package:quickgui/src/model/version.dart';
+
 class OperatingSystem {
-  OperatingSystem({required this.name, this.code, this.hasMore = false});
+  OperatingSystem(this.name, this.code) : versions = [];
 
   final String name;
-  final String? code;
-  final bool hasMore;
+  final String code;
+  List<Version> versions;
 }
+
+var gOperatingSystems = <OperatingSystem>[];
