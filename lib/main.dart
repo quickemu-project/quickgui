@@ -18,7 +18,7 @@ void main() async {
 }
 
 Future<List<OperatingSystem>> loadOperatingSystems(bool showUbuntus) async {
-  var process = await Process.run('quickget', ['list']);
+  var process = await Process.run('quickget', ['list_csv']);
   var stdout = process.stdout as String;
   var output = <OperatingSystem>[];
 
@@ -26,7 +26,7 @@ Future<List<OperatingSystem>> loadOperatingSystems(bool showUbuntus) async {
   Version? currentVersion;
 
   stdout.split('\n').skip(1).where((element) => element.isNotEmpty).map((e) => e.trim()).forEach((element) {
-    var supportedVersion = Tuple5.fromList(element.split(","));
+    var supportedVersion = Tuple4.fromList(element.split(","));
     if (currentOperatingSystem?.code != supportedVersion.item2) {
       currentOperatingSystem = OperatingSystem(supportedVersion.item1, supportedVersion.item2);
       output.add(currentOperatingSystem!);

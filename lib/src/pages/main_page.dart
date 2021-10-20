@@ -49,15 +49,9 @@ class MainPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  TextButton(
-                    child: Text(
-                      "Working directory : ${Directory.current.absolute.path}",
-                      style: Theme.of(context)
-                          .textTheme
-                          .subtitle1!
-                          .copyWith(color: Colors.white),
-                    ),
-                    onPressed: () {},
+                  Text(
+                    "Working directory : ${Directory.current.absolute.path}",
+                    style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.white),
                   ),
                 ],
               ),
