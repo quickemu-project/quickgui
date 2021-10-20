@@ -28,3 +28,4 @@ ios/
 android/
 windows/
 list.csv
+*.xz
