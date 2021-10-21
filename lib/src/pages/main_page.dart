@@ -10,6 +10,7 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Directory.current = '/home/yannick';
     return Scaffold(
       body: Column(
         children: [

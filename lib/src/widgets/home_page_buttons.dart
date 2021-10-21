@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -75,32 +74,19 @@ class _HomePageButtonsState extends State<HomePageButtons> {
           onPressed: (_selectedVersion == null)
               ? null
               : () {
-                  Navigator.of(context).push(MaterialPageRoute(
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
                       builder: (context) => Downloader(
-                            operatingSystem: _selectedOperatingSystem!,
-                            version: _selectedVersion!,
-                            option: _selectedOption,
-                          )));
-                  /*
-                  showLoadingIndicator(text: 'Downloading');
-                  //await Process.run('quickget', [_selectedOperatingSystem!.code, _selectedVersion!.version]);
-                  var options = [_selectedOperatingSystem!.code, _selectedVersion!.version];
-                  if (_selectedOption != null) {
-                    options.add(_selectedOption!);
-                  }
-                  var process = await Process.start('quickget', options);
-                  process.stderr.transform(utf8.decoder).forEach(
-                    
+                        operatingSystem: _selectedOperatingSystem!,
+                        version: _selectedVersion!,
+                        option: _selectedOption,
+                      ),
+                    ),
                   );
-                  var exitCode = await process.exitCode;
-                  hideLoadingIndicator();
-                  showDoneDialog(operatingSystem: _selectedOperatingSystem!.code, version: _selectedVersion!.version);
-                  */
                 },
         ),
       ],
     );
-    ;
   }
 
   void showLoadingIndicator({String text = ''}) {
