@@ -27,7 +27,8 @@ bin: quickgui
 	tar -C $(BUILD_ROOT) -c -v -f $(BIN_TAR) $(BASE_NAME)
 	xz -z $(BIN_TAR)
 
-src: distclean
+src:
 	mkdir -p $(BUILD_ROOT)
 	tar -C .. -c -v -f $(SRC_TAR) --exclude .git --transform 's/^quickgui/$(BASE_NAME)/' quickgui
+	rm ${SRC_TAR}.xz
 	xz -z $(SRC_TAR)
