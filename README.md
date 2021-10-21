@@ -62,9 +62,11 @@ If there are some options (Windows language, Pop!_OS nvidia or Intel, etc..), th
 
 ![Option is diplayed](./assets/github/screenshot9.png)
 
-Then click "Download". The ISO will be downloaded in the current working directory, in 99% of cases that will be the directory where `quickgui` was invoked from. The spinner will tell you where the file is being downloaded.
+Then click "Download". The ISO will be downloaded in the current working directory, in 99% of cases that will be the directory where `quickgui` was invoked from.
 
-![All set !](./assets/github/screenshot6.png)
+![Waiting for download](./assets/github/screenshot10.png)
 
-![Downloading](./assets/github/screenshot7.png)
+![Downloading](./assets/github/screenshot11.png)
+
+![Download finished](./assets/github/screenshot12.png)
 

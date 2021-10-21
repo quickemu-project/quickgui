@@ -29,3 +29,5 @@ android/
 windows/
 list.csv
 *.xz
+*.iso
+*.conf

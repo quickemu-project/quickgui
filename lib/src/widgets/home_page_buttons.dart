@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quickgui/src/model/operating_system.dart';
 import 'package:quickgui/src/model/version.dart';
+import 'package:quickgui/src/pages/downloader.dart';
 import 'package:quickgui/src/pages/operating_system_selection.dart';
 import 'package:quickgui/src/pages/version_selection.dart';
 import 'package:quickgui/src/widgets/home_page_button.dart';
@@ -72,11 +74,28 @@ class _HomePageButtonsState extends State<HomePageButtons> {
           text: 'Download',
           onPressed: (_selectedVersion == null)
               ? null
-              : () async {
+              : () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => Downloader(
+                            operatingSystem: _selectedOperatingSystem!,
+                            version: _selectedVersion!,
+                            option: _selectedOption,
+                          )));
+                  /*
                   showLoadingIndicator(text: 'Downloading');
-                  await Process.run('quickget', [_selectedOperatingSystem!.code, _selectedVersion!.version]);
+                  //await Process.run('quickget', [_selectedOperatingSystem!.code, _selectedVersion!.version]);
+                  var options = [_selectedOperatingSystem!.code, _selectedVersion!.version];
+                  if (_selectedOption != null) {
+                    options.add(_selectedOption!);
+                  }
+                  var process = await Process.start('quickget', options);
+                  process.stderr.transform(utf8.decoder).forEach(
+                    
+                  );
+                  var exitCode = await process.exitCode;
                   hideLoadingIndicator();
                   showDoneDialog(operatingSystem: _selectedOperatingSystem!.code, version: _selectedVersion!.version);
+                  */
                 },
         ),
       ],
