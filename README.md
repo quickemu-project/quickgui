@@ -4,6 +4,24 @@ A Flutter frontend for [quickget](https://github.com/wimpysworld/quickemu).
 
 ## Install
 
+### Standard package
+
+On Ubuntu, `quickgui` can be installed as a standard package.
+
+First, add this ppa (this only needs to be done once) :
+
+```
+sudo add-apt-repository ppa:yannick-mauray/quickgui
+sudo apt update
+```
+
+Then, install the pacakge : 
+```
+sudo apt install quickgui
+```
+
+### Pre-compiled binary
+
 * [Download](https://github.com/ymauray/quickgui/releases/) the binary.
 * Uncompress the tarball wherever you want.
 * From anywhere on the filesystem, run the app.
