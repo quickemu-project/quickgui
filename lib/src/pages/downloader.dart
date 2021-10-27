@@ -7,6 +7,9 @@ import 'package:quickgui/src/globals.dart';
 import 'package:quickgui/src/model/operating_system.dart';
 import 'package:quickgui/src/model/option.dart';
 import 'package:quickgui/src/model/version.dart';
+import 'package:quickgui/src/widgets/cancel_dismiss_button.dart';
+import 'package:quickgui/src/widgets/download_label.dart';
+import 'package:quickgui/src/widgets/download_progress_bar.dart';
 
 class Downloader extends StatefulWidget {
   const Downloader({
@@ -89,7 +92,8 @@ class _DownloaderState extends State<Downloader> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-            'Downloading ${widget.operatingSystem.name} ${widget.version.version}' + (widget.option!.option.isNotEmpty ? ' (${widget.option!.option})' : '')),
+          'Downloading ${widget.operatingSystem.name} ${widget.version.version}' + (widget.option!.option.isNotEmpty ? ' (${widget.option!.option})' : ''),
+        ),
         automaticallyImplyLeading: false,
       ),
       body: Column(
@@ -102,30 +106,14 @@ class _DownloaderState extends State<Downloader> {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: _downloadFinished
-                          ? const Text('Download finished.')
-                          : snapshot.hasData
-                              ? widget.option!.downloader != 'zsync'
-                                  ? widget.option!.downloader == 'wget'
-                                      ? Text('Downloading...${(snapshot.data! * 100).toInt()}%')
-                                      : Text('${snapshot.data} Mbs downloaded')
-                                  : const Text("Downloading (no progress available)...")
-                              : const Text('Waiting for download to start'),
+                    DownloadLabel(
+                      downloadFinished: _downloadFinished,
+                      data: snapshot.hasData ? snapshot.data : null,
+                      downloader: widget.option!.downloader,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
-                        width: 200,
-                        child: LinearProgressIndicator(
-                          value: _downloadFinished
-                              ? 1
-                              : snapshot.hasData
-                                  ? data
-                                  : null,
-                        ),
-                      ),
+                    DownloadProgressBar(
+                      downloadFinished: _downloadFinished,
+                      data: snapshot.hasData ? data : null,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 32),
@@ -136,20 +124,8 @@ class _DownloaderState extends State<Downloader> {
               },
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                    onPressed: _downloadFinished
-                        ? () {
-                            Navigator.of(context).pop();
-                          }
-                        : null,
-                    child: _downloadFinished ? const Text('Dimiss') : const Text('Cancel'))
-              ],
-            ),
+          CancelDismissButton(
+            downloadFinished: _downloadFinished,
           ),
         ],
       ),
