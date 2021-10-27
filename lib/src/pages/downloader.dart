@@ -51,10 +51,8 @@ class _DownloaderState extends State<Downloader> {
     var matches = macRecoveryPattern.allMatches(line).toList();
     if (matches.isNotEmpty) {
       var size = matches[0].group(1);
-      print(size);
       if (size != null) {
         var value = double.parse(size);
-        print(value);
         controller.add(value);
       }
     }
@@ -75,7 +73,6 @@ class _DownloaderState extends State<Downloader> {
       }
 
       process.exitCode.then((value) {
-        print("Process exited with exit code $value");
         controller.close();
         setState(() {
           _downloadFinished = true;
