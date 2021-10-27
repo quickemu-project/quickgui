@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:quickgui/src/globals.dart';
 import 'package:quickgui/src/model/operating_system.dart';
 import 'package:quickgui/src/model/option.dart';
 import 'package:quickgui/src/model/version.dart';
@@ -32,6 +33,7 @@ class _DownloaderState extends State<Downloader> {
 
   @override
   void initState() {
+    Directory.current = gCurrentDirectoy;
     _progressStream = progressStream();
     super.initState();
   }
@@ -127,7 +129,7 @@ class _DownloaderState extends State<Downloader> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 32),
-                      child: Text("Target folder : ${Directory.current}"),
+                      child: Text("Target folder : $gCurrentDirectoy"),
                     ),
                   ],
                 );

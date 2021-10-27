@@ -1,13 +1,20 @@
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:quickgui/src/globals.dart';
 import 'package:quickgui/src/widgets/home_page_buttons.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   const MainPage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     //Directory.current = '/home/yannick';
@@ -50,9 +57,19 @@ class MainPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Text(
-                    "Working directory : ${Directory.current.absolute.path}",
-                    style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.white),
+                  InkWell(
+                    onTap: () async {
+                      var folder = await FilePicker.platform.getDirectoryPath(dialogTitle: "Pick a folder");
+                      if (folder != null) {
+                        setState(() {
+                          gCurrentDirectoy = Directory(folder);
+                        });
+                      }
+                    },
+                    child: Text(
+                      "Working directory : ${gCurrentDirectoy.path}",
+                      style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.white),
+                    ),
                   ),
                 ],
               ),
