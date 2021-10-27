@@ -8,17 +8,17 @@ import 'package:quickgui/src/model/version.dart';
 import 'package:quickgui/src/pages/downloader.dart';
 import 'package:quickgui/src/pages/operating_system_selection.dart';
 import 'package:quickgui/src/pages/version_selection.dart';
-import 'package:quickgui/src/widgets/home_page_button.dart';
+import 'package:quickgui/src/widgets/home_page/home_page_button.dart';
 import 'package:tuple/tuple.dart';
 
-class HomePageButtons extends StatefulWidget {
-  const HomePageButtons({Key? key}) : super(key: key);
+class HomePageButtonGroup extends StatefulWidget {
+  const HomePageButtonGroup({Key? key}) : super(key: key);
 
   @override
-  State<HomePageButtons> createState() => _HomePageButtonsState();
+  State<HomePageButtonGroup> createState() => _HomePageButtonGroupState();
 }
 
-class _HomePageButtonsState extends State<HomePageButtons> {
+class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
   OperatingSystem? _selectedOperatingSystem;
   Version? _selectedVersion;
   Option? _selectedOption;

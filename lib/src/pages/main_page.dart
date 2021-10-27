@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:quickgui/src/globals.dart';
-import 'package:quickgui/src/widgets/home_page_buttons.dart';
+import 'package:quickgui/src/widgets/home_page/home_page_button_group.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key, required this.title}) : super(key: key);
@@ -50,7 +50,7 @@ class _MainPageState extends State<MainPage> {
                           children: const [
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 12),
-                              child: HomePageButtons(),
+                              child: HomePageButtonGroup(),
                             )
                           ],
                         ),

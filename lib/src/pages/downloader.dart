@@ -7,9 +7,9 @@ import 'package:quickgui/src/globals.dart';
 import 'package:quickgui/src/model/operating_system.dart';
 import 'package:quickgui/src/model/option.dart';
 import 'package:quickgui/src/model/version.dart';
-import 'package:quickgui/src/widgets/cancel_dismiss_button.dart';
-import 'package:quickgui/src/widgets/download_label.dart';
-import 'package:quickgui/src/widgets/download_progress_bar.dart';
+import 'package:quickgui/src/widgets/downloader/cancel_dismiss_button.dart';
+import 'package:quickgui/src/widgets/downloader/download_label.dart';
+import 'package:quickgui/src/widgets/downloader/download_progress_bar.dart';
 
 class Downloader extends StatefulWidget {
   const Downloader({
