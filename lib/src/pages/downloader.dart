@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:quickgui/src/model/operating_system.dart';
+import 'package:quickgui/src/model/option.dart';
 import 'package:quickgui/src/model/version.dart';
 
 class Downloader extends StatefulWidget {
@@ -16,14 +17,15 @@ class Downloader extends StatefulWidget {
 
   final OperatingSystem operatingSystem;
   final Version version;
-  final String? option;
+  final Option? option;
 
   @override
   _DownloaderState createState() => _DownloaderState();
 }
 
 class _DownloaderState extends State<Downloader> {
-  final pattern = RegExp("( [0-9.]+%)");
+  final wgetPattern = RegExp("( [0-9.]+%)");
+  final macRecoveryPattern = RegExp("([0-9]+\\.[0-9])");
   late final Stream<double> _progressStream;
   bool _downloadFinished = false;
   var controller = StreamController<double>();
@@ -34,9 +36,8 @@ class _DownloaderState extends State<Downloader> {
     super.initState();
   }
 
-  void parseProgress(String line) {
-    print(line);
-    var matches = pattern.allMatches(line).toList();
+  void parseWgetProgress(String line) {
+    var matches = wgetPattern.allMatches(line).toList();
     if (matches.isNotEmpty) {
       var percent = matches[0].group(1);
       if (percent != null) {
@@ -46,14 +47,33 @@ class _DownloaderState extends State<Downloader> {
     }
   }
 
+  void parseMacRecoveryProgress(String line) {
+    var matches = macRecoveryPattern.allMatches(line).toList();
+    if (matches.isNotEmpty) {
+      var size = matches[0].group(1);
+      print(size);
+      if (size != null) {
+        var value = double.parse(size);
+        print(value);
+        controller.add(value);
+      }
+    }
+  }
+
   Stream<double> progressStream() {
     var options = [widget.operatingSystem.code, widget.version.version];
     if (widget.option != null) {
-      options.add(widget.option!);
+      options.add(widget.option!.option);
     }
     Process.start('quickget', options).then((process) {
-      process.stdout.transform(utf8.decoder).forEach(parseProgress);
-      process.stderr.transform(utf8.decoder).forEach(parseProgress);
+      if (widget.option!.downloader == 'wget') {
+        process.stderr.transform(utf8.decoder).forEach(parseWgetProgress);
+      } else if (widget.option!.downloader == 'zsync') {
+        controller.add(-1);
+      } else if (widget.option!.downloader == 'macrecovery') {
+        process.stdout.transform(utf8.decoder).forEach(parseMacRecoveryProgress);
+      }
+
       process.exitCode.then((value) {
         print("Process exited with exit code $value");
         controller.close();
@@ -69,7 +89,8 @@ class _DownloaderState extends State<Downloader> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Downloading ${widget.operatingSystem.name} ${widget.version.version}' + (widget.option != null ? ' (${widget.option})' : '')),
+        title: Text(
+            'Downloading ${widget.operatingSystem.name} ${widget.version.version}' + (widget.option!.option.isNotEmpty ? ' (${widget.option!.option})' : '')),
         automaticallyImplyLeading: false,
       ),
       body: Column(
@@ -78,6 +99,7 @@ class _DownloaderState extends State<Downloader> {
             child: StreamBuilder(
               stream: _progressStream,
               builder: (context, AsyncSnapshot<double> snapshot) {
+                var data = !snapshot.hasData || widget.option!.downloader != 'wget' ? null : snapshot.data;
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -86,7 +108,11 @@ class _DownloaderState extends State<Downloader> {
                       child: _downloadFinished
                           ? const Text('Download finished.')
                           : snapshot.hasData
-                              ? Text('Downloading...${(snapshot.data! * 100).toInt()}%')
+                              ? widget.option!.downloader != 'zsync'
+                                  ? widget.option!.downloader == 'wget'
+                                      ? Text('Downloading...${(snapshot.data! * 100).toInt()}%')
+                                      : Text('${snapshot.data} Mbs downloaded')
+                                  : const Text("Downloading (no progress available)...")
                               : const Text('Waiting for download to start'),
                     ),
                     Padding(
@@ -97,10 +123,14 @@ class _DownloaderState extends State<Downloader> {
                           value: _downloadFinished
                               ? 1
                               : snapshot.hasData
-                                  ? snapshot.data!
+                                  ? data
                                   : null,
                         ),
                       ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 32),
+                      child: Text("Target folder : ${Directory.current}"),
                     ),
                   ],
                 );

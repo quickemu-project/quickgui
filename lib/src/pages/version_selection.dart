@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quickgui/src/model/operating_system.dart';
+import 'package:quickgui/src/model/option.dart';
 import 'package:quickgui/src/model/version.dart';
 import 'package:quickgui/src/pages/option_selection.dart';
 import 'package:tuple/tuple.dart';
@@ -34,15 +35,15 @@ class _VersionSelectionState extends State<VersionSelection> {
                     onTap: () {
                       if (widget.operatingSystem.versions[index].options.length > 1) {
                         Navigator.of(context)
-                            .push<String>(
+                            .push<Option>(
                                 MaterialPageRoute(fullscreenDialog: true, builder: (context) => OptionSelection(widget.operatingSystem.versions[index])))
                             .then((selection) {
                           if (selection != null) {
-                            Navigator.of(context).pop(Tuple2<Version, String?>(item, selection));
+                            Navigator.of(context).pop(Tuple2<Version, Option?>(item, selection));
                           }
                         });
                       } else {
-                        Navigator.of(context).pop(Tuple2<Version, String?>(item, null));
+                        Navigator.of(context).pop(Tuple2<Version, Option?>(item, widget.operatingSystem.versions[index].options[0]));
                       }
                     },
                   ),

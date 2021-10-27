@@ -22,7 +22,7 @@ class _OptionSelectionState extends State<OptionSelection> {
 
   @override
   Widget build(BuildContext context) {
-    var list = widget.version.options.where((e) => e.toLowerCase().contains(term.toLowerCase())).toList();
+    var list = widget.version.options.where((e) => e.option.toLowerCase().contains(term.toLowerCase())).toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -73,7 +73,7 @@ class _OptionSelectionState extends State<OptionSelection> {
                 var item = list[index];
                 return Card(
                   child: ListTile(
-                    title: Text(item),
+                    title: Text(item.option),
                     onTap: () {
                       Navigator.of(context).pop(item);
                     },

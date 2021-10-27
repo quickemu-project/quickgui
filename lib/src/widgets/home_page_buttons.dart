@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quickgui/src/model/operating_system.dart';
+import 'package:quickgui/src/model/option.dart';
 import 'package:quickgui/src/model/version.dart';
 import 'package:quickgui/src/pages/downloader.dart';
 import 'package:quickgui/src/pages/operating_system_selection.dart';
@@ -20,13 +21,13 @@ class HomePageButtons extends StatefulWidget {
 class _HomePageButtonsState extends State<HomePageButtons> {
   OperatingSystem? _selectedOperatingSystem;
   Version? _selectedVersion;
-  String? _selectedOption;
+  Option? _selectedOption;
 
   @override
   Widget build(BuildContext context) {
     var _versionButtonLabel = _selectedVersion?.version ?? 'Select...';
-    if (_selectedOption != null) {
-      _versionButtonLabel = "$_versionButtonLabel ($_selectedOption)";
+    if (_selectedOption?.option.isNotEmpty ?? false) {
+      _versionButtonLabel = "$_versionButtonLabel (${_selectedOption!.option})";
     }
     return Row(
       children: [
@@ -53,7 +54,7 @@ class _HomePageButtonsState extends State<HomePageButtons> {
           onPressed: (_selectedOperatingSystem != null)
               ? () {
                   Navigator.of(context)
-                      .push<Tuple2<Version, String?>>(MaterialPageRoute(
+                      .push<Tuple2<Version, Option?>>(MaterialPageRoute(
                     fullscreenDialog: true,
                     builder: (context) => VersionSelection(operatingSystem: _selectedOperatingSystem!),
                   ))
