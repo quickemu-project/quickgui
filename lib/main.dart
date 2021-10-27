@@ -9,17 +9,6 @@ import 'package:quickgui/src/model/version.dart';
 import 'package:tuple/tuple.dart';
 import 'package:window_size/window_size.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  Directory.current = gCurrentDirectoy;
-  setWindowTitle('Quickgui : a flutter frontend for Quickget and Quickemu');
-  setWindowMinSize(const Size(692, 580));
-  setWindowMaxSize(const Size(692, 580));
-  gOperatingSystems = await loadOperatingSystems(false);
-
-  runApp(const App());
-}
-
 Future<List<OperatingSystem>> loadOperatingSystems(bool showUbuntus) async {
   var process = await Process.run('quickget', ['list_csv']);
   var stdout = process.stdout as String;
@@ -51,4 +40,15 @@ Future<List<OperatingSystem>> loadOperatingSystems(bool showUbuntus) async {
   });
 
   return output;
+}
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Directory.current = gCurrentDirectoy;
+  setWindowTitle('Quickgui : a flutter frontend for Quickget and Quickemu');
+  setWindowMinSize(const Size(692, 580));
+  setWindowMaxSize(const Size(692, 580));
+  gOperatingSystems = await loadOperatingSystems(false);
+
+  runApp(const App());
 }

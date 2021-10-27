@@ -1,9 +1,8 @@
 import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:quickgui/src/globals.dart';
-import 'package:quickgui/src/widgets/home_page/home_page_button_group.dart';
+import 'package:quickgui/src/widgets/home_page/logo.dart';
+import 'package:quickgui/src/widgets/home_page/main_menu.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key, required this.title}) : super(key: key);
@@ -17,64 +16,20 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
-    //Directory.current = '/home/yannick';
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Main menu'),
+        leading: IconButton(
+          onPressed: () {
+            exit(0);
+          },
+          icon: const Icon(Icons.exit_to_app),
+        ),
+      ),
       body: Column(
-        children: [
-          SizedBox(
-            height: 250,
-            child: Flex(
-              direction: Axis.vertical,
-              children: [
-                Expanded(
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image.asset('assets/images/logo.png'),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Container(
-              color: Colors.pink,
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 12),
-                              child: HomePageButtonGroup(),
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  InkWell(
-                    onTap: () async {
-                      var folder = await FilePicker.platform.getDirectoryPath(dialogTitle: "Pick a folder");
-                      if (folder != null) {
-                        setState(() {
-                          gCurrentDirectoy = Directory(folder);
-                        });
-                      }
-                    },
-                    child: Text(
-                      "Working directory : ${gCurrentDirectoy.path}",
-                      style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.white),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+        children: const [
+          Logo(),
+          MainMenu(),
         ],
       ),
     );
