@@ -4,6 +4,13 @@ A Flutter frontend for [quickget](https://github.com/wimpysworld/quickemu).
 
 ## Install
 
+### quickemu
+
+For this tool to work, you need to have `quickget`, from the `quickemu` 
+package, in your current `path`.
+Go to the `quickemu` [github page](https://github.com/wimpysworld/quickemu)
+for more information about installing the tool.
+
 ### Standard package
 
 On Ubuntu, `quickgui` can be installed as a standard package.
