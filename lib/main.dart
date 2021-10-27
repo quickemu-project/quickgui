@@ -26,7 +26,15 @@ Future<List<OperatingSystem>> loadOperatingSystems(bool showUbuntus) async {
   Version? currentVersion;
 
   stdout.split('\n').skip(1).where((element) => element.isNotEmpty).map((e) => e.trim()).forEach((element) {
-    var supportedVersion = Tuple4.fromList(element.split(","));
+    var chunks = element.split(",");
+    Tuple5 supportedVersion;
+    if (chunks.length == 4) // Legacy version of quickget
+    {
+      supportedVersion = Tuple5.fromList([...chunks, "wget"]);
+    } else {
+      supportedVersion = Tuple5.fromList(chunks);
+    }
+
     if (currentOperatingSystem?.code != supportedVersion.item2) {
       currentOperatingSystem = OperatingSystem(supportedVersion.item1, supportedVersion.item2);
       output.add(currentOperatingSystem!);
