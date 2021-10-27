@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quickgui/src/pages/downloader_page.dart';
+import 'package:quickgui/src/pages/manager.dart';
 import 'package:quickgui/src/widgets/home_page/home_page_button.dart';
 
 class MainMenu extends StatelessWidget {
@@ -16,7 +17,15 @@ class MainMenu extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               HomePageButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    PageRouteBuilder(
+                      fullscreenDialog: true,
+                      pageBuilder: (context, animation1, animation2) => const Manager(),
+                      transitionDuration: Duration.zero,
+                    ),
+                  );
+                },
                 text: 'Manage existing machines',
               ),
               HomePageButton(
