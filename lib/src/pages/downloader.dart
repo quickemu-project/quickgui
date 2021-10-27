@@ -33,6 +33,7 @@ class _DownloaderState extends State<Downloader> {
   late final Stream<double> _progressStream;
   bool _downloadFinished = false;
   var controller = StreamController<double>();
+  Process? _process;
 
   @override
   void initState() {
@@ -83,6 +84,10 @@ class _DownloaderState extends State<Downloader> {
           _downloadFinished = true;
         });
       });
+
+      setState(() {
+        _process = process;
+      });
     });
     return controller.stream;
   }
@@ -125,6 +130,9 @@ class _DownloaderState extends State<Downloader> {
             ),
           ),
           CancelDismissButton(
+            onCancel: () {
+              _process?.kill();
+            },
             downloadFinished: _downloadFinished,
           ),
         ],

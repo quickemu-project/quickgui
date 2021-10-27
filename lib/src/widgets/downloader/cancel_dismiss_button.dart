@@ -4,9 +4,11 @@ class CancelDismissButton extends StatelessWidget {
   const CancelDismissButton({
     Key? key,
     required this.downloadFinished,
+    required this.onCancel,
   }) : super(key: key);
 
   final bool downloadFinished;
+  final VoidCallback onCancel;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class CancelDismissButton extends StatelessWidget {
         children: [
           ElevatedButton(
             onPressed: !downloadFinished
-                ? null
+                ? onCancel
                 : () {
                     Navigator.of(context).pop();
                   },
