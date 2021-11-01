@@ -7,10 +7,9 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.pink,
-      ),
-      home: const MainPage(title: 'Quickgui - A Flutter frontend for Quickget and Quickemu'),
-    );
+        theme: ThemeData(
+          primarySwatch: Colors.pink,
+        ),
+        home: const MainPage(title: 'Quickgui - A Flutter frontend for Quickget and Quickemu'));
   }
 }

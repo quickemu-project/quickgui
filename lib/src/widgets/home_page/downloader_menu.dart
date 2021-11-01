@@ -1,8 +1,8 @@
 import 'dart:io';
-
+import 'package:quickgui/src/globals.dart';
+import 'package:quickgui/src/mixins/preferences_mixin.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:quickgui/src/globals.dart';
 import 'package:quickgui/src/widgets/home_page/home_page_button_group.dart';
 
 class DownloaderMenu extends StatefulWidget {
@@ -12,7 +12,7 @@ class DownloaderMenu extends StatefulWidget {
   State<DownloaderMenu> createState() => _DownloaderMenuState();
 }
 
-class _DownloaderMenuState extends State<DownloaderMenu> {
+class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -40,12 +40,13 @@ class _DownloaderMenuState extends State<DownloaderMenu> {
                 var folder = await FilePicker.platform.getDirectoryPath(dialogTitle: "Pick a folder");
                 if (folder != null) {
                   setState(() {
-                    gCurrentDirectoy = Directory(folder);
+                    Directory.current = folder;
                   });
+                  savePreference(prefWorkingDirectory, Directory.current.path);
                 }
               },
               child: Text(
-                "Working directory : ${gCurrentDirectoy.path}",
+                "Working directory : ${Directory.current.path}",
                 style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.white),
               ),
             ),

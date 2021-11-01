@@ -1,8 +1,6 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:quickgui/src/app.dart';
-import 'package:quickgui/src/globals.dart';
 import 'package:quickgui/src/model/operating_system.dart';
 import 'package:quickgui/src/model/option.dart';
 import 'package:quickgui/src/model/version.dart';
@@ -44,7 +42,6 @@ Future<List<OperatingSystem>> loadOperatingSystems(bool showUbuntus) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Directory.current = gCurrentDirectoy;
   setWindowTitle('Quickgui : a flutter frontend for Quickget and Quickemu');
   setWindowMinSize(const Size(692, 580));
   setWindowMaxSize(const Size(692, 580));

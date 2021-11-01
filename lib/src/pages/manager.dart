@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path;
 import 'package:file_picker/file_picker.dart';
 import 'dart:io';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:quickgui/src/globals.dart';
 import 'package:quickgui/src/model/vminfo.dart';
+import 'package:quickgui/src/mixins/preferences_mixin.dart';
 
 /// VM manager page.
 /// Displays a list of available VMs, running state and connection info,
@@ -17,18 +18,24 @@ class Manager extends StatefulWidget {
   State<Manager> createState() => _ManagerState();
 }
 
-class _ManagerState extends State<Manager> {
+class _ManagerState extends State<Manager> with PreferencesMixin {
   List<String> _currentVms = [];
   Map<String, VmInfo> _activeVms = {};
   final List<String> _spicyVms = [];
   Timer? refreshTimer;
-  static const String prefsWorkingDirectory = 'workingDirectory';
 
   @override
   void initState() {
     super.initState();
-    _getCurrentDirectory();
-    Future.delayed(Duration.zero, () => _getVms(context)); // Reload VM list when we enter the page.
+    getPreference(prefWorkingDirectory).then((pref) {
+      if (pref is String) {
+        setState(() {
+          Directory.current = pref;
+        });
+        Future.delayed(Duration.zero, () => _getVms(context)); // Reload VM list when we enter the page.
+      }
+    });
+
     refreshTimer = Timer.periodic(const Duration(seconds: 5), (Timer t) {
       _getVms(context);
     }); // Reload VM list every 5 seconds.
@@ -38,23 +45,6 @@ class _ManagerState extends State<Manager> {
   void dispose() {
     refreshTimer?.cancel();
     super.dispose();
-  }
-
-  void _saveCurrentDirectory() async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString(prefsWorkingDirectory, Directory.current.path);
-  }
-
-  void _getCurrentDirectory() async {
-    final prefs = await SharedPreferences.getInstance();
-    if (prefs.containsKey(prefsWorkingDirectory)) {
-      setState(() {
-        final directory = prefs.getString(prefsWorkingDirectory);
-        if (directory != null) {
-          Directory.current = directory;
-        }
-      });
-    }
   }
 
   VmInfo _parseVmInfo(name) {
@@ -106,8 +96,11 @@ class _ManagerState extends State<Manager> {
         onPressed: () async {
           String? result = await FilePicker.platform.getDirectoryPath();
           if (result != null) {
-            Directory.current = result;
-            _saveCurrentDirectory();
+            setState(() {
+              Directory.current = result;
+            });
+
+            savePreference(prefWorkingDirectory, Directory.current.path);
             _getVms(context);
           }
         },
