@@ -156,9 +156,10 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
   List<Widget> _buildRow(String currentVm) {
     final bool active = _activeVms.containsKey(currentVm);
     final bool spicy = _spicyVms.contains(currentVm);
+    VmInfo vmInfo = VmInfo();
     String connectInfo = '';
     if (active) {
-      VmInfo vmInfo = _activeVms[currentVm]!;
+      vmInfo = _activeVms[currentVm]!;
       if (vmInfo.sshPort != null) {
         connectInfo += context.t('SSH port') + ': ' + vmInfo.sshPort! + ' ';
       }
@@ -249,6 +250,17 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
       if (connectInfo.isNotEmpty)
         ListTile(
           title: Text(connectInfo),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              TextButton(
+                child: Text('Spice'),
+                onPressed: () {
+                  Process.start('spicy', ['-p', vmInfo.spicePort!]);
+                },
+              ),
+            ]
+          )
         ),
       const Divider()
     ];
