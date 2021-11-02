@@ -58,15 +58,18 @@ class _ManagerState extends State<Manager> {
   }
 
   VmInfo _parseVmInfo(name) {
-    String shellScript = File(name + '/' + name + '.sh').readAsStringSync();
-    RegExpMatch? sshMatch = RegExp('hostfwd=tcp::(\\d+?)-:22').firstMatch(shellScript);
-    RegExpMatch? spiceMatch = RegExp('-spice.+?port=(\\d+)').firstMatch(shellScript);
     VmInfo info = VmInfo();
-    if (sshMatch != null) {
-      info.sshPort = sshMatch.group(1);
-    }
-    if (spiceMatch != null) {
-      info.spicePort = spiceMatch.group(1);
+    List<String> lines = File(name + '/' + name + '.ports').readAsLinesSync();
+    for (var line in lines) {
+      List<String> parts = line.split(',');
+      switch(parts[0]) {
+        case 'ssh':
+          info.sshPort = parts[1];
+          break;
+        case 'spice':
+          info.spicePort = parts[1];
+          break;
+      }
     }
     return info;
   }
