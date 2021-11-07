@@ -52,7 +52,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     List<String> lines = File(name + '/' + name + '.ports').readAsLinesSync();
     for (var line in lines) {
       List<String> parts = line.split(',');
-      switch(parts[0]) {
+      switch (parts[0]) {
         case 'ssh':
           info.sshPort = parts[1];
           break;
@@ -64,12 +64,23 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     return info;
   }
 
+  bool _isValidConf(conf) {
+    List<String> lines = File(conf).readAsLinesSync();
+    for (var line in lines) {
+      List<String> parts = line.split('=');
+      if (parts[0] == 'guest_os') {
+        return true;
+      }
+    }
+    return false;
+  }
+
   void _getVms(context) async {
     List<String> currentVms = [];
     Map<String, VmInfo> activeVms = {};
 
     await for (var entity in Directory.current.list(recursive: false, followLinks: true)) {
-      if (entity.path.endsWith('.conf')) {
+      if ((entity.path.endsWith('.conf')) && (_isValidConf(entity.path))) {
         String name = path.basenameWithoutExtension(entity.path);
         currentVms.add(name);
         File pidFile = File(name + '/' + name + '.pid');
