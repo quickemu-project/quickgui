@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:quickgui/src/widgets/home_page/logo.dart';
 import 'package:quickgui/src/widgets/home_page/main_menu.dart';
+import 'package:quickgui/src/widgets/left_menu.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key, required this.title}) : super(key: key);
@@ -19,13 +20,8 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Main menu'),
-        leading: IconButton(
-          onPressed: () {
-            exit(0);
-          },
-          icon: const Icon(Icons.exit_to_app),
-        ),
       ),
+      drawer: const LeftMenu(),
       body: Column(
         children: const [
           Logo(),
