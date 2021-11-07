@@ -1,6 +1,7 @@
 * bump the version number in pubspec.yaml (ex: version: 1.0.5)
 * push to github
 * create and push version tag (ex: v1.0.5)
+* create a release on GitHub
 * build the tarball (`make`)
 * upload the tarball to github
 
