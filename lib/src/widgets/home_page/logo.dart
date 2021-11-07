@@ -16,7 +16,7 @@ class Logo extends StatelessWidget {
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Image.asset('assets/images/logo.png'),
+                child: Image.asset('assets/images/logo_pink.png'),
               ),
             ),
           ),

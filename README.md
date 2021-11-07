@@ -1,6 +1,13 @@
-# quickgui
+<h1 align="center">
+  <img src=".github/logo.png" alt="Quickgui" width="256" />
+  <br />
+  Quickgui
+</h1>
 
-A Flutter frontend for [quickget](https://github.com/wimpysworld/quickemu).
+<p align="center">A Flutter frontend for `quickget` and [quickemu](https://github.com/wimpysworld/quickemu).</p>
+<div align="center"><img src="assets/github/screenshot1.png" alt="Quickgui screenshot"></div>
+
+This project is discussed mainly on [![Discord](https://img.shields.io/discord/712850672223125565?color=87a556&label=WimpysWorld%20Discord&logo=discord&logoColor=ffffff&style=flat-square)](https://discord.gg/sNmz3uw) server
 
 ## Install
 
@@ -69,29 +76,28 @@ You can also use `update-alternatives` for easier access to the app.
 From the main screen, select the operating system you want to use. The list can be filtered.
 
 
-![Main screen](./assets/github/screenshot1.png)
+<div align="center"><img src="assets/github/screenshot1.png" alt="Main screen"></div>
 
-![List of supported operating systems](./assets/github/screenshot2.png)
+<div align="center"><img src="assets/github/screenshot2.png" alt="List of supported operating systems"></div>
 
-![The Ubuntu flavors](./assets/github/screenshot3.png)
+<div align="center"><img src="assets/github/screenshot3.png" alt="Search a distribution"></div>
 
 Then, select the version :
 
-![Main screen after selection of the operating system](./assets/github/screenshot4.png)
+<div align="center"><img src="assets/github/screenshot4.png" alt="Main screen after selection of the operating system"></div>
 
-![Versions of the selected operating system](./assets/github/screenshot5.png)
+<div align="center"><img src="assets/github/screenshot5.png" alt="Versions of the selected operating system"></div>
 
 If there are some options (Windows language, Pop!_OS nvidia or Intel, etc..), they will be displayed :
 
-![Choose an option](./assets/github/screenshot8.png)
+<div align="center"><img src="assets/github/screenshot8.png" alt="Choose an option"></div>
 
-![Option is diplayed](./assets/github/screenshot9.png)
+<div align="center"><img src="assets/github/screenshot9.png" alt="Option is diplayed"></div>
 
 Then click "Download". The ISO will be downloaded in the current working directory, in 99% of cases that will be the directory where `quickgui` was invoked from.
 
-![Waiting for download](./assets/github/screenshot10.png)
+<div align="center"><img src="assets/github/screenshot10.png" alt="Waiting for download"></div>
 
-![Downloading](./assets/github/screenshot11.png)
+<div align="center"><img src="assets/github/screenshot11.png" alt="Downloading"></div>
 
-![Download finished](./assets/github/screenshot12.png)
-
+<div align="center"><img src="assets/github/screenshot12.png" alt="Download finished"></div>
