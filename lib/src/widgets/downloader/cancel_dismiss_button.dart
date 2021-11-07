@@ -18,6 +18,9 @@ class CancelDismissButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Theme.of(context).colorScheme.surface,
+            ),
             onPressed: !downloadFinished
                 ? onCancel
                 : () {

@@ -10,7 +10,7 @@ class MainMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        color: Colors.pink,
+        color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.primary,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(

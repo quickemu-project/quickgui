@@ -29,7 +29,7 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        color: Colors.pink,
+        color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.primary,
         child: Column(
           children: [
             Row(
