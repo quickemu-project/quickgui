@@ -24,12 +24,12 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
       }
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        color: Colors.pink,
+        // color: Colors.pink,
         child: Column(
           children: [
             Row(
@@ -49,7 +49,8 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
             ),
             InkWell(
               onTap: () async {
-                var folder = await FilePicker.platform.getDirectoryPath(dialogTitle: "Pick a folder");
+                var folder = await FilePicker.platform
+                    .getDirectoryPath(dialogTitle: "Pick a folder");
                 if (folder != null) {
                   setState(() {
                     Directory.current = folder;
@@ -59,7 +60,10 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
               },
               child: Text(
                 "Working directory : ${Directory.current.path}",
-                style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.white),
+                style: Theme.of(context)
+                    .textTheme
+                    .subtitle1!
+                    .copyWith(color: Colors.white),
               ),
             ),
           ],

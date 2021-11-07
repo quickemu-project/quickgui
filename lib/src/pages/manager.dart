@@ -7,6 +7,7 @@ import 'dart:io';
 import 'package:quickgui/src/globals.dart';
 import 'package:quickgui/src/model/vminfo.dart';
 import 'package:quickgui/src/mixins/preferences_mixin.dart';
+import 'package:yaru_icons/widgets/yaru_icons.dart';
 
 /// VM manager page.
 /// Displays a list of available VMs, running state and connection info,
@@ -32,7 +33,8 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
         setState(() {
           Directory.current = pref;
         });
-        Future.delayed(Duration.zero, () => _getVms(context)); // Reload VM list when we enter the page.
+        Future.delayed(Duration.zero,
+            () => _getVms(context)); // Reload VM list when we enter the page.
       }
     });
 
@@ -79,7 +81,8 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     List<String> currentVms = [];
     Map<String, VmInfo> activeVms = {};
 
-    await for (var entity in Directory.current.list(recursive: false, followLinks: true)) {
+    await for (var entity
+        in Directory.current.list(recursive: false, followLinks: true)) {
       if ((entity.path.endsWith('.conf')) && (_isValidConf(entity.path))) {
         String name = path.basenameWithoutExtension(entity.path);
         currentVms.add(name);
@@ -152,7 +155,11 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               IconButton(
-                  icon: Icon(Icons.monitor, color: spicy ? Colors.red : null, semanticLabel: spicy ? 'Using SPICE display' : 'Click to use SPICE display'),
+                  icon: Icon(YaruIcons.desktop_display,
+                      color: spicy ? Colors.red : null,
+                      semanticLabel: spicy
+                          ? 'Using SPICE display'
+                          : 'Click to use SPICE display'),
                   tooltip: spicy ? 'Using SPICE display' : 'Use SPICE display',
                   onPressed: () {
                     if (spicy) {
@@ -167,7 +174,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                   }),
               IconButton(
                   icon: Icon(
-                    active ? Icons.play_arrow : Icons.play_arrow_outlined,
+                    YaruIcons.media_playback_start,
                     color: active ? Colors.green : null,
                     semanticLabel: active ? 'Running' : 'Run',
                   ),
@@ -188,7 +195,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                   }),
               IconButton(
                 icon: Icon(
-                  active ? Icons.stop : Icons.stop_outlined,
+                  YaruIcons.media_playback_stop,
                   color: active ? Colors.red : null,
                   semanticLabel: active ? 'Stop' : 'Not running',
                 ),
@@ -198,7 +205,8 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                       context: context,
                       builder: (BuildContext context) => AlertDialog(
                         title: const Text('Stop The Virtual Machine?'),
-                        content: Text('You are about to terminate the virtual machine $currentVm'),
+                        content: Text(
+                            'You are about to terminate the virtual machine $currentVm'),
                         actions: <Widget>[
                           TextButton(
                             onPressed: () => Navigator.pop(context, false),
@@ -236,6 +244,10 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(YaruIcons.window_close),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         title: const Text('Manager'),
       ),
       body: _buildVmList(),

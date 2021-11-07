@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:quickgui/src/model/operating_system.dart';
+import 'package:yaru_icons/widgets/yaru_icons.dart';
 
 class OperatingSystemSelection extends StatefulWidget {
   const OperatingSystemSelection({Key? key}) : super(key: key);
 
   @override
-  State<OperatingSystemSelection> createState() => _OperatingSystemSelectionState();
+  State<OperatingSystemSelection> createState() =>
+      _OperatingSystemSelectionState();
 }
 
 class _OperatingSystemSelectionState extends State<OperatingSystemSelection> {
@@ -20,9 +22,15 @@ class _OperatingSystemSelectionState extends State<OperatingSystemSelection> {
 
   @override
   Widget build(BuildContext context) {
-    var list = gOperatingSystems.where((os) => os.name.toLowerCase().contains(term.toLowerCase())).toList();
+    var list = gOperatingSystems
+        .where((os) => os.name.toLowerCase().contains(term.toLowerCase()))
+        .toList();
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(YaruIcons.window_close),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         title: const Text('Select operating system'),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(kToolbarHeight),
@@ -30,6 +38,7 @@ class _OperatingSystemSelectionState extends State<OperatingSystemSelection> {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
                 color: Theme.of(context).canvasColor,
               ),
               child: Padding(
@@ -38,11 +47,12 @@ class _OperatingSystemSelectionState extends State<OperatingSystemSelection> {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      const Icon(Icons.search),
+                      const Icon(YaruIcons.search),
                       Expanded(
                         child: TextField(
                           focusNode: focusNode,
-                          decoration: const InputDecoration.collapsed(hintText: 'Search operating system'),
+                          decoration: const InputDecoration.collapsed(
+                              hintText: 'Search operating system'),
                           onChanged: (value) {
                             setState(() {
                               term = value;
@@ -67,12 +77,15 @@ class _OperatingSystemSelectionState extends State<OperatingSystemSelection> {
               itemCount: list.length,
               itemBuilder: (context, index) {
                 var item = list[index];
-                return Card(
-                  child: ListTile(
-                    title: Text(item.name),
-                    onTap: () {
-                      Navigator.of(context).pop(item);
-                    },
+                return Padding(
+                  padding: const EdgeInsets.only(left: 4, right: 4),
+                  child: Card(
+                    child: ListTile(
+                      title: Text(item.name),
+                      onTap: () {
+                        Navigator.of(context).pop(item);
+                      },
+                    ),
                   ),
                 );
               },

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:quickgui/src/widgets/home_page/logo.dart';
 import 'package:quickgui/src/widgets/home_page/main_menu.dart';
+import 'package:yaru_icons/widgets/yaru_icons.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key, required this.title}) : super(key: key);
@@ -23,7 +24,7 @@ class _MainPageState extends State<MainPage> {
           onPressed: () {
             exit(0);
           },
-          icon: const Icon(Icons.exit_to_app),
+          icon: const Icon(YaruIcons.pan_start),
         ),
       ),
       body: Column(

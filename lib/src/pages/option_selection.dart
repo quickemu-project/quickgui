@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quickgui/src/model/version.dart';
+import 'package:yaru_icons/widgets/yaru_icons.dart';
 
 class OptionSelection extends StatefulWidget {
   const OptionSelection(this.version, {Key? key}) : super(key: key);
@@ -22,7 +23,9 @@ class _OptionSelectionState extends State<OptionSelection> {
 
   @override
   Widget build(BuildContext context) {
-    var list = widget.version.options.where((e) => e.option.toLowerCase().contains(term.toLowerCase())).toList();
+    var list = widget.version.options
+        .where((e) => e.option.toLowerCase().contains(term.toLowerCase()))
+        .toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -43,11 +46,12 @@ class _OptionSelectionState extends State<OptionSelection> {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
-                            const Icon(Icons.search),
+                            const Icon(YaruIcons.search),
                             Expanded(
                               child: TextField(
                                 focusNode: focusNode,
-                                decoration: const InputDecoration.collapsed(hintText: 'Search option'),
+                                decoration: const InputDecoration.collapsed(
+                                    hintText: 'Search option'),
                                 onChanged: (value) {
                                   setState(() {
                                     term = value;
