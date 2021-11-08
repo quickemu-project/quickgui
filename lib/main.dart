@@ -22,7 +22,8 @@ Future<List<OperatingSystem>> loadOperatingSystems(bool showUbuntus) async {
     {
       supportedVersion = Tuple5.fromList([...chunks, "wget"]);
     } else {
-      supportedVersion = Tuple5.fromList(chunks);
+      var t5 = [chunks[0], chunks[1], chunks[2], chunks[3], chunks[4]].toList();
+      supportedVersion = Tuple5.fromList(t5);
     }
 
     if (currentOperatingSystem?.code != supportedVersion.item2) {

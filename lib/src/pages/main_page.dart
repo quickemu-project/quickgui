@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:quickgui/src/widgets/home_page/logo.dart';
 import 'package:quickgui/src/widgets/home_page/main_menu.dart';
 import 'package:yaru_icons/widgets/yaru_icons.dart';
+import 'package:quickgui/src/widgets/left_menu.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key, required this.title}) : super(key: key);
@@ -27,6 +28,7 @@ class _MainPageState extends State<MainPage> {
           icon: const Icon(YaruIcons.pan_start),
         ),
       ),
+      drawer: const LeftMenu(),
       body: Column(
         children: const [
           Logo(),
