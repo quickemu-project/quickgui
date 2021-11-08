@@ -34,10 +34,6 @@ class HomePageButton extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              // style: ElevatedButton.styleFrom(
-              //   primary: Colors.white,
-              //   onPrimary: Colors.pink,
-              // ),
               onPressed: onPressed,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),

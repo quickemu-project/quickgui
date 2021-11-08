@@ -28,46 +28,43 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-        // color: Colors.pink,
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12),
-                        child: HomePageButtonGroup(),
-                      )
-                    ],
-                  ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 12),
+                      child: HomePageButtonGroup(),
+                    )
+                  ],
                 ),
-              ],
-            ),
-            InkWell(
-              onTap: () async {
-                var folder = await FilePicker.platform
-                    .getDirectoryPath(dialogTitle: "Pick a folder");
-                if (folder != null) {
-                  setState(() {
-                    Directory.current = folder;
-                  });
-                  savePreference(prefWorkingDirectory, Directory.current.path);
-                }
-              },
-              child: Text(
-                "Working directory : ${Directory.current.path}",
-                style: Theme.of(context)
-                    .textTheme
-                    .subtitle1!
-                    .copyWith(color: Colors.white),
               ),
+            ],
+          ),
+          InkWell(
+            onTap: () async {
+              var folder = await FilePicker.platform
+                  .getDirectoryPath(dialogTitle: "Pick a folder");
+              if (folder != null) {
+                setState(() {
+                  Directory.current = folder;
+                });
+                savePreference(prefWorkingDirectory, Directory.current.path);
+              }
+            },
+            child: Text(
+              "Working directory : ${Directory.current.path}",
+              style: Theme.of(context)
+                  .textTheme
+                  .subtitle1!
+                  .copyWith(color: Colors.white),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
