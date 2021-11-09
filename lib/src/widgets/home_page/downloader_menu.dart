@@ -24,7 +24,7 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
       }
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -47,20 +47,33 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
                 ),
               ],
             ),
-            InkWell(
-              onTap: () async {
-                var folder = await FilePicker.platform.getDirectoryPath(dialogTitle: "Pick a folder");
-                if (folder != null) {
-                  setState(() {
-                    Directory.current = folder;
-                  });
-                  savePreference(prefWorkingDirectory, Directory.current.path);
-                }
-              },
-              child: Text(
-                "Working directory : ${Directory.current.path}",
-                style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.white),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Working directory : ${Directory.current.path}",
+                  style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.white),
+                ),
+                const SizedBox(
+                  width: 8,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Theme.of(context).canvasColor,
+                    onPrimary: Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Theme.of(context).colorScheme.primary,
+                  ),
+                  onPressed: () async {
+                    var folder = await FilePicker.platform.getDirectoryPath(dialogTitle: "Pick a folder");
+                    if (folder != null) {
+                      setState(() {
+                        Directory.current = folder;
+                      });
+                      savePreference(prefWorkingDirectory, Directory.current.path);
+                    }
+                  },
+                  child: const Icon(Icons.more_horiz),
+                ),
+              ],
             ),
           ],
         ),

@@ -106,19 +106,37 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
 
   Widget _buildVmList() {
     List<Widget> _widgetList = [];
-    _widgetList.add(TextButton(
-        onPressed: () async {
-          String? result = await FilePicker.platform.getDirectoryPath();
-          if (result != null) {
-            setState(() {
-              Directory.current = result;
-            });
+    _widgetList.add(
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            Directory.current.path,
+          ),
+          const SizedBox(
+            width: 8,
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Theme.of(context).canvasColor,
+              onPrimary: Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Theme.of(context).colorScheme.primary,
+            ),
+            onPressed: () async {
+              String? result = await FilePicker.platform.getDirectoryPath();
+              if (result != null) {
+                setState(() {
+                  Directory.current = result;
+                });
 
-            savePreference(prefWorkingDirectory, Directory.current.path);
-            _getVms(context);
-          }
-        },
-        child: Text(Directory.current.path)));
+                savePreference(prefWorkingDirectory, Directory.current.path);
+                _getVms(context);
+              }
+            },
+            child: const Icon(Icons.more_horiz),
+          ),
+        ],
+      ),
+    );
     List<List<Widget>> rows = _currentVms.map((vm) {
       return _buildRow(vm);
     }).toList();
