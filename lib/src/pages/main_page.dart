@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:quickgui/src/widgets/home_page/logo.dart';
 import 'package:quickgui/src/widgets/home_page/main_menu.dart';

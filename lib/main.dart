@@ -1,6 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:provider/provider.dart';
 import 'package:quickgui/src/app.dart';
+import 'package:quickgui/src/mixins/app_version.dart';
+import 'package:quickgui/src/model/app_theme.dart';
 import 'package:quickgui/src/model/operating_system.dart';
 import 'package:quickgui/src/model/option.dart';
 import 'package:quickgui/src/model/version.dart';
@@ -47,6 +51,11 @@ void main() async {
   setWindowMinSize(const Size(692, 580));
   setWindowMaxSize(const Size(692, 580));
   gOperatingSystems = await loadOperatingSystems(false);
-
-  runApp(const App());
+  AppVersion.packageInfo = await PackageInfo.fromPlatform();
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => AppTheme()),
+    ],
+    builder: (context, _) => const App(),
+  ));
 }

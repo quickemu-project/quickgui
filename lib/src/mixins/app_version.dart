@@ -1,6 +1,6 @@
 import 'package:package_info_plus/package_info_plus.dart';
 
-mixin VersionMixin {
+class AppVersion {
   static PackageInfo? packageInfo;
 
   String get appName => packageInfo?.appName ?? '';
