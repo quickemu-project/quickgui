@@ -10,14 +10,14 @@
 * `dch -v a.b.c "New changelog message"`
 * `nano debian/changelog` to change the release (ex: 1.0.5-1~focal1.0 focal)
 * `uscan --noconf --force-download --rename --download-current-version --destdir=.. --verbose` to download the tarball properly
-* `dpkg-buildpackage -d -S -sa -kyannick.mauray@gmail.com` to build the changes file.
+* `dpkg-buildpackage -d -S -sa` to build the changes file (the name of the key to use is in ~/.config/dpkg/buildpackage.conf)
 * `nano debian/changelog` to change the release (ex: 1.0.5-1~hirsute1.0 hirsute)
-* `dpkg-buildpackage -d -S -sa -kyannick.mauray@gmail.com`
+* `dpkg-buildpackage -d -S -sa`
 * `nano debian/changelog` to change the release (ex: 1.0.5-1~impish1.0 impish)
-* `dpkg-buildpackage -d -S -sa -kyannick.mauray@gmail.com`
+* `dpkg-buildpackage -d -S -sa`
 * `nano debian/changelog` to change the release (ex: 1.0.5-1~jammy.0 jammy)
-* `dpkg-buildpackage -d -S -sa -kyannick.mauray@gmail.com`
-* `dput ppa:yannick-mauray/quicksync ../quicksync_0.6.4-1~focal1.0_source.changes`
-* `dput ppa:yannick-mauray/quicksync ../quicksync_0.6.4-1~hirsute1.0_source.changes`
-* `dput ppa:yannick-mauray/quicksync ../quicksync_0.6.4-1~impish1.0_source.changes`
-* `dput ppa:yannick-mauray/quicksync ../quicksync_0.6.4-1~jammy1.0_source.changes`
+* `dpkg-buildpackage -d -S -sa`
+* `dput ppa:yannick-mauray/quickgui ../quickgui_1.0.5-1~focal1.0_source.changes`
+* `dput ppa:yannick-mauray/quickgui ../quickgui_1.0.5-1~hirsute1.0_source.changes`
+* `dput ppa:yannick-mauray/quickgui ../quickgui_1.0.5-1~impish1.0_source.changes`
+* `dput ppa:yannick-mauray/quickgui ../quickgui_1.0.5-1~jammy1.0_source.changes`
