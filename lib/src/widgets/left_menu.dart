@@ -1,10 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quickgui/src/globals.dart';
 import 'package:quickgui/src/mixins/app_version.dart';
+import 'package:quickgui/src/mixins/preferences_mixin.dart';
 import 'package:quickgui/src/model/app_theme.dart';
 
-class LeftMenu extends StatelessWidget {
+class LeftMenu extends StatelessWidget with PreferencesMixin {
   const LeftMenu({Key? key}) : super(key: key);
 
   @override
@@ -27,6 +29,7 @@ class LeftMenu extends StatelessWidget {
                     value: Theme.of(context).brightness == Brightness.dark,
                     onChanged: (value) {
                       appTheme.useDarkMode = value;
+                      savePreference(prefThemeMode, value);
                     },
                   ),
                 ],
