@@ -24,6 +24,7 @@ quickgui: distclean
 bin: quickgui
 	mkdir -p $(BUILD_DIR)
 	cp -a build/linux/x64/release/bundle/* $(BUILD_DIR)
+	cp -a assets/resources $(BUILD_DIR)
 	tar -C $(BUILD_ROOT) -c -v -f $(BIN_TAR) $(BASE_NAME)
 	xz -z $(BIN_TAR)
 
