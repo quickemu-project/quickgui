@@ -27,13 +27,11 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
   @override
   void initState() {
     super.initState();
-    getPreference(prefWorkingDirectory).then((pref) {
-      if (pref is String) {
-        setState(() {
-          Directory.current = pref;
-        });
-        Future.delayed(Duration.zero, () => _getVms(context)); // Reload VM list when we enter the page.
-      }
+    getPreference<String>(prefWorkingDirectory).then((pref) {
+      setState(() {
+        Directory.current = pref;
+      });
+      Future.delayed(Duration.zero, () => _getVms(context)); // Reload VM list when we enter the page.
     });
 
     refreshTimer = Timer.periodic(const Duration(seconds: 5), (Timer t) {

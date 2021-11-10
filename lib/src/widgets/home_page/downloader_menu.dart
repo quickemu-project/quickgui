@@ -16,12 +16,10 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
   @override
   void initState() {
     super.initState();
-    getPreference(prefWorkingDirectory).then((pref) {
-      if (pref is String) {
-        setState(() {
-          Directory.current = pref;
-        });
-      }
+    getPreference<String>(prefWorkingDirectory).then((pref) {
+      setState(() {
+        Directory.current = pref;
+      });
     });
   }
 
