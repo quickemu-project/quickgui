@@ -18,3 +18,99 @@ msgstr ""
 
 msgid "Use dark mode"
 msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Click to use SPICE display"
+msgstr ""
+
+msgid "Create new machines"
+msgstr ""
+
+msgid "Dismiss"
+msgstr ""
+
+msgid "Done !"
+msgstr ""
+
+msgid "Download"
+msgstr ""
+
+msgid "Download finished."
+msgstr ""
+
+msgid "Downloader"
+msgstr ""
+
+msgid "Downloading (no progress available)..."
+msgstr ""
+
+msgid "Downloading..."
+msgstr ""
+
+msgid "Manage existing machines"
+msgstr ""
+
+msgid "Manager"
+msgstr ""
+
+msgid "Mbs downloaded"
+msgstr ""
+
+msgid "Now run"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "Operating system"
+msgstr ""
+
+msgid "Search operating system"
+msgstr ""
+
+msgid "Search option"
+msgstr ""
+
+msgid "Select operating system"
+msgstr ""
+
+msgid "Select option"
+msgstr ""
+
+msgid "Select version for"
+msgstr ""
+
+msgid "Select..."
+msgstr ""
+
+msgid "SPICE port"
+msgstr ""
+
+msgid "SSH port"
+msgstr ""
+
+msgid "Stop The Virtual Machine?"
+msgstr ""
+
+msgid "Target folder"
+msgstr ""
+
+msgid "to start the VM"
+msgstr ""
+
+msgid "Use SPICE display"
+msgstr ""
+
+msgid "Using SPICE display"
+msgstr ""
+
+msgid "Version"
+msgstr ""
+
+msgid "Waiting for download to start"
+msgstr ""
+
+msgid "You are about to terminate the virtual machine"
+msgstr ""

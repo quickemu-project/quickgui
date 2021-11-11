@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quickgui/src/model/version.dart';
+import 'package:quickgui/src/i18n/i18n_ext.dart';
 
 class OptionSelection extends StatefulWidget {
   const OptionSelection(this.version, {Key? key}) : super(key: key);
@@ -26,7 +27,7 @@ class _OptionSelectionState extends State<OptionSelection> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Select option'),
+        title: Text(context.t('Select option')),
         bottom: widget.version.options.length <= 6
             ? null
             : PreferredSize(
@@ -47,7 +48,7 @@ class _OptionSelectionState extends State<OptionSelection> {
                             Expanded(
                               child: TextField(
                                 focusNode: focusNode,
-                                decoration: const InputDecoration.collapsed(hintText: 'Search option'),
+                                decoration: InputDecoration.collapsed(hintText: context.t('Search option')),
                                 onChanged: (value) {
                                   setState(() {
                                     term = value;

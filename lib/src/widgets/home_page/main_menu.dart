@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quickgui/src/pages/downloader_page.dart';
 import 'package:quickgui/src/pages/manager.dart';
 import 'package:quickgui/src/widgets/home_page/home_page_button.dart';
+import 'package:quickgui/src/i18n/i18n_ext.dart';
 
 class MainMenu extends StatelessWidget {
   const MainMenu({Key? key}) : super(key: key);
@@ -26,7 +27,7 @@ class MainMenu extends StatelessWidget {
                     ),
                   );
                 },
-                text: 'Manage existing machines',
+                text: context.t('Manage existing machines'),
               ),
               HomePageButton(
                 onPressed: () {
@@ -39,7 +40,7 @@ class MainMenu extends StatelessWidget {
                     ),
                   );
                 },
-                text: 'Create new machines',
+                text: context.t('Create new machines'),
               ),
             ],
           ),

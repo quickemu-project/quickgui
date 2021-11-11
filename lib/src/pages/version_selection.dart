@@ -4,6 +4,7 @@ import 'package:quickgui/src/model/option.dart';
 import 'package:quickgui/src/model/version.dart';
 import 'package:quickgui/src/pages/option_selection.dart';
 import 'package:tuple/tuple.dart';
+import 'package:quickgui/src/i18n/i18n_ext.dart';
 
 class VersionSelection extends StatefulWidget {
   const VersionSelection({Key? key, required this.operatingSystem}) : super(key: key);
@@ -19,7 +20,7 @@ class _VersionSelectionState extends State<VersionSelection> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Select version for ${widget.operatingSystem.name}'),
+        title: Text('${context.t('Select version for')} ${widget.operatingSystem.name}'),
       ),
       body: SingleChildScrollView(
         child: Column(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quickgui/src/i18n/i18n_ext.dart';
 
 class CancelDismissButton extends StatelessWidget {
   const CancelDismissButton({
@@ -26,7 +27,7 @@ class CancelDismissButton extends StatelessWidget {
                 : () {
                     Navigator.of(context).pop();
                   },
-            child: downloadFinished ? const Text('Dimiss') : const Text('Cancel'),
+            child: downloadFinished ? Text(context.t('Dismiss')) : Text(context.t('Cancel')),
           )
         ],
       ),

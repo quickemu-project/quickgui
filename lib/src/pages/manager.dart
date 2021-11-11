@@ -7,6 +7,7 @@ import 'dart:io';
 import 'package:quickgui/src/globals.dart';
 import 'package:quickgui/src/model/vminfo.dart';
 import 'package:quickgui/src/mixins/preferences_mixin.dart';
+import 'package:quickgui/src/i18n/i18n_ext.dart';
 
 /// VM manager page.
 /// Displays a list of available VMs, running state and connection info,
@@ -155,10 +156,10 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     if (active) {
       VmInfo vmInfo = _activeVms[currentVm]!;
       if (vmInfo.sshPort != null) {
-        connectInfo += 'SSH port: ' + vmInfo.sshPort! + ' ';
+        connectInfo += context.t('SSH port') + ': ' + vmInfo.sshPort! + ' ';
       }
       if (vmInfo.spicePort != null) {
-        connectInfo += 'SPICE port: ' + vmInfo.spicePort! + ' ';
+        connectInfo += context.t('SPICE port') + ': ' + vmInfo.spicePort! + ' ';
       }
     }
     return <Widget>[
@@ -168,8 +169,9 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               IconButton(
-                  icon: Icon(Icons.monitor, color: spicy ? Colors.red : null, semanticLabel: spicy ? 'Using SPICE display' : 'Click to use SPICE display'),
-                  tooltip: spicy ? 'Using SPICE display' : 'Use SPICE display',
+                  icon: Icon(Icons.monitor,
+                      color: spicy ? Colors.red : null, semanticLabel: spicy ? context.t('Using SPICE display') : context.t('Click to use SPICE display')),
+                  tooltip: spicy ? context.t('Using SPICE display') : context.t('Use SPICE display'),
                   onPressed: () {
                     if (spicy) {
                       setState(() {
@@ -213,16 +215,16 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                     showDialog<bool>(
                       context: context,
                       builder: (BuildContext context) => AlertDialog(
-                        title: const Text('Stop The Virtual Machine?'),
-                        content: Text('You are about to terminate the virtual machine $currentVm'),
+                        title: Text(context.t('Stop The Virtual Machine?')),
+                        content: Text('${context.t('You are about to terminate the virtual machine')} $currentVm'),
                         actions: <Widget>[
                           TextButton(
                             onPressed: () => Navigator.pop(context, false),
-                            child: const Text('Cancel'),
+                            child: Text(context.t('Cancel')),
                           ),
                           TextButton(
                             onPressed: () => Navigator.pop(context, true),
-                            child: const Text('OK'),
+                            child: Text(context.t('OK')),
                           ),
                         ],
                       ),
@@ -252,7 +254,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Manager'),
+        title: Text(context.t('Manager')),
       ),
       body: _buildVmList(),
     );

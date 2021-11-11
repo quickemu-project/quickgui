@@ -1,20 +1,150 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: quickgui\n"
 "POT-Creation-Date: 2021-09-29 09:59+0200\n"
-"PO-Revision-Date: 2021-09-29 10:58+0200\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2021-11-11 16:44+0100\n"
+"Last-Translator: Yannick Mauray\n"
+"Language-Team: Yannick Mauray\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0\n"
 "X-Poedit-Basepath: .\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#, fuzzy
 msgid "Main menu"
 msgstr "Menu principal"
 
+#, fuzzy
 msgid "Use dark mode"
 msgstr "Utiliser le mode sombre"
+
+#, fuzzy
+msgid "Cancel"
+msgstr "Annuler"
+
+#, fuzzy
+msgid "Click to use SPICE display"
+msgstr "Cliquez pour utiliser l'affichage SPICE"
+
+#, fuzzy
+msgid "Create new machines"
+msgstr "Créer de nouvelles machines"
+
+#, fuzzy
+msgid "Dismiss"
+msgstr "Fermer"
+
+#, fuzzy
+msgid "Done !"
+msgstr "Fini!"
+
+#, fuzzy
+msgid "Download"
+msgstr "Télécharger"
+
+#, fuzzy
+msgid "Download finished."
+msgstr "Téléchargement terminé."
+
+#, fuzzy
+msgid "Downloader"
+msgstr "Gestionnaire de téléchargements"
+
+#, fuzzy
+msgid "Downloading (no progress available)..."
+msgstr "Téléchargement (pas de barre de progression)..."
+
+#, fuzzy
+msgid "Downloading..."
+msgstr "Téléchargement..."
+
+#, fuzzy
+msgid "Manage existing machines"
+msgstr "Gérer les machines existantes"
+
+#, fuzzy
+msgid "Manager"
+msgstr "Gestionnaire"
+
+#, fuzzy
+msgid "Mbs downloaded"
+msgstr "Mbs téléchargés"
+
+#, fuzzy
+msgid "Now run"
+msgstr "Lancer"
+
+#, fuzzy
+msgid "OK"
+msgstr "OK"
+
+#, fuzzy
+msgid "Operating system"
+msgstr "Système d'exploitation"
+
+#, fuzzy
+msgid "Search operating system"
+msgstr "Chercher un système d'exploitation"
+
+#, fuzzy
+msgid "Search option"
+msgstr "Chercher une option"
+
+#, fuzzy
+msgid "Select operating system"
+msgstr "Sélectionner un système d'exploitation"
+
+#, fuzzy
+msgid "Select option"
+msgstr "Sélectionner une option"
+
+#, fuzzy
+msgid "Select version for"
+msgstr "Sélectionner une version pour"
+
+#, fuzzy
+msgid "Select..."
+msgstr "Sélectionner..."
+
+#, fuzzy
+msgid "SPICE port"
+msgstr "Port SPICE"
+
+#, fuzzy
+msgid "SSH port"
+msgstr "Port SSH"
+
+#, fuzzy
+msgid "Stop The Virtual Machine?"
+msgstr "Arrêtez la machine virtuelle ?"
+
+#, fuzzy
+msgid "Target folder"
+msgstr "Dossier cible"
+
+#, fuzzy
+msgid "to start the VM"
+msgstr "pour démarrer la machine virtuelle"
+
+#, fuzzy
+msgid "Use SPICE display"
+msgstr "Utiliser l'affichage SPICE"
+
+#, fuzzy
+msgid "Using SPICE display"
+msgstr "Utilisation de l'affichage SPICE"
+
+#, fuzzy
+msgid "Version"
+msgstr "Version"
+
+#, fuzzy
+msgid "Waiting for download to start"
+msgstr "En attente du début du téléchargement"
+
+#, fuzzy
+msgid "You are about to terminate the virtual machine"
+msgstr "Vous êtes sur le point d'arrêter la machine virtuelle"

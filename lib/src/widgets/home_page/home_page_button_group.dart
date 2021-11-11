@@ -10,6 +10,7 @@ import 'package:quickgui/src/pages/operating_system_selection.dart';
 import 'package:quickgui/src/pages/version_selection.dart';
 import 'package:quickgui/src/widgets/home_page/home_page_button.dart';
 import 'package:tuple/tuple.dart';
+import 'package:quickgui/src/i18n/i18n_ext.dart';
 
 class HomePageButtonGroup extends StatefulWidget {
   const HomePageButtonGroup({Key? key}) : super(key: key);
@@ -25,15 +26,15 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
 
   @override
   Widget build(BuildContext context) {
-    var _versionButtonLabel = _selectedVersion?.version ?? 'Select...';
+    var _versionButtonLabel = _selectedVersion?.version ?? context.t('Select...');
     if (_selectedOption?.option.isNotEmpty ?? false) {
       _versionButtonLabel = "$_versionButtonLabel (${_selectedOption!.option})";
     }
     return Row(
       children: [
         HomePageButton(
-          label: "Operating system",
-          text: _selectedOperatingSystem?.name ?? 'Select...',
+          label: context.t("Operating system"),
+          text: _selectedOperatingSystem?.name ?? context.t('Select...'),
           onPressed: () {
             Navigator.of(context)
                 .push<OperatingSystem>(MaterialPageRoute(fullscreenDialog: true, builder: (context) => const OperatingSystemSelection()))
@@ -49,7 +50,7 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
           },
         ),
         HomePageButton(
-          label: "Version",
+          label: context.t('Version'),
           text: _versionButtonLabel, //_selectedVersion?.version ?? 'Select...',
           onPressed: (_selectedOperatingSystem != null)
               ? () {
@@ -70,8 +71,8 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
               : null,
         ),
         HomePageButton(
-          label: 'Download',
-          text: 'Download',
+          label: context.t('Download'),
+          text: context.t('Download'),
           onPressed: (_selectedVersion == null)
               ? null
               : () {
@@ -108,7 +109,7 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 32),
-                  child: Text('Downloading...', style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.white)),
+                  child: Text(context.t('Downloading...'), style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.white)),
                 ),
                 const CircularProgressIndicator(),
                 Padding(
@@ -148,9 +149,9 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 32),
-                  child: Text('Done !', style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.white)),
+                  child: Text(context.t('Done !'), style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.white)),
                 ),
-                Text('Now run "quickemu --vm $operatingSystem-$version" to start the VM',
+                Text('${context.t('Now run')} "quickemu --vm $operatingSystem-$version" ${context.t('to start the VM')}',
                     style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.white)),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 32),

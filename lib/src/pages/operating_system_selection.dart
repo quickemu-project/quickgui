@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quickgui/src/model/operating_system.dart';
+import 'package:quickgui/src/i18n/i18n_ext.dart';
 
 class OperatingSystemSelection extends StatefulWidget {
   const OperatingSystemSelection({Key? key}) : super(key: key);
@@ -23,7 +24,7 @@ class _OperatingSystemSelectionState extends State<OperatingSystemSelection> {
     var list = gOperatingSystems.where((os) => os.name.toLowerCase().contains(term.toLowerCase())).toList();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Select operating system'),
+        title: Text(context.t('Select operating system')),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(kToolbarHeight),
           child: Padding(
@@ -42,7 +43,7 @@ class _OperatingSystemSelectionState extends State<OperatingSystemSelection> {
                       Expanded(
                         child: TextField(
                           focusNode: focusNode,
-                          decoration: const InputDecoration.collapsed(hintText: 'Search operating system'),
+                          decoration: InputDecoration.collapsed(hintText: context.t('Search operating system')),
                           onChanged: (value) {
                             setState(() {
                               term = value;

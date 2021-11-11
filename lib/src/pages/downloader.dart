@@ -9,6 +9,7 @@ import 'package:quickgui/src/model/version.dart';
 import 'package:quickgui/src/widgets/downloader/cancel_dismiss_button.dart';
 import 'package:quickgui/src/widgets/downloader/download_label.dart';
 import 'package:quickgui/src/widgets/downloader/download_progress_bar.dart';
+import 'package:quickgui/src/i18n/i18n_ext.dart';
 
 class Downloader extends StatefulWidget {
   const Downloader({
@@ -120,7 +121,7 @@ class _DownloaderState extends State<Downloader> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 32),
-                      child: Text("Target folder : ${Directory.current}"),
+                      child: Text('${context.t('Target folder')} : ${Directory.current}'),
                     ),
                   ],
                 );

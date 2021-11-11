@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quickgui/src/i18n/i18n_ext.dart';
 
 class DownloadLabel extends StatelessWidget {
   const DownloadLabel({Key? key, required this.downloadFinished, required this.data, required this.downloader}) : super(key: key);
@@ -12,14 +13,14 @@ class DownloadLabel extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: downloadFinished
-          ? const Text('Download finished.')
+          ? Text(context.t('Download finished.'))
           : data != null
               ? downloader != 'zsync'
                   ? downloader == 'wget'
-                      ? Text('Downloading...${(data! * 100).toInt()}%')
-                      : Text('$data Mbs downloaded')
-                  : const Text("Downloading (no progress available)...")
-              : const Text('Waiting for download to start'),
+                      ? Text('${context.t('Downloading...')}${(data! * 100).toInt()}%')
+                      : Text('$data ${context.t('Mbs downloaded')}')
+                  : Text(context.t("Downloading (no progress available)..."))
+              : Text(context.t('Waiting for download to start')),
     );
   }
 }
