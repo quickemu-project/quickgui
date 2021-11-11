@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:quickgui/src/globals.dart';
+import 'package:quickgui/src/i18n/quickgui_localizations_delegate.dart';
 import 'package:quickgui/src/mixins/preferences_mixin.dart';
 import 'package:quickgui/src/model/app_theme.dart';
 import 'package:quickgui/src/pages/main_page.dart';
@@ -20,7 +22,7 @@ class _AppState extends State<App> with PreferencesMixin {
       builder: (context, AsyncSnapshot<bool?> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.data != null) {
-            context.read<AppTheme>().useDarkMode = snapshot.data!;
+            context.read<AppTheme>().useDarkModeSilently = snapshot.data!;
           }
           return Consumer<AppTheme>(
             builder: (context, appTheme, _) => MaterialApp(
@@ -28,6 +30,33 @@ class _AppState extends State<App> with PreferencesMixin {
               darkTheme: ThemeData.dark(),
               themeMode: appTheme.themeMode,
               home: const MainPage(title: 'Quickgui - A Flutter frontend for Quickget and Quickemu'),
+              supportedLocales: const [
+                /// List of locales we have translations for.
+                Locale('en', ''),
+                Locale('fr', ''),
+                Locale('fr', 'CH'),
+              ],
+              localizationsDelegates: [
+                QuickguiLocalizationsDelegate(),
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+              ],
+              localeListResolutionCallback: (locales, supportedLocales) {
+                if (locales != null) {
+                  for (var locale in locales) {
+                    var supportedLocale =
+                        supportedLocales.where((element) => element.languageCode == locale.languageCode && element.countryCode == locale.countryCode);
+                    if (supportedLocale.isNotEmpty) {
+                      return supportedLocale.first;
+                    }
+                    supportedLocale = supportedLocales.where((element) => element.languageCode == locale.languageCode);
+                    if (supportedLocale.isNotEmpty) {
+                      return supportedLocale.first;
+                    }
+                  }
+                }
+                return null;
+              },
             ),
           );
         } else {

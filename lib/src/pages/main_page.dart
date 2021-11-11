@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quickgui/src/widgets/home_page/logo.dart';
 import 'package:quickgui/src/widgets/home_page/main_menu.dart';
 import 'package:quickgui/src/widgets/left_menu.dart';
+import 'package:quickgui/src/i18n/i18n_ext.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key, required this.title}) : super(key: key);
@@ -17,7 +18,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Main menu'),
+        title: Text(context.t('Main menu')),
       ),
       drawer: const LeftMenu(),
       body: Column(

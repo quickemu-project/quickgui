@@ -5,6 +5,7 @@ import 'package:quickgui/src/globals.dart';
 import 'package:quickgui/src/mixins/app_version.dart';
 import 'package:quickgui/src/mixins/preferences_mixin.dart';
 import 'package:quickgui/src/model/app_theme.dart';
+import 'package:quickgui/src/i18n/i18n_ext.dart';
 
 class LeftMenu extends StatelessWidget with PreferencesMixin {
   const LeftMenu({Key? key}) : super(key: key);
@@ -24,7 +25,7 @@ class LeftMenu extends StatelessWidget with PreferencesMixin {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
                 children: [
-                  const Text('Use dark mode'),
+                  Text(context.t('Use dark mode')),
                   Switch(
                     value: Theme.of(context).brightness == Brightness.dark,
                     onChanged: (value) {

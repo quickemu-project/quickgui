@@ -52,10 +52,12 @@ void main() async {
   setWindowMaxSize(const Size(692, 580));
   gOperatingSystems = await loadOperatingSystems(false);
   AppVersion.packageInfo = await PackageInfo.fromPlatform();
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (_) => AppTheme()),
-    ],
-    builder: (context, _) => const App(),
-  ));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AppTheme()),
+      ],
+      builder: (context, _) => const App(),
+    ),
+  );
 }
