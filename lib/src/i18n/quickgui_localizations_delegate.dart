@@ -4,7 +4,7 @@ import 'package:quickgui/src/i18n/quickgui_localizations.dart';
 
 class QuickguiLocalizationsDelegate extends LocalizationsDelegate<QuickguiLocalizations> {
   @override
-  bool isSupported(Locale locale) => ['fr', 'en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => true;
 
   @override
   Future<QuickguiLocalizations> load(Locale locale) async {
@@ -12,7 +12,11 @@ class QuickguiLocalizationsDelegate extends LocalizationsDelegate<QuickguiLocali
     try {
       poContent = await rootBundle.loadString('assets/i18n/${locale.languageCode}_${locale.countryCode}.po');
     } catch (e) {
-      poContent = await rootBundle.loadString('assets/i18n/${locale.languageCode}.po');
+      try {
+        poContent = await rootBundle.loadString('assets/i18n/${locale.languageCode}.po');
+      } catch (e) {
+        poContent = await rootBundle.loadString('assets/i18n/en.po');
+      }
     }
 
     return QuickguiLocalizations.fromPO(poContent);
