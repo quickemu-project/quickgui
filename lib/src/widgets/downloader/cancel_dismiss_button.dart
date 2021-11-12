@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quickgui/src/i18n/i18n_ext.dart';
+
+import '../../i18n/i18n_ext.dart';
 
 class CancelDismissButton extends StatelessWidget {
   const CancelDismissButton({

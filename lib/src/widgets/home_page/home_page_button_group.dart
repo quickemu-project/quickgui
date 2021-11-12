@@ -2,15 +2,16 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:quickgui/src/model/operating_system.dart';
-import 'package:quickgui/src/model/option.dart';
-import 'package:quickgui/src/model/version.dart';
-import 'package:quickgui/src/pages/downloader.dart';
-import 'package:quickgui/src/pages/operating_system_selection.dart';
-import 'package:quickgui/src/pages/version_selection.dart';
-import 'package:quickgui/src/widgets/home_page/home_page_button.dart';
 import 'package:tuple/tuple.dart';
-import 'package:quickgui/src/i18n/i18n_ext.dart';
+
+import '../../model/operating_system.dart';
+import '../../model/option.dart';
+import '../../model/version.dart';
+import '../../pages/downloader.dart';
+import '../../pages/operating_system_selection.dart';
+import '../../pages/version_selection.dart';
+import '../../i18n/i18n_ext.dart';
+import '../home_page/home_page_button.dart';
 
 class HomePageButtonGroup extends StatefulWidget {
   const HomePageButtonGroup({Key? key}) : super(key: key);

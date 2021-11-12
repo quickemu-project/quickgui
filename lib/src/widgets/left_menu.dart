@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quickgui/src/globals.dart';
-import 'package:quickgui/src/mixins/app_version.dart';
-import 'package:quickgui/src/mixins/preferences_mixin.dart';
-import 'package:quickgui/src/model/app_theme.dart';
-import 'package:quickgui/src/i18n/i18n_ext.dart';
+
+import '../globals.dart';
+import '../mixins/app_version.dart';
+import '../mixins/preferences_mixin.dart';
+import '../model/app_theme.dart';
+import '../i18n/i18n_ext.dart';
 
 class LeftMenu extends StatelessWidget with PreferencesMixin {
   const LeftMenu({Key? key}) : super(key: key);

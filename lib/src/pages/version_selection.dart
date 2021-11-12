@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:quickgui/src/model/operating_system.dart';
-import 'package:quickgui/src/model/option.dart';
-import 'package:quickgui/src/model/version.dart';
-import 'package:quickgui/src/pages/option_selection.dart';
 import 'package:tuple/tuple.dart';
-import 'package:quickgui/src/i18n/i18n_ext.dart';
+
+import '../model/operating_system.dart';
+import '../model/option.dart';
+import '../model/version.dart';
+import '../i18n/i18n_ext.dart';
+import 'option_selection.dart';
 
 class VersionSelection extends StatefulWidget {
   const VersionSelection({Key? key, required this.operatingSystem}) : super(key: key);

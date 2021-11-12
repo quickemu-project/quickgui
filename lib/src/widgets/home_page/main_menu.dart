@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:quickgui/src/pages/downloader_page.dart';
-import 'package:quickgui/src/pages/manager.dart';
-import 'package:quickgui/src/widgets/home_page/home_page_button.dart';
-import 'package:quickgui/src/i18n/i18n_ext.dart';
+
+import '../../pages/downloader_page.dart';
+import '../../pages/manager.dart';
+import '../../i18n/i18n_ext.dart';
+import '../home_page/home_page_button.dart';
 
 class MainMenu extends StatelessWidget {
   const MainMenu({Key? key}) : super(key: key);

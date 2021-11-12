@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:quickgui/src/globals.dart';
-import 'package:quickgui/src/i18n/quickgui_localizations_delegate.dart';
-import 'package:quickgui/src/mixins/preferences_mixin.dart';
-import 'package:quickgui/src/model/app_theme.dart';
-import 'package:quickgui/src/pages/main_page.dart';
+
+import 'globals.dart';
+import 'i18n/quickgui_localizations_delegate.dart';
+import 'mixins/preferences_mixin.dart';
+import 'model/app_theme.dart';
+import 'pages/main_page.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);

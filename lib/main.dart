@@ -2,14 +2,15 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
-import 'package:quickgui/src/app.dart';
-import 'package:quickgui/src/mixins/app_version.dart';
-import 'package:quickgui/src/model/app_theme.dart';
-import 'package:quickgui/src/model/operating_system.dart';
-import 'package:quickgui/src/model/option.dart';
-import 'package:quickgui/src/model/version.dart';
 import 'package:tuple/tuple.dart';
 import 'package:window_size/window_size.dart';
+
+import 'src/app.dart';
+import 'src/mixins/app_version.dart';
+import 'src/model/app_theme.dart';
+import 'src/model/operating_system.dart';
+import 'src/model/option.dart';
+import 'src/model/version.dart';
 
 Future<List<OperatingSystem>> loadOperatingSystems(bool showUbuntus) async {
   var process = await Process.run('quickget', ['list_csv']);

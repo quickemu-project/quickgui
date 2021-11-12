@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:quickgui/src/widgets/home_page/logo.dart';
-import 'package:quickgui/src/widgets/home_page/main_menu.dart';
-import 'package:quickgui/src/widgets/left_menu.dart';
-import 'package:quickgui/src/i18n/i18n_ext.dart';
+
+import '../widgets/home_page/logo.dart';
+import '../widgets/home_page/main_menu.dart';
+import '../widgets/left_menu.dart';
+import '../i18n/i18n_ext.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key, required this.title}) : super(key: key);
