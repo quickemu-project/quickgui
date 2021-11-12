@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:desktop_notifications/desktop_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:quickgui/src/model/operating_system.dart';
 import 'package:quickgui/src/model/option.dart';
@@ -28,6 +29,7 @@ class Downloader extends StatefulWidget {
 }
 
 class _DownloaderState extends State<Downloader> {
+  final notificationsClient = NotificationsClient();
   final wgetPattern = RegExp("( [0-9.]+%)");
   final macRecoveryPattern = RegExp("([0-9]+\\.[0-9])");
   late final Stream<double> _progressStream;
@@ -81,6 +83,12 @@ class _DownloaderState extends State<Downloader> {
         controller.close();
         setState(() {
           _downloadFinished = true;
+          notificationsClient.notify(
+            context.t('Download complete'),
+            body: 'Download of ${widget.operatingSystem.name} has completed.',
+            appName: context.t('QuickGUI'),
+            expireTimeoutMs: 10000, /* 10 seconds */
+          );
         });
       });
 
