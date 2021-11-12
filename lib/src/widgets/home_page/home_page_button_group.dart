@@ -37,13 +37,21 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
           text: _selectedOperatingSystem?.name ?? context.t('Select...'),
           onPressed: () {
             Navigator.of(context)
-                .push<OperatingSystem>(MaterialPageRoute(fullscreenDialog: true, builder: (context) => const OperatingSystemSelection()))
+                .push<OperatingSystem>(MaterialPageRoute(
+                    fullscreenDialog: true,
+                    builder: (context) => const OperatingSystemSelection()))
                 .then((selection) {
               if (selection != null) {
                 setState(() {
                   _selectedOperatingSystem = selection;
-                  _selectedVersion = null;
-                  _selectedOption = null;
+                  if (selection.versions.length == 1 &&
+                      selection.versions.first.options.length == 1) {
+                    _selectedVersion = selection.versions.first;
+                    _selectedOption = selection.versions.first.options.first;
+                  } else {
+                    _selectedVersion = null;
+                    _selectedOption = null;
+                  }
                 });
               }
             });
