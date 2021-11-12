@@ -1,4 +1,4 @@
-import 'package:quickgui/src/model/version.dart';
+import 'version.dart';
 
 class OperatingSystem {
   OperatingSystem(this.name, this.code) : versions = [];

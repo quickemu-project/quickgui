@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:quickgui/src/model/operating_system.dart';
-import 'package:quickgui/src/i18n/i18n_ext.dart';
+
+import '../model/operating_system.dart';
+import '../i18n/i18n_ext.dart';
 
 class OperatingSystemSelection extends StatefulWidget {
   const OperatingSystemSelection({Key? key}) : super(key: key);

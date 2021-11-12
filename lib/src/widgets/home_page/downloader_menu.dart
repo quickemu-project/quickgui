@@ -1,9 +1,10 @@
 import 'dart:io';
-import 'package:quickgui/src/globals.dart';
-import 'package:quickgui/src/mixins/preferences_mixin.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:quickgui/src/widgets/home_page/home_page_button_group.dart';
+
+import '../../globals.dart';
+import '../../mixins/preferences_mixin.dart';
+import '../home_page/home_page_button_group.dart';
 
 class DownloaderMenu extends StatefulWidget {
   const DownloaderMenu({Key? key}) : super(key: key);

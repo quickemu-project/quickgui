@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path;
 import 'package:file_picker/file_picker.dart';
 import 'dart:io';
-import 'package:quickgui/src/globals.dart';
-import 'package:quickgui/src/model/vminfo.dart';
-import 'package:quickgui/src/mixins/preferences_mixin.dart';
-import 'package:quickgui/src/i18n/i18n_ext.dart';
+
+import '../globals.dart';
+import '../model/vminfo.dart';
+import '../mixins/preferences_mixin.dart';
+import '../i18n/i18n_ext.dart';
 
 /// VM manager page.
 /// Displays a list of available VMs, running state and connection info,

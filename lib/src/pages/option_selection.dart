@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:quickgui/src/model/version.dart';
-import 'package:quickgui/src/i18n/i18n_ext.dart';
+
+import '../model/version.dart';
+import '../i18n/i18n_ext.dart';
 
 class OptionSelection extends StatefulWidget {
   const OptionSelection(this.version, {Key? key}) : super(key: key);

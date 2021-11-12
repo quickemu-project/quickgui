@@ -1,4 +1,4 @@
-import 'package:quickgui/src/model/option.dart';
+import 'option.dart';
 
 class Version {
   Version(this.version) : options = [];
