@@ -30,6 +30,9 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     super.initState();
     getPreference<String>(prefWorkingDirectory).then((pref) {
       setState(() {
+        if (pref == null) {
+          return;
+        }
         Directory.current = pref;
       });
       Future.delayed(Duration.zero, () => _getVms(context)); // Reload VM list when we enter the page.
