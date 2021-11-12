@@ -3,117 +3,115 @@ msgid ""
 msgstr ""
 "Project-Id-Version: quickgui\n"
 "POT-Creation-Date: 2021-09-29 09:59+0200\n"
-"PO-Revision-Date: 2021-11-11 16:44+0100\n"
-"Last-Translator: Yannick Mauray\n"
+"PO-Revision-Date: 2021-11-11 17:30+0100\n"
+"Last-Translator: Philipp Kiemle <philipp.kiemle@gmail.com>\n"
 "Language-Team: Philipp Kiemle\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Lokalize 21.08.2\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: de\n"
 
-#, fuzzy
 msgid "Main menu"
 msgstr "Hauptmenü"
 
-#, fuzzy
 msgid "Use dark mode"
 msgstr "Den dunklen Modus verwenden"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Abbrechen"
 
 msgid "Click to use SPICE display"
-msgstr ""
+msgstr "Klicken, um SPICE-Display zu nutzen"
 
 msgid "Create new machines"
-msgstr ""
+msgstr "Neue virtuelle Maschinen erstellen"
 
 msgid "Dismiss"
-msgstr ""
+msgstr "Verwerfen"
 
 msgid "Done !"
-msgstr ""
+msgstr "Fertig!"
 
 msgid "Download"
-msgstr ""
+msgstr "Herunterladen"
 
 msgid "Download finished."
-msgstr ""
+msgstr "Herunterladen abgeschlossen."
 
 msgid "Downloader"
-msgstr ""
+msgstr "Downloader"
 
 msgid "Downloading (no progress available)..."
-msgstr ""
+msgstr "Lädt herunter (Kein Fortschritt verfügbar) …"
 
 msgid "Downloading..."
-msgstr ""
+msgstr "Herunterladen …"
 
 msgid "Manage existing machines"
-msgstr ""
+msgstr "Bestehende Maschinen verwalten"
 
 msgid "Manager"
-msgstr ""
+msgstr "Manager"
 
 msgid "Mbs downloaded"
-msgstr ""
+msgstr "MB heruntergeladen"
 
 msgid "Now run"
 msgstr ""
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Operating system"
-msgstr ""
+msgstr "Betriebssystem"
 
 msgid "Search operating system"
-msgstr ""
+msgstr "Betriebssystem suchen"
 
 msgid "Search option"
-msgstr ""
+msgstr "Suchoptionen"
 
 msgid "Select operating system"
-msgstr ""
+msgstr "Betriebssystem auswählen"
 
 msgid "Select option"
-msgstr ""
+msgstr "Option auswählen"
 
 msgid "Select version for"
-msgstr ""
+msgstr "Version auswählen für"
 
 msgid "Select..."
-msgstr ""
+msgstr "Auswählen …"
 
 msgid "SPICE port"
-msgstr ""
+msgstr "SPICE-Port"
 
 msgid "SSH port"
-msgstr ""
+msgstr "SSH-Port"
 
 msgid "Stop The Virtual Machine?"
-msgstr ""
+msgstr "Die virtuelle Maschine stoppen?"
 
 msgid "Target folder"
-msgstr ""
+msgstr "Zielverzeichnis"
 
 msgid "to start the VM"
-msgstr ""
+msgstr "um die VM zu starten"
 
 msgid "Use SPICE display"
-msgstr ""
+msgstr "SPICE-Display verwenden"
 
 msgid "Using SPICE display"
-msgstr ""
+msgstr "SPICE-Display wird verwendet"
 
 msgid "Version"
-msgstr ""
+msgstr "Version"
 
 msgid "Waiting for download to start"
-msgstr ""
+msgstr "Warten auf den Beginn des Downloads"
 
 msgid "You are about to terminate the virtual machine"
-msgstr ""
+msgstr "Sie sind dabei, die virtuelle Maschine zu beenden"
