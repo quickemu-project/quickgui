@@ -4,6 +4,7 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path;
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:io';
 
 import '../globals.dart';
@@ -143,6 +144,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
 
   Widget _buildVmList() {
     List<Widget> _widgetList = [];
+    final Color buttonColor = Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Theme.of(context).colorScheme.primary;
     _widgetList.add(
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -156,7 +158,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               primary: Theme.of(context).canvasColor,
-              onPrimary: Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Theme.of(context).colorScheme.primary,
+              onPrimary: buttonColor
             ),
             onPressed: () async {
               String? result = await FilePicker.platform.getDirectoryPath();
@@ -175,7 +177,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
       ),
     );
     List<List<Widget>> rows = _currentVms.map((vm) {
-      return _buildRow(vm);
+      return _buildRow(vm, buttonColor);
     }).toList();
     for (var row in rows) {
       _widgetList.addAll(row);
@@ -187,14 +189,16 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     );
   }
 
-  List<Widget> _buildRow(String currentVm) {
+  List<Widget> _buildRow(String currentVm, Color buttonColor) {
     final bool active = _activeVms.containsKey(currentVm);
-    final bool spicy = _spicyVms.contains(currentVm);
     final bool sshy = _sshVms.contains(currentVm);
     VmInfo vmInfo = VmInfo();
     String connectInfo = '';
     if (active) {
       vmInfo = _activeVms[currentVm]!;
+      if (vmInfo.spicePort != null) {
+        connectInfo += context.t('SPICE port') + ': ' + vmInfo.spicePort! + ' ';
+      }
       if (vmInfo.sshPort != null && _terminalEmulator != null) {
         connectInfo += context.t('SSH port') + ': ' + vmInfo.sshPort! + ' ';
         _detectSsh(int.parse(vmInfo.sshPort!)).then((sshRunning) {
@@ -209,9 +213,6 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
           }
         });
       }
-      if (vmInfo.spicePort != null) {
-        connectInfo += context.t('SPICE port') + ': ' + vmInfo.spicePort! + ' ';
-      }
     }
     return <Widget>[
       ListTile(
@@ -222,7 +223,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
               IconButton(
                   icon: Icon(
                     active ? Icons.play_arrow : Icons.play_arrow_outlined,
-                    color: active ? Colors.green : null,
+                    color: active ? Colors.green : buttonColor,
                     semanticLabel: active ? 'Running' : 'Run',
                   ),
                   onPressed: active ? null : () async {
@@ -244,52 +245,63 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                   color: active ? Colors.red : null,
                   semanticLabel: active ? 'Stop' : 'Not running',
                 ),
-                onPressed: () {
-                  if (active) {
-                    showDialog<bool>(
-                      context: context,
-                      builder: (BuildContext context) => AlertDialog(
-                        title: Text(context.t('Stop The Virtual Machine?')),
-                        content: Text('${context.t('You are about to terminate the virtual machine')} $currentVm'),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () => Navigator.pop(context, false),
-                            child: Text(context.t('Cancel')),
-                          ),
-                          TextButton(
-                            onPressed: () => Navigator.pop(context, true),
-                            child: Text(context.t('OK')),
-                          ),
-                        ],
-                      ),
-                    ).then((result) {
-                      result = result ?? false;
-                      if (result) {
-                        Process.run('killall', [currentVm]);
-                        setState(() {
-                          _activeVms.remove(currentVm);
-                        });
-                      }
-                    });
-                  }
+                onPressed: !active ? null : () {
+                  showDialog<bool>(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      title: Text(context.t('Stop The Virtual Machine?')),
+                      content: Text('${context.t('You are about to terminate the virtual machine')} $currentVm'),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, false),
+                          child: Text(context.t('Cancel')),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, true),
+                          child: Text(context.t('OK')),
+                        ),
+                      ],
+                    ),
+                  ).then((result) {
+                    result = result ?? false;
+                    if (result) {
+                      Process.run('killall', [currentVm]);
+                      setState(() {
+                        _activeVms.remove(currentVm);
+                      });
+                    }
+                  });
                 },
               ),
             ],
           )),
       if (connectInfo.isNotEmpty)
         ListTile(
-          title: Text(connectInfo),
+          title: Text(
+            connectInfo,
+            style: TextStyle(fontSize: 12)
+          ),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              TextButton(
-                child: Text('Spice'),
-                onPressed: () {
+              IconButton(
+                icon: Icon(
+                  Icons.monitor,
+                  color: _spicy ? buttonColor : null,
+                  semanticLabel: 'Connect display with SPICE',
+                ),
+                tooltip: _spicy? 'Connect display with SPICE' : 'SPICE client not found',
+                onPressed: !_spicy? null : () {
                   Process.start('spicy', ['-p', vmInfo.spicePort!]);
                 },
               ),
-              TextButton(
-                child: Text('SSH'),
+              IconButton(
+                icon: SvgPicture.asset(
+                  'assets/images/console.svg',
+                  semanticsLabel: 'Connect with SSH',
+                  color: sshy ? buttonColor : Colors.grey
+                ),
+                tooltip: sshy ? 'Connect with SSH' : 'SSH server not detected on guest',
                 onPressed: !sshy ? null : () {
                   TextEditingController _usernameController = TextEditingController();
                   showDialog<bool>(

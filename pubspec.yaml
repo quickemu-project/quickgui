@@ -51,6 +51,7 @@ dependencies:
   flutter_localizations: 
     sdk: flutter
   desktop_notifications: ^0.6.1
+  flutter_svg: ^0.23.0
 
 dev_dependencies:
   flutter_test:
