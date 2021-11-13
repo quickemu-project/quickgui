@@ -24,7 +24,7 @@ class Manager extends StatefulWidget {
 class _ManagerState extends State<Manager> with PreferencesMixin {
   List<String> _currentVms = [];
   Map<String, VmInfo> _activeVms = {};
-  final List<String> _spicyVms = [];
+  bool _spicy = false;
   final List<String> _sshVms = [];
   String? _terminalEmulator;
   Timer? refreshTimer;
@@ -33,6 +33,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
   void initState() {
     super.initState();
     _getTerminalEmulator();
+    _detectSpice();
     getPreference<String>(prefWorkingDirectory).then((pref) {
       setState(() {
         if (pref == null) {
@@ -53,7 +54,6 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     super.dispose();
   }
 
-
   void _getTerminalEmulator() async {
     ProcessResult result = Process.runSync('x-terminal-emulator', ['-h']);
     RegExp pattern = RegExp(r"usage:\s+([^\s]+)", multiLine: true, caseSensitive: false);
@@ -63,6 +63,13 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
         _terminalEmulator = match.group(1);
       });
     }
+  }
+
+  void _detectSpice() async {
+      ProcessResult result = await Process.run('which', ['spicy']);
+      setState(() {
+        _spicy = result.exitCode == 0;
+      });
   }
 
   VmInfo _parseVmInfo(name) {
@@ -213,40 +220,23 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               IconButton(
-                  icon: Icon(Icons.monitor,
-                      color: spicy ? Colors.red : null, semanticLabel: spicy ? context.t('Using SPICE display') : context.t('Click to use SPICE display')),
-                  tooltip: spicy ? context.t('Using SPICE display') : context.t('Use SPICE display'),
-                  onPressed: () {
-                    if (spicy) {
-                      setState(() {
-                        _spicyVms.remove(currentVm);
-                      });
-                    } else {
-                      setState(() {
-                        _spicyVms.add(currentVm);
-                      });
-                    }
-                  }),
-              IconButton(
                   icon: Icon(
                     active ? Icons.play_arrow : Icons.play_arrow_outlined,
                     color: active ? Colors.green : null,
                     semanticLabel: active ? 'Running' : 'Run',
                   ),
-                  onPressed: () async {
-                    if (!active) {
-                      Map<String, VmInfo> activeVms = _activeVms;
-                      List<String> args = ['--vm', currentVm + '.conf'];
-                      if (spicy) {
-                        args.addAll(['--display', 'spice']);
-                      }
-                      await Process.start('quickemu', args);
-                      VmInfo info = _parseVmInfo(currentVm);
-                      activeVms[currentVm] = info;
-                      setState(() {
-                        _activeVms = activeVms;
-                      });
+                  onPressed: active ? null : () async {
+                    Map<String, VmInfo> activeVms = _activeVms;
+                    List<String> args = ['--vm', currentVm + '.conf'];
+                    if (_spicy) {
+                      args.addAll(['--display', 'spice']);
                     }
+                    await Process.start('quickemu', args);
+                    VmInfo info = _parseVmInfo(currentVm);
+                    activeVms[currentVm] = info;
+                    setState(() {
+                      _activeVms = activeVms;
+                    });
                   }),
               IconButton(
                 icon: Icon(
