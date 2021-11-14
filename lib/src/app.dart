@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
+import 'package:window_size/window_size.dart';
 
 import 'globals.dart';
 import 'mixins/preferences_mixin.dart';
@@ -30,7 +31,7 @@ class _AppState extends State<App> with PreferencesMixin {
               theme: ThemeData(primarySwatch: Colors.pink),
               darkTheme: ThemeData.dark(),
               themeMode: appTheme.themeMode,
-              home: const MainPage(title: 'Quickgui - A Flutter frontend for Quickget and Quickemu'),
+              home: const MainPage(),
               supportedLocales: const [
                 /*
                  * List of locales (language + country) we have translations for.

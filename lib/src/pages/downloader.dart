@@ -86,8 +86,8 @@ class _DownloaderState extends State<Downloader> {
           _downloadFinished = true;
           notificationsClient.notify(
             context.t('Download complete'),
-            body: 'Download of ${widget.operatingSystem.name} has completed.',
-            appName: context.t('QuickGUI'),
+            body: context.t('Download of {0} has completed.', args: [widget.operatingSystem.name]),
+            appName: 'Quickgui',
             expireTimeoutMs: 10000, /* 10 seconds */
           );
         });
@@ -105,7 +105,8 @@ class _DownloaderState extends State<Downloader> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Downloading ${widget.operatingSystem.name} ${widget.version.version}' + (widget.option!.option.isNotEmpty ? ' (${widget.option!.option})' : ''),
+          context.t('Downloading {0}',
+              args: ['${widget.operatingSystem.name} ${widget.version.version}' + (widget.option!.option.isNotEmpty ? ' (${widget.option!.option})' : '')]),
         ),
         automaticallyImplyLeading: false,
       ),
@@ -130,7 +131,7 @@ class _DownloaderState extends State<Downloader> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 32),
-                      child: Text(context.t('Target folder : {0}', args: [Directory.current])),
+                      child: Text(context.t('Target folder : {0}', args: [Directory.current.path])),
                     ),
                   ],
                 );

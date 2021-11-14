@@ -47,8 +47,8 @@ msgstr "Downloader"
 msgid "Downloading (no progress available)..."
 msgstr "Lädt herunter (Kein Fortschritt verfügbar) …"
 
-msgid "Downloading... {0}"
-msgstr "Herunterladen … {0}"
+msgid "Downloading...{0}%"
+msgstr "Herunterladen …{0}%"
 
 msgid "Manage existing machines"
 msgstr "Bestehende Maschinen verwalten"
