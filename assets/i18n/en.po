@@ -14,6 +14,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, fuzzy
+msgid "Quickgui : a Flutter frontend for Quickget and Quickemu"
+msgstr "Quickgui : a Flutter frontend for Quickget and Quickemu"
+
+#, fuzzy
 msgid "Main menu"
 msgstr "Main menu"
 
@@ -58,8 +62,20 @@ msgid "Downloading (no progress available)..."
 msgstr "Downloading (no progress available)..."
 
 #, fuzzy
-msgid "Downloading... {0}"
-msgstr "Downloading... {0}"
+msgid "Downloading...{0}%"
+msgstr "Downloading...{0}%"
+
+#, fuzzy
+msgid "Downloading {0}"
+msgstr "Downloading {0}"
+
+#, fuzzy
+msgid "Download complete"
+msgstr "Download complete"
+
+#, fuzzy
+msgid "Download of {0} has completed."
+msgstr "Download of {0} has completed."
 
 #, fuzzy
 msgid "Manage existing machines"

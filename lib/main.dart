@@ -48,7 +48,6 @@ Future<List<OperatingSystem>> loadOperatingSystems(bool showUbuntus) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  setWindowTitle('Quickgui : a flutter frontend for Quickget and Quickemu');
   setWindowMinSize(const Size(692, 580));
   setWindowMaxSize(const Size(692, 580));
   gOperatingSystems = await loadOperatingSystems(false);
