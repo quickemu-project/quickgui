@@ -13,6 +13,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: en\n"
 
+msgid "Quickgui : a Flutter frontend for Quickget and Quickemu"
+msgstr ""
+
 msgid "Main menu"
 msgstr ""
 
@@ -46,7 +49,16 @@ msgstr ""
 msgid "Downloading (no progress available)..."
 msgstr ""
 
-msgid "Downloading... {0}"
+msgid "Downloading...{0}%"
+msgstr ""
+
+msgid "Downloading {0}"
+msgstr ""
+
+msgid "Download complete"
+msgstr ""
+
+msgid "Download of {0} has completed."
 msgstr ""
 
 msgid "Manage existing machines"

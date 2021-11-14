@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
+import 'package:gettext_i18n/gettext_i18n.dart';
 
 import '../model/operating_system.dart';
 import '../model/option.dart';
 import '../model/version.dart';
-import '../i18n/i18n_ext.dart';
 import 'option_selection.dart';
 
 class VersionSelection extends StatefulWidget {
