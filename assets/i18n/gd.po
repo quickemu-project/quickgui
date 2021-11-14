@@ -1,0 +1,113 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2021-09-29 09:59+0200\n"
+"PO-Revision-Date: 2021-11-14 13:19+0000\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=4; plural=(n==1 || n==11 ? 0 : n==2 || n==12 ? 1 : (n>=3 && n<=10) || (n>=13 && n<=19) ? 2 : 3);\n"
+"Last-Translator: \n"
+"Language: gd\n"
+
+msgid "Main menu"
+msgstr "Clàr-taice"
+
+msgid "Use dark mode"
+msgstr ""
+
+msgid "Cancel"
+msgstr "Sguir dheth"
+
+msgid "Click to use SPICE display"
+msgstr ""
+
+msgid "Create new machines"
+msgstr ""
+
+msgid "Dismiss"
+msgstr "Cuir air falbh"
+
+msgid "Done !"
+msgstr ""
+
+msgid "Download"
+msgstr "Luchdadh a-nuas"
+
+msgid "Download finished."
+msgstr ""
+
+msgid "Downloader"
+msgstr "Luchdaichear a-nuas nam faidhle"
+
+msgid "Downloading (no progress available)..."
+msgstr ""
+
+msgid "Downloading... {0}"
+msgstr ""
+
+msgid "Manage existing machines"
+msgstr ""
+
+msgid "Manager"
+msgstr "Manaidsear"
+
+msgid "{0} Mbs downloaded"
+msgstr ""
+
+msgid "Now run {0} to start the VM"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "Operating system"
+msgstr "Siostam-obrachaidh"
+
+msgid "Search operating system"
+msgstr ""
+
+msgid "Search option"
+msgstr ""
+
+msgid "Select operating system"
+msgstr ""
+
+msgid "Select option"
+msgstr ""
+
+msgid "Select version for {0}"
+msgstr ""
+
+msgid "Select..."
+msgstr "Tagh..."
+
+msgid "SPICE port"
+msgstr ""
+
+msgid "SSH port"
+msgstr ""
+
+msgid "Stop The Virtual Machine?"
+msgstr ""
+
+msgid "Target folder : {0}"
+msgstr ""
+
+msgid "Use SPICE display"
+msgstr ""
+
+msgid "Using SPICE display"
+msgstr ""
+
+msgid "Version"
+msgstr ""
+
+msgid "Waiting for download to start"
+msgstr ""
+
+msgid "You are about to terminate the virtual machine {0}"
+msgstr ""
