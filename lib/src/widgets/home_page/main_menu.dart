@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gettext_i18n/gettext_i18n.dart';
 
 import '../../pages/downloader_page.dart';
 import '../../pages/manager.dart';
-import '../../i18n/i18n_ext.dart';
 import '../home_page/home_page_button.dart';
 
 class MainMenu extends StatelessWidget {

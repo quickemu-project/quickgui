@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gettext_i18n/gettext_i18n.dart';
 
 import '../model/version.dart';
-import '../i18n/i18n_ext.dart';
 
 class OptionSelection extends StatefulWidget {
   const OptionSelection(this.version, {Key? key}) : super(key: key);

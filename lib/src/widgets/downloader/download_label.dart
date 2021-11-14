@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../i18n/i18n_ext.dart';
+import 'package:gettext_i18n/gettext_i18n.dart';
 
 class DownloadLabel extends StatelessWidget {
   const DownloadLabel(

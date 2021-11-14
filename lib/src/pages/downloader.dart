@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:desktop_notifications/desktop_notifications.dart';
 import 'package:flutter/material.dart';
+import 'package:gettext_i18n/gettext_i18n.dart';
 
 import '../model/operating_system.dart';
 import '../model/option.dart';
@@ -11,7 +12,6 @@ import '../model/version.dart';
 import '../widgets/downloader/cancel_dismiss_button.dart';
 import '../widgets/downloader/download_label.dart';
 import '../widgets/downloader/download_progress_bar.dart';
-import '../i18n/i18n_ext.dart';
 
 class Downloader extends StatefulWidget {
   const Downloader({

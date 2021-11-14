@@ -1,16 +1,17 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:core';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'dart:io';
+import 'package:gettext_i18n/gettext_i18n.dart';
 
 import '../globals.dart';
 import '../model/vminfo.dart';
 import '../mixins/preferences_mixin.dart';
-import '../i18n/i18n_ext.dart';
 
 /// VM manager page.
 /// Displays a list of available VMs, running state and connection info,

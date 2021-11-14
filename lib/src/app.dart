@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:gettext_i18n/gettext_i18n.dart';
 
 import 'globals.dart';
-import 'i18n/quickgui_localizations_delegate.dart';
 import 'mixins/preferences_mixin.dart';
 import 'model/app_theme.dart';
 import 'pages/main_page.dart';
@@ -56,7 +56,7 @@ class _AppState extends State<App> with PreferencesMixin {
                 Locale('fr', 'CH'),
               ],
               localizationsDelegates: [
-                QuickguiLocalizationsDelegate(),
+                GettextLocalizationsDelegate(),
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
               ],
