@@ -115,3 +115,5 @@ When a VM is running, the host's ports mapped to SPICE and SSH on the guest will
 If the "Connect display with SPICE" button is disabled, the `spicy` client could not be found. Ensure it is installed, and in your PATH (it should have been installed with `quickemu`)
 
 If the "Connect with SSH" button is disabled, an SSH server could not be detected on the guest. Most guest operating systems will not install an SSH server by default, so if it was not an option during install, you will need to install one yourself. It must be listening on port 22 (the default SSH port). Once a server is installed and running, it should be detected automatically.
+
+"Connect with SSH" will use the terminal emulator symlinked to `x-terminal-emulator`. Several common terminal emulators are supported. If yours is not, please raise an issue on this repository.
