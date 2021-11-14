@@ -14,16 +14,16 @@ msgstr ""
 "Language: it\n"
 
 msgid "Main menu"
-msgstr ""
+msgstr "Menu principale"
 
 msgid "Use dark mode"
-msgstr ""
+msgstr "Utilizzare la modalità scura"
 
 msgid "Cancel"
 msgstr "Cancella"
 
 msgid "Click to use SPICE display"
-msgstr ""
+msgstr "Clicca per usare il display SPICE"
 
 msgid "Create new machines"
 msgstr "Crea nuove macchine"
@@ -56,13 +56,13 @@ msgid "Manager"
 msgstr "Manager"
 
 msgid "{0} Mbs downloaded"
-msgstr ""
+msgstr "{0} Mbs scaricati"
 
 msgid "Now run {0} to start the VM"
-msgstr ""
+msgstr "Ora esegui {0} per avviare la VM"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Operating system"
 msgstr "Sistema operativo"
@@ -86,28 +86,28 @@ msgid "Select..."
 msgstr "Selezionare"
 
 msgid "SPICE port"
-msgstr ""
+msgstr "Porta SPICE"
 
 msgid "SSH port"
-msgstr ""
+msgstr "Porta SSH"
 
 msgid "Stop The Virtual Machine?"
-msgstr ""
+msgstr "Ferma la macchina virtuale"
 
 msgid "Target folder : {0}"
-msgstr ""
+msgstr "Folder di destinazione"
 
 msgid "Use SPICE display"
-msgstr ""
+msgstr "Utilizzare il display SPICE"
 
 msgid "Using SPICE display"
-msgstr ""
+msgstr "Utilizzo del display SPICE"
 
 msgid "Version"
-msgstr ""
+msgstr "Versione"
 
 msgid "Waiting for download to start"
-msgstr ""
+msgstr "In attesa dell'inizio del download"
 
 msgid "You are about to terminate the virtual machine {0}"
-msgstr ""
+msgstr "Stai per terminare la macchina virtuale"
