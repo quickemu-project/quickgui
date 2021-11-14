@@ -1,0 +1,113 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2021-09-29 09:59+0200\n"
+"PO-Revision-Date: 2021-11-14 13:20+0000\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: \n"
+"Language: it\n"
+
+msgid "Main menu"
+msgstr ""
+
+msgid "Use dark mode"
+msgstr ""
+
+msgid "Cancel"
+msgstr "Cancella"
+
+msgid "Click to use SPICE display"
+msgstr ""
+
+msgid "Create new machines"
+msgstr "Crea nuove macchine"
+
+msgid "Dismiss"
+msgstr "Congedare"
+
+msgid "Done !"
+msgstr "Fatto !"
+
+msgid "Download"
+msgstr "Scarica"
+
+msgid "Download finished."
+msgstr "Download terminato"
+
+msgid "Downloader"
+msgstr "Downloader"
+
+msgid "Downloading (no progress available)..."
+msgstr "Download (nessun progresso disponibile)..."
+
+msgid "Downloading... {0}"
+msgstr "Download... {0}"
+
+msgid "Manage existing machines"
+msgstr "Gestire le macchine esistenti"
+
+msgid "Manager"
+msgstr "Manager"
+
+msgid "{0} Mbs downloaded"
+msgstr ""
+
+msgid "Now run {0} to start the VM"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "Operating system"
+msgstr "Sistema operativo"
+
+msgid "Search operating system"
+msgstr "Cerca il sistema operativo"
+
+msgid "Search option"
+msgstr "Opzione di ricerca"
+
+msgid "Select operating system"
+msgstr "Scegli il sistema operativo"
+
+msgid "Select option"
+msgstr "Scegli l'opzione"
+
+msgid "Select version for {0}"
+msgstr "Seleziona la versione per"
+
+msgid "Select..."
+msgstr "Selezionare"
+
+msgid "SPICE port"
+msgstr ""
+
+msgid "SSH port"
+msgstr ""
+
+msgid "Stop The Virtual Machine?"
+msgstr ""
+
+msgid "Target folder : {0}"
+msgstr ""
+
+msgid "Use SPICE display"
+msgstr ""
+
+msgid "Using SPICE display"
+msgstr ""
+
+msgid "Version"
+msgstr ""
+
+msgid "Waiting for download to start"
+msgstr ""
+
+msgid "You are about to terminate the virtual machine {0}"
+msgstr ""
