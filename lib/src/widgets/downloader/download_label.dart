@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
 
 class DownloadLabel extends StatelessWidget {
-  const DownloadLabel(
-      {Key? key,
-      required this.downloadFinished,
-      required this.data,
-      required this.downloader})
-      : super(key: key);
+  const DownloadLabel({Key? key, required this.downloadFinished, required this.data, required this.downloader}) : super(key: key);
 
   final bool downloadFinished;
   final double? data;

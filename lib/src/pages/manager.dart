@@ -68,10 +68,10 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
   }
 
   void _detectSpice() async {
-      ProcessResult result = await Process.run('which', ['spicy']);
-      setState(() {
-        _spicy = result.exitCode == 0;
-      });
+    ProcessResult result = await Process.run('which', ['spicy']);
+    setState(() {
+      _spicy = result.exitCode == 0;
+    });
   }
 
   VmInfo _parseVmInfo(name) {
@@ -157,10 +157,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
             width: 8,
           ),
           ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              primary: Theme.of(context).canvasColor,
-              onPrimary: buttonColor
-            ),
+            style: ElevatedButton.styleFrom(primary: Theme.of(context).canvasColor, onPrimary: buttonColor),
             onPressed: () async {
               String? result = await FilePicker.platform.getDirectoryPath();
               if (result != null) {
