@@ -75,7 +75,7 @@ msgstr "Téléchargement terminé"
 
 #, fuzzy
 msgid "Download of {0} has completed."
-msgstr "Le téléhcargement de {0} est terminé."
+msgstr "Le téléchargement de {0} est terminé."
 
 #, fuzzy
 msgid "Manage existing machines"
