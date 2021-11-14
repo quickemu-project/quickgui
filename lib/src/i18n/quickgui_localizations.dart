@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gettext/gettext.dart';
 import 'package:gettext_parser/gettext_parser.dart' as gettext_parser;
+import 'package:quiver/iterables.dart';
 
 class QuickguiLocalizations {
   final _gt = Gettext(
@@ -24,5 +25,15 @@ class QuickguiLocalizations {
 
   static QuickguiLocalizations of(BuildContext context) => Localizations.of<QuickguiLocalizations>(context, QuickguiLocalizations)!;
 
-  String t(String key) => _gt.gettext(key);
+  String t(String key, List<Object>? args) {
+    var message = _gt.gettext(key);
+
+    if (args != null) {
+      for (var i in range(args.length)) {
+        message = message.replaceAll('{$i}', args[i.toInt()].toString());
+      }
+    }
+
+    return message;
+  }
 }

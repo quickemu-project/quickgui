@@ -46,7 +46,7 @@ msgstr ""
 msgid "Downloading (no progress available)..."
 msgstr ""
 
-msgid "Downloading..."
+msgid "Downloading... {0}"
 msgstr ""
 
 msgid "Manage existing machines"
@@ -55,10 +55,10 @@ msgstr ""
 msgid "Manager"
 msgstr ""
 
-msgid "Mbs downloaded"
+msgid "{0} Mbs downloaded"
 msgstr ""
 
-msgid "Now run"
+msgid "Now run {0} to start the VM"
 msgstr ""
 
 msgid "OK"
@@ -79,7 +79,7 @@ msgstr ""
 msgid "Select option"
 msgstr ""
 
-msgid "Select version for"
+msgid "Select version for {0}"
 msgstr ""
 
 msgid "Select..."
@@ -94,10 +94,7 @@ msgstr ""
 msgid "Stop The Virtual Machine?"
 msgstr ""
 
-msgid "Target folder"
-msgstr ""
-
-msgid "to start the VM"
+msgid "Target folder : {0}"
 msgstr ""
 
 msgid "Use SPICE display"
@@ -112,5 +109,5 @@ msgstr ""
 msgid "Waiting for download to start"
 msgstr ""
 
-msgid "You are about to terminate the virtual machine"
+msgid "You are about to terminate the virtual machine {0}"
 msgstr ""

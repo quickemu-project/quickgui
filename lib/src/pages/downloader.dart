@@ -130,7 +130,7 @@ class _DownloaderState extends State<Downloader> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 32),
-                      child: Text('${context.t('Target folder')} : ${Directory.current}'),
+                      child: Text(context.t('Target folder : {0}', args: [Directory.current])),
                     ),
                   ],
                 );

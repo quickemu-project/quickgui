@@ -58,8 +58,8 @@ msgid "Downloading (no progress available)..."
 msgstr "Downloading (no progress available)..."
 
 #, fuzzy
-msgid "Downloading..."
-msgstr "Downloading..."
+msgid "Downloading... {0}"
+msgstr "Downloading... {0}"
 
 #, fuzzy
 msgid "Manage existing machines"
@@ -70,12 +70,12 @@ msgid "Manager"
 msgstr "Manager"
 
 #, fuzzy
-msgid "Mbs downloaded"
-msgstr "Mbs downloaded"
+msgid "{0} Mbs downloaded"
+msgstr "{0} Mbs downloaded"
 
 #, fuzzy
-msgid "Now run"
-msgstr "Now run"
+msgid "Now run {0} to start the VM"
+msgstr "Now run {0} to start the VM"
 
 #, fuzzy
 msgid "OK"
@@ -102,8 +102,8 @@ msgid "Select option"
 msgstr "Select option"
 
 #, fuzzy
-msgid "Select version for"
-msgstr "Select version for"
+msgid "Select version for {0}"
+msgstr "Select version for {0}"
 
 #, fuzzy
 msgid "Select..."
@@ -122,12 +122,8 @@ msgid "Stop The Virtual Machine?"
 msgstr "Stop The Virtual Machine?"
 
 #, fuzzy
-msgid "Target folder"
-msgstr "Target folder"
-
-#, fuzzy
-msgid "to start the VM"
-msgstr "to start the VM"
+msgid "Target folder : {0}"
+msgstr "Target folder : {0}"
 
 #, fuzzy
 msgid "Use SPICE display"
@@ -146,5 +142,5 @@ msgid "Waiting for download to start"
 msgstr "Waiting for download to start"
 
 #, fuzzy
-msgid "You are about to terminate the virtual machine"
-msgstr "You are about to terminate the virtual machine"
+msgid "You are about to terminate the virtual machine {0}"
+msgstr "You are about to terminate the virtual machine {0}"

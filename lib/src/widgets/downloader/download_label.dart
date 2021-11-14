@@ -23,8 +23,8 @@ class DownloadLabel extends StatelessWidget {
           : data != null
               ? downloader != 'zsync'
                   ? downloader == 'wget'
-                      ? Text('${context.t('Downloading...')}${(data! * 100).toInt()}%')
-                      : Text('$data ${context.t('Mbs downloaded')}')
+                      ? Text(context.t('Downloading...{0}%', args: [(data! * 100).toInt()]))
+                      : Text(context.t('{0} Mbs downloaded', args: [data!]))
                   : Text(context.t("Downloading (no progress available)..."))
               : Text(context.t('Waiting for download to start')),
     );

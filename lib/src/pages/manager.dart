@@ -226,133 +226,130 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                     color: active ? Colors.green : buttonColor,
                     semanticLabel: active ? 'Running' : 'Run',
                   ),
-                  onPressed: active ? null : () async {
-                    Map<String, VmInfo> activeVms = _activeVms;
-                    List<String> args = ['--vm', currentVm + '.conf'];
-                    if (_spicy) {
-                      args.addAll(['--display', 'spice']);
-                    }
-                    await Process.start('quickemu', args);
-                    VmInfo info = _parseVmInfo(currentVm);
-                    activeVms[currentVm] = info;
-                    setState(() {
-                      _activeVms = activeVms;
-                    });
-                  }),
+                  onPressed: active
+                      ? null
+                      : () async {
+                          Map<String, VmInfo> activeVms = _activeVms;
+                          List<String> args = ['--vm', currentVm + '.conf'];
+                          if (_spicy) {
+                            args.addAll(['--display', 'spice']);
+                          }
+                          await Process.start('quickemu', args);
+                          VmInfo info = _parseVmInfo(currentVm);
+                          activeVms[currentVm] = info;
+                          setState(() {
+                            _activeVms = activeVms;
+                          });
+                        }),
               IconButton(
                 icon: Icon(
                   active ? Icons.stop : Icons.stop_outlined,
                   color: active ? Colors.red : null,
                   semanticLabel: active ? 'Stop' : 'Not running',
                 ),
-                onPressed: !active ? null : () {
-                  showDialog<bool>(
-                    context: context,
-                    builder: (BuildContext context) => AlertDialog(
-                      title: Text(context.t('Stop The Virtual Machine?')),
-                      content: Text('${context.t('You are about to terminate the virtual machine')} $currentVm'),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () => Navigator.pop(context, false),
-                          child: Text(context.t('Cancel')),
-                        ),
-                        TextButton(
-                          onPressed: () => Navigator.pop(context, true),
-                          child: Text(context.t('OK')),
-                        ),
-                      ],
-                    ),
-                  ).then((result) {
-                    result = result ?? false;
-                    if (result) {
-                      Process.run('killall', [currentVm]);
-                      setState(() {
-                        _activeVms.remove(currentVm);
-                      });
-                    }
-                  });
-                },
+                onPressed: !active
+                    ? null
+                    : () {
+                        showDialog<bool>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: Text(context.t('Stop The Virtual Machine?')),
+                            content: Text(context.t('You are about to terminate the virtual machine', args: [currentVm])),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, false),
+                                child: Text(context.t('Cancel')),
+                              ),
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, true),
+                                child: Text(context.t('OK')),
+                              ),
+                            ],
+                          ),
+                        ).then((result) {
+                          result = result ?? false;
+                          if (result) {
+                            Process.run('killall', [currentVm]);
+                            setState(() {
+                              _activeVms.remove(currentVm);
+                            });
+                          }
+                        });
+                      },
               ),
             ],
           )),
       if (connectInfo.isNotEmpty)
         ListTile(
-          title: Text(
-            connectInfo,
-            style: TextStyle(fontSize: 12)
-          ),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
+            title: Text(connectInfo, style: const TextStyle(fontSize: 12)),
+            trailing: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
               IconButton(
                 icon: Icon(
                   Icons.monitor,
                   color: _spicy ? buttonColor : null,
                   semanticLabel: 'Connect display with SPICE',
                 ),
-                tooltip: _spicy? 'Connect display with SPICE' : 'SPICE client not found',
-                onPressed: !_spicy? null : () {
-                  Process.start('spicy', ['-p', vmInfo.spicePort!]);
-                },
+                tooltip: _spicy ? 'Connect display with SPICE' : 'SPICE client not found',
+                onPressed: !_spicy
+                    ? null
+                    : () {
+                        Process.start('spicy', ['-p', vmInfo.spicePort!]);
+                      },
               ),
               IconButton(
-                icon: SvgPicture.asset(
-                  'assets/images/console.svg',
-                  semanticsLabel: 'Connect with SSH',
-                  color: sshy ? buttonColor : Colors.grey
-                ),
+                icon: SvgPicture.asset('assets/images/console.svg', semanticsLabel: 'Connect with SSH', color: sshy ? buttonColor : Colors.grey),
                 tooltip: sshy ? 'Connect with SSH' : 'SSH server not detected on guest',
-                onPressed: !sshy ? null : () {
-                  TextEditingController _usernameController = TextEditingController();
-                  showDialog<bool>(
-                    context: context,
-                    builder: (BuildContext context) => AlertDialog(
-                      title: Text('Launch SSH connection to $currentVm'),
-                      content: TextField(
-                        controller: _usernameController,
-                        decoration: const InputDecoration(hintText: "SSH username"),
-                      ),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () => Navigator.pop(context, false),
-                          child: const Text('Cancel'),
-                        ),
-                        TextButton(
-                          onPressed: () => Navigator.pop(context, true),
-                          child: const Text('Connect'),
-                        ),
-                      ],
-                    ),
-                  ).then((result) {
-                    result = result ?? false;
-                    if (result) {
-                      List<String> sshArgs = ['ssh', '-p', vmInfo.sshPort!, _usernameController.text + '@localhost'];
-                      switch(_terminalEmulator) {
-                        case 'gnome-terminal':
-                        case 'mate-terminal':
-                          sshArgs.insert(0, '--');
-                          break;
-                        case 'xterm':
-                        case 'konsole':
-                          sshArgs.insert(0, '-e');
-                          break;
-                        case 'terminator':
-                        case 'xfce4-terminal':
-                          sshArgs.insert(0, '-x');
-                          break;
-                        case 'guake':
-                          String command = sshArgs.join(' ');
-                          sshArgs = ['-e', command];
-                          break;
-                      }
-                      Process.start(_terminalEmulator!, sshArgs);
-                    }
-                  });
-                },
+                onPressed: !sshy
+                    ? null
+                    : () {
+                        TextEditingController _usernameController = TextEditingController();
+                        showDialog<bool>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: Text('Launch SSH connection to $currentVm'),
+                            content: TextField(
+                              controller: _usernameController,
+                              decoration: const InputDecoration(hintText: "SSH username"),
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, false),
+                                child: const Text('Cancel'),
+                              ),
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, true),
+                                child: const Text('Connect'),
+                              ),
+                            ],
+                          ),
+                        ).then((result) {
+                          result = result ?? false;
+                          if (result) {
+                            List<String> sshArgs = ['ssh', '-p', vmInfo.sshPort!, _usernameController.text + '@localhost'];
+                            switch (_terminalEmulator) {
+                              case 'gnome-terminal':
+                              case 'mate-terminal':
+                                sshArgs.insert(0, '--');
+                                break;
+                              case 'xterm':
+                              case 'konsole':
+                                sshArgs.insert(0, '-e');
+                                break;
+                              case 'terminator':
+                              case 'xfce4-terminal':
+                                sshArgs.insert(0, '-x');
+                                break;
+                              case 'guake':
+                                String command = sshArgs.join(' ');
+                                sshArgs = ['-e', command];
+                                break;
+                            }
+                            Process.start(_terminalEmulator!, sshArgs);
+                          }
+                        });
+                      },
               ),
-            ]
-          )
-        ),
+            ])),
       const Divider()
     ];
   }

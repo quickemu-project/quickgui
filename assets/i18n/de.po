@@ -47,8 +47,8 @@ msgstr "Downloader"
 msgid "Downloading (no progress available)..."
 msgstr "Lädt herunter (Kein Fortschritt verfügbar) …"
 
-msgid "Downloading..."
-msgstr "Herunterladen …"
+msgid "Downloading... {0}"
+msgstr "Herunterladen … {0}"
 
 msgid "Manage existing machines"
 msgstr "Bestehende Maschinen verwalten"
@@ -56,11 +56,11 @@ msgstr "Bestehende Maschinen verwalten"
 msgid "Manager"
 msgstr "Manager"
 
-msgid "Mbs downloaded"
-msgstr "MB heruntergeladen"
+msgid "{0} Mbs downloaded"
+msgstr "{0} MB heruntergeladen"
 
-msgid "Now run"
-msgstr ""
+msgid "Now run {0} to start the VM"
+msgstr "Now run {0} um die VM zu starten"
 
 msgid "OK"
 msgstr "OK"
@@ -81,7 +81,7 @@ msgid "Select option"
 msgstr "Option auswählen"
 
 msgid "Select version for"
-msgstr "Version auswählen für"
+msgstr "Version auswählen für {0}"
 
 msgid "Select..."
 msgstr "Auswählen …"
@@ -95,11 +95,8 @@ msgstr "SSH-Port"
 msgid "Stop The Virtual Machine?"
 msgstr "Die virtuelle Maschine stoppen?"
 
-msgid "Target folder"
-msgstr "Zielverzeichnis"
-
-msgid "to start the VM"
-msgstr "um die VM zu starten"
+msgid "Target folder : {0}"
+msgstr "Zielverzeichnis : {0}"
 
 msgid "Use SPICE display"
 msgstr "SPICE-Display verwenden"
@@ -113,5 +110,5 @@ msgstr "Version"
 msgid "Waiting for download to start"
 msgstr "Warten auf den Beginn des Downloads"
 
-msgid "You are about to terminate the virtual machine"
-msgstr "Sie sind dabei, die virtuelle Maschine zu beenden"
+msgid "You are about to terminate the virtual machine {0}"
+msgstr "Sie sind dabei, die virtuelle Maschine zu beenden {0}"

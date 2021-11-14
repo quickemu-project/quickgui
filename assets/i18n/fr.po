@@ -58,8 +58,8 @@ msgid "Downloading (no progress available)..."
 msgstr "Téléchargement (pas de barre de progression)..."
 
 #, fuzzy
-msgid "Downloading..."
-msgstr "Téléchargement..."
+msgid "Downloading... {0}"
+msgstr "Téléchargement... {0}"
 
 #, fuzzy
 msgid "Manage existing machines"
@@ -70,12 +70,12 @@ msgid "Manager"
 msgstr "Gestionnaire"
 
 #, fuzzy
-msgid "Mbs downloaded"
-msgstr "Mbs téléchargés"
+msgid "{0} Mbs downloaded"
+msgstr "{0} Mbs téléchargés"
 
 #, fuzzy
-msgid "Now run"
-msgstr "Lancer"
+msgid "Now run {0} to start the VM"
+msgstr "Lancer {0} pour démarrer la machine virtuelle"
 
 #, fuzzy
 msgid "OK"
@@ -102,8 +102,8 @@ msgid "Select option"
 msgstr "Sélectionner une option"
 
 #, fuzzy
-msgid "Select version for"
-msgstr "Sélectionner une version pour"
+msgid "Select version for {0}"
+msgstr "Sélectionner une version pour {0}"
 
 #, fuzzy
 msgid "Select..."
@@ -122,12 +122,8 @@ msgid "Stop The Virtual Machine?"
 msgstr "Arrêtez la machine virtuelle ?"
 
 #, fuzzy
-msgid "Target folder"
-msgstr "Dossier cible"
-
-#, fuzzy
-msgid "to start the VM"
-msgstr "pour démarrer la machine virtuelle"
+msgid "Target folder : {0}"
+msgstr "Dossier cible : {0}"
 
 #, fuzzy
 msgid "Use SPICE display"
@@ -146,5 +142,5 @@ msgid "Waiting for download to start"
 msgstr "En attente du début du téléchargement"
 
 #, fuzzy
-msgid "You are about to terminate the virtual machine"
-msgstr "Vous êtes sur le point d'arrêter la machine virtuelle"
+msgid "You are about to terminate the virtual machine {0}"
+msgstr "Vous êtes sur le point d'arrêter la machine virtuelle {0}"

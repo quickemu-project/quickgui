@@ -21,7 +21,7 @@ class _VersionSelectionState extends State<VersionSelection> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${context.t('Select version for')} ${widget.operatingSystem.name}'),
+        title: Text(context.t('Select version for {0}', args: [widget.operatingSystem.name])),
       ),
       body: SingleChildScrollView(
         child: Column(

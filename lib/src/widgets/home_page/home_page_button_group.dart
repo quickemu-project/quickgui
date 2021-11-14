@@ -160,7 +160,7 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
                   padding: const EdgeInsets.symmetric(vertical: 32),
                   child: Text(context.t('Done !'), style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.white)),
                 ),
-                Text('${context.t('Now run')} "quickemu --vm $operatingSystem-$version" ${context.t('to start the VM')}',
+                Text(context.t('Now run {0} to start the VM', args: ["quickemu --vm $operatingSystem-$version"]),
                     style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.white)),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 32),
