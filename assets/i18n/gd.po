@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: quickgui\n"
 "POT-Creation-Date: 2021-09-29 09:59+0200\n"
 "PO-Revision-Date: 2021-11-14 13:19+0000\n"
 "Language-Team: \n"
@@ -10,104 +10,104 @@ msgstr ""
 "X-Generator: Poedit 3.0\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11 ? 0 : n==2 || n==12 ? 1 : (n>=3 && n<=10) || (n>=13 && n<=19) ? 2 : 3);\n"
-"Last-Translator: \n"
+"Last-Translator: Phil Clifford <philip.clifford@gmail.com>\n"
 "Language: gd\n"
 
 msgid "Main menu"
 msgstr "Clàr-taice"
 
 msgid "Use dark mode"
-msgstr ""
+msgstr "Cleachd modh dorcha"
 
 msgid "Cancel"
 msgstr "Sguir dheth"
 
 msgid "Click to use SPICE display"
-msgstr ""
+msgstr "Cliog gus taisbeanadh SPICE a chleachdadh"
 
 msgid "Create new machines"
-msgstr ""
+msgstr "Cruthaich innealan brìgheil ùra"
 
 msgid "Dismiss"
 msgstr "Cuir air falbh"
 
 msgid "Done !"
-msgstr ""
+msgstr "Dèanta!"
 
 msgid "Download"
-msgstr "Luchdadh a-nuas"
+msgstr "Luchdaich sìos"
 
 msgid "Download finished."
-msgstr ""
+msgstr "Tha an luchdachadh sìos deiseil"
 
 msgid "Downloader"
-msgstr "Luchdaichear a-nuas nam faidhle"
+msgstr "Inneal luchdachadh sìos"
 
 msgid "Downloading (no progress available)..."
-msgstr ""
+msgstr "A ’luchdachadh sìos (chan eil adhartas ri fhaighinn)"
 
 msgid "Downloading... {0}"
-msgstr ""
+msgstr "A ’luchdachadh sìos... {0}"
 
 msgid "Manage existing machines"
-msgstr ""
+msgstr "Stiùirich na h-innealan a th ’ann"
 
 msgid "Manager"
 msgstr "Manaidsear"
 
 msgid "{0} Mbs downloaded"
-msgstr ""
+msgstr "Chaidh {0} Mbs a luchdachadh sìos"
 
 msgid "Now run {0} to start the VM"
-msgstr ""
+msgstr "A-nis run {0} gus an VM a thòiseachadh"
 
 msgid "OK"
-msgstr ""
+msgstr "Ceart gu leòr"
 
 msgid "Operating system"
 msgstr "Siostam-obrachaidh"
 
 msgid "Search operating system"
-msgstr ""
+msgstr "Lorg airson siostam obrachaidh"
 
 msgid "Search option"
-msgstr ""
+msgstr "Roghainn rannsachaidh"
 
 msgid "Select operating system"
-msgstr ""
+msgstr "Tagh siostam obrachaidh"
 
 msgid "Select option"
-msgstr ""
+msgstr "Tagh roghainn"
 
 msgid "Select version for {0}"
-msgstr ""
+msgstr "Tagh dreach airson {0}"
 
 msgid "Select..."
 msgstr "Tagh..."
 
 msgid "SPICE port"
-msgstr ""
+msgstr "Port SPICE"
 
 msgid "SSH port"
-msgstr ""
+msgstr "Port SSH"
 
 msgid "Stop The Virtual Machine?"
-msgstr ""
+msgstr "Cuir stad air an inneal brìgheil?"
 
 msgid "Target folder : {0}"
-msgstr ""
+msgstr "Pasgan targaid: {0}"
 
 msgid "Use SPICE display"
-msgstr ""
+msgstr "Cleachd taisbeanadh SPICE"
 
 msgid "Using SPICE display"
-msgstr ""
+msgstr "A ’cleachdadh taisbeanadh SPICE"
 
 msgid "Version"
-msgstr ""
+msgstr "Dreach"
 
 msgid "Waiting for download to start"
-msgstr ""
+msgstr "A ’feitheamh ri luchdachadh sìos gus tòiseachadh
 
 msgid "You are about to terminate the virtual machine {0}"
-msgstr ""
+msgstr "Tha thu gu bhith a ’cur crìoch air an inneal brìgheil {0}"
