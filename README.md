@@ -73,6 +73,8 @@ You can also use `update-alternatives` for easier access to the app.
 
 ## Usage
 
+### Downloading VMs
+
 From the main screen, select the operating system you want to use. The list can be filtered.
 
 
@@ -101,3 +103,17 @@ Then click "Download". The ISO will be downloaded in the current working directo
 <div align="center"><img src="assets/github/screenshot11.png" alt="Downloading"></div>
 
 <div align="center"><img src="assets/github/screenshot12.png" alt="Download finished"></div>
+
+### Managing VMs
+
+The "Manage running VMs" screen will list available Quickemu VMs in the current working directory.
+
+VMs can be launched by clicking the "Play" (▶) button. Running VMs will have the "Play" and "Stop" buttons highlighted in green and red respectively, and pressing "Stop" (■) will kill the running VM.
+
+When a VM is running, the host's ports mapped to SPICE and SSH on the guest will be displayed. If you close the SPICE display and wish to reconnect, you can click the "Connect display with SPICE" button. To open an SSH session, you can click the "Connect with SSH" button.
+
+If the "Connect display with SPICE" button is disabled, the `spicy` client could not be found. Ensure it is installed, and in your PATH (it should have been installed with `quickemu`)
+
+If the "Connect with SSH" button is disabled, an SSH server could not be detected on the guest. Most guest operating systems will not install an SSH server by default, so if it was not an option during install, you will need to install one yourself. It must be listening on port 22 (the default SSH port). Once a server is installed and running, it should be detected automatically.
+
+"Connect with SSH" will use the terminal emulator symlinked to `x-terminal-emulator`. Several common terminal emulators are supported. If yours is not, please raise an issue on this repository.
