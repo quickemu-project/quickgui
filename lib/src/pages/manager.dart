@@ -76,16 +76,19 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
 
   VmInfo _parseVmInfo(name) {
     VmInfo info = VmInfo();
-    List<String> lines = File(name + '/' + name + '.ports').readAsLinesSync();
-    for (var line in lines) {
-      List<String> parts = line.split(',');
-      switch (parts[0]) {
-        case 'ssh':
-          info.sshPort = parts[1];
-          break;
-        case 'spice':
-          info.spicePort = parts[1];
-          break;
+    File portsFile = File(name + '/' + name + '.ports');
+    if (portsFile.existsSync()) {
+      List<String> lines = portsFile.readAsLinesSync();
+      for (var line in lines) {
+        List<String> parts = line.split(',');
+        switch (parts[0]) {
+          case 'ssh':
+            info.sshPort = parts[1];
+            break;
+          case 'spice':
+            info.spicePort = parts[1];
+            break;
+        }
       }
     }
     return info;
