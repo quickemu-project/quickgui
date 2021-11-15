@@ -55,6 +55,7 @@ class _AppState extends State<App> with PreferencesMixin {
                 Locale('en'),
                 Locale('fr'),
                 Locale('fr', 'CH'),
+                Locale('it'),
               ],
               localizationsDelegates: [
                 GettextLocalizationsDelegate(),
