@@ -123,4 +123,4 @@ msgid "Waiting for download to start"
 msgstr "Warten auf den Beginn des Downloads"
 
 msgid "You are about to terminate the virtual machine {0}"
-msgstr "Sie sind dabei, die virtuelle Maschine zu beenden {0}"
+msgstr "Sie sind dabei, die virtuelle Maschine {0} zu beenden"
