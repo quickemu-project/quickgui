@@ -36,7 +36,7 @@ sudo apt install quickgui
 
 ### Pre-compiled binary
 
-* [Download](https://github.com/ymauray/quickgui/releases/) the binary.
+* [Download](https://github.com/quickgui/quickgui/releases/) the binary.
 * Uncompress the tarball wherever you want.
 * From anywhere on the filesystem, run the app.
 
@@ -63,7 +63,7 @@ If you don't want to run the binary, you can rebuild the application yourself :
 * Run the app.
 
 ```bash
-git clone https://github.com/ymauray/quickgui.git
+git clone https://github.com/quickgui/quickgui.git
 cd quickgui
 flutter build linux --release
 ./build/linux/x64/release/bundle/quickgui
