@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:gettext_i18n/gettext_i18n.dart';
 
 import '../globals.dart';
 import '../mixins/app_version.dart';
 import '../mixins/preferences_mixin.dart';
 import '../model/app_theme.dart';
-import '../i18n/i18n_ext.dart';
 
 class LeftMenu extends StatelessWidget with PreferencesMixin {
   const LeftMenu({Key? key}) : super(key: key);

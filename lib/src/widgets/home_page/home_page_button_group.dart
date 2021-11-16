@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
+import 'package:gettext_i18n/gettext_i18n.dart';
 
 import '../../model/operating_system.dart';
 import '../../model/option.dart';
@@ -10,7 +11,6 @@ import '../../model/version.dart';
 import '../../pages/downloader.dart';
 import '../../pages/operating_system_selection.dart';
 import '../../pages/version_selection.dart';
-import '../../i18n/i18n_ext.dart';
 import '../home_page/home_page_button.dart';
 
 class HomePageButtonGroup extends StatefulWidget {
@@ -38,15 +38,12 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
           text: _selectedOperatingSystem?.name ?? context.t('Select...'),
           onPressed: () {
             Navigator.of(context)
-                .push<OperatingSystem>(MaterialPageRoute(
-                    fullscreenDialog: true,
-                    builder: (context) => const OperatingSystemSelection()))
+                .push<OperatingSystem>(MaterialPageRoute(fullscreenDialog: true, builder: (context) => const OperatingSystemSelection()))
                 .then((selection) {
               if (selection != null) {
                 setState(() {
                   _selectedOperatingSystem = selection;
-                  if (selection.versions.length == 1 &&
-                      selection.versions.first.options.length == 1) {
+                  if (selection.versions.length == 1 && selection.versions.first.options.length == 1) {
                     _selectedVersion = selection.versions.first;
                     _selectedOption = selection.versions.first.options.first;
                   } else {
