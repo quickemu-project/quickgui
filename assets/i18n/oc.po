@@ -97,7 +97,7 @@ msgid "Select..."
 msgstr "Seleccionar..."
 
 msgid "SPICE port"
-msgstr "Pòrt SPICe"
+msgstr "Pòrt SPICE"
 
 msgid "SSH port"
 msgstr "Pòrt SSH"
