@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: quickgui\n"
 "POT-Creation-Date: 2021-09-29 09:59+0200\n"
-"PO-Revision-Date: 2021-11-21 22:22\n"
+"PO-Revision-Date: 2021-11-22 18:19+0000\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
 "MIME-Version: 1.0\n"
@@ -31,7 +31,7 @@ msgid "Cancel"
 msgstr "Cancella"
 
 msgid "Click to use SPICE display"
-msgstr "Clicca per usare SPICE display"
+msgstr "Fare clic per utilizzare SPICE display"
 
 msgid "Create new machines"
 msgstr "Crea nuove macchine"
@@ -58,7 +58,7 @@ msgid "Downloading...{0}%"
 msgstr "Scaricando...{0}%"
 
 msgid "Downloading {0}"
-msgstr "{0} verrà scaricato"
+msgstr "Scaricamento di {0}"
 
 msgid "Download complete"
 msgstr "Scaricamento completato"
@@ -100,7 +100,7 @@ msgid "Select version for {0}"
 msgstr "Seleziona la versione per {0}"
 
 msgid "Select..."
-msgstr "Selezionare..."
+msgstr "Seleziona..."
 
 msgid "SPICE port"
 msgstr "Porta SPICE"
@@ -109,10 +109,10 @@ msgid "SSH port"
 msgstr "Porta SSH"
 
 msgid "Stop The Virtual Machine?"
-msgstr "Fermare La Macchina Virtuale?"
+msgstr "Fermare la Virtual Machine?"
 
 msgid "Target folder : {0}"
-msgstr "Folder di destinazione : {0}"
+msgstr "Cartella di destinazione : {0}"
 
 msgid "Use SPICE display"
 msgstr "Utilizzare il display SPICE"
@@ -127,5 +127,4 @@ msgid "Waiting for download to start"
 msgstr "In attesa del download per iniziare"
 
 msgid "You are about to terminate the virtual machine {0}"
-msgstr "Stai per terminare la macchina virtuale {0}"
-
+msgstr "Stai per terminare la Macchina Virtuale {0}"
