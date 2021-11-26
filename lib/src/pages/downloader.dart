@@ -81,12 +81,18 @@ class _DownloaderState extends State<Downloader> {
       }
 
       process.exitCode.then((value) {
+        bool _cancelled = value.isNegative;
         controller.close();
         setState(() {
           _downloadFinished = true;
           notificationsClient.notify(
-            context.t('Download complete'),
-            body: context.t('Download of {0} has completed.', args: [widget.operatingSystem.name]),
+            _cancelled ? context.t('Download cancelled') : context.t('Download complete'),
+            body: _cancelled
+                ? context.t(
+                    'Download of {0} has completed.',
+                    args: [widget.operatingSystem.name],
+                  )
+                : context.t('Download cancelled.'),
             appName: 'Quickgui',
             expireTimeoutMs: 10000, /* 10 seconds */
           );
