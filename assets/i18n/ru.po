@@ -19,7 +19,7 @@ msgstr ""
 "X-Crowdin-File-ID: 1\n"
 
 msgid "Quickgui : a Flutter frontend for Quickget and Quickemu"
-msgstr "Quickgui : Флэттер фронтенд для Quickget и Quickemu"
+msgstr "Quickgui : Flutter фронтент Quickget и Quickemu"
 
 msgid "Main menu"
 msgstr "Главное меню"
@@ -88,7 +88,7 @@ msgid "Search operating system"
 msgstr "Поиск операционной системы"
 
 msgid "Search option"
-msgstr "Опция поиска"
+msgstr "Параметры поиска"
 
 msgid "Select operating system"
 msgstr "Выберите операционную систему"
@@ -121,7 +121,7 @@ msgid "Using SPICE display"
 msgstr "Использование SPICE дисплея"
 
 msgid "Version"
-msgstr "Версии"
+msgstr "Версия"
 
 msgid "Waiting for download to start"
 msgstr "Ожидание начала загрузки"
