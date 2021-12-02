@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: quickgui 1.1.5\n"
 "Report-Msgid-Bugs-To: Phil Clifford <philip.clifford@gmail.com>\n"
 "POT-Creation-Date: 2021-09-29 09:59+0200\n"
-"PO-Revision-Date: 2021-11-15 19:07+0000\n"
+"PO-Revision-Date: 2021-12-02 20:24+0000\n"
 "Last-Translator: Phil Clifford <philip.clifford@gmail.com>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -55,6 +55,9 @@ msgstr "Download...{0}%"
 
 msgid "Downloading {0}"
 msgstr "{0} verrà scaricato"
+
+msgid "Download cancelled"
+msgstr "Download interrotto"
 
 msgid "Download complete"
 msgstr "Download completato"
