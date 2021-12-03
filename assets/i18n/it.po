@@ -61,7 +61,7 @@ msgid "Downloading {0}"
 msgstr "Scaricamento di {0}"
 
 msgid "Download cancelled"
-msgstr "Download interrotto"
+msgstr "Scaricamento interrotto"
 
 msgid "Download complete"
 msgstr "Scaricamento completato"
