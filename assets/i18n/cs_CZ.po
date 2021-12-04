@@ -1,0 +1,125 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2021-09-29 09:59+0200\n"
+"PO-Revision-Date: 2021-12-02 21:22+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
+"Last-Translator: \n"
+"Language: cs_CZ\n"
+
+msgid "Quickgui : a Flutter frontend for Quickget and Quickemu"
+msgstr "Quickgui: Flutter frontend pro Quickget a Quickemu"
+
+msgid "Main menu"
+msgstr "Hlavní menu"
+
+msgid "Use dark mode"
+msgstr "Použít tmavý režim"
+
+msgid "Cancel"
+msgstr "Zrušit"
+
+msgid "Click to use SPICE display"
+msgstr "Kliknout pro použití SPICE obrazovky"
+
+msgid "Create new machines"
+msgstr "Vytvořit nové virtuální stroje"
+
+msgid "Dismiss"
+msgstr "Zavřít"
+
+msgid "Done !"
+msgstr "Hotovo!"
+
+msgid "Download"
+msgstr "Stáhnout"
+
+msgid "Download finished."
+msgstr "Stahování bylo dokončeno."
+
+msgid "Downloader"
+msgstr "Správce stahování"
+
+msgid "Downloading (no progress available)..."
+msgstr "Probíhá stahování (průběh není k dispozici) …"
+
+msgid "Downloading...{0}%"
+msgstr "Probíhá stahování …{0}%"
+
+msgid "Downloading {0}"
+msgstr "Probíhá stahování {0}"
+
+msgid "Download complete"
+msgstr "Stahování bylo dokončeno"
+
+msgid "Download of {0} has completed."
+msgstr "Stažení {0} bylo dokončeno."
+
+msgid "Manage existing machines"
+msgstr "Správa existujících virtuálních strojů"
+
+msgid "Manager"
+msgstr "Správce virtuálních strojů"
+
+msgid "{0} Mbs downloaded"
+msgstr "Staženo {0} MB"
+
+msgid "Now run {0} to start the VM"
+msgstr "Nyní spustíme {0} aby došlo ke startu VM"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Operating system"
+msgstr "Operační systém"
+
+msgid "Search operating system"
+msgstr "Hledat operační systém"
+
+msgid "Search option"
+msgstr "Možnosti hledání"
+
+msgid "Select operating system"
+msgstr "Zvolit operační systém"
+
+msgid "Select option"
+msgstr "Zvolit možnost"
+
+msgid "Select version for {0}"
+msgstr "Vybrat verzi pro {0}"
+
+msgid "Select..."
+msgstr "Vybrat …"
+
+msgid "SPICE port"
+msgstr "SPICE port"
+
+msgid "SSH port"
+msgstr "SSH port"
+
+msgid "Stop The Virtual Machine?"
+msgstr "Zastavit virtuální stroj?"
+
+msgid "Target folder : {0}"
+msgstr "Cílová složka: {0}"
+
+msgid "Use SPICE display"
+msgstr "Použít obrazovku SPICE"
+
+msgid "Using SPICE display"
+msgstr "Používá se obrazovka SPICE"
+
+msgid "Version"
+msgstr "Verze"
+
+msgid "Waiting for download to start"
+msgstr "Čeká se na zahájení stahování"
+
+msgid "You are about to terminate the virtual machine {0}"
+msgstr "Chystáte se ukončit virtuální stroj {0}"
