@@ -55,6 +55,9 @@ msgstr ""
 msgid "Downloading {0}"
 msgstr ""
 
+msgid "Download cancelled"
+msgstr ""
+
 msgid "Download complete"
 msgstr ""
 
