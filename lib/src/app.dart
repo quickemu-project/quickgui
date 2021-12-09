@@ -51,6 +51,7 @@ class _AppState extends State<App> with PreferencesMixin {
                  * but are present in fr.po, the missing translations will not be picked up from fr.po,
                  * and thus will show up in english.
                  */
+                Locale('cs_CZ'),
                 Locale('cy'),
                 Locale('de'),
                 Locale('en'),
@@ -58,10 +59,9 @@ class _AppState extends State<App> with PreferencesMixin {
                 Locale('fr', 'CH'),
                 Locale('gd'),
                 Locale('it'),
-                Locale('cs_CZ'),
-                Locale('oc'),
                 Locale('nl'),
                 Locale('no'),
+                Locale('oc'),
                 Locale('ru'),
               ],
               localizationsDelegates: [
@@ -72,12 +72,14 @@ class _AppState extends State<App> with PreferencesMixin {
               localeListResolutionCallback: (locales, supportedLocales) {
                 if (locales != null) {
                   for (var locale in locales) {
-                    var supportedLocale =
-                        supportedLocales.where((element) => element.languageCode == locale.languageCode && element.countryCode == locale.countryCode);
+                    var supportedLocale = supportedLocales.where((element) =>
+                        element.languageCode == locale.languageCode &&
+                        element.countryCode == locale.countryCode);
                     if (supportedLocale.isNotEmpty) {
                       return supportedLocale.first;
                     }
-                    supportedLocale = supportedLocales.where((element) => element.languageCode == locale.languageCode);
+                    supportedLocale = supportedLocales.where((element) =>
+                        element.languageCode == locale.languageCode);
                     if (supportedLocale.isNotEmpty) {
                       return supportedLocale.first;
                     }
