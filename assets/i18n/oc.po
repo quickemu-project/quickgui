@@ -1,0 +1,124 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2021-09-29 09:59+0200\n"
+"PO-Revision-Date: 2021-11-22 13:04+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-Basepath: .\n"
+"Last-Translator: Quentin PAGÈS\n"
+"Language: oc\n"
+
+msgid "Quickgui : a Flutter frontend for Quickget and Quickemu"
+msgstr "Quickgui : una interfàcia Flutter per Quickget e Quickemu"
+
+msgid "Main menu"
+msgstr "Menú principal"
+
+msgid "Use dark mode"
+msgstr "Utilizar lo mòde escur"
+
+msgid "Cancel"
+msgstr "Anullar"
+
+msgid "Click to use SPICE display"
+msgstr "Clicar per utilizar l’afichatge SPICE"
+
+msgid "Create new machines"
+msgstr "Crear maquinas novèlas"
+
+msgid "Dismiss"
+msgstr "Abandonar"
+
+msgid "Done !"
+msgstr "Terminat !"
+
+msgid "Download"
+msgstr "Telecargar"
+
+msgid "Download finished."
+msgstr "Telecargament acabat."
+
+msgid "Downloader"
+msgstr "Telecargador"
+
+msgid "Downloading (no progress available)..."
+msgstr "Telecargament (cap de barra de progression pas disponibla)..."
+
+msgid "Downloading...{0}%"
+msgstr "Telecargament... {0} %"
+
+msgid "Downloading {0}"
+msgstr "Telecargament de {0}"
+
+msgid "Download complete"
+msgstr "Telecargament acabat"
+
+msgid "Download of {0} has completed."
+msgstr "Lo telecargament de {0} es acabat."
+
+msgid "Manage existing machines"
+msgstr "Gerir las maquinas existentas"
+
+msgid "Manager"
+msgstr "Gestionari"
+
+msgid "{0} Mbs downloaded"
+msgstr "{0} Mbs telecargat"
+
+msgid "Now run {0} to start the VM"
+msgstr "Lançar {0} per aviar la maquina virtuala"
+
+msgid "OK"
+msgstr "D’acordi"
+
+msgid "Operating system"
+msgstr "Sistèma operatiu"
+
+msgid "Search operating system"
+msgstr "Cercar un sistèma operatiu"
+
+msgid "Search option"
+msgstr "Cercar una opcion"
+
+msgid "Select operating system"
+msgstr "Seleccionar un sistèma operatiu"
+
+msgid "Select option"
+msgstr "Seleccionar una opcion"
+
+msgid "Select version for {0}"
+msgstr "Seleccionar una version per {0}"
+
+msgid "Select..."
+msgstr "Seleccionar..."
+
+msgid "SPICE port"
+msgstr "Pòrt SPICE"
+
+msgid "SSH port"
+msgstr "Pòrt SSH"
+
+msgid "Stop The Virtual Machine?"
+msgstr "Arrestar la maquina virtuala ?"
+
+msgid "Target folder : {0}"
+msgstr "Dossièr cibla : {0}"
+
+msgid "Use SPICE display"
+msgstr "Utilizar l’afichatge SPICE"
+
+msgid "Using SPICE display"
+msgstr "Utilizacion de l’afichatge SPICE"
+
+msgid "Version"
+msgstr "Version"
+
+msgid "Waiting for download to start"
+msgstr "En espèra de la debuta del telecargament"
+
+msgid "You are about to terminate the virtual machine {0}"
+msgstr "Sètz a mand d’arrestar la maquina virtuala {0}"
