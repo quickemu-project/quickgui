@@ -58,6 +58,7 @@ class _AppState extends State<App> with PreferencesMixin {
                 Locale('fr', 'CH'),
                 Locale('gd'),
                 Locale('it'),
+                Locale('cs_CZ'),
                 Locale('oc'),
                 Locale('nl'),
                 Locale('no'),
