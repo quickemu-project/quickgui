@@ -18,14 +18,14 @@
  */
 final supportedLocales = [
   'cs_CZ',
-  'cy',
+  //'cy',
   'de',
   'en',
   'fr',
-  'gd',
+  //'gd',
   'it',
   'nl',
   'no',
-  'oc',
+  //'oc',
   'ru',
 ];
