@@ -51,12 +51,16 @@ class _AppState extends State<App> with PreferencesMixin {
                  * but are present in fr.po, the missing translations will not be picked up from fr.po,
                  * and thus will show up in english.
                  */
+                Locale('cy'),
                 Locale('de'),
                 Locale('en'),
                 Locale('fr'),
                 Locale('fr', 'CH'),
                 Locale('gd'),
                 Locale('it'),
+                Locale('nl'),
+                Locale('no'),
+                Locale('ru'),
               ],
               localizationsDelegates: [
                 GettextLocalizationsDelegate(),

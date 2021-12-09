@@ -1,0 +1,131 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: quickgui\n"
+"POT-Creation-Date: 2021-09-29 09:59+0200\n"
+"PO-Revision-Date: 2021-11-17 03:59\n"
+"Last-Translator: \n"
+"Language-Team: Dutch\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: nl\n"
+"X-Crowdin-Project: quickgui\n"
+"X-Crowdin-Project-ID: 485591\n"
+"X-Crowdin-Language: nl\n"
+"X-Crowdin-File: quickgui.pot\n"
+"X-Crowdin-File-ID: 1\n"
+
+msgid "Quickgui : a Flutter frontend for Quickget and Quickemu"
+msgstr "Quickgui : een Flutter frontend voor Quickget en Quickemu"
+
+msgid "Main menu"
+msgstr "Hoofd menu"
+
+msgid "Use dark mode"
+msgstr "Donkere modus gebruiken"
+
+msgid "Cancel"
+msgstr "Annuleren"
+
+msgid "Click to use SPICE display"
+msgstr "Klik om SPICE display te gebruiken"
+
+msgid "Create new machines"
+msgstr "Nieuwe machines creëren"
+
+msgid "Dismiss"
+msgstr "Uitschakelen"
+
+msgid "Done !"
+msgstr "Klaar!"
+
+msgid "Download"
+msgstr "Downloaden"
+
+msgid "Download finished."
+msgstr "Download voltooid."
+
+msgid "Downloader"
+msgstr "Downloader"
+
+msgid "Downloading (no progress available)..."
+msgstr "Downloaden (geen voortgang beschikbaar)..."
+
+msgid "Downloading...{0}%"
+msgstr "Downloaden...{0}%"
+
+msgid "Downloading {0}"
+msgstr "Downloaden {0}"
+
+msgid "Download complete"
+msgstr "Download voltooid"
+
+msgid "Download of {0} has completed."
+msgstr "Download van {0} is voltooid."
+
+msgid "Manage existing machines"
+msgstr "Bestaande machines beheren"
+
+msgid "Manager"
+msgstr "Beheerder"
+
+msgid "{0} Mbs downloaded"
+msgstr "{0} Mbs gedownload"
+
+msgid "Now run {0} to start the VM"
+msgstr "Start nu {0} om de VM te starten"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Operating system"
+msgstr "Besturingssysteem"
+
+msgid "Search operating system"
+msgstr "Zoek besturingssysteem"
+
+msgid "Search option"
+msgstr "Optie zoeken"
+
+msgid "Select operating system"
+msgstr "Selecteer besturingssysteem"
+
+msgid "Select option"
+msgstr "Selecteer optie"
+
+msgid "Select version for {0}"
+msgstr "Selecteer versie voor {0}"
+
+msgid "Select..."
+msgstr "Selecteer..."
+
+msgid "SPICE port"
+msgstr "SPICE poort"
+
+msgid "SSH port"
+msgstr "SSH poort"
+
+msgid "Stop The Virtual Machine?"
+msgstr "Stop de virtuele Machine?"
+
+msgid "Target folder : {0}"
+msgstr "Target folder : {0}"
+
+msgid "Use SPICE display"
+msgstr "Gebruik SPICE display"
+
+msgid "Using SPICE display"
+msgstr "SPICE display gebruiken"
+
+msgid "Version"
+msgstr "Versie"
+
+msgid "Waiting for download to start"
+msgstr "Wachten op download om te starten"
+
+msgid "You are about to terminate the virtual machine {0}"
+msgstr "U staat op het punt de virtuele machine {0} te beëindigen"
+
