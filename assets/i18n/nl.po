@@ -2,9 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: quickgui\n"
 "POT-Creation-Date: 2021-09-29 09:59+0200\n"
-"PO-Revision-Date: 2021-11-17 03:59\n"
+"PO-Revision-Date: 2021-12-02 23:40+0000\n"
 "Last-Translator: \n"
 "Language-Team: Dutch\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -59,6 +60,9 @@ msgstr "Downloaden...{0}%"
 
 msgid "Downloading {0}"
 msgstr "Downloaden {0}"
+
+msgid "Download cancelled"
+msgstr "Download geannuleerd"
 
 msgid "Download complete"
 msgstr "Download voltooid"
@@ -128,4 +132,3 @@ msgstr "Wachten op download om te starten"
 
 msgid "You are about to terminate the virtual machine {0}"
 msgstr "U staat op het punt de virtuele machine {0} te beëindigen"
-

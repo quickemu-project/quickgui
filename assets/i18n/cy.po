@@ -2,9 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: quickgui\n"
 "POT-Creation-Date: 2021-09-29 09:59+0200\n"
-"PO-Revision-Date: 2021-11-21 23:09\n"
+"PO-Revision-Date: 2021-12-03 00:05+0000\n"
 "Last-Translator: \n"
 "Language-Team: Welsh\n"
+"Language: cy\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -59,6 +60,9 @@ msgstr "Llwytho i lawr... {0}%"
 
 msgid "Downloading {0}"
 msgstr "Llwytho i lawr {0}"
+
+msgid "Download cancelled"
+msgstr "Lawrlwytho wedi'i ganslo"
 
 msgid "Download complete"
 msgstr "Lawrlwytho wedi'i gwblhau"
@@ -128,4 +132,3 @@ msgstr "Aros i'r lawrlwytho ddechrau"
 
 msgid "You are about to terminate the virtual machine {0}"
 msgstr "Rydych chi ar fin terfynu'r peiriant rhithwir {0}"
-
