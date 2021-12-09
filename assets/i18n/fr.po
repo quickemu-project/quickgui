@@ -163,3 +163,7 @@ msgstr "En attente du début du téléchargement"
 #, fuzzy
 msgid "You are about to terminate the virtual machine {0}"
 msgstr "Vous êtes sur le point d'arrêter la machine virtuelle {0}"
+
+#, fuzzy
+msgid "Language"
+msgstr "Langue"

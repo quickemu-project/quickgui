@@ -160,3 +160,7 @@ msgstr "Waiting for download to start"
 #, fuzzy
 msgid "You are about to terminate the virtual machine {0}"
 msgstr "You are about to terminate the virtual machine {0}"
+
+#, fuzzy
+msgid "Language"
+msgstr "Language"

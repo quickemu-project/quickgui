@@ -126,3 +126,6 @@ msgstr ""
 
 msgid "You are about to terminate the virtual machine {0}"
 msgstr ""
+
+msgid "Language"
+msgstr ""
