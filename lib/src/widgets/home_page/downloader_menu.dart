@@ -28,7 +28,9 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.primary,
+        color: Theme.of(context).brightness == Brightness.dark
+            ? Theme.of(context).colorScheme.surface
+            : Theme.of(context).colorScheme.primary,
         child: Column(
           children: [
             Row(
@@ -50,8 +52,11 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Working directory : ${Directory.current.path}",
-                  style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.white),
+                  Directory.current.path,
+                  style: Theme.of(context)
+                      .textTheme
+                      .subtitle1!
+                      .copyWith(color: Colors.white),
                 ),
                 const SizedBox(
                   width: 8,
@@ -59,15 +64,19 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: Theme.of(context).canvasColor,
-                    onPrimary: Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Theme.of(context).colorScheme.primary,
+                    onPrimary: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white70
+                        : Theme.of(context).colorScheme.primary,
                   ),
                   onPressed: () async {
-                    var folder = await FilePicker.platform.getDirectoryPath(dialogTitle: "Pick a folder");
+                    var folder = await FilePicker.platform
+                        .getDirectoryPath(dialogTitle: "Pick a folder");
                     if (folder != null) {
                       setState(() {
                         Directory.current = folder;
                       });
-                      savePreference(prefWorkingDirectory, Directory.current.path);
+                      savePreference(
+                          prefWorkingDirectory, Directory.current.path);
                     }
                   },
                   child: const Icon(Icons.more_horiz),
