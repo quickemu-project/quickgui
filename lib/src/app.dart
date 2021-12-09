@@ -1,12 +1,16 @@
+import 'dart:ffi';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
-import 'package:window_size/window_size.dart';
+import 'package:quickgui/src/supported_locales.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'globals.dart';
 import 'mixins/preferences_mixin.dart';
-import 'model/app_theme.dart';
+import 'model/app_settings.dart';
 import 'pages/main_page.dart';
 
 class App extends StatefulWidget {
@@ -19,56 +23,33 @@ class App extends StatefulWidget {
 class _AppState extends State<App> with PreferencesMixin {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<bool?>(
-      future: getPreference<bool>(prefThemeMode),
-      builder: (context, AsyncSnapshot<bool?> snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.data != null) {
-            context.read<AppTheme>().useDarkModeSilently = snapshot.data!;
-          }
-          return Consumer<AppTheme>(
-            builder: (context, appTheme, _) => MaterialApp(
+    return FutureBuilder<SharedPreferences>(
+      future: SharedPreferences.getInstance(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done &&
+            snapshot.data != null) {
+          var appSettings = context.read<AppSettings>();
+          appSettings.setActiveLocaleSilently(
+              snapshot.data?.getString(prefCurrentLocale) ??
+                  Platform.localeName);
+          appSettings.useDarkModeSilently =
+              snapshot.data!.getBool(prefThemeMode) as bool;
+          return Consumer<AppSettings>(
+            builder: (context, appSettings, _) => MaterialApp(
               theme: ThemeData(primarySwatch: Colors.pink),
               darkTheme: ThemeData.dark(),
-              themeMode: appTheme.themeMode,
+              themeMode: appSettings.themeMode,
               home: const MainPage(),
-              supportedLocales: const [
-                /*
-                 * List of locales (language + country) we have translations for.
-                 *
-                 * If there is a file for the tuple (langue, country) in assets/lib/i18n, then this
-                 * will be used for translation.
-                 *
-                 * If there is not, then we'll look for a file for the language only.
-                 *
-                 * If there is no file for the language code, we'll fallback to the english file.
-                 *
-                 * Example : let's say the locale is fr_CH. We will look for "assets/lib/i18n/fr_CH.po",
-                 * "assets/lib/i18n/fr.po", and "assets/lib/i18n/en.po", stopping at the first file we
-                 * find.
-                 *
-                 * Translation files are not merged, meaning if some translations are missing in fr_CH.po
-                 * but are present in fr.po, the missing translations will not be picked up from fr.po,
-                 * and thus will show up in english.
-                 */
-                Locale('cs_CZ'),
-                Locale('cy'),
-                Locale('de'),
-                Locale('en'),
-                Locale('fr'),
-                Locale('fr', 'CH'),
-                Locale('gd'),
-                Locale('it'),
-                Locale('nl'),
-                Locale('no'),
-                Locale('oc'),
-                Locale('ru'),
-              ],
+              supportedLocales: supportedLocales.map((s) => s.contains("_")
+                  ? Locale(s.split("_")[0], s.split("_")[1])
+                  : Locale(s)),
               localizationsDelegates: [
                 GettextLocalizationsDelegate(),
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
               ],
+              locale:
+                  Locale(appSettings.languageCode!, appSettings.countryCode),
               localeListResolutionCallback: (locales, supportedLocales) {
                 if (locales != null) {
                   for (var locale in locales) {
@@ -96,5 +77,56 @@ class _AppState extends State<App> with PreferencesMixin {
         }
       },
     );
+    /*
+    return FutureBuilder<bool?>(
+      future: getPreference<bool>(prefThemeMode),
+      builder: (context, AsyncSnapshot<bool?> snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.data != null) {
+            context.read<AppSettings>().useDarkModeSilently = snapshot.data!;
+          }
+          return Consumer<AppSettings>(
+            builder: (context, appTheme, _) => MaterialApp(
+              theme: ThemeData(primarySwatch: Colors.pink),
+              darkTheme: ThemeData.dark(),
+              themeMode: appTheme.themeMode,
+              home: const MainPage(),
+              supportedLocales: supportedLocales.map((s) => s.contains("_")
+                  ? Locale(s.split("_")[0], s.split("_")[1])
+                  : Locale(s)),
+              localizationsDelegates: [
+                GettextLocalizationsDelegate(),
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+              ],
+              locale: const Locale('ru'),
+              localeListResolutionCallback: (locales, supportedLocales) {
+                if (locales != null) {
+                  for (var locale in locales) {
+                    var supportedLocale = supportedLocales.where((element) =>
+                        element.languageCode == locale.languageCode &&
+                        element.countryCode == locale.countryCode);
+                    if (supportedLocale.isNotEmpty) {
+                      return supportedLocale.first;
+                    }
+                    supportedLocale = supportedLocales.where((element) =>
+                        element.languageCode == locale.languageCode);
+                    if (supportedLocale.isNotEmpty) {
+                      return supportedLocale.first;
+                    }
+                  }
+                }
+                return null;
+              },
+            ),
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
+    */
   }
 }
