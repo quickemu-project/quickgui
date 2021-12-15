@@ -29,6 +29,24 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
   bool _spicy = false;
   final List<String> _sshVms = [];
   String? _terminalEmulator;
+  final List<String> _supportedTerminalEmulators = [
+    'cool-retro-term',
+    'gnome-terminal',
+    'guake',
+    'mate-terminal',
+    'konsole',
+    'lxterm',
+    'lxterminal',
+    'pterm',
+    'sakura',
+    'terminator',
+    'tilix',
+    'uxterm',
+    'uxrvt',
+    'xfce4-terminal',
+    'xrvt',
+    'xterm'
+  ];
   Timer? refreshTimer;
 
   @override
@@ -61,10 +79,12 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     ProcessResult result = await Process.run('which', ['x-terminal-emulator']);
     if (result.exitCode == 0) {
       String terminalEmulator = await File(result.stdout.toString().trim()).resolveSymbolicLinks();
-      stdout.writeln(terminalEmulator);
-      setState(() {
-        _terminalEmulator = path.basename(terminalEmulator);
-      });
+      terminalEmulator = path.basenameWithoutExtension(terminalEmulator);
+      if (_supportedTerminalEmulators.contains(terminalEmulator)) {
+        setState(() {
+          _terminalEmulator = path.basename(terminalEmulator);
+        });
+      }
     }
   }
 
