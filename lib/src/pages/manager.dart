@@ -57,12 +57,13 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
   }
 
   void _getTerminalEmulator() async {
-    ProcessResult result = Process.runSync('x-terminal-emulator', ['-h']);
-    RegExp pattern = RegExp(r"usage:\s+([^\s]+)", multiLine: true, caseSensitive: false);
-    RegExpMatch? match = pattern.firstMatch(result.stdout);
-    if (match != null) {
+    // Find out which terminal emulator we have set as the default.
+    ProcessResult result = await Process.run('which', ['x-terminal-emulator']);
+    if (result.exitCode == 0) {
+      String terminalEmulator = await File(result.stdout.toString().trim()).resolveSymbolicLinks();
+      stdout.writeln(terminalEmulator);
       setState(() {
-        _terminalEmulator = match.group(1);
+        _terminalEmulator = path.basename(terminalEmulator);
       });
     }
   }
@@ -278,6 +279,46 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                         });
                       },
               ),
+              IconButton(
+                icon: Icon(
+                  Icons.delete,
+                  color: active ? null : buttonColor,
+                  semanticLabel: 'Delete'
+                ),
+                onPressed: active ? null : () {
+                  showDialog<String?>(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      title: Text('Delete ' + currentVm),
+                      content: Text(
+                          'You are about to delete ' + currentVm + '. This cannot be undone. ' +
+                          'Would you like to delete the disk image but keep the ' +
+                          'configuration, or delete the whole VM?'
+                      ),
+                      actions: [
+                        TextButton(
+                          child: Text('Cancel'),
+                          onPressed: () => Navigator.pop(context, 'cancel'),
+                        ),
+                        TextButton(
+                          child: Text('Delete disk image'),
+                          onPressed: () => Navigator.pop(context, 'disk'),
+                        ),
+                        TextButton(
+                          child: Text('Delete whole VM'),
+                          onPressed: () => Navigator.pop(context, 'vm'),
+                        )  // set up the AlertDialog
+                      ],
+                    ),
+                  ).then((result) async {
+                    result = result ?? 'cancel';
+                    if (result != 'cancel') {
+                      List<String> args = ['--vm', currentVm + '.conf', '--delete-' + result];
+                      await Process.start('quickemu', args);
+                    }
+                  });
+                },
+              ),
             ],
           )),
       if (connectInfo.isNotEmpty)
@@ -327,13 +368,24 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                           result = result ?? false;
                           if (result) {
                             List<String> sshArgs = ['ssh', '-p', vmInfo.sshPort!, _usernameController.text + '@localhost'];
-                            switch (_terminalEmulator) {
+                            // Set the arguments to execute the ssh command in the default terminal.
+                            // Strip the extension as x-terminal-emulator may point to a .wrapper
+                            switch (path.basenameWithoutExtension(_terminalEmulator!)) {
                               case 'gnome-terminal':
                               case 'mate-terminal':
                                 sshArgs.insert(0, '--');
                                 break;
                               case 'xterm':
+                              case 'lxterm':
+                              case 'uxterm':
                               case 'konsole':
+                              case 'uxrvt':
+                              case 'xrvt':
+                              case 'sakura':
+                              case 'cool-retro-term':
+                              case 'pterm':
+                              case 'lxterminal':
+                              case 'tilix':
                                 sshArgs.insert(0, '-e');
                                 break;
                               case 'terminator':
