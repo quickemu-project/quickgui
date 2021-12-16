@@ -5,7 +5,7 @@ BASE_NAME := quickgui-$(VERSION)
 BUILD_DIR := $(BUILD_ROOT)/$(BASE_NAME)
 BIN_TAR := $(BUILD_ROOT)/$(BASE_NAME).tar
 SRC_TAR := $(BUILD_ROOT)/$(BASE_NAME)-src.tar
-FLUTTER := /usr/local/bin/flutter
+FLUTTER := /opt/flutter/bin/flutter
 
 all: version bin
 
