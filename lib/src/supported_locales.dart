@@ -27,5 +27,6 @@ final supportedLocales = [
   'nl',
   'no',
   //'oc',
+  'pt_PT',
   'ru',
 ];
