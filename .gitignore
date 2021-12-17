@@ -32,3 +32,5 @@ list.csv
 *.iso
 *.conf
 *.mo
+RELEASING.md
+BUILDING.md
