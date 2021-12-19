@@ -27,6 +27,7 @@ class _VersionSelectionState extends State<VersionSelection> {
         child: Column(
           children: [
             ListView.builder(
+              padding: const EdgeInsets.only(top: 4),
               shrinkWrap: true,
               itemCount: widget.operatingSystem.versions.length,
               itemBuilder: (context, index) {
