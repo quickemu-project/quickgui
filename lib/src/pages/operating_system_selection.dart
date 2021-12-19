@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_svg/parser.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
 
 import '../model/operating_system.dart';
@@ -69,9 +72,15 @@ class _OperatingSystemSelectionState extends State<OperatingSystemSelection> {
               itemCount: list.length,
               itemBuilder: (context, index) {
                 var item = list[index];
+                var icon = SvgPicture.asset(
+                  "assets/quickemu-icons/${item.code}-quickemu-white-pinkbg.svg",
+                  width: 32,
+                  height: 32,
+                );
                 return Card(
                   child: ListTile(
                     title: Text(item.name),
+                    leading: icon,
                     onTap: () {
                       Navigator.of(context).pop(item);
                     },
