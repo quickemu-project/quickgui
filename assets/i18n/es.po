@@ -1,0 +1,166 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: quickgui\n"
+"POT-Creation-Date: 2021-09-29 09:59+0200\n"
+"PO-Revision-Date: 2021-12-19 19:23+0100\n"
+"Last-Translator: José Miguel Manzano\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, fuzzy
+msgid "Quickgui : a Flutter frontend for Quickget and Quickemu"
+msgstr "Quickgui : una aplicación Flutter para Quickget y Quickemu"
+
+#, fuzzy
+msgid "Main menu"
+msgstr "Menu principal"
+
+#, fuzzy
+msgid "Use dark mode"
+msgstr "Utilizar el modo oscuro"
+
+#, fuzzy
+msgid "Cancel"
+msgstr "Cancelar"
+
+#, fuzzy
+msgid "Click to use SPICE display"
+msgstr "Pulsa para utilizar SPICE display"
+
+#, fuzzy
+msgid "Create new machines"
+msgstr "Crear nuevas máquinas"
+
+#, fuzzy
+msgid "Dismiss"
+msgstr "Descartar"
+
+#, fuzzy
+msgid "Done !"
+msgstr "Hecho !"
+
+#, fuzzy
+msgid "Download"
+msgstr "Descargar"
+
+#, fuzzy
+msgid "Download finished."
+msgstr "Descarga completa."
+
+#, fuzzy
+msgid "Downloader"
+msgstr "Descargas"
+
+#, fuzzy
+msgid "Downloading (no progress available)..."
+msgstr "Descargando (progreso no disponible)..."
+
+#, fuzzy
+msgid "Downloading...{0}%"
+msgstr "Descargando...{0}%"
+
+#, fuzzy
+msgid "Downloading {0}"
+msgstr "Descargando {0}"
+
+#, fuzzy
+msgid "Download complete"
+msgstr "Descarga completa"
+
+#, fuzzy
+msgid "Download of {0} has completed."
+msgstr "La descarga de {0} se ha completado."
+
+#, fuzzy
+msgid "Manage existing machines"
+msgstr "Gestionar máquinas existentes"
+
+#, fuzzy
+msgid "Manager"
+msgstr "Gestionar"
+
+#, fuzzy
+msgid "{0} Mbs downloaded"
+msgstr "{0} Mbs descargados"
+
+#, fuzzy
+msgid "Now run {0} to start the VM"
+msgstr "Ahora ejecuta {0} para iniciar la VM"
+
+#, fuzzy
+msgid "OK"
+msgstr "OK"
+
+#, fuzzy
+msgid "Operating system"
+msgstr "Sistema operativo"
+
+#, fuzzy
+msgid "Search operating system"
+msgstr "Buscar sistema operativo"
+
+#, fuzzy
+msgid "Search option"
+msgstr "Opción de busqueda"
+
+#, fuzzy
+msgid "Select operating system"
+msgstr "Selecciona sistema operativo"
+
+#, fuzzy
+msgid "Select option"
+msgstr "Selecciona opción"
+
+#, fuzzy
+msgid "Select version for {0}"
+msgstr "Selecciona versión para {0}"
+
+#, fuzzy
+msgid "Select..."
+msgstr "Selecciona..."
+
+#, fuzzy
+msgid "SPICE port"
+msgstr "Puerto SPICE"
+
+#, fuzzy
+msgid "SSH port"
+msgstr "Puerto SSH"
+
+#, fuzzy
+msgid "Stop The Virtual Machine?"
+msgstr "¿Detener la Máquina Virtual?"
+
+#, fuzzy
+msgid "Target folder : {0}"
+msgstr "Directorio de destino : {0}"
+
+#, fuzzy
+msgid "Use SPICE display"
+msgstr "Usar SPICE display"
+
+#, fuzzy
+msgid "Using SPICE display"
+msgstr "Usando SPICE display"
+
+#, fuzzy
+msgid "Version"
+msgstr "Versión"
+
+#, fuzzy
+msgid "Waiting for download to start"
+msgstr "Esperando que comience la descarga"
+
+#, fuzzy
+msgid "You are about to terminate the virtual machine {0}"
+msgstr "Estás a punto de cerrar la máquina virtual {0}"
+
+#, fuzzy
+msgid "Language"
+msgstr "Lenguaje"
