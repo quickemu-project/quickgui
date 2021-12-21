@@ -17,7 +17,8 @@ class _MainPageState extends State<MainPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    setWindowTitle(context.t('Quickgui : a Flutter frontend for Quickget and Quickemu'));
+    setWindowTitle(
+        context.t('Quickgui : a Flutter frontend for Quickget and Quickemu'));
   }
 
   @override

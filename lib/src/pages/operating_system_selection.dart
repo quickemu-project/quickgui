@@ -10,7 +10,8 @@ class OperatingSystemSelection extends StatefulWidget {
   const OperatingSystemSelection({Key? key}) : super(key: key);
 
   @override
-  State<OperatingSystemSelection> createState() => _OperatingSystemSelectionState();
+  State<OperatingSystemSelection> createState() =>
+      _OperatingSystemSelectionState();
 }
 
 class _OperatingSystemSelectionState extends State<OperatingSystemSelection> {
@@ -25,7 +26,9 @@ class _OperatingSystemSelectionState extends State<OperatingSystemSelection> {
 
   @override
   Widget build(BuildContext context) {
-    var list = gOperatingSystems.where((os) => os.name.toLowerCase().contains(term.toLowerCase())).toList();
+    var list = gOperatingSystems
+        .where((os) => os.name.toLowerCase().contains(term.toLowerCase()))
+        .toList();
     return Scaffold(
       appBar: AppBar(
         title: Text(context.t('Select operating system')),
@@ -47,7 +50,8 @@ class _OperatingSystemSelectionState extends State<OperatingSystemSelection> {
                       Expanded(
                         child: TextField(
                           focusNode: focusNode,
-                          decoration: InputDecoration.collapsed(hintText: context.t('Search operating system')),
+                          decoration: InputDecoration.collapsed(
+                              hintText: context.t('Search operating system')),
                           onChanged: (value) {
                             setState(() {
                               term = value;

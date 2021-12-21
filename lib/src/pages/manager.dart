@@ -61,7 +61,8 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
         }
         Directory.current = pref;
       });
-      Future.delayed(Duration.zero, () => _getVms(context)); // Reload VM list when we enter the page.
+      Future.delayed(Duration.zero,
+          () => _getVms(context)); // Reload VM list when we enter the page.
     });
     refreshTimer = Timer.periodic(const Duration(seconds: 5), (Timer t) {
       _getVms(context);
@@ -78,7 +79,8 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     // Find out which terminal emulator we have set as the default.
     ProcessResult result = await Process.run('which', ['x-terminal-emulator']);
     if (result.exitCode == 0) {
-      String terminalEmulator = await File(result.stdout.toString().trim()).resolveSymbolicLinks();
+      String terminalEmulator =
+          await File(result.stdout.toString().trim()).resolveSymbolicLinks();
       terminalEmulator = path.basenameWithoutExtension(terminalEmulator);
       if (_supportedTerminalEmulators.contains(terminalEmulator)) {
         setState(() {
@@ -130,7 +132,8 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     List<String> currentVms = [];
     Map<String, VmInfo> activeVms = {};
 
-    await for (var entity in Directory.current.list(recursive: false, followLinks: true)) {
+    await for (var entity
+        in Directory.current.list(recursive: false, followLinks: true)) {
       if ((entity.path.endsWith('.conf')) && (_isValidConf(entity.path))) {
         String name = path.basenameWithoutExtension(entity.path);
         currentVms.add(name);
@@ -169,7 +172,9 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
 
   Widget _buildVmList() {
     List<Widget> _widgetList = [];
-    final Color buttonColor = Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Theme.of(context).colorScheme.primary;
+    final Color buttonColor = Theme.of(context).brightness == Brightness.dark
+        ? Colors.white70
+        : Theme.of(context).colorScheme.primary;
     _widgetList.add(
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -181,7 +186,8 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
             width: 8,
           ),
           ElevatedButton(
-            style: ElevatedButton.styleFrom(primary: Theme.of(context).canvasColor, onPrimary: buttonColor),
+            style: ElevatedButton.styleFrom(
+                primary: Theme.of(context).canvasColor, onPrimary: buttonColor),
             onPressed: () async {
               String? result = await FilePicker.platform.getDirectoryPath();
               if (result != null) {
@@ -276,7 +282,9 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
                             title: Text(context.t('Stop The Virtual Machine?')),
-                            content: Text(context.t('You are about to terminate the virtual machine', args: [currentVm])),
+                            content: Text(context.t(
+                                'You are about to terminate the virtual machine',
+                                args: [currentVm])),
                             actions: <Widget>[
                               TextButton(
                                 onPressed: () => Navigator.pop(context, false),
@@ -300,44 +308,49 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                       },
               ),
               IconButton(
-                icon: Icon(
-                  Icons.delete,
-                  color: active ? null : buttonColor,
-                  semanticLabel: 'Delete'
-                ),
-                onPressed: active ? null : () {
-                  showDialog<String?>(
-                    context: context,
-                    builder: (BuildContext context) => AlertDialog(
-                      title: Text('Delete ' + currentVm),
-                      content: Text(
-                          'You are about to delete ' + currentVm + '. This cannot be undone. ' +
-                          'Would you like to delete the disk image but keep the ' +
-                          'configuration, or delete the whole VM?'
-                      ),
-                      actions: [
-                        TextButton(
-                          child: Text('Cancel'),
-                          onPressed: () => Navigator.pop(context, 'cancel'),
-                        ),
-                        TextButton(
-                          child: Text('Delete disk image'),
-                          onPressed: () => Navigator.pop(context, 'disk'),
-                        ),
-                        TextButton(
-                          child: Text('Delete whole VM'),
-                          onPressed: () => Navigator.pop(context, 'vm'),
-                        )  // set up the AlertDialog
-                      ],
-                    ),
-                  ).then((result) async {
-                    result = result ?? 'cancel';
-                    if (result != 'cancel') {
-                      List<String> args = ['--vm', currentVm + '.conf', '--delete-' + result];
-                      await Process.start('quickemu', args);
-                    }
-                  });
-                },
+                icon: Icon(Icons.delete,
+                    color: active ? null : buttonColor,
+                    semanticLabel: 'Delete'),
+                onPressed: active
+                    ? null
+                    : () {
+                        showDialog<String?>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: Text('Delete ' + currentVm),
+                            content: Text('You are about to delete ' +
+                                currentVm +
+                                '. This cannot be undone. ' +
+                                'Would you like to delete the disk image but keep the ' +
+                                'configuration, or delete the whole VM?'),
+                            actions: [
+                              TextButton(
+                                child: Text('Cancel'),
+                                onPressed: () =>
+                                    Navigator.pop(context, 'cancel'),
+                              ),
+                              TextButton(
+                                child: Text('Delete disk image'),
+                                onPressed: () => Navigator.pop(context, 'disk'),
+                              ),
+                              TextButton(
+                                child: Text('Delete whole VM'),
+                                onPressed: () => Navigator.pop(context, 'vm'),
+                              ) // set up the AlertDialog
+                            ],
+                          ),
+                        ).then((result) async {
+                          result = result ?? 'cancel';
+                          if (result != 'cancel') {
+                            List<String> args = [
+                              '--vm',
+                              currentVm + '.conf',
+                              '--delete-' + result
+                            ];
+                            await Process.start('quickemu', args);
+                          }
+                        });
+                      },
               ),
             ],
           )),
@@ -351,7 +364,9 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                   color: _spicy ? buttonColor : null,
                   semanticLabel: 'Connect display with SPICE',
                 ),
-                tooltip: _spicy ? 'Connect display with SPICE' : 'SPICE client not found',
+                tooltip: _spicy
+                    ? 'Connect display with SPICE'
+                    : 'SPICE client not found',
                 onPressed: !_spicy
                     ? null
                     : () {
@@ -359,19 +374,25 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                       },
               ),
               IconButton(
-                icon: SvgPicture.asset('assets/images/console.svg', semanticsLabel: 'Connect with SSH', color: sshy ? buttonColor : Colors.grey),
-                tooltip: sshy ? 'Connect with SSH' : 'SSH server not detected on guest',
+                icon: SvgPicture.asset('assets/images/console.svg',
+                    semanticsLabel: 'Connect with SSH',
+                    color: sshy ? buttonColor : Colors.grey),
+                tooltip: sshy
+                    ? 'Connect with SSH'
+                    : 'SSH server not detected on guest',
                 onPressed: !sshy
                     ? null
                     : () {
-                        TextEditingController _usernameController = TextEditingController();
+                        TextEditingController _usernameController =
+                            TextEditingController();
                         showDialog<bool>(
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
                             title: Text('Launch SSH connection to $currentVm'),
                             content: TextField(
                               controller: _usernameController,
-                              decoration: const InputDecoration(hintText: "SSH username"),
+                              decoration: const InputDecoration(
+                                  hintText: "SSH username"),
                             ),
                             actions: <Widget>[
                               TextButton(
@@ -387,10 +408,16 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                         ).then((result) {
                           result = result ?? false;
                           if (result) {
-                            List<String> sshArgs = ['ssh', '-p', vmInfo.sshPort!, _usernameController.text + '@localhost'];
+                            List<String> sshArgs = [
+                              'ssh',
+                              '-p',
+                              vmInfo.sshPort!,
+                              _usernameController.text + '@localhost'
+                            ];
                             // Set the arguments to execute the ssh command in the default terminal.
                             // Strip the extension as x-terminal-emulator may point to a .wrapper
-                            switch (path.basenameWithoutExtension(_terminalEmulator!)) {
+                            switch (path
+                                .basenameWithoutExtension(_terminalEmulator!)) {
                               case 'gnome-terminal':
                               case 'mate-terminal':
                                 sshArgs.insert(0, '--');

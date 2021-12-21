@@ -12,7 +12,9 @@ class MainMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.primary,
+        color: Theme.of(context).brightness == Brightness.dark
+            ? Theme.of(context).colorScheme.surface
+            : Theme.of(context).colorScheme.primary,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
@@ -23,7 +25,8 @@ class MainMenu extends StatelessWidget {
                   Navigator.of(context).push(
                     PageRouteBuilder(
                       fullscreenDialog: true,
-                      pageBuilder: (context, animation1, animation2) => const Manager(),
+                      pageBuilder: (context, animation1, animation2) =>
+                          const Manager(),
                       transitionDuration: Duration.zero,
                     ),
                   );
@@ -36,7 +39,8 @@ class MainMenu extends StatelessWidget {
                   Navigator.of(context).push(
                     PageRouteBuilder(
                       fullscreenDialog: true,
-                      pageBuilder: (context, animation1, animation2) => const DownloaderPage(),
+                      pageBuilder: (context, animation1, animation2) =>
+                          const DownloaderPage(),
                       transitionDuration: Duration.zero,
                     ),
                   );

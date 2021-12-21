@@ -8,7 +8,8 @@ import '../model/version.dart';
 import 'option_selection.dart';
 
 class VersionSelection extends StatefulWidget {
-  const VersionSelection({Key? key, required this.operatingSystem}) : super(key: key);
+  const VersionSelection({Key? key, required this.operatingSystem})
+      : super(key: key);
 
   final OperatingSystem operatingSystem;
 
@@ -21,7 +22,8 @@ class _VersionSelectionState extends State<VersionSelection> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.t('Select version for {0}', args: [widget.operatingSystem.name])),
+        title: Text(context
+            .t('Select version for {0}', args: [widget.operatingSystem.name])),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -36,17 +38,23 @@ class _VersionSelectionState extends State<VersionSelection> {
                   child: ListTile(
                     title: Text(item.version),
                     onTap: () {
-                      if (widget.operatingSystem.versions[index].options.length > 1) {
+                      if (widget
+                              .operatingSystem.versions[index].options.length >
+                          1) {
                         Navigator.of(context)
-                            .push<Option>(
-                                MaterialPageRoute(fullscreenDialog: true, builder: (context) => OptionSelection(widget.operatingSystem.versions[index])))
+                            .push<Option>(MaterialPageRoute(
+                                fullscreenDialog: true,
+                                builder: (context) => OptionSelection(
+                                    widget.operatingSystem.versions[index])))
                             .then((selection) {
                           if (selection != null) {
-                            Navigator.of(context).pop(Tuple2<Version, Option?>(item, selection));
+                            Navigator.of(context)
+                                .pop(Tuple2<Version, Option?>(item, selection));
                           }
                         });
                       } else {
-                        Navigator.of(context).pop(Tuple2<Version, Option?>(item, widget.operatingSystem.versions[index].options[0]));
+                        Navigator.of(context).pop(Tuple2<Version, Option?>(item,
+                            widget.operatingSystem.versions[index].options[0]));
                       }
                     },
                   ),

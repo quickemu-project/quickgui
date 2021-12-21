@@ -77,7 +77,9 @@ class _DownloaderState extends State<Downloader> {
       } else if (widget.option!.downloader == 'zsync') {
         controller.add(-1);
       } else if (widget.option!.downloader == 'macrecovery') {
-        process.stdout.transform(utf8.decoder).forEach(parseMacRecoveryProgress);
+        process.stdout
+            .transform(utf8.decoder)
+            .forEach(parseMacRecoveryProgress);
       }
 
       process.exitCode.then((value) {
@@ -86,7 +88,9 @@ class _DownloaderState extends State<Downloader> {
         setState(() {
           _downloadFinished = true;
           notificationsClient.notify(
-            _cancelled ? context.t('Download cancelled') : context.t('Download complete'),
+            _cancelled
+                ? context.t('Download cancelled')
+                : context.t('Download complete'),
             body: _cancelled
                 ? context.t(
                     'Download of {0} has completed.',
@@ -111,8 +115,12 @@ class _DownloaderState extends State<Downloader> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          context.t('Downloading {0}',
-              args: ['${widget.operatingSystem.name} ${widget.version.version}' + (widget.option!.option.isNotEmpty ? ' (${widget.option!.option})' : '')]),
+          context.t('Downloading {0}', args: [
+            '${widget.operatingSystem.name} ${widget.version.version}' +
+                (widget.option!.option.isNotEmpty
+                    ? ' (${widget.option!.option})'
+                    : '')
+          ]),
         ),
         automaticallyImplyLeading: false,
       ),
@@ -122,7 +130,10 @@ class _DownloaderState extends State<Downloader> {
             child: StreamBuilder(
               stream: _progressStream,
               builder: (context, AsyncSnapshot<double> snapshot) {
-                var data = !snapshot.hasData || widget.option!.downloader != 'wget' ? null : snapshot.data;
+                var data =
+                    !snapshot.hasData || widget.option!.downloader != 'wget'
+                        ? null
+                        : snapshot.data;
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -137,7 +148,8 @@ class _DownloaderState extends State<Downloader> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 32),
-                      child: Text(context.t('Target folder : {0}', args: [Directory.current.path])),
+                      child: Text(context.t('Target folder : {0}',
+                          args: [Directory.current.path])),
                     ),
                   ],
                 );
