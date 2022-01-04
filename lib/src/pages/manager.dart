@@ -325,16 +325,16 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                                 'configuration, or delete the whole VM?'),
                             actions: [
                               TextButton(
-                                child: Text('Cancel'),
+                                child: const Text('Cancel'),
                                 onPressed: () =>
                                     Navigator.pop(context, 'cancel'),
                               ),
                               TextButton(
-                                child: Text('Delete disk image'),
+                                child: const Text('Delete disk image'),
                                 onPressed: () => Navigator.pop(context, 'disk'),
                               ),
                               TextButton(
-                                child: Text('Delete whole VM'),
+                                child: const Text('Delete whole VM'),
                                 onPressed: () => Navigator.pop(context, 'vm'),
                               ) // set up the AlertDialog
                             ],
