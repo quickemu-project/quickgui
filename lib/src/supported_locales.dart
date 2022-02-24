@@ -21,6 +21,7 @@ final supportedLocales = [
   //'cy',
   'de',
   'en',
+  'es',
   'fr',
   //'gd',
   'it',
