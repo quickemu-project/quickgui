@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: quickgui\n"
 "POT-Creation-Date: 2021-09-29 09:59+0200\n"
-"PO-Revision-Date: 2021-12-02 20:23+0000\n"
+"PO-Revision-Date: 2022-02-24 23:39+0100\n"
 "Last-Translator: Yannick Mauray\n"
 "Language-Team: Yannick Mauray\n"
 "Language: fr\n"
@@ -79,6 +79,9 @@ msgstr "Téléchargement terminé"
 #, fuzzy
 msgid "Download of {0} has completed."
 msgstr "Le téléchargement de {0} est terminé."
+
+msgid "Download of {0} has been cancelled."
+msgstr "Le téléchargement de {0} a été annulé."
 
 #, fuzzy
 msgid "Manage existing machines"
