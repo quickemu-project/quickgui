@@ -33,6 +33,7 @@ class _DownloaderState extends State<Downloader> {
   final notificationsClient = NotificationsClient();
   final wgetPattern = RegExp("( [0-9.]+%)");
   final macRecoveryPattern = RegExp("([0-9]+\\.[0-9])");
+  final ariaPattern = RegExp("([0-9.]+%)");
   late final Stream<double> _progressStream;
   bool _downloadFinished = false;
   var controller = StreamController<double>();
@@ -46,6 +47,17 @@ class _DownloaderState extends State<Downloader> {
 
   void parseWgetProgress(String line) {
     var matches = wgetPattern.allMatches(line).toList();
+    if (matches.isNotEmpty) {
+      var percent = matches[0].group(1);
+      if (percent != null) {
+        var value = double.parse(percent.replaceAll('%', '')) / 100.0;
+        controller.add(value);
+      }
+    }
+  }
+
+  void parseAriaProgress(String line) {
+    var matches = ariaPattern.allMatches(line).toList();
     if (matches.isNotEmpty) {
       var percent = matches[0].group(1);
       if (percent != null) {
@@ -80,6 +92,8 @@ class _DownloaderState extends State<Downloader> {
         process.stdout
             .transform(utf8.decoder)
             .forEach(parseMacRecoveryProgress);
+      } else if (widget.option!.downloader == 'aria2c') {
+        process.stderr.transform(utf8.decoder).forEach(parseAriaProgress);
       }
 
       process.exitCode.then((value) {
@@ -130,10 +144,11 @@ class _DownloaderState extends State<Downloader> {
             child: StreamBuilder(
               stream: _progressStream,
               builder: (context, AsyncSnapshot<double> snapshot) {
-                var data =
-                    !snapshot.hasData || widget.option!.downloader != 'wget'
-                        ? null
-                        : snapshot.data;
+                var data = !snapshot.hasData ||
+                        widget.option!.downloader != 'wget' ||
+                        widget.option!.downloader != 'aria2c'
+                    ? null
+                    : snapshot.data;
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
