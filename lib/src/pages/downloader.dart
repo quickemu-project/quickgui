@@ -107,10 +107,13 @@ class _DownloaderState extends State<Downloader> {
                 : context.t('Download complete'),
             body: _cancelled
                 ? context.t(
-                    'Download of {0} has completed.',
+                    'Download of {0} has been canceled.',
                     args: [widget.operatingSystem.name],
                   )
-                : context.t('Download cancelled.'),
+                : context.t(
+                    'Download of {0} has completed.',
+                    args: [widget.operatingSystem.name],
+                  ),
             appName: 'Quickgui',
             expireTimeoutMs: 10000, /* 10 seconds */
           );
