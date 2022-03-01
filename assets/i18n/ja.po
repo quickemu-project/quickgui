@@ -1,0 +1,134 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2021-09-29 09:59+0200\n"
+"PO-Revision-Date: 2022-03-01 20:27+0900\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Last-Translator: \n"
+"Language: ja_JP\n"
+
+msgid "Quickgui : a Flutter frontend for Quickget and Quickemu"
+msgstr "Quickgui : Flutterで作られたQuickget、Quickemuのフロントエンド"
+
+msgid "Main menu"
+msgstr "メインメニュー"
+
+msgid "Use dark mode"
+msgstr "ダークモードを使用する"
+
+msgid "Cancel"
+msgstr "キャンセル"
+
+msgid "Click to use SPICE display"
+msgstr "クリックしてSPICEディスプレイを使用する"
+
+msgid "Create new machines"
+msgstr "新規仮想マシンを作成"
+
+msgid "Dismiss"
+msgstr "終了する"
+
+msgid "Done !"
+msgstr "完了！"
+
+msgid "Download"
+msgstr "ダウンロード"
+
+msgid "Download finished."
+msgstr "ダウンロードが完了しました。"
+
+msgid "Downloader"
+msgstr "ダウンローダ"
+
+msgid "Downloading (no progress available)..."
+msgstr "ダウンロード中(進行状況を推定中)..."
+
+msgid "Downloading...{0}%"
+msgstr "ダウンロード中...{0}%"
+
+msgid "Downloading {0}"
+msgstr "{0}をダウンロード中"
+
+msgid "Download cancelled"
+msgstr "ダウンロードがキャンセルされました"
+
+msgid "Download complete"
+msgstr "ダウンロード完了"
+
+msgid "Download of {0} has completed."
+msgstr "{0}のダウンロードは完了しました。"
+
+msgid "Download of {0} has been cancelled."
+msgstr "{0}のダウンロードはキャンセルされました。"
+
+msgid "Manage existing machines"
+msgstr "既存の仮想マシンを管理"
+
+msgid "Manager"
+msgstr "マネージャ"
+
+msgid "{0} Mbs downloaded"
+msgstr "{0} Mbs がダウンロードされました"
+
+msgid "Now run {0} to start the VM"
+msgstr "今すぐ{0}を起動して仮想マシンを開始"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Operating system"
+msgstr "オペレーティングシステム"
+
+msgid "Search operating system"
+msgstr "オペレーティングシステムを検索"
+
+msgid "Search option"
+msgstr "オプションを検索"
+
+msgid "Select operating system"
+msgstr "オペレーティングシステムを選択"
+
+msgid "Select option"
+msgstr "オプションを選択"
+
+msgid "Select version for {0}"
+msgstr "{0}のバージョンを選択"
+
+msgid "Select..."
+msgstr "選択..."
+
+msgid "SPICE port"
+msgstr "SPICEのポート"
+
+msgid "SSH port"
+msgstr "SSHのポート"
+
+msgid "Stop The Virtual Machine?"
+msgstr "仮想マシンを停止しますか？"
+
+msgid "Target folder : {0}"
+msgstr "対象フォルダ:{0}"
+
+msgid "Use SPICE display"
+msgstr "SPICEディスプレイを使用する"
+
+msgid "Using SPICE display"
+msgstr "SPICEディスプレイを使用中"
+
+msgid "Version"
+msgstr "バージョン"
+
+msgid "Waiting for download to start"
+msgstr "ダウンロードの開始を待機しています"
+
+msgid "You are about to terminate the virtual machine {0}"
+msgstr "仮想マシン{0}を終了しようとしています"
+
+msgid "Language"
+msgstr "言語"
