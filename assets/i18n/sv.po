@@ -1,0 +1,137 @@
+# Swedish translation for quickgui.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: quickgui\n"
+"POT-Creation-Date: 2021-09-29 09:59+0200\n"
+"PO-Revision-Date: 2022-06-13 13:19+0200\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: \n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1\n"
+"X-Poedit-Basepath: .\n"
+
+msgid "Quickgui : a Flutter frontend for Quickget and Quickemu"
+msgstr "Quickgui : Ett Flutter-gränssnitt för Quickget och Quickemu"
+
+msgid "Main menu"
+msgstr "Huvudmeny"
+
+msgid "Use dark mode"
+msgstr "Använd mörkt läge"
+
+msgid "Cancel"
+msgstr "Avbryt"
+
+msgid "Click to use SPICE display"
+msgstr "Klicka för att använda SPICE-skärm"
+
+msgid "Create new machines"
+msgstr "Skapa nya maskiner"
+
+msgid "Dismiss"
+msgstr "Avfärda"
+
+msgid "Done !"
+msgstr "Klart!"
+
+msgid "Download"
+msgstr "Ladda ner"
+
+msgid "Download finished."
+msgstr "Nerladdning slutförd."
+
+msgid "Downloader"
+msgstr "Nerladdare"
+
+msgid "Downloading (no progress available)..."
+msgstr "Laddar ner (inget förlopp tillgängligt)..."
+
+msgid "Downloading...{0}%"
+msgstr "Laddar ner... {0}%"
+
+msgid "Downloading {0}"
+msgstr "Laddar ner {0}"
+
+msgid "Download cancelled"
+msgstr "Nerladdning avbröts"
+
+msgid "Download complete"
+msgstr "Nerladdning komplett"
+
+msgid "Download of {0} has completed."
+msgstr "Nerladdning av {0} har slutförts."
+
+msgid "Download of {0} has been cancelled."
+msgstr "Nerladdning av {0} har avbrutits."
+
+msgid "Manage existing machines"
+msgstr "Hantera befintliga maskiner"
+
+msgid "Manager"
+msgstr "Hanterare"
+
+msgid "{0} Mbs downloaded"
+msgstr "{0} Mbs nerladdat"
+
+msgid "Now run {0} to start the VM"
+msgstr "Kör nu {0} för att starta VM"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Operating system"
+msgstr "Operativsystem"
+
+msgid "Search operating system"
+msgstr "Sök operativsystem"
+
+msgid "Search option"
+msgstr "Sökalternativ"
+
+msgid "Select operating system"
+msgstr "Välj operativsystem"
+
+msgid "Select option"
+msgstr "Välj alternativ"
+
+msgid "Select version for {0}"
+msgstr "Välj version för {0}"
+
+msgid "Select..."
+msgstr "Välj..."
+
+msgid "SPICE port"
+msgstr "SPICE-port"
+
+msgid "SSH port"
+msgstr "SSH-port"
+
+msgid "Stop The Virtual Machine?"
+msgstr "Vill du stoppa den virtuella maskinen"
+
+msgid "Target folder : {0}"
+msgstr "Målmapp : {0}"
+
+msgid "Use SPICE display"
+msgstr "Använd SPICE-skärm"
+
+msgid "Using SPICE display"
+msgstr "Använder SPICE-skärm"
+
+msgid "Version"
+msgstr "Version"
+
+msgid "Waiting for download to start"
+msgstr "Väntar på att nerladdning skall starta"
+
+msgid "You are about to terminate the virtual machine {0}"
+msgstr "Du är på väg att stoppa den virtuella maskinen {0}"
+
+msgid "Language"
+msgstr "Språk"
