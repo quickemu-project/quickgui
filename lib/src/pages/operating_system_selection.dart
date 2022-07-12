@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
 
 import '../model/operating_system.dart';
@@ -7,7 +8,8 @@ class OperatingSystemSelection extends StatefulWidget {
   const OperatingSystemSelection({Key? key}) : super(key: key);
 
   @override
-  State<OperatingSystemSelection> createState() => _OperatingSystemSelectionState();
+  State<OperatingSystemSelection> createState() =>
+      _OperatingSystemSelectionState();
 }
 
 class _OperatingSystemSelectionState extends State<OperatingSystemSelection> {
@@ -22,7 +24,9 @@ class _OperatingSystemSelectionState extends State<OperatingSystemSelection> {
 
   @override
   Widget build(BuildContext context) {
-    var list = gOperatingSystems.where((os) => os.name.toLowerCase().contains(term.toLowerCase())).toList();
+    var list = gOperatingSystems
+        .where((os) => os.name.toLowerCase().contains(term.toLowerCase()))
+        .toList();
     return Scaffold(
       appBar: AppBar(
         title: Text(context.t('Select operating system')),
@@ -44,7 +48,8 @@ class _OperatingSystemSelectionState extends State<OperatingSystemSelection> {
                       Expanded(
                         child: TextField(
                           focusNode: focusNode,
-                          decoration: InputDecoration.collapsed(hintText: context.t('Search operating system')),
+                          decoration: InputDecoration.collapsed(
+                              hintText: context.t('Search operating system')),
                           onChanged: (value) {
                             setState(() {
                               term = value;
@@ -69,9 +74,15 @@ class _OperatingSystemSelectionState extends State<OperatingSystemSelection> {
               itemCount: list.length,
               itemBuilder: (context, index) {
                 var item = list[index];
+                var icon = SvgPicture.asset(
+                  "assets/quickemu-icons/${item.code}-quickemu-white-pinkbg.svg",
+                  width: 32,
+                  height: 32,
+                );
                 return Card(
                   child: ListTile(
                     title: Text(item.name),
+                    leading: icon,
                     onTap: () {
                       Navigator.of(context).pop(item);
                     },

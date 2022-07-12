@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -32,8 +31,10 @@ class _AppState extends State<App> with PreferencesMixin {
           appSettings.setActiveLocaleSilently(
               snapshot.data?.getString(prefCurrentLocale) ??
                   Platform.localeName);
-          appSettings.useDarkModeSilently =
-              snapshot.data!.getBool(prefThemeMode) as bool;
+          var pref = snapshot.data!.getBool(prefThemeMode);
+          if (pref != null) {
+            appSettings.useDarkModeSilently = pref;
+          }
           return Consumer<AppSettings>(
             builder: (context, appSettings, _) => MaterialApp(
               theme: ThemeData(primarySwatch: Colors.pink),

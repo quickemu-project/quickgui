@@ -64,6 +64,9 @@ msgstr ""
 msgid "Download of {0} has completed."
 msgstr ""
 
+msgid "Download of {0} has been cancelled."
+msgstr ""
+
 msgid "Manage existing machines"
 msgstr ""
 

@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
 
 class DownloadLabel extends StatelessWidget {
-  const DownloadLabel({Key? key, required this.downloadFinished, required this.data, required this.downloader}) : super(key: key);
+  const DownloadLabel(
+      {Key? key,
+      required this.downloadFinished,
+      required this.data,
+      required this.downloader})
+      : super(key: key);
 
   final bool downloadFinished;
   final double? data;
@@ -16,8 +21,9 @@ class DownloadLabel extends StatelessWidget {
           ? Text(context.t('Download finished.'))
           : data != null
               ? downloader != 'zsync'
-                  ? downloader == 'wget'
-                      ? Text(context.t('Downloading...{0}%', args: [(data! * 100).toInt()]))
+                  ? downloader == 'wget' || downloader == 'aria2c'
+                      ? Text(context.t('Downloading... {0}%',
+                          args: [(data! * 100).toInt()]))
                       : Text(context.t('{0} Mbs downloaded', args: [data!]))
                   : Text(context.t("Downloading (no progress available)..."))
               : Text(context.t('Waiting for download to start')),

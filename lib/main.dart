@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
-import 'package:quickgui/src/globals.dart';
 import 'package:tuple/tuple.dart';
 import 'package:window_size/window_size.dart';
 

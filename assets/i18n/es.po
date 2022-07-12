@@ -2,20 +2,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: quickgui\n"
 "POT-Creation-Date: 2021-09-29 09:59+0200\n"
-"PO-Revision-Date: 2022-02-24 23:39+0100\n"
-"Last-Translator: Yannick Mauray\n"
-"Language-Team: Yannick Mauray\n"
-"Language: fr\n"
+"PO-Revision-Date: 2021-12-19 19:23+0100\n"
+"Last-Translator: José Miguel Manzano\n"
+"Language-Team: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0\n"
 "X-Poedit-Basepath: .\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, fuzzy
 msgid "Quickgui : a Flutter frontend for Quickget and Quickemu"
-msgstr "Quickgui : une interface en Flutter pour Quickget et Quickemu"
+msgstr "Quickgui : una aplicación Flutter para Quickget y Quickemu"
 
 #, fuzzy
 msgid "Main menu"
@@ -23,81 +23,75 @@ msgstr "Menu principal"
 
 #, fuzzy
 msgid "Use dark mode"
-msgstr "Utiliser le mode sombre"
+msgstr "Utilizar el modo oscuro"
 
 #, fuzzy
 msgid "Cancel"
-msgstr "Annuler"
+msgstr "Cancelar"
 
 #, fuzzy
 msgid "Click to use SPICE display"
-msgstr "Cliquez pour utiliser l'affichage SPICE"
+msgstr "Pulsa para utilizar SPICE display"
 
 #, fuzzy
 msgid "Create new machines"
-msgstr "Créer de nouvelles machines"
+msgstr "Crear nuevas máquinas"
 
 #, fuzzy
 msgid "Dismiss"
-msgstr "Fermer"
+msgstr "Descartar"
 
 #, fuzzy
 msgid "Done !"
-msgstr "Fini!"
+msgstr "Hecho !"
 
 #, fuzzy
 msgid "Download"
-msgstr "Télécharger"
+msgstr "Descargar"
 
 #, fuzzy
 msgid "Download finished."
-msgstr "Téléchargement terminé."
+msgstr "Descarga completa."
 
 #, fuzzy
 msgid "Downloader"
-msgstr "Gestionnaire de téléchargements"
+msgstr "Descargas"
 
 #, fuzzy
 msgid "Downloading (no progress available)..."
-msgstr "Téléchargement (pas de barre de progression)..."
+msgstr "Descargando (progreso no disponible)..."
 
 #, fuzzy
 msgid "Downloading...{0}%"
-msgstr "Téléchargement...{0}%"
+msgstr "Descargando...{0}%"
 
 #, fuzzy
 msgid "Downloading {0}"
-msgstr "Téléchargement de {0}"
-
-msgid "Download cancelled"
-msgstr "Téléchargement annulé"
+msgstr "Descargando {0}"
 
 #, fuzzy
 msgid "Download complete"
-msgstr "Téléchargement terminé"
+msgstr "Descarga completa"
 
 #, fuzzy
 msgid "Download of {0} has completed."
-msgstr "Le téléchargement de {0} est terminé."
-
-msgid "Download of {0} has been cancelled."
-msgstr "Le téléchargement de {0} a été annulé."
+msgstr "La descarga de {0} se ha completado."
 
 #, fuzzy
 msgid "Manage existing machines"
-msgstr "Gérer les machines existantes"
+msgstr "Gestionar máquinas existentes"
 
 #, fuzzy
 msgid "Manager"
-msgstr "Gestionnaire"
+msgstr "Gestionar"
 
 #, fuzzy
 msgid "{0} Mbs downloaded"
-msgstr "{0} Mbs téléchargés"
+msgstr "{0} Mbs descargados"
 
 #, fuzzy
 msgid "Now run {0} to start the VM"
-msgstr "Lancer {0} pour démarrer la machine virtuelle"
+msgstr "Ahora ejecuta {0} para iniciar la VM"
 
 #, fuzzy
 msgid "OK"
@@ -105,68 +99,68 @@ msgstr "OK"
 
 #, fuzzy
 msgid "Operating system"
-msgstr "Système d'exploitation"
+msgstr "Sistema operativo"
 
 #, fuzzy
 msgid "Search operating system"
-msgstr "Chercher un système d'exploitation"
+msgstr "Buscar sistema operativo"
 
 #, fuzzy
 msgid "Search option"
-msgstr "Chercher une option"
+msgstr "Opción de busqueda"
 
 #, fuzzy
 msgid "Select operating system"
-msgstr "Sélectionner un système d'exploitation"
+msgstr "Selecciona sistema operativo"
 
 #, fuzzy
 msgid "Select option"
-msgstr "Sélectionner une option"
+msgstr "Selecciona opción"
 
 #, fuzzy
 msgid "Select version for {0}"
-msgstr "Sélectionner une version pour {0}"
+msgstr "Selecciona versión para {0}"
 
 #, fuzzy
 msgid "Select..."
-msgstr "Sélectionner..."
+msgstr "Selecciona..."
 
 #, fuzzy
 msgid "SPICE port"
-msgstr "Port SPICE"
+msgstr "Puerto SPICE"
 
 #, fuzzy
 msgid "SSH port"
-msgstr "Port SSH"
+msgstr "Puerto SSH"
 
 #, fuzzy
 msgid "Stop The Virtual Machine?"
-msgstr "Arrêtez la machine virtuelle ?"
+msgstr "¿Detener la Máquina Virtual?"
 
 #, fuzzy
 msgid "Target folder : {0}"
-msgstr "Dossier cible : {0}"
+msgstr "Directorio de destino : {0}"
 
 #, fuzzy
 msgid "Use SPICE display"
-msgstr "Utiliser l'affichage SPICE"
+msgstr "Usar SPICE display"
 
 #, fuzzy
 msgid "Using SPICE display"
-msgstr "Utilisation de l'affichage SPICE"
+msgstr "Usando SPICE display"
 
 #, fuzzy
 msgid "Version"
-msgstr "Version"
+msgstr "Versión"
 
 #, fuzzy
 msgid "Waiting for download to start"
-msgstr "En attente du début du téléchargement"
+msgstr "Esperando que comience la descarga"
 
 #, fuzzy
 msgid "You are about to terminate the virtual machine {0}"
-msgstr "Vous êtes sur le point d'arrêter la machine virtuelle {0}"
+msgstr "Estás a punto de cerrar la máquina virtual {0}"
 
 #, fuzzy
 msgid "Language"
-msgstr "Langue"
+msgstr "Lenguaje"

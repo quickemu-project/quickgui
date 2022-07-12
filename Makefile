@@ -5,7 +5,7 @@ BASE_NAME := quickgui-$(VERSION)
 BUILD_DIR := $(BUILD_ROOT)/$(BASE_NAME)
 BIN_TAR := $(BUILD_ROOT)/$(BASE_NAME).tar
 SRC_TAR := $(BUILD_ROOT)/$(BASE_NAME)-src.tar
-FLUTTER := /usr/local/bin/flutter
+FLUTTER := /opt/flutter/bin/flutter
 
 all: version bin
 
@@ -25,7 +25,7 @@ bin: quickgui
 	mkdir -p $(BUILD_DIR)
 	cp -a build/linux/x64/release/bundle/* $(BUILD_DIR)
 	cp -a assets/resources $(BUILD_DIR)
-	tar -C $(BUILD_ROOT) -c -v -f $(BIN_TAR) $(BASE_NAME)
+	tar -C $(BUILD_ROOT) -c -v --exclude "quickemu-icons/*.png" -f $(BIN_TAR) $(BASE_NAME)
 	xz -z $(BIN_TAR)
 
 src:

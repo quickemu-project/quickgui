@@ -33,6 +33,7 @@ class _DownloaderState extends State<Downloader> {
   final notificationsClient = NotificationsClient();
   final wgetPattern = RegExp("( [0-9.]+%)");
   final macRecoveryPattern = RegExp("([0-9]+\\.[0-9])");
+  final ariaPattern = RegExp("([0-9.]+%)");
   late final Stream<double> _progressStream;
   bool _downloadFinished = false;
   var controller = StreamController<double>();
@@ -46,6 +47,17 @@ class _DownloaderState extends State<Downloader> {
 
   void parseWgetProgress(String line) {
     var matches = wgetPattern.allMatches(line).toList();
+    if (matches.isNotEmpty) {
+      var percent = matches[0].group(1);
+      if (percent != null) {
+        var value = double.parse(percent.replaceAll('%', '')) / 100.0;
+        controller.add(value);
+      }
+    }
+  }
+
+  void parseAriaProgress(String line) {
+    var matches = ariaPattern.allMatches(line).toList();
     if (matches.isNotEmpty) {
       var percent = matches[0].group(1);
       if (percent != null) {
@@ -77,7 +89,11 @@ class _DownloaderState extends State<Downloader> {
       } else if (widget.option!.downloader == 'zsync') {
         controller.add(-1);
       } else if (widget.option!.downloader == 'macrecovery') {
-        process.stdout.transform(utf8.decoder).forEach(parseMacRecoveryProgress);
+        process.stdout
+            .transform(utf8.decoder)
+            .forEach(parseMacRecoveryProgress);
+      } else if (widget.option!.downloader == 'aria2c') {
+        process.stderr.transform(utf8.decoder).forEach(parseAriaProgress);
       }
 
       process.exitCode.then((value) {
@@ -86,13 +102,18 @@ class _DownloaderState extends State<Downloader> {
         setState(() {
           _downloadFinished = true;
           notificationsClient.notify(
-            _cancelled ? context.t('Download cancelled') : context.t('Download complete'),
+            _cancelled
+                ? context.t('Download cancelled')
+                : context.t('Download complete'),
             body: _cancelled
                 ? context.t(
-                    'Download of {0} has completed.',
+                    'Download of {0} has been canceled.',
                     args: [widget.operatingSystem.name],
                   )
-                : context.t('Download cancelled.'),
+                : context.t(
+                    'Download of {0} has completed.',
+                    args: [widget.operatingSystem.name],
+                  ),
             appName: 'Quickgui',
             expireTimeoutMs: 10000, /* 10 seconds */
           );
@@ -111,8 +132,12 @@ class _DownloaderState extends State<Downloader> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          context.t('Downloading {0}',
-              args: ['${widget.operatingSystem.name} ${widget.version.version}' + (widget.option!.option.isNotEmpty ? ' (${widget.option!.option})' : '')]),
+          context.t('Downloading {0}', args: [
+            '${widget.operatingSystem.name} ${widget.version.version}' +
+                (widget.option!.option.isNotEmpty
+                    ? ' (${widget.option!.option})'
+                    : '')
+          ]),
         ),
         automaticallyImplyLeading: false,
       ),
@@ -122,7 +147,11 @@ class _DownloaderState extends State<Downloader> {
             child: StreamBuilder(
               stream: _progressStream,
               builder: (context, AsyncSnapshot<double> snapshot) {
-                var data = !snapshot.hasData || widget.option!.downloader != 'wget' ? null : snapshot.data;
+                var data = !snapshot.hasData ||
+                        widget.option!.downloader != 'wget' ||
+                        widget.option!.downloader != 'aria2c'
+                    ? null
+                    : snapshot.data;
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -137,7 +166,8 @@ class _DownloaderState extends State<Downloader> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 32),
-                      child: Text(context.t('Target folder : {0}', args: [Directory.current.path])),
+                      child: Text(context.t('Target folder : {0}',
+                          args: [Directory.current.path])),
                     ),
                   ],
                 );

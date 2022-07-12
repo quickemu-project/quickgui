@@ -1,0 +1,4 @@
+[submodule "assets/quickemu-icons"]
+	path = assets/quickemu-icons
+	url = https://github.com/quickemu-project/quickemu-icons.git
+	branch = quickgui

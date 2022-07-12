@@ -26,14 +26,19 @@ class HomePageButton extends StatelessWidget {
               child: Center(
                 child: Text(
                   label?.toUpperCase() ?? '',
-                  style: Theme.of(context).textTheme.subtitle2?.copyWith(color: Colors.white),
+                  style: Theme.of(context)
+                      .textTheme
+                      .subtitle2
+                      ?.copyWith(color: Colors.white),
                 ),
               ),
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 primary: Theme.of(context).canvasColor,
-                onPrimary: Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Theme.of(context).colorScheme.primary,
+                onPrimary: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.white70
+                    : Theme.of(context).colorScheme.primary,
               ),
               onPressed: onPressed,
               child: Padding(

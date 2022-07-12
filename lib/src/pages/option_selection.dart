@@ -24,7 +24,9 @@ class _OptionSelectionState extends State<OptionSelection> {
 
   @override
   Widget build(BuildContext context) {
-    var list = widget.version.options.where((e) => e.option.toLowerCase().contains(term.toLowerCase())).toList();
+    var list = widget.version.options
+        .where((e) => e.option.toLowerCase().contains(term.toLowerCase()))
+        .toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -49,7 +51,8 @@ class _OptionSelectionState extends State<OptionSelection> {
                             Expanded(
                               child: TextField(
                                 focusNode: focusNode,
-                                decoration: InputDecoration.collapsed(hintText: context.t('Search option')),
+                                decoration: InputDecoration.collapsed(
+                                    hintText: context.t('Search option')),
                                 onChanged: (value) {
                                   setState(() {
                                     term = value;
