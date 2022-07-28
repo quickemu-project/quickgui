@@ -1,0 +1,131 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: quickgui\n"
+"POT-Creation-Date: 2022-07-28 10:18-0300\n"
+"PO-Revision-Date: 2022-07-28 10:18-0300\n"
+"Last-Translator: Marc Dnd <marcdnd@gmail.com>\n"
+"Language-Team: Marc Dnd\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Nano pure text editor\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Quickgui : a Flutter frontend for Quickget and Quickemu"
+msgstr "Quickgui: Interface gráfica feito em Flutter para Quickget e Quickemu"
+
+msgid "Main menu"
+msgstr "Menu principal"
+
+msgid "Use dark mode"
+msgstr "Usar modo escuro"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Click to use SPICE display"
+msgstr "Clique para usar o monitor SPICE"
+
+msgid "Create new machines"
+msgstr "Criar novas máquinas virtuais"
+
+msgid "Dismiss"
+msgstr "Dispensar"
+
+msgid "Done !"
+msgstr "Feito !"
+
+msgid "Download"
+msgstr "Baixar"
+
+msgid "Download finished."
+msgstr "Transferência terminada."
+
+msgid "Downloader"
+msgstr "Downloader"
+
+msgid "Downloading (no progress available)..."
+msgstr "Baixando (progresso não disponível)..."
+
+msgid "Downloading...{0}%"
+msgstr "Baixando...{0}%"
+
+msgid "Downloading {0}"
+msgstr "Baixando {0}"
+
+msgid "Download cancelled"
+msgstr "Transferência cancelada"
+
+msgid "Download complete"
+msgstr "Transferência terminada"
+
+msgid "Download of {0} has completed."
+msgstr "Transferência de {0} terminada."
+
+msgid "Manage existing machines"
+msgstr "Configurar máquinas existentes"
+
+msgid "Manager"
+msgstr "Configurar"
+
+msgid "{0} Mbs downloaded"
+msgstr "{0} Mbs transferidos"
+
+msgid "Now run {0} to start the VM"
+msgstr "Inicie a VM [{0}]"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Operating system"
+msgstr "Sistema operacional"
+
+msgid "Search operating system"
+msgstr "Procurar o sistema operacional"
+
+msgid "Search option"
+msgstr "Opção de pesquisa"
+
+msgid "Select operating system"
+msgstr "Selecione o sistema operacional"
+
+msgid "Select option"
+msgstr "Selecione a opção"
+
+msgid "Select version for {0}"
+msgstr "Selecione a versão para {0}"
+
+msgid "Select..."
+msgstr "Selecione..."
+
+msgid "SPICE port"
+msgstr "Porta TCP/IP do monitor SPICE"
+
+msgid "SSH port"
+msgstr "Porta TCP/IP do SSH"
+
+msgid "Stop The Virtual Machine?"
+msgstr "Parar a Máquina Virtual?"
+
+msgid "Target folder : {0}"
+msgstr "Pasta de destino : {0}"
+
+msgid "Use SPICE display"
+msgstr "Usar mostrador SPICE"
+
+msgid "Using SPICE display"
+msgstr "A usar monitor SPICE"
+
+msgid "Version"
+msgstr "Versão"
+
+msgid "Waiting for download to start"
+msgstr "Esperando que a transferência inicie"
+
+msgid "You are about to terminate the virtual machine {0}"
+msgstr "A máquina virtual será finalizada {0}"
+
+msgid "Language"
+msgstr "Idioma"
