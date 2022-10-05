@@ -31,4 +31,5 @@ final supportedLocales = [
   'pt_PT',
   'ru',
   'ja',
+  'sv',
 ];
