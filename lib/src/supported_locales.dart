@@ -30,5 +30,5 @@ final supportedLocales = [
   //'oc',
   'pt_PT',
   'ru',
-  'ja'’
+  'ja',
 ];
