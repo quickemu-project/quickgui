@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:provider/provider.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
+import 'package:provider/provider.dart';
+import 'package:quickgui/src/mixins/app_version.dart';
+import 'package:quickgui/src/pages/deget_not_found_page.dart';
 import 'package:quickgui/src/supported_locales.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -40,13 +42,15 @@ class _AppState extends State<App> with PreferencesMixin {
               theme: ThemeData(primarySwatch: Colors.pink),
               darkTheme: ThemeData.dark(),
               themeMode: appSettings.themeMode,
-              home: const MainPage(),
+              home: AppVersion.packageInfo == null
+                  ? const DebgetNotFoundPage()
+                  : const MainPage(),
               supportedLocales: supportedLocales.map((s) => s.contains("_")
                   ? Locale(s.split("_")[0], s.split("_")[1])
                   : Locale(s)),
               localizationsDelegates: [
                 GettextLocalizationsDelegate(),
-                GlobalMaterialLocalizations.delegate,
+                ...GlobalMaterialLocalizations.delegates,
                 GlobalWidgetsLocalizations.delegate,
               ],
               locale:

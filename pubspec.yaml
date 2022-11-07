@@ -53,6 +53,7 @@ dependencies:
   desktop_notifications: ^0.6.1
   flutter_svg: ^0.23.0
   gettext_i18n: ^1.0.2
+  url_launcher: ^6.1.6
 
 dev_dependencies:
   flutter_test:
