@@ -1,8 +1,7 @@
 name: quickgui
 description: A new Flutter project.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-
-version: 1.2.4
+version: 1.2.5
 
 environment:
   sdk: ">=2.14.4 <3.0.0"
