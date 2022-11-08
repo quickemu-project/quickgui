@@ -2,7 +2,7 @@ SHELL := /usr/bin/env bash
 VERSION := $(shell cat pubspec.yaml | grep "^version: " | cut -c 10- | sed 's/+/\-/')
 SHORT_VERSION := $(shell xx="$(VERSION)"; arrVersion=($${xx//-/ }); echo $${arrVersion[0]};)
 BUILD_ROOT := ../build-package
-BASE_NAME := quickgui-$(SHORT_VERSION)
+BASE_NAME := quickgui_$(SHORT_VERSION)
 BUILD_DIR := $(BUILD_ROOT)/$(BASE_NAME)
 BIN_TAR := $(BUILD_ROOT)/$(BASE_NAME).tar
 SRC_TAR := $(BUILD_ROOT)/$(BASE_NAME)-src.tar
@@ -42,7 +42,7 @@ ppa: version
 	cd /mnt/data/dev/debianpackages/quickgui.deb/quickgui ; \
 	dch -v $(VERSION) "New changelog message" ; \
 	vi debian/changelog ; \
-	for dist in focal jammy kinetic; do \
+	for dist in focal jammy kinetic lunar; do \
 		sed -i "1 s/^\(.*\)) UNRELEASED;\(.*\)\$$/\1~xxx1.0) xxx;\2/g" debian/changelog ; \
 		sed -i "1 s/~.*1\.0) .*;\(.*\)\$$/~$${dist}1.0) $$dist;\1/g" debian/changelog ; \
 		dpkg-buildpackage -d -S -sa ; \
