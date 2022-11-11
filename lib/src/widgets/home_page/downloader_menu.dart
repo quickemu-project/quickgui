@@ -1,6 +1,9 @@
 import 'dart:io';
+
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:gettext_i18n/gettext_i18n.dart';
 
 import '../../globals.dart';
 import '../../mixins/preferences_mixin.dart';
@@ -33,6 +36,42 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
             : Theme.of(context).colorScheme.primary,
         child: Column(
           children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "${context.t('Directory where the machines are stored')}:",
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  Text.rich(
+                    TextSpan(
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () async {
+                          var folder = await FilePicker.platform
+                              .getDirectoryPath(dialogTitle: "Pick a folder");
+                          if (folder != null) {
+                            setState(() {
+                              Directory.current = folder;
+                            });
+                            savePreference(
+                                prefWorkingDirectory, Directory.current.path);
+                          }
+                        },
+                      text: Directory.current.path,
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Divider(
+              thickness: 2,
+            ),
             Row(
               children: [
                 Expanded(
@@ -45,41 +84,6 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
                       )
                     ],
                   ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  Directory.current.path,
-                  style: Theme.of(context)
-                      .textTheme
-                      .subtitle1!
-                      .copyWith(color: Colors.white),
-                ),
-                const SizedBox(
-                  width: 8,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Theme.of(context).canvasColor,
-                    onPrimary: Theme.of(context).brightness == Brightness.dark
-                        ? Colors.white70
-                        : Theme.of(context).colorScheme.primary,
-                  ),
-                  onPressed: () async {
-                    var folder = await FilePicker.platform
-                        .getDirectoryPath(dialogTitle: "Pick a folder");
-                    if (folder != null) {
-                      setState(() {
-                        Directory.current = folder;
-                      });
-                      savePreference(
-                          prefWorkingDirectory, Directory.current.path);
-                    }
-                  },
-                  child: const Icon(Icons.more_horiz),
                 ),
               ],
             ),

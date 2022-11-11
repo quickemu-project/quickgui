@@ -3,15 +3,16 @@ import 'dart:convert';
 import 'dart:core';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
-import 'package:path/path.dart' as path;
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
+import 'package:path/path.dart' as path;
 
 import '../globals.dart';
-import '../model/vminfo.dart';
 import '../mixins/preferences_mixin.dart';
+import '../model/vminfo.dart';
 
 /// VM manager page.
 /// Displays a list of available VMs, running state and connection info,
@@ -175,34 +176,47 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     final Color buttonColor = Theme.of(context).brightness == Brightness.dark
         ? Colors.white70
         : Theme.of(context).colorScheme.primary;
-    _widgetList.add(
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            Directory.current.path,
-          ),
-          const SizedBox(
-            width: 8,
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                primary: Theme.of(context).canvasColor, onPrimary: buttonColor),
-            onPressed: () async {
-              String? result = await FilePicker.platform.getDirectoryPath();
-              if (result != null) {
-                setState(() {
-                  Directory.current = result;
-                });
+    _widgetList.addAll(
+      [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "${context.t('Directory where the machines are stored')}:",
+              ),
+              const SizedBox(
+                width: 8,
+              ),
+              Text.rich(
+                TextSpan(
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () async {
+                      String? result =
+                          await FilePicker.platform.getDirectoryPath();
+                      if (result != null) {
+                        setState(() {
+                          Directory.current = result;
+                        });
 
-                savePreference(prefWorkingDirectory, Directory.current.path);
-                _getVms(context);
-              }
-            },
-            child: const Icon(Icons.more_horiz),
+                        savePreference(
+                            prefWorkingDirectory, Directory.current.path);
+                        _getVms(context);
+                      }
+                    },
+                  text: Directory.current.path,
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.primary),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+        const Divider(
+          thickness: 2,
+        ),
+      ],
     );
     List<List<Widget>> rows = _currentVms.map((vm) {
       return _buildRow(vm, buttonColor);
