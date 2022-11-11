@@ -2,172 +2,139 @@ msgid ""
 msgstr ""
 "Project-Id-Version: quickgui\n"
 "POT-Creation-Date: 2021-09-29 09:59+0200\n"
-"PO-Revision-Date: 2022-02-24 23:38+0100\n"
+"PO-Revision-Date: 2022-11-11 15:42+0100\n"
 "Last-Translator: Yannick Mauray\n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
-"X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+"X-Poedit-Basepath: .\n"
 
-#, fuzzy
 msgid "Quickgui : a Flutter frontend for Quickget and Quickemu"
 msgstr "Quickgui : a Flutter frontend for Quickget and Quickemu"
 
-#, fuzzy
 msgid "Main menu"
 msgstr "Main menu"
 
-#, fuzzy
 msgid "Use dark mode"
 msgstr "Use dark mode"
 
-#, fuzzy
 msgid "Cancel"
 msgstr "Cancel"
 
-#, fuzzy
 msgid "Click to use SPICE display"
 msgstr "Click to use SPICE display"
 
-#, fuzzy
 msgid "Create new machines"
 msgstr "Create new machines"
 
-#, fuzzy
 msgid "Dismiss"
 msgstr "Dismiss"
 
-#, fuzzy
 msgid "Done !"
 msgstr "Done !"
 
-#, fuzzy
 msgid "Download"
 msgstr "Download"
 
-#, fuzzy
 msgid "Download finished."
 msgstr "Download finished."
 
-#, fuzzy
 msgid "Downloader"
 msgstr "Downloader"
 
-#, fuzzy
 msgid "Downloading (no progress available)..."
 msgstr "Downloading (no progress available)..."
 
-#, fuzzy
 msgid "Downloading...{0}%"
 msgstr "Downloading...{0}%"
 
-#, fuzzy
 msgid "Downloading {0}"
 msgstr "Downloading {0}"
 
 msgid "Download cancelled"
-msgstr "Download cancelled"
+msgstr "Download canceled"
 
-#, fuzzy
 msgid "Download complete"
 msgstr "Download complete"
 
-#, fuzzy
 msgid "Download of {0} has completed."
 msgstr "Download of {0} has completed."
 
-#, fuzzy
 msgid "Download of {0} has been cancelled."
-msgstr "Download of {0} has been cancelled."
+msgstr "Download of {0} has been canceled."
 
-#, fuzzy
 msgid "Manage existing machines"
 msgstr "Manage existing machines"
 
-#, fuzzy
 msgid "Manager"
 msgstr "Manager"
 
-#, fuzzy
 msgid "{0} Mbs downloaded"
 msgstr "{0} Mbs downloaded"
 
-#, fuzzy
 msgid "Now run {0} to start the VM"
 msgstr "Now run {0} to start the VM"
 
-#, fuzzy
 msgid "OK"
 msgstr "OK"
 
-#, fuzzy
 msgid "Operating system"
 msgstr "Operating system"
 
-#, fuzzy
 msgid "Search operating system"
 msgstr "Search operating system"
 
-#, fuzzy
 msgid "Search option"
 msgstr "Search option"
 
-#, fuzzy
 msgid "Select operating system"
 msgstr "Select operating system"
 
-#, fuzzy
 msgid "Select option"
 msgstr "Select option"
 
-#, fuzzy
 msgid "Select version for {0}"
 msgstr "Select version for {0}"
 
-#, fuzzy
 msgid "Select..."
 msgstr "Select..."
 
-#, fuzzy
 msgid "SPICE port"
 msgstr "SPICE port"
 
-#, fuzzy
 msgid "SSH port"
 msgstr "SSH port"
 
-#, fuzzy
 msgid "Stop The Virtual Machine?"
 msgstr "Stop The Virtual Machine?"
 
-#, fuzzy
 msgid "Target folder : {0}"
 msgstr "Target folder : {0}"
 
-#, fuzzy
 msgid "Use SPICE display"
 msgstr "Use SPICE display"
 
-#, fuzzy
 msgid "Using SPICE display"
 msgstr "Using SPICE display"
 
-#, fuzzy
 msgid "Version"
 msgstr "Version"
 
-#, fuzzy
 msgid "Waiting for download to start"
 msgstr "Waiting for download to start"
 
-#, fuzzy
 msgid "You are about to terminate the virtual machine {0}"
 msgstr "You are about to terminate the virtual machine {0}"
 
-#, fuzzy
 msgid "Language"
 msgstr "Language"
+
+msgid "Directory where the machines are stored"
+msgstr "Directory where the machines are stored"
+
+msgid "Search version"
+msgstr "Search version"

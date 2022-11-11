@@ -132,3 +132,9 @@ msgstr ""
 
 msgid "Language"
 msgstr ""
+
+msgid "Directory where the machines are stored"
+msgstr ""
+
+msgid "Search version"
+msgstr ""
