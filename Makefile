@@ -5,6 +5,7 @@ BUILD_ROOT := ../build-package
 BASE_NAME := quickgui_$(SHORT_VERSION)
 BUILD_DIR := $(BUILD_ROOT)/$(BASE_NAME)
 BIN_TAR := $(BUILD_ROOT)/$(BASE_NAME).tar
+ORIG_TAR := $(BASE_NAME).orig.tar
 SRC_TAR := $(BUILD_ROOT)/$(BASE_NAME)-src.tar
 FLUTTER := /opt/flutter/bin/flutter
 
@@ -39,7 +40,7 @@ bin: quickgui
 	xz -z $(BIN_TAR)
 
 ppa: version
-	cp $(BIN_TAR).xz /mnt/data/dev/debianpackages/quickgui.deb/
+	cp $(BIN_TAR).xz /mnt/data/dev/debianpackages/quickgui.deb/$(ORIG_TAR).xz
 	cd /mnt/data/dev/debianpackages/quickgui.deb/quickgui ; \
 	dch -v $(VERSION) "New changelog message" ; \
 	vi debian/changelog ; \
