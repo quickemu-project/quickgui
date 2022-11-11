@@ -20,6 +20,7 @@ spawn:
 	echo "" >> /home/yannick/machines/focal/home/yannick/build.sh
 	echo "cd /opt/flutter-projects/quickgui" >> /home/yannick/machines/focal/home/yannick/build.sh
 	echo "make bin" >> /home/yannick/machines/focal/home/yannick/build.sh
+	chmod +x /home/yannick/machines/focal/home/yannick/build.sh
 	sudo systemd-nspawn -D /home/yannick/machines/focal --resolv-conf=off --bind-ro=/home/yannick/machines/resolv.conf:/etc/resolv.conf --bind=/opt/flutter:/opt/flutter --bind=/opt/flutter-projects:/opt/flutter-projects -u yannick bash /home/yannick/build.sh
 
 distclean:
