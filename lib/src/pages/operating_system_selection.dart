@@ -75,7 +75,7 @@ class _OperatingSystemSelectionState extends State<OperatingSystemSelection> {
               itemBuilder: (context, index) {
                 var item = list[index];
                 var icon = SvgPicture.asset(
-                  "assets/quickemu-icons/${item.code}-quickemu-white-pinkbg.svg",
+                  "assets/quickemu-icons/${item.code}.svg",
                   width: 32,
                   height: 32,
                 );
