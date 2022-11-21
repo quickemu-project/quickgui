@@ -1,0 +1,134 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: quickgui\n"
+"POT-Creation-Date: 2021-09-29 09:59+0200\n"
+"PO-Revision-Date: 2022-02-24 23:38+0100\n"
+"Last-Translator: Mikael Bak\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Quickgui : a Flutter frontend for Quickget and Quickemu"
+msgstr "Quickgui : Flutter kezelőfelület Quickget és Quickemuhez"
+
+msgid "Main menu"
+msgstr "Főmenü"
+
+msgid "Use dark mode"
+msgstr "Sötét mód használata"
+
+msgid "Cancel"
+msgstr "Mégse"
+
+msgid "Click to use SPICE display"
+msgstr "SPICE kijelző bekapcsolása"
+
+msgid "Create new machines"
+msgstr "Új gép létrehozása"
+
+msgid "Dismiss"
+msgstr "Rendben"
+
+msgid "Done !"
+msgstr "Kész !"
+
+msgid "Download"
+msgstr "Letöltés"
+
+msgid "Download finished."
+msgstr "Letöltés kész."
+
+msgid "Downloader"
+msgstr "Letöltő"
+
+msgid "Downloading (no progress available)..."
+msgstr "Letöltés (a haladásról nincs visszajelzés)..."
+
+msgid "Downloading...{0}%"
+msgstr "Letöltés...{0}%"
+
+msgid "Downloading {0}"
+msgstr "Letöltés {0}"
+
+msgid "Download cancelled"
+msgstr "Letöltés megszakítva"
+
+msgid "Download complete"
+msgstr "Letöltés kész"
+
+msgid "Download of {0} has completed."
+msgstr "{0} letöltése befejeződött."
+
+msgid "Download of {0} has been cancelled."
+msgstr "{0} letöltése megszakítva."
+
+msgid "Manage existing machines"
+msgstr "Meglévő gépek kezelése"
+
+msgid "Manager"
+msgstr "Kezelő"
+
+msgid "{0} Mbs downloaded"
+msgstr "{0} Mbs letöltve"
+
+msgid "Now run {0} to start the VM"
+msgstr "Gép indításhoz: {0}"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Operating system"
+msgstr "Operációs rendszer"
+
+msgid "Search operating system"
+msgstr "Operációs rendszer keresése"
+
+msgid "Search option"
+msgstr "Keresési opciók"
+
+msgid "Select operating system"
+msgstr "Válasszon operációs rendszert"
+
+msgid "Select option"
+msgstr "Válasszon az opciók közül"
+
+msgid "Select version for {0}"
+msgstr "Válasszon {0} verziót"
+
+msgid "Select..."
+msgstr "Válasszon..."
+
+msgid "SPICE port"
+msgstr "SPICE port"
+
+msgid "SSH port"
+msgstr "SSH port"
+
+msgid "Stop The Virtual Machine?"
+msgstr "Virtuális gép leállítása?"
+
+msgid "Target folder : {0}"
+msgstr "Cél mappa : {0}"
+
+msgid "Use SPICE display"
+msgstr "SPICE kijelző használata"
+
+msgid "Using SPICE display"
+msgstr "SPICE kijelző használatban"
+
+msgid "Version"
+msgstr "Verzió"
+
+msgid "Waiting for download to start"
+msgstr "Remélhetőleg nem sokára elindul a letöltés"
+
+msgid "You are about to terminate the virtual machine {0}"
+msgstr "{0} virtuális gép le lesz állítva"
+
+msgid "Language"
+msgstr "Nyelv"
