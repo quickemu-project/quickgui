@@ -6,3 +6,4 @@ Exec=/usr/bin/quickgui
 Terminal=false
 Type=Application
 Icon=quickgui_512.png
+Categories=System;
