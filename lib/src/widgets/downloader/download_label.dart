@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
+import 'package:platform_ui/platform_ui.dart';
 
 class DownloadLabel extends StatelessWidget {
   const DownloadLabel(
@@ -18,15 +19,17 @@ class DownloadLabel extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: downloadFinished
-          ? Text(context.t('Download finished.'))
+          ? PlatformText(context.t('Download finished.'))
           : data != null
               ? downloader != 'zsync'
                   ? downloader == 'wget' || downloader == 'aria2c'
-                      ? Text(context.t('Downloading... {0}%',
+                      ? PlatformText(context.t('Downloading... {0}%',
                           args: [(data! * 100).toInt()]))
-                      : Text(context.t('{0} Mbs downloaded', args: [data!]))
-                  : Text(context.t("Downloading (no progress available)..."))
-              : Text(context.t('Waiting for download to start')),
+                      : PlatformText(
+                          context.t('{0} Mbs downloaded', args: [data!]))
+                  : PlatformText(
+                      context.t("Downloading (no progress available)..."))
+              : PlatformText(context.t('Waiting for download to start')),
     );
   }
 }

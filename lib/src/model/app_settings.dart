@@ -37,12 +37,12 @@ class AppSettings extends ChangeNotifier {
     }
   }
 
-  set useDarkModeSilently(bool useDarkMode) {
-    _themeMode = useDarkMode ? ThemeMode.dark : ThemeMode.light;
+  set themeModeSilently(ThemeMode themeMode) {
+    _themeMode = themeMode;
   }
 
-  set useDarkMode(bool useDarkMode) {
-    useDarkModeSilently = useDarkMode;
+  set themeMode(ThemeMode themeMode) {
+    _themeMode = themeMode;
     notifyListeners();
   }
 }

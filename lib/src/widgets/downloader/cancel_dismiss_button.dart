@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
+import 'package:platform_ui/platform_ui.dart';
 
 class CancelDismissButton extends StatelessWidget {
   const CancelDismissButton({
@@ -20,7 +21,7 @@ class CancelDismissButton extends StatelessWidget {
         children: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: Theme.of(context).colorScheme.surface,
+              backgroundColor: Theme.of(context).colorScheme.surface,
               onPrimary: Theme.of(context).brightness == Brightness.dark
                   ? Colors.white70
                   : Theme.of(context).colorScheme.primary,
@@ -31,8 +32,8 @@ class CancelDismissButton extends StatelessWidget {
                     Navigator.of(context).pop();
                   },
             child: downloadFinished
-                ? Text(context.t('Dismiss'))
-                : Text(context.t('Cancel')),
+                ? PlatformText(context.t('Dismiss'))
+                : PlatformText(context.t('Cancel')),
           )
         ],
       ),

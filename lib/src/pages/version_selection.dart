@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
+import 'package:platform_ui/platform_ui.dart';
 import 'package:tuple/tuple.dart';
 
 import '../model/operating_system.dart';
@@ -34,49 +35,32 @@ class _VersionSelectionState extends State<VersionSelection> {
             version.version.toLowerCase().contains(term.toLowerCase()))
         .toList();
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(context
-            .t('Select version for {0}', args: [widget.operatingSystem.name])),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(kToolbarHeight),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).canvasColor,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: Material(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      const Icon(Icons.search),
-                      Expanded(
-                        child: TextField(
-                          focusNode: focusNode,
-                          decoration: InputDecoration.collapsed(
-                            hintText: context.t('Search version'),
-                          ),
-                          onChanged: (value) {
-                            setState(() {
-                              term = value;
-                            });
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
+    return PlatformScaffold(
+      appBar: PlatformAppBar(
+        title: PlatformText(
+          context
+              .t('Select version for {0}', args: [widget.operatingSystem.name]),
         ),
+        actions: const [
+          PlatformWindowButtons(),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: PlatformTextField(
+                focusNode: focusNode,
+                prefixIcon: Icons.search,
+                placeholder: context.t('Search version'),
+                onChanged: (value) {
+                  setState(() {
+                    term = value;
+                  });
+                },
+              ),
+            ),
             ListView.builder(
               padding: const EdgeInsets.only(top: 4),
               shrinkWrap: true,
@@ -84,8 +68,8 @@ class _VersionSelectionState extends State<VersionSelection> {
               itemBuilder: (context, index) {
                 var item = list[index];
                 return Card(
-                  child: ListTile(
-                    title: Text(item.version),
+                  child: PlatformListTile(
+                    title: PlatformText(item.version),
                     onTap: () {
                       if (item.options.length > 1) {
                         Navigator.of(context)

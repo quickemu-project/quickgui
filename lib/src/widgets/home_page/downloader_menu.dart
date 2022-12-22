@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
+import 'package:platform_ui/platform_ui.dart';
 
 import '../../globals.dart';
 import '../../mixins/preferences_mixin.dart';
@@ -30,65 +30,59 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-        color: Theme.of(context).brightness == Brightness.dark
-            ? Theme.of(context).colorScheme.surface
-            : Theme.of(context).colorScheme.primary,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "${context.t('Directory where the machines are stored')}:",
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Text.rich(
-                    TextSpan(
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () async {
-                          var folder = await FilePicker.platform
-                              .getDirectoryPath(dialogTitle: "Pick a folder");
-                          if (folder != null) {
-                            setState(() {
-                              Directory.current = folder;
-                            });
-                            savePreference(
-                                prefWorkingDirectory, Directory.current.path);
-                          }
-                        },
-                      text: Directory.current.path,
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const Divider(
-              thickness: 2,
-            ),
-            Row(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12),
-                        child: HomePageButtonGroup(),
-                      )
+                PlatformText(
+                  "${context.t('Directory where the machines are stored')}:",
+                ),
+                const SizedBox(
+                  width: 8,
+                ),
+                PlatformFilledButton(
+                  child: Row(
+                    children: [
+                      PlatformText(Directory.current.path),
+                      const SizedBox(width: 8),
+                      const Icon(Icons.folder_outlined),
                     ],
                   ),
+                  isSecondary: true,
+                  onPressed: () async {
+                    var folder = await FilePicker.platform
+                        .getDirectoryPath(dialogTitle: "Pick a folder");
+                    if (folder != null) {
+                      setState(() {
+                        Directory.current = folder;
+                      });
+                      savePreference(
+                          prefWorkingDirectory, Directory.current.path);
+                    }
+                  },
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 12),
+                      child: HomePageButtonGroup(),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

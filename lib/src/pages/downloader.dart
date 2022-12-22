@@ -5,11 +5,11 @@ import 'dart:io';
 import 'package:desktop_notifications/desktop_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
+import 'package:platform_ui/platform_ui.dart';
 
 import '../model/operating_system.dart';
 import '../model/option.dart';
 import '../model/version.dart';
-import '../widgets/downloader/cancel_dismiss_button.dart';
 import '../widgets/downloader/download_label.dart';
 import '../widgets/downloader/download_progress_bar.dart';
 
@@ -129,9 +129,9 @@ class _DownloaderState extends State<Downloader> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
+    return PlatformScaffold(
+      appBar: PlatformAppBar(
+        title: PlatformText(
           context.t('Downloading {0}', args: [
             '${widget.operatingSystem.name} ${widget.version.version}' +
                 (widget.option!.option.isNotEmpty
@@ -139,48 +139,70 @@ class _DownloaderState extends State<Downloader> {
                     : '')
           ]),
         ),
+        actions: const [
+          PlatformWindowButtons(),
+        ],
         automaticallyImplyLeading: false,
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: StreamBuilder(
-              stream: _progressStream,
-              builder: (context, AsyncSnapshot<double> snapshot) {
-                var data = !snapshot.hasData ||
-                        widget.option!.downloader != 'wget' ||
-                        widget.option!.downloader != 'aria2c'
-                    ? null
-                    : snapshot.data;
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    DownloadLabel(
-                      downloadFinished: _downloadFinished,
-                      data: snapshot.hasData ? snapshot.data : null,
-                      downloader: widget.option!.downloader,
-                    ),
-                    DownloadProgressBar(
-                      downloadFinished: _downloadFinished,
-                      data: snapshot.hasData ? data : null,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 32),
-                      child: Text(context.t('Target folder : {0}',
-                          args: [Directory.current.path])),
-                    ),
-                  ],
-                );
-              },
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: StreamBuilder(
+                stream: _progressStream,
+                builder: (context, AsyncSnapshot<double> snapshot) {
+                  var data = !snapshot.hasData ||
+                          widget.option!.downloader != 'wget' ||
+                          widget.option!.downloader != 'aria2c'
+                      ? null
+                      : snapshot.data;
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      DownloadLabel(
+                        downloadFinished: _downloadFinished,
+                        data: snapshot.hasData ? snapshot.data : null,
+                        downloader: widget.option!.downloader,
+                      ),
+                      DownloadProgressBar(
+                        downloadFinished: _downloadFinished,
+                        data: snapshot.hasData ? data : null,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 32),
+                        child: PlatformText(context.t('Target folder : {0}',
+                            args: [Directory.current.path])),
+                      ),
+                    ],
+                  );
+                },
+              ),
             ),
-          ),
-          CancelDismissButton(
-            onCancel: () {
-              _process?.kill();
-            },
-            downloadFinished: _downloadFinished,
-          ),
-        ],
+            PlatformFilledButton(
+              onPressed: () {
+                if (!_downloadFinished) {
+                  _process?.kill();
+                } else {
+                  Navigator.of(context).pop();
+                }
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.red[400]),
+              ),
+              child: _downloadFinished
+                  ? PlatformText(
+                      context.t('Dismiss'),
+                      style: const TextStyle(color: Colors.white),
+                    )
+                  : PlatformText(
+                      context.t('Cancel'),
+                      style: const TextStyle(color: Colors.white),
+                    ),
+            ),
+            const SizedBox(height: 16),
+          ],
+        ),
       ),
     );
   }

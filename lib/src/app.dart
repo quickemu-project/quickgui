@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:fluent_ui/fluent_ui.dart' as fluent;
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
+import 'package:platform_ui/platform_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:quickgui/src/mixins/app_version.dart';
 import 'package:quickgui/src/pages/deget_not_found_page.dart';
@@ -24,6 +26,7 @@ class App extends StatefulWidget {
 class _AppState extends State<App> with PreferencesMixin {
   @override
   Widget build(BuildContext context) {
+    platform = TargetPlatform.macOS;
     return FutureBuilder<SharedPreferences>(
       future: SharedPreferences.getInstance(),
       builder: (context, snapshot) {
@@ -33,47 +36,59 @@ class _AppState extends State<App> with PreferencesMixin {
           appSettings.setActiveLocaleSilently(
               snapshot.data?.getString(prefCurrentLocale) ??
                   Platform.localeName);
-          var pref = snapshot.data!.getBool(prefThemeMode);
+          var pref = snapshot.data!.getString(prefThemeMode);
           if (pref != null) {
-            appSettings.useDarkModeSilently = pref;
+            appSettings.themeModeSilently =
+                ThemeMode.values.firstWhere((element) => element.name == pref);
           }
           return Consumer<AppSettings>(
-            builder: (context, appSettings, _) => MaterialApp(
-              theme: ThemeData(primarySwatch: Colors.pink),
-              darkTheme: ThemeData.dark(),
-              themeMode: appSettings.themeMode,
-              home: AppVersion.packageInfo == null
-                  ? const DebgetNotFoundPage()
-                  : const MainPage(),
-              supportedLocales: supportedLocales.map((s) => s.contains("_")
-                  ? Locale(s.split("_")[0], s.split("_")[1])
-                  : Locale(s)),
-              localizationsDelegates: [
-                GettextLocalizationsDelegate(),
-                ...GlobalMaterialLocalizations.delegates,
-                GlobalWidgetsLocalizations.delegate,
-              ],
-              locale:
-                  Locale(appSettings.languageCode!, appSettings.countryCode),
-              localeListResolutionCallback: (locales, supportedLocales) {
-                if (locales != null) {
-                  for (var locale in locales) {
-                    var supportedLocale = supportedLocales.where((element) =>
-                        element.languageCode == locale.languageCode &&
-                        element.countryCode == locale.countryCode);
-                    if (supportedLocale.isNotEmpty) {
-                      return supportedLocale.first;
-                    }
-                    supportedLocale = supportedLocales.where((element) =>
-                        element.languageCode == locale.languageCode);
-                    if (supportedLocale.isNotEmpty) {
-                      return supportedLocale.first;
+            builder: (context, appSettings, _) {
+              return PlatformApp(
+                themeMode: appSettings.themeMode,
+                home: AppVersion.packageInfo == null
+                    ? const DebgetNotFoundPage()
+                    : const MainPage(),
+                supportedLocales: supportedLocales.map((s) => s.contains("_")
+                    ? Locale(s.split("_")[0], s.split("_")[1])
+                    : Locale(s)),
+                localizationsDelegates: [
+                  GettextLocalizationsDelegate(),
+                  ...GlobalMaterialLocalizations.delegates,
+                  GlobalWidgetsLocalizations.delegate,
+                ],
+                windowButtonConfig: PlatformWindowButtonConfig(
+                  isMaximized: () => false,
+                  onClose: () {},
+                  onMinimize: () {},
+                  onMaximize: () {},
+                  onRestore: () {},
+                ),
+                windowsTheme: fluent.ThemeData(
+                  scaffoldBackgroundColor: fluent.Colors.grey[50],
+                ),
+                windowsDarkTheme: fluent.ThemeData.dark(),
+                locale:
+                    Locale(appSettings.languageCode!, appSettings.countryCode),
+                localeListResolutionCallback: (locales, supportedLocales) {
+                  if (locales != null) {
+                    for (var locale in locales) {
+                      var supportedLocale = supportedLocales.where((element) =>
+                          element.languageCode == locale.languageCode &&
+                          element.countryCode == locale.countryCode);
+                      if (supportedLocale.isNotEmpty) {
+                        return supportedLocale.first;
+                      }
+                      supportedLocale = supportedLocales.where((element) =>
+                          element.languageCode == locale.languageCode);
+                      if (supportedLocale.isNotEmpty) {
+                        return supportedLocale.first;
+                      }
                     }
                   }
-                }
-                return null;
-              },
-            ),
+                  return null;
+                },
+              );
+            },
           );
         } else {
           return const Center(
@@ -82,56 +97,5 @@ class _AppState extends State<App> with PreferencesMixin {
         }
       },
     );
-    /*
-    return FutureBuilder<bool?>(
-      future: getPreference<bool>(prefThemeMode),
-      builder: (context, AsyncSnapshot<bool?> snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.data != null) {
-            context.read<AppSettings>().useDarkModeSilently = snapshot.data!;
-          }
-          return Consumer<AppSettings>(
-            builder: (context, appTheme, _) => MaterialApp(
-              theme: ThemeData(primarySwatch: Colors.pink),
-              darkTheme: ThemeData.dark(),
-              themeMode: appTheme.themeMode,
-              home: const MainPage(),
-              supportedLocales: supportedLocales.map((s) => s.contains("_")
-                  ? Locale(s.split("_")[0], s.split("_")[1])
-                  : Locale(s)),
-              localizationsDelegates: [
-                GettextLocalizationsDelegate(),
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-              ],
-              locale: const Locale('ru'),
-              localeListResolutionCallback: (locales, supportedLocales) {
-                if (locales != null) {
-                  for (var locale in locales) {
-                    var supportedLocale = supportedLocales.where((element) =>
-                        element.languageCode == locale.languageCode &&
-                        element.countryCode == locale.countryCode);
-                    if (supportedLocale.isNotEmpty) {
-                      return supportedLocale.first;
-                    }
-                    supportedLocale = supportedLocales.where((element) =>
-                        element.languageCode == locale.languageCode);
-                    if (supportedLocale.isNotEmpty) {
-                      return supportedLocale.first;
-                    }
-                  }
-                }
-                return null;
-              },
-            ),
-          );
-        } else {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      },
-    );
-    */
   }
 }

@@ -4,11 +4,11 @@ import 'dart:core';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
 import 'package:path/path.dart' as path;
+import 'package:platform_ui/platform_ui.dart';
 
 import '../globals.dart';
 import '../mixins/preferences_mixin.dart';
@@ -173,9 +173,10 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
 
   Widget _buildVmList() {
     List<Widget> _widgetList = [];
-    final Color buttonColor = Theme.of(context).brightness == Brightness.dark
-        ? Colors.white70
-        : Theme.of(context).colorScheme.primary;
+    final Color buttonColor =
+        PlatformTheme.of(context).brightness == Brightness.dark
+            ? Colors.white70
+            : PlatformTheme.of(context).primaryColor!;
     _widgetList.addAll(
       [
         Padding(
@@ -183,32 +184,33 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              PlatformText(
                 "${context.t('Directory where the machines are stored')}:",
               ),
               const SizedBox(
                 width: 8,
               ),
-              Text.rich(
-                TextSpan(
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () async {
-                      String? result =
-                          await FilePicker.platform.getDirectoryPath();
-                      if (result != null) {
-                        setState(() {
-                          Directory.current = result;
-                        });
-
-                        savePreference(
-                            prefWorkingDirectory, Directory.current.path);
-                        _getVms(context);
-                      }
-                    },
-                  text: Directory.current.path,
-                  style:
-                      TextStyle(color: Theme.of(context).colorScheme.primary),
+              PlatformFilledButton(
+                child: Row(
+                  children: [
+                    PlatformText(Directory.current.path),
+                    const SizedBox(width: 8),
+                    const Icon(Icons.folder_outlined),
+                  ],
                 ),
+                isSecondary: true,
+                onPressed: () async {
+                  String? result = await FilePicker.platform.getDirectoryPath();
+                  if (result != null) {
+                    setState(() {
+                      Directory.current = result;
+                    });
+
+                    savePreference(
+                        prefWorkingDirectory, Directory.current.path);
+                    _getVms(context);
+                  }
+                },
               ),
             ],
           ),
@@ -257,12 +259,12 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
       }
     }
     return <Widget>[
-      ListTile(
-          title: Text(currentVm),
+      PlatformListTile(
+          title: PlatformText(currentVm),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              IconButton(
+              PlatformIconButton(
                   icon: Icon(
                     active ? Icons.play_arrow : Icons.play_arrow_outlined,
                     color: active ? Colors.green : buttonColor,
@@ -283,7 +285,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                             _activeVms = activeVms;
                           });
                         }),
-              IconButton(
+              PlatformIconButton(
                 icon: Icon(
                   active ? Icons.stop : Icons.stop_outlined,
                   color: active ? Colors.red : null,
@@ -292,21 +294,30 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                 onPressed: !active
                     ? null
                     : () {
-                        showDialog<bool>(
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                            title: Text(context.t('Stop The Virtual Machine?')),
-                            content: Text(context.t(
+                        showPlatformAlertDialog<bool>(
+                          context,
+                          builder: (BuildContext context) =>
+                              PlatformAlertDialog(
+                            title: PlatformText(
+                              context.t('Stop The Virtual Machine?'),
+                            ),
+                            content: PlatformText(
+                              context.t(
                                 'You are about to terminate the virtual machine',
-                                args: [currentVm])),
-                            actions: <Widget>[
-                              TextButton(
-                                onPressed: () => Navigator.pop(context, false),
-                                child: Text(context.t('Cancel')),
+                                args: [currentVm],
                               ),
-                              TextButton(
+                            ),
+                            primaryActions: [
+                              PlatformFilledButton(
                                 onPressed: () => Navigator.pop(context, true),
-                                child: Text(context.t('OK')),
+                                child: PlatformText(context.t('OK')),
+                              ),
+                            ],
+                            secondaryActions: [
+                              PlatformFilledButton(
+                                onPressed: () => Navigator.pop(context, false),
+                                isSecondary: true,
+                                child: PlatformText(context.t('Cancel')),
                               ),
                             ],
                           ),
@@ -321,38 +332,80 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                         });
                       },
               ),
-              IconButton(
-                icon: Icon(Icons.delete,
-                    color: active ? null : buttonColor,
-                    semanticLabel: 'Delete'),
+              PlatformIconButton(
+                icon: Icon(
+                  Icons.delete_forever_outlined,
+                  color: active
+                      ? PlatformTheme.of(context).borderColor
+                      : Colors.red[400],
+                  semanticLabel: 'Delete',
+                ),
                 onPressed: active
                     ? null
                     : () {
-                        showDialog<String?>(
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                            title: Text('Delete ' + currentVm),
-                            content: Text('You are about to delete ' +
-                                currentVm +
-                                '. This cannot be undone. ' +
-                                'Would you like to delete the disk image but keep the ' +
-                                'configuration, or delete the whole VM?'),
-                            actions: [
-                              TextButton(
-                                child: const Text('Cancel'),
-                                onPressed: () =>
-                                    Navigator.pop(context, 'cancel'),
+                        showPlatformAlertDialog<String?>(
+                          context,
+                          builder: (BuildContext context) {
+                            return PlatformAlertDialog(
+                              title: PlatformText('Delete ' + currentVm),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: PlatformText(
+                                      'You are about to delete ' +
+                                          currentVm +
+                                          '. This cannot be undone. ' +
+                                          'Would you like to delete the disk image but keep the ' +
+                                          'configuration, or delete the whole VM?',
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      PlatformFilledButton(
+                                        style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStatePropertyAll(
+                                                  Colors.red[400]),
+                                        ),
+                                        child: const PlatformText(
+                                          'Delete disk image',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        onPressed: () =>
+                                            Navigator.pop(context, 'disk'),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      PlatformFilledButton(
+                                        style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStatePropertyAll(
+                                                  Colors.red[400]),
+                                        ),
+                                        child: const PlatformText(
+                                          'Delete whole VM',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        onPressed: () =>
+                                            Navigator.pop(context, 'vm'),
+                                      ),
+                                      const SizedBox(width: 8),
+                                    ],
+                                  )
+                                ],
                               ),
-                              TextButton(
-                                child: const Text('Delete disk image'),
-                                onPressed: () => Navigator.pop(context, 'disk'),
-                              ),
-                              TextButton(
-                                child: const Text('Delete whole VM'),
-                                onPressed: () => Navigator.pop(context, 'vm'),
-                              ) // set up the AlertDialog
-                            ],
-                          ),
+                              secondaryActions: [
+                                PlatformFilledButton(
+                                  child: const PlatformText('Cancel'),
+                                  isSecondary: true,
+                                  onPressed: () =>
+                                      Navigator.pop(context, 'cancel'),
+                                )
+                              ],
+                            );
+                          },
                         ).then((result) async {
                           result = result ?? 'cancel';
                           if (result != 'cancel') {
@@ -369,10 +422,13 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
             ],
           )),
       if (connectInfo.isNotEmpty)
-        ListTile(
-            title: Text(connectInfo, style: const TextStyle(fontSize: 12)),
-            trailing: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
-              IconButton(
+        PlatformListTile(
+          title:
+              PlatformText(connectInfo, style: const TextStyle(fontSize: 12)),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              PlatformIconButton(
                 icon: Icon(
                   Icons.monitor,
                   color: _spicy ? buttonColor : null,
@@ -387,7 +443,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                         Process.start('spicy', ['-p', vmInfo.spicePort!]);
                       },
               ),
-              IconButton(
+              PlatformIconButton(
                 icon: SvgPicture.asset('assets/images/console.svg',
                     semanticsLabel: 'Connect with SSH',
                     color: sshy ? buttonColor : Colors.grey),
@@ -399,23 +455,23 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                     : () {
                         TextEditingController _usernameController =
                             TextEditingController();
-                        showDialog<bool>(
-                          context: context,
+                        showPlatformAlertDialog<bool>(
+                          context,
                           builder: (BuildContext context) => AlertDialog(
-                            title: Text('Launch SSH connection to $currentVm'),
-                            content: TextField(
+                            title: PlatformText(
+                                'Launch SSH connection to $currentVm'),
+                            content: PlatformTextField(
                               controller: _usernameController,
-                              decoration: const InputDecoration(
-                                  hintText: "SSH username"),
+                              placeholder: "SSH username",
                             ),
                             actions: <Widget>[
-                              TextButton(
+                              PlatformTextButton(
                                 onPressed: () => Navigator.pop(context, false),
-                                child: const Text('Cancel'),
+                                child: const PlatformText('Cancel'),
                               ),
-                              TextButton(
+                              PlatformTextButton(
                                 onPressed: () => Navigator.pop(context, true),
-                                child: const Text('Connect'),
+                                child: const PlatformText('Connect'),
                               ),
                             ],
                           ),
@@ -463,16 +519,21 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                         });
                       },
               ),
-            ])),
+            ],
+          ),
+        ),
       const Divider()
     ];
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(context.t('Manager')),
+    return PlatformScaffold(
+      appBar: PlatformAppBar(
+        title: PlatformText(context.t('Manager')),
+        actions: const [
+          PlatformWindowButtons(),
+        ],
       ),
       body: _buildVmList(),
     );

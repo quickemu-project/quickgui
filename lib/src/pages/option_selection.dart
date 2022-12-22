@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
+import 'package:platform_ui/platform_ui.dart';
 
 import '../model/version.dart';
 
@@ -30,7 +31,7 @@ class _OptionSelectionState extends State<OptionSelection> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.t('Select option')),
+        title: PlatformText(context.t('Select option')),
         bottom: widget.version.options.length <= 6
             ? null
             : PreferredSize(
@@ -77,8 +78,10 @@ class _OptionSelectionState extends State<OptionSelection> {
               itemBuilder: (context, index) {
                 var item = list[index];
                 return Card(
+                  color: PlatformTheme.of(context).secondaryBackgroundColor,
+                  elevation: platform == TargetPlatform.macOS ? 0 : null,
                   child: ListTile(
-                    title: Text(item.option),
+                    title: PlatformText(item.option),
                     onTap: () {
                       Navigator.of(context).pop(item);
                     },

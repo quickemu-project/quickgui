@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:platform_ui/platform_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DebgetNotFoundPage extends StatelessWidget {
@@ -7,12 +8,19 @@ class DebgetNotFoundPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PlatformScaffold(
+      appBar: PlatformAppBar(
+        title: PlatformText.subheading('Quickgui'),
+        actions: const [
+          PlatformWindowButtons(),
+        ],
+        automaticallyImplyLeading: false,
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
+            const PlatformText(
               'quickemu was not found in your PATH',
               style: TextStyle(
                 fontSize: 24,
@@ -21,7 +29,7 @@ class DebgetNotFoundPage extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            const Text(
+            const PlatformText(
               'Please install it and try again.',
               style: TextStyle(
                 fontSize: 24,

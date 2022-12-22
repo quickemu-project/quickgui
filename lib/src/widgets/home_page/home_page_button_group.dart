@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:tuple/tuple.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
+import 'package:platform_ui/platform_ui.dart';
+import 'package:tuple/tuple.dart';
 
 import '../../model/operating_system.dart';
 import '../../model/option.dart';
@@ -10,7 +12,79 @@ import '../../model/version.dart';
 import '../../pages/downloader.dart';
 import '../../pages/operating_system_selection.dart';
 import '../../pages/version_selection.dart';
-import '../home_page/home_page_button.dart';
+
+class ProgressArrowPainter extends CustomPainter {
+  final Color? oddColor;
+  final Color? evenColor;
+  final double radius;
+  const ProgressArrowPainter({
+    this.oddColor,
+    this.evenColor,
+    this.radius = 3,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    const icon = Icons.arrow_right_alt_rounded;
+    final paint = Paint()
+      ..strokeWidth = 2
+      ..style = PaintingStyle.fill;
+
+    final spacing = (radius + 1) * 2;
+    final balls = ((size.width / spacing) - 2).abs();
+
+    TextPainter textPainter = TextPainter(textDirection: TextDirection.ltr);
+    textPainter.text = TextSpan(
+      text: String.fromCharCode(icon.codePoint),
+      style: TextStyle(
+        color: balls % 2 != 0
+            ? evenColor ?? Colors.grey[500]!
+            : oddColor ?? Colors.grey[600]!,
+        fontSize: 30,
+        fontFamily: icon.fontFamily,
+        package:
+            icon.fontPackage, // This line is mandatory for external icon packs
+      ),
+    );
+    textPainter.layout();
+    textPainter.paint(
+      canvas,
+      Offset(spacing * (balls).abs(), size.height / 2 - 15),
+    );
+
+    for (var i = 0; i < balls; i++) {
+      if (i % 2 == 0) {
+        paint.color = evenColor ?? Colors.grey[500]!;
+      } else {
+        paint.color = oddColor ?? Colors.grey[600]!;
+      }
+      canvas.drawCircle(
+        Offset((size.height / 2) + i * spacing, size.height / 2),
+        radius,
+        paint,
+      );
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
+}
+
+class ProgressArrow extends StatelessWidget {
+  const ProgressArrow({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12).copyWith(top: 30),
+      child: const CustomPaint(
+        painter: ProgressArrowPainter(),
+      ),
+    );
+  }
+}
 
 class HomePageButtonGroup extends StatefulWidget {
   const HomePageButtonGroup({Key? key}) : super(key: key);
@@ -33,69 +107,127 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
     }
     return Row(
       children: [
-        HomePageButton(
-          label: context.t("Operating system"),
-          text: _selectedOperatingSystem?.name ?? context.t('Select...'),
-          onPressed: () {
-            Navigator.of(context)
-                .push<OperatingSystem>(MaterialPageRoute(
+        Column(
+          children: [
+            PlatformText(context.t("Operating system")),
+            const SizedBox(height: 10),
+            PlatformFilledButton(
+              child: Row(
+                children: [
+                  _selectedOperatingSystem != null
+                      ? SvgPicture.asset(
+                          "assets/quickemu-icons/${_selectedOperatingSystem!.code}.svg",
+                          width: 32,
+                          height: 32,
+                          key: ValueKey(_selectedOperatingSystem?.code),
+                          placeholderBuilder: (context) {
+                            return const Icon(
+                                Icons.settings_applications_sharp);
+                          },
+                        )
+                      : const Icon(Icons.settings_applications_sharp),
+                  const SizedBox(width: 8),
+                  PlatformText(
+                    _selectedOperatingSystem == null
+                        ? context.t('Select...')
+                        : _selectedOperatingSystem!.name,
+                  ),
+                ],
+              ),
+              onPressed: () async {
+                final selection =
+                    await Navigator.of(context).push<OperatingSystem>(
+                  MaterialPageRoute(
                     fullscreenDialog: true,
-                    builder: (context) => const OperatingSystemSelection()))
-                .then((selection) {
-              if (selection != null) {
-                setState(() {
-                  _selectedOperatingSystem = selection;
-                  if (selection.versions.length == 1 &&
-                      selection.versions.first.options.length == 1) {
-                    _selectedVersion = selection.versions.first;
-                    _selectedOption = selection.versions.first.options.first;
-                  } else {
-                    _selectedVersion = null;
-                    _selectedOption = null;
-                  }
-                });
-              }
-            });
-          },
-        ),
-        HomePageButton(
-          label: context.t('Version'),
-          text: _versionButtonLabel, //_selectedVersion?.version ?? 'Select...',
-          onPressed: (_selectedOperatingSystem != null)
-              ? () {
-                  Navigator.of(context)
-                      .push<Tuple2<Version, Option?>>(MaterialPageRoute(
-                    fullscreenDialog: true,
-                    builder: (context) => VersionSelection(
-                        operatingSystem: _selectedOperatingSystem!),
-                  ))
-                      .then((selection) {
-                    if (selection != null) {
-                      setState(() {
-                        _selectedVersion = selection.item1;
-                        _selectedOption = selection.item2;
-                      });
+                    builder: (context) => const OperatingSystemSelection(),
+                  ),
+                );
+
+                if (selection != null) {
+                  setState(() {
+                    _selectedOperatingSystem = selection;
+                    if (selection.versions.length == 1 &&
+                        selection.versions.first.options.length == 1) {
+                      _selectedVersion = selection.versions.first;
+                      _selectedOption = selection.versions.first.options.first;
+                    } else {
+                      _selectedVersion = null;
+                      _selectedOption = null;
                     }
                   });
                 }
-              : null,
+              },
+            ),
+          ],
         ),
-        HomePageButton(
-          label: context.t('Download'),
-          text: context.t('Download'),
-          onPressed: (_selectedVersion == null)
-              ? null
-              : () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => Downloader(
-                        operatingSystem: _selectedOperatingSystem!,
-                        version: _selectedVersion!,
-                        option: _selectedOption,
-                      ),
-                    ),
-                  );
-                },
+        const Expanded(
+          child: ProgressArrow(),
+        ),
+        Column(
+          children: [
+            PlatformText(context.t("Version")),
+            const SizedBox(height: 10),
+            PlatformFilledButton(
+              child: Row(
+                children: [
+                  const Icon(Icons.numbers_rounded),
+                  const SizedBox(width: 8),
+                  PlatformText(_versionButtonLabel),
+                ],
+              ),
+              isSecondary: _selectedOperatingSystem == null,
+              onPressed: (_selectedOperatingSystem != null)
+                  ? () {
+                      Navigator.of(context)
+                          .push<Tuple2<Version, Option?>>(MaterialPageRoute(
+                        fullscreenDialog: true,
+                        builder: (context) => VersionSelection(
+                            operatingSystem: _selectedOperatingSystem!),
+                      ))
+                          .then((selection) {
+                        if (selection != null) {
+                          setState(() {
+                            _selectedVersion = selection.item1;
+                            _selectedOption = selection.item2;
+                          });
+                        }
+                      });
+                    }
+                  : null,
+            ),
+          ],
+        ),
+        const Expanded(
+          child: ProgressArrow(),
+        ),
+        Column(
+          children: [
+            PlatformText(context.t('Download')),
+            const SizedBox(height: 10),
+            PlatformFilledButton(
+              child: Row(
+                children: [
+                  const Icon(Icons.file_download_outlined),
+                  const SizedBox(width: 8),
+                  PlatformText(context.t('Download')),
+                ],
+              ),
+              isSecondary: _selectedVersion == null,
+              onPressed: (_selectedVersion == null)
+                  ? null
+                  : () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => Downloader(
+                            operatingSystem: _selectedOperatingSystem!,
+                            version: _selectedVersion!,
+                            option: _selectedOption,
+                          ),
+                        ),
+                      );
+                    },
+            ),
+          ],
         ),
       ],
     );
@@ -119,7 +251,7 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 32),
-                  child: Text(context.t('Downloading...'),
+                  child: PlatformText(context.t('Downloading...'),
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
@@ -128,7 +260,7 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
                 const CircularProgressIndicator(),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 32),
-                  child: Text(
+                  child: PlatformText(
                     'Target : ${Directory.current.absolute.path}',
                     style: Theme.of(context)
                         .textTheme
@@ -167,13 +299,13 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 32),
-                  child: Text(context.t('Done !'),
+                  child: PlatformText(context.t('Done !'),
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
                           ?.copyWith(color: Colors.white)),
                 ),
-                Text(
+                PlatformText(
                     context.t('Now run {0} to start the VM',
                         args: ["quickemu --vm $operatingSystem-$version"]),
                     style: Theme.of(context)
@@ -186,7 +318,7 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text(
+                    child: PlatformText(
                       'Dismiss',
                       style: Theme.of(context)
                           .textTheme

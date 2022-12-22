@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:platform_ui/platform_ui.dart';
 
 class HomePageButton extends StatelessWidget {
   const HomePageButton({
@@ -16,38 +17,25 @@ class HomePageButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       flex: 1,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(12, 24, 12, 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 24),
-              child: Center(
-                child: Text(
-                  label?.toUpperCase() ?? '',
-                  style: Theme.of(context)
-                      .textTheme
-                      .subtitle2
-                      ?.copyWith(color: Colors.white),
-                ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 24),
+            child: Center(
+              child: PlatformText.label(
+                label?.toUpperCase() ?? '',
               ),
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Theme.of(context).canvasColor,
-                onPrimary: Theme.of(context).brightness == Brightness.dark
-                    ? Colors.white70
-                    : Theme.of(context).colorScheme.primary,
-              ),
-              onPressed: onPressed,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
-                child: Text(text),
-              ),
+          ),
+          PlatformFilledButton(
+            onPressed: onPressed,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
+              child: PlatformText(text),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
