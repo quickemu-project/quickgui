@@ -1,7 +1,7 @@
 name: quickgui
 description: A new Flutter project.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 1.2.8-1
+version: 1.2.8+1
 
 environment:
   sdk: ">=2.14.4 <3.0.0"
@@ -35,6 +35,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.0
+  flutter_distributor:
+    git:
+      url: https://github.com/KRTirtho/flutter_distributor
+      path: packages/flutter_distributor
 
 flutter:
   uses-material-design: true

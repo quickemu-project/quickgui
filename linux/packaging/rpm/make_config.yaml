@@ -1,0 +1,15 @@
+summary: A Flutter frontend for quickget and quickemu
+group: Application/Emulator
+vendor: Quick Project
+packager: Yannick Mauray
+packagerEmail: yannick.mauray@gmail.com
+url: https://github.com/quickemu-project/quickgui
+icon: assets/images/logo.png
+license: Unknown
+
+requires:
+  - zenity
+
+display_name: Quickgui
+essential: false
+startup_notify: true

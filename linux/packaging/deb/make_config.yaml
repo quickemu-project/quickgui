@@ -1,0 +1,15 @@
+display_name: Quickgui
+package_name: quickgui
+maintainer:
+  name: Yannick Mauray
+  email: yannick.mauray@gmail.com
+
+dependencies:
+  - zenity
+section: x11
+priority: optional
+installed_size: 6604
+essential: false
+icon: assets/images/logo.png
+
+startup_notify: true
