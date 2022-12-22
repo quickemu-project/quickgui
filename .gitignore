@@ -34,3 +34,4 @@ list.csv
 *.mo
 RELEASING.md
 BUILDING.md
+dist/
