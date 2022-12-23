@@ -33,7 +33,7 @@ dependencies:
   platform_ui:
     git:
       url: https://github.com/KRTirtho/platform_ui.git
-      ref: 7eb00aef962f282463bc994ca5a6d31cc78f1fe3
+      ref: 073cefb9c419fcb01cbdfd6ca2f9714eec23c83b
   fluent_ui: ^4.1.2
   macos_ui: ^1.7.5
   libadwaita: ^1.2.5
