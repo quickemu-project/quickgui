@@ -1,14 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:window_size/window_size.dart';
 
 import 'src/app.dart';
-import 'src/mixins/app_version.dart';
 import 'src/model/app_settings.dart';
 import 'src/model/operating_system.dart';
 import 'src/model/option.dart';
@@ -69,15 +67,12 @@ void main() async {
     skipTaskbar: false,
     titleBarStyle: TitleBarStyle.hidden,
   );
-  windowManager.waitUntilReadyToShow(windowOptions, () async {
+
+  await windowManager.waitUntilReadyToShow(windowOptions, () async {
     await windowManager.show();
     await windowManager.focus();
   });
-  final foundQuickGet = await Process.run('which', ['quickget']);
-  if (foundQuickGet.exitCode == 0) {
-    gOperatingSystems = await loadOperatingSystems(false);
-    AppVersion.packageInfo = await PackageInfo.fromPlatform();
-  }
+
   runApp(
     MultiProvider(
       providers: [

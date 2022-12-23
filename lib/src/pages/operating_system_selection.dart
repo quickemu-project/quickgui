@@ -32,6 +32,7 @@ class _OperatingSystemSelectionState extends State<OperatingSystemSelection> {
     return PlatformScaffold(
       appBar: TitleBar(
         title: PlatformText.subheading(context.t('Select operating system')),
+        leading: const PlatformBackButton(),
       ),
       body: SingleChildScrollView(
         child: Column(

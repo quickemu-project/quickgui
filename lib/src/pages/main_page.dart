@@ -29,7 +29,6 @@ class _MainPageState extends State<MainPage> {
       appBar: TitleBar(
         automaticallyImplyLeading: false,
         title: PlatformText.subheading(context.t('Quickgui')),
-        centerTitle: true,
         actions: [
           PlatformIconButton(
             icon: const Icon(Icons.settings),

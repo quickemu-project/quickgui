@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
 import 'package:platform_ui/platform_ui.dart';
+import 'package:quickgui/src/widgets/title_bar.dart';
 
 import '../model/version.dart';
 
@@ -29,49 +30,28 @@ class _OptionSelectionState extends State<OptionSelection> {
         .where((e) => e.option.toLowerCase().contains(term.toLowerCase()))
         .toList();
 
-    return Scaffold(
-      appBar: AppBar(
+    return PlatformScaffold(
+      appBar: TitleBar(
         title: PlatformText(context.t('Select option')),
-        bottom: widget.version.options.length <= 6
-            ? null
-            : PreferredSize(
-                preferredSize: const Size.fromHeight(kToolbarHeight),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).canvasColor,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Material(
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            const Icon(Icons.search),
-                            Expanded(
-                              child: TextField(
-                                focusNode: focusNode,
-                                decoration: InputDecoration.collapsed(
-                                    hintText: context.t('Search option')),
-                                onChanged: (value) {
-                                  setState(() {
-                                    term = value;
-                                  });
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+        leading: const PlatformBackButton(),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
+            if (widget.version.options.length > 6)
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: PlatformTextField(
+                  focusNode: focusNode,
+                  prefixIcon: Icons.search,
+                  placeholder: context.t('Search option'),
+                  onChanged: (value) {
+                    setState(() {
+                      term = value;
+                    });
+                  },
+                ),
+              ),
             ListView.builder(
               shrinkWrap: true,
               itemCount: list.length,
@@ -80,7 +60,7 @@ class _OptionSelectionState extends State<OptionSelection> {
                 return Card(
                   color: PlatformTheme.of(context).secondaryBackgroundColor,
                   elevation: platform == TargetPlatform.macOS ? 0 : null,
-                  child: ListTile(
+                  child: PlatformListTile(
                     title: PlatformText(item.option),
                     onTap: () {
                       Navigator.of(context).pop(item);

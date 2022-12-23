@@ -14,6 +14,7 @@ class DownloaderPage extends StatelessWidget {
     return PlatformScaffold(
       appBar: TitleBar(
         title: PlatformText.subheading(context.t('Downloader')),
+        leading: const PlatformBackButton(),
       ),
       body: Column(
         children: const [

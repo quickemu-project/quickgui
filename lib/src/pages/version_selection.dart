@@ -42,6 +42,7 @@ class _VersionSelectionState extends State<VersionSelection> {
           context
               .t('Select version for {0}', args: [widget.operatingSystem.name]),
         ),
+        leading: const PlatformBackButton(),
       ),
       body: SingleChildScrollView(
         child: Column(

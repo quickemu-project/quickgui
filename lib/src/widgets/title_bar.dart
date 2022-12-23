@@ -18,7 +18,7 @@ class TitleBar extends StatelessWidget with PreferredSizeWidget {
   final TextStyle? titleTextStyle;
   final double? titleWidth;
 
-  const TitleBar({
+  TitleBar({
     this.actions,
     this.leading,
     this.automaticallyImplyLeading = true,
@@ -38,7 +38,7 @@ class TitleBar extends StatelessWidget with PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PlatformAppBar(
+    var platformAppBar = PlatformAppBar(
       automaticallyImplyLeading: automaticallyImplyLeading,
       backgroundColor: backgroundColor,
       foregroundColor: foregroundColor,
@@ -47,7 +47,7 @@ class TitleBar extends StatelessWidget with PreferredSizeWidget {
       leading: leading,
       leadingWidth: leadingWidth,
       title: title,
-      titleSpacing: titleSpacing,
+      titleSpacing: titleSpacing ?? (leading == null ? 16 : null),
       toolbarOpacity: toolbarOpacity,
       toolbarTextStyle: toolbarTextStyle,
       titleTextStyle: titleTextStyle,
@@ -58,8 +58,10 @@ class TitleBar extends StatelessWidget with PreferredSizeWidget {
         const PlatformWindowButtons(),
       ],
     );
+    return platformAppBar;
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize =>
+      Size.fromHeight(platform == TargetPlatform.windows ? 35 : kToolbarHeight);
 }

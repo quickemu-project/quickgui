@@ -44,6 +44,7 @@ class _SettingsPageState extends State<SettingsPage> with PreferencesMixin {
     return PlatformScaffold(
       appBar: TitleBar(
         title: PlatformText.subheading(context.t('Settings')),
+        leading: const PlatformBackButton(),
       ),
       body: Consumer<AppSettings>(
         builder: (context, appSettings, _) {

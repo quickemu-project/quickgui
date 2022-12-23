@@ -531,6 +531,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
   Widget build(BuildContext context) {
     return PlatformScaffold(
       appBar: TitleBar(
+        leading: const PlatformBackButton(),
         title: PlatformText.subheading(context.t('Manager')),
       ),
       body: _buildVmList(),
