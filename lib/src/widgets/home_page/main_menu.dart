@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
 import 'package:platform_ui/platform_ui.dart';
 
@@ -19,11 +19,8 @@ class MainMenu extends StatelessWidget {
             PlatformFilledButton(
               onPressed: () {
                 Navigator.of(context).push(
-                  PageRouteBuilder(
-                    fullscreenDialog: true,
-                    pageBuilder: (context, animation1, animation2) =>
-                        const Manager(),
-                    transitionDuration: Duration.zero,
+                  CupertinoPageRoute(
+                    builder: (context) => const Manager(),
                   ),
                 );
               },
@@ -34,11 +31,8 @@ class MainMenu extends StatelessWidget {
               onPressed: () {
                 //Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DownloaderPage()));
                 Navigator.of(context).push(
-                  PageRouteBuilder(
-                    fullscreenDialog: true,
-                    pageBuilder: (context, animation1, animation2) =>
-                        const DownloaderPage(),
-                    transitionDuration: Duration.zero,
+                  CupertinoPageRoute(
+                    builder: (context) => const DownloaderPage(),
                   ),
                 );
               },

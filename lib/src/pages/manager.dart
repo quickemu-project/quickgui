@@ -9,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
 import 'package:path/path.dart' as path;
 import 'package:platform_ui/platform_ui.dart';
+import 'package:quickgui/src/widgets/title_bar.dart';
 
 import '../globals.dart';
 import '../mixins/preferences_mixin.dart';
@@ -529,11 +530,8 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
   @override
   Widget build(BuildContext context) {
     return PlatformScaffold(
-      appBar: PlatformAppBar(
-        title: PlatformText(context.t('Manager')),
-        actions: const [
-          PlatformWindowButtons(),
-        ],
+      appBar: TitleBar(
+        title: PlatformText.subheading(context.t('Manager')),
       ),
       body: _buildVmList(),
     );

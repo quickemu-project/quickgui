@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
 import 'package:platform_ui/platform_ui.dart';
+import 'package:quickgui/src/widgets/title_bar.dart';
 import 'package:window_size/window_size.dart';
 
 import '../widgets/home_page/logo.dart';
@@ -25,7 +26,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return PlatformScaffold(
-      appBar: PlatformAppBar(
+      appBar: TitleBar(
         automaticallyImplyLeading: false,
         title: PlatformText.subheading(context.t('Quickgui')),
         centerTitle: true,
@@ -41,7 +42,6 @@ class _MainPageState extends State<MainPage> {
               );
             },
           ),
-          const PlatformWindowButtons(),
         ],
       ),
       body: Column(

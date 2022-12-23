@@ -4,7 +4,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.2.8-1
 
 environment:
-  sdk: ">=2.14.4 <3.0.0"
+  sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -30,11 +30,14 @@ dependencies:
   flutter_svg: ^1.1.6
   gettext_i18n: ^1.0.2
   url_launcher: ^6.1.6
-  platform_ui: ^0.1.0
+  platform_ui:
+    git:
+      url: https://github.com/KRTirtho/platform_ui.git
   fluent_ui: ^4.1.2
   macos_ui: ^1.7.5
   libadwaita: ^1.2.5
   adwaita: ^0.5.2
+  window_manager: ^0.2.8
 
 dev_dependencies:
   flutter_test:

@@ -6,6 +6,7 @@ import 'package:desktop_notifications/desktop_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
 import 'package:platform_ui/platform_ui.dart';
+import 'package:quickgui/src/widgets/title_bar.dart';
 
 import '../model/operating_system.dart';
 import '../model/option.dart';
@@ -130,8 +131,8 @@ class _DownloaderState extends State<Downloader> {
   @override
   Widget build(BuildContext context) {
     return PlatformScaffold(
-      appBar: PlatformAppBar(
-        title: PlatformText(
+      appBar: TitleBar(
+        title: PlatformText.subheading(
           context.t('Downloading {0}', args: [
             '${widget.operatingSystem.name} ${widget.version.version}' +
                 (widget.option!.option.isNotEmpty
@@ -139,9 +140,6 @@ class _DownloaderState extends State<Downloader> {
                     : '')
           ]),
         ),
-        actions: const [
-          PlatformWindowButtons(),
-        ],
         automaticallyImplyLeading: false,
       ),
       body: Center(

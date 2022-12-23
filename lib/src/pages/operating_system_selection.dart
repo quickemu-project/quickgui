@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
 import 'package:platform_ui/platform_ui.dart';
+import 'package:quickgui/src/widgets/title_bar.dart';
 
 import '../model/operating_system.dart';
 
@@ -29,11 +30,8 @@ class _OperatingSystemSelectionState extends State<OperatingSystemSelection> {
         .where((os) => os.name.toLowerCase().contains(term.toLowerCase()))
         .toList();
     return PlatformScaffold(
-      appBar: PlatformAppBar(
-        title: PlatformText(context.t('Select operating system')),
-        actions: const [
-          PlatformWindowButtons(),
-        ],
+      appBar: TitleBar(
+        title: PlatformText.subheading(context.t('Select operating system')),
       ),
       body: SingleChildScrollView(
         child: Column(

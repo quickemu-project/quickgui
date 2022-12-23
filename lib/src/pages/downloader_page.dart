@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
 import 'package:platform_ui/platform_ui.dart';
+import 'package:quickgui/src/widgets/title_bar.dart';
 
 import '../widgets/home_page/downloader_menu.dart';
 import '../widgets/home_page/logo.dart';
@@ -11,11 +12,8 @@ class DownloaderPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PlatformScaffold(
-      appBar: PlatformAppBar(
-        title: PlatformText(context.t('Downloader')),
-        actions: const [
-          PlatformWindowButtons(),
-        ],
+      appBar: TitleBar(
+        title: PlatformText.subheading(context.t('Downloader')),
       ),
       body: Column(
         children: const [

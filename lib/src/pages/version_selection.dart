@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
 import 'package:platform_ui/platform_ui.dart';
+import 'package:quickgui/src/widgets/title_bar.dart';
 import 'package:tuple/tuple.dart';
 
 import '../model/operating_system.dart';
@@ -36,14 +37,11 @@ class _VersionSelectionState extends State<VersionSelection> {
         .toList();
 
     return PlatformScaffold(
-      appBar: PlatformAppBar(
-        title: PlatformText(
+      appBar: TitleBar(
+        title: PlatformText.subheading(
           context
               .t('Select version for {0}', args: [widget.operatingSystem.name]),
         ),
-        actions: const [
-          PlatformWindowButtons(),
-        ],
       ),
       body: SingleChildScrollView(
         child: Column(

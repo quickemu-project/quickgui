@@ -3,6 +3,7 @@ import 'package:gettext_i18n/gettext_i18n.dart';
 import 'package:platform_ui/platform_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:quickgui/src/supported_locales.dart';
+import 'package:quickgui/src/widgets/title_bar.dart';
 
 import '../globals.dart';
 import '../mixins/app_version.dart';
@@ -41,11 +42,8 @@ class _SettingsPageState extends State<SettingsPage> with PreferencesMixin {
   Widget build(BuildContext context) {
     var _version = AppVersion.packageInfo!.version;
     return PlatformScaffold(
-      appBar: PlatformAppBar(
-        title: PlatformText(context.t('Settings')),
-        actions: const [
-          PlatformWindowButtons(),
-        ],
+      appBar: TitleBar(
+        title: PlatformText.subheading(context.t('Settings')),
       ),
       body: Consumer<AppSettings>(
         builder: (context, appSettings, _) {

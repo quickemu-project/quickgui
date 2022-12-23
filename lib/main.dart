@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
+import 'package:window_manager/window_manager.dart';
 import 'package:window_size/window_size.dart';
 
 import 'src/app.dart';
@@ -59,6 +60,19 @@ void main() async {
   // Don't forget to also change the size in linux/my_application.cc:50
   setWindowMinSize(const Size(692, 580));
   setWindowMaxSize(const Size(692, 580));
+  await windowManager.ensureInitialized();
+
+  const windowOptions = WindowOptions(
+    size: Size(692, 580),
+    center: true,
+    backgroundColor: Colors.transparent,
+    skipTaskbar: false,
+    titleBarStyle: TitleBarStyle.hidden,
+  );
+  windowManager.waitUntilReadyToShow(windowOptions, () async {
+    await windowManager.show();
+    await windowManager.focus();
+  });
   final foundQuickGet = await Process.run('which', ['quickget']);
   if (foundQuickGet.exitCode == 0) {
     gOperatingSystems = await loadOperatingSystems(false);

@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:platform_ui/platform_ui.dart';
+import 'package:quickgui/src/widgets/title_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DebgetNotFoundPage extends StatelessWidget {
@@ -9,11 +10,8 @@ class DebgetNotFoundPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PlatformScaffold(
-      appBar: PlatformAppBar(
+      appBar: TitleBar(
         title: PlatformText.subheading('Quickgui'),
-        actions: const [
-          PlatformWindowButtons(),
-        ],
         automaticallyImplyLeading: false,
       ),
       body: Center(

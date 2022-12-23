@@ -10,6 +10,7 @@ import 'package:quickgui/src/mixins/app_version.dart';
 import 'package:quickgui/src/pages/deget_not_found_page.dart';
 import 'package:quickgui/src/supported_locales.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:window_manager/window_manager.dart';
 
 import 'globals.dart';
 import 'mixins/preferences_mixin.dart';
@@ -23,10 +24,9 @@ class App extends StatefulWidget {
   State<App> createState() => _AppState();
 }
 
-class _AppState extends State<App> with PreferencesMixin {
+class _AppState extends State<App> with PreferencesMixin, WindowListener {
   @override
   Widget build(BuildContext context) {
-    platform = TargetPlatform.macOS;
     return FutureBuilder<SharedPreferences>(
       future: SharedPreferences.getInstance(),
       builder: (context, snapshot) {
@@ -57,11 +57,12 @@ class _AppState extends State<App> with PreferencesMixin {
                   GlobalWidgetsLocalizations.delegate,
                 ],
                 windowButtonConfig: PlatformWindowButtonConfig(
-                  isMaximized: () => false,
-                  onClose: () {},
-                  onMinimize: () {},
-                  onMaximize: () {},
-                  onRestore: () {},
+                  isMaximized: () => windowManager.isMaximized(),
+                  onClose: windowManager.close,
+                  onMinimize: windowManager.minimize,
+                  onMaximize: windowManager.maximize,
+                  onRestore: windowManager.restore,
+                  showMaximizeButton: false,
                 ),
                 windowsTheme: fluent.ThemeData(
                   scaffoldBackgroundColor: fluent.Colors.grey[50],
