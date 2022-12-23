@@ -20,7 +20,7 @@ class ProgressArrowPainter extends CustomPainter {
   const ProgressArrowPainter({
     this.oddColor,
     this.evenColor,
-    this.radius = 3,
+    this.radius = 4,
   });
 
   @override
@@ -73,14 +73,26 @@ class ProgressArrowPainter extends CustomPainter {
 }
 
 class ProgressArrow extends StatelessWidget {
-  const ProgressArrow({Key? key}) : super(key: key);
+  final Color? oddColor;
+  final Color? evenColor;
+  final double? radius;
+  const ProgressArrow({
+    Key? key,
+    this.oddColor,
+    this.evenColor,
+    this.radius,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12).copyWith(top: 30),
-      child: const CustomPaint(
-        painter: ProgressArrowPainter(),
+      child: CustomPaint(
+        painter: ProgressArrowPainter(
+          oddColor: oddColor,
+          evenColor: evenColor,
+          radius: radius ?? 4,
+        ),
       ),
     );
   }
@@ -97,6 +109,18 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
   OperatingSystem? _selectedOperatingSystem;
   Version? _selectedVersion;
   Option? _selectedOption;
+
+  /// Lighten a color by [percent] amount (100 = white)
+// ........................................................
+  Color lighten(Color c, [int percent = 10]) {
+    assert(1 <= percent && percent <= 100);
+    var p = percent / 100;
+    return Color.fromARGB(
+        c.alpha,
+        c.red + ((255 - c.red) * p).round(),
+        c.green + ((255 - c.green) * p).round(),
+        c.blue + ((255 - c.blue) * p).round());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -160,8 +184,15 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
             ),
           ],
         ),
-        const Expanded(
-          child: ProgressArrow(),
+        Expanded(
+          child: ProgressArrow(
+            evenColor: _selectedOperatingSystem != null
+                ? PlatformTheme.of(context).primaryColor
+                : null,
+            oddColor: _selectedOperatingSystem != null
+                ? lighten(PlatformTheme.of(context).primaryColor!, 35)
+                : null,
+          ),
         ),
         Column(
           children: [
@@ -197,8 +228,15 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
             ),
           ],
         ),
-        const Expanded(
-          child: ProgressArrow(),
+        Expanded(
+          child: ProgressArrow(
+            evenColor: _selectedVersion != null
+                ? PlatformTheme.of(context).primaryColor
+                : null,
+            oddColor: _selectedVersion != null
+                ? lighten(PlatformTheme.of(context).primaryColor!, 35)
+                : null,
+          ),
         ),
         Column(
           children: [
