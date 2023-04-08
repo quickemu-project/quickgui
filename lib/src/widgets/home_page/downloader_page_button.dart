@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HomePageButton extends StatelessWidget {
-  const HomePageButton({
+class DownloaderPageButton extends StatelessWidget {
+  const DownloaderPageButton({
     Key? key,
     this.label,
     required this.text,
@@ -17,25 +17,28 @@ class HomePageButton extends StatelessWidget {
     return Expanded(
       flex: 1,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(12, 24, 12, 24),
+        padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Center(
-              child: Text(
-                label?.toUpperCase() ?? '',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall
-                    ?.copyWith(color: Colors.white),
+            Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Center(
+                child: Text(
+                  label?.toUpperCase() ?? '',
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleSmall
+                      ?.copyWith(color: Colors.white),
+                ),
               ),
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).canvasColor,
                 foregroundColor: Theme.of(context).brightness == Brightness.dark
                     ? Colors.white70
                     : Theme.of(context).colorScheme.primary,
+                backgroundColor: Theme.of(context).canvasColor,
               ),
               onPressed: onPressed,
               child: Padding(
