@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
+import 'package:provider/provider.dart';
 import 'package:quickgui/src/supported_locales.dart';
 
 import '../globals.dart';
@@ -46,7 +46,7 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
             children: [
               ListTile(
                 title: Text("quickgui $_version",
-                    style: Theme.of(context).textTheme.headline6),
+                    style: Theme.of(context).textTheme.titleLarge),
               ),
               const Divider(),
               Padding(

@@ -31,6 +31,7 @@ mixin PreferencesMixin {
         return prefs.getStringList(key) as T;
       }
     }
+    return null;
   }
 
   Future<void> deletePreference(String key) async {

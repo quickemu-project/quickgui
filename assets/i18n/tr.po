@@ -1,0 +1,140 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: quickgui\n"
+"POT-Creation-Date: 2021-09-29 09:59+0200\n"
+"PO-Revision-Date: 2023-04-08 23:40+0300\n"
+"Last-Translator: Mustafa Tosun <mstfcod@gmail.com>\n"
+"Language-Team: \n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+"X-Poedit-Basepath: .\n"
+
+msgid "Quickgui : a Flutter frontend for Quickget and Quickemu"
+msgstr "Quickgui : Quickget ve Quickemu için Flutter arayüzü"
+
+msgid "Main menu"
+msgstr "Ana menü"
+
+msgid "Use dark mode"
+msgstr "Siyah mod kullan"
+
+msgid "Cancel"
+msgstr "İptal"
+
+msgid "Click to use SPICE display"
+msgstr "SPICE ekranı kullanmak için tıkla"
+
+msgid "Create new machines"
+msgstr "Yeni makine oluştur"
+
+msgid "Dismiss"
+msgstr "Yoksay"
+
+msgid "Done !"
+msgstr "Bitti !"
+
+msgid "Download"
+msgstr "İndir"
+
+msgid "Download finished."
+msgstr "İndirme tamamlandı."
+
+msgid "Downloader"
+msgstr "Yükleyici"
+
+msgid "Downloading (no progress available)..."
+msgstr "Yükleniyor (ilerleme yok)..."
+
+msgid "Downloading...{0}%"
+msgstr "Yükleniyor...{0}%"
+
+msgid "Downloading {0}"
+msgstr "Yükleniyor {0}"
+
+msgid "Download cancelled"
+msgstr "İndirme iptal edildi"
+
+msgid "Download complete"
+msgstr "İndirme tamamlandı"
+
+msgid "Download of {0} has completed."
+msgstr "{0} indirme işlemi tamamlandı."
+
+msgid "Download of {0} has been cancelled."
+msgstr "{0} indirme işlemi iptal edildi."
+
+msgid "Manage existing machines"
+msgstr "Yüklü makineleri yönet"
+
+msgid "Manager"
+msgstr "Yönetici"
+
+msgid "{0} Mbs downloaded"
+msgstr "{0} Mbs indirildi"
+
+msgid "Now run {0} to start the VM"
+msgstr "SM'yi başlatmak için {0} çalıştırın"
+
+msgid "OK"
+msgstr "TAMAM"
+
+msgid "Operating system"
+msgstr "İşletim sistemi"
+
+msgid "Search operating system"
+msgstr "İşletim sistemi ara"
+
+msgid "Search option"
+msgstr "Arama seçeneği"
+
+msgid "Select operating system"
+msgstr "İşletim sistemi seç"
+
+msgid "Select option"
+msgstr "Seçeneği seçin"
+
+msgid "Select version for {0}"
+msgstr "{0} için sürüm seçin"
+
+msgid "Select..."
+msgstr "Seç..."
+
+msgid "SPICE port"
+msgstr "SPICE port"
+
+msgid "SSH port"
+msgstr "SSH port"
+
+msgid "Stop The Virtual Machine?"
+msgstr "Sanal makineyi durdur?"
+
+msgid "Target folder : {0}"
+msgstr "Hedef klasör : {0}"
+
+msgid "Use SPICE display"
+msgstr "SPICE ekran kullan"
+
+msgid "Using SPICE display"
+msgstr "SPICE ekran kullanılıyor"
+
+msgid "Version"
+msgstr "Sürüm"
+
+msgid "Waiting for download to start"
+msgstr "İndirme işlemi bekleniyor"
+
+msgid "You are about to terminate the virtual machine {0}"
+msgstr "{0} Sanal makinesini kapatmak üzeresin"
+
+msgid "Language"
+msgstr "Dil"
+
+msgid "Directory where the machines are stored"
+msgstr "Sanal makinelerin saklandığı dizin"
+
+msgid "Search version"
+msgstr "Sürüm ara"

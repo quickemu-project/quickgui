@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:tuple/tuple.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
+import 'package:tuple/tuple.dart';
 
 import '../../model/operating_system.dart';
 import '../../model/option.dart';
@@ -10,7 +10,7 @@ import '../../model/version.dart';
 import '../../pages/downloader.dart';
 import '../../pages/operating_system_selection.dart';
 import '../../pages/version_selection.dart';
-import '../home_page/home_page_button.dart';
+import 'downloader_page_button.dart';
 
 class HomePageButtonGroup extends StatefulWidget {
   const HomePageButtonGroup({Key? key}) : super(key: key);
@@ -33,7 +33,7 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
     }
     return Row(
       children: [
-        HomePageButton(
+        DownloaderPageButton(
           label: context.t("Operating system"),
           text: _selectedOperatingSystem?.name ?? context.t('Select...'),
           onPressed: () {
@@ -58,7 +58,7 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
             });
           },
         ),
-        HomePageButton(
+        DownloaderPageButton(
           label: context.t('Version'),
           text: _versionButtonLabel, //_selectedVersion?.version ?? 'Select...',
           onPressed: (_selectedOperatingSystem != null)
@@ -80,7 +80,7 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
                 }
               : null,
         ),
-        HomePageButton(
+        DownloaderPageButton(
           label: context.t('Download'),
           text: context.t('Download'),
           onPressed: (_selectedVersion == null)
@@ -122,7 +122,7 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
                   child: Text(context.t('Downloading...'),
                       style: Theme.of(context)
                           .textTheme
-                          .bodyText1
+                          .bodyLarge
                           ?.copyWith(color: Colors.white)),
                 ),
                 const CircularProgressIndicator(),
@@ -132,7 +132,7 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
                     'Target : ${Directory.current.absolute.path}',
                     style: Theme.of(context)
                         .textTheme
-                        .bodyText1
+                        .bodyLarge
                         ?.copyWith(color: Colors.white),
                   ),
                 ),
@@ -170,7 +170,7 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
                   child: Text(context.t('Done !'),
                       style: Theme.of(context)
                           .textTheme
-                          .bodyText1
+                          .bodyLarge
                           ?.copyWith(color: Colors.white)),
                 ),
                 Text(
@@ -178,7 +178,7 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
                         args: ["quickemu --vm $operatingSystem-$version"]),
                     style: Theme.of(context)
                         .textTheme
-                        .bodyText1
+                        .bodyLarge
                         ?.copyWith(color: Colors.white)),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 32),
@@ -190,7 +190,7 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
                       'Dismiss',
                       style: Theme.of(context)
                           .textTheme
-                          .bodyText1
+                          .bodyLarge
                           ?.copyWith(color: Colors.white),
                     ),
                   ),
