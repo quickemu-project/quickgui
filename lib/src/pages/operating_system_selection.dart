@@ -74,11 +74,18 @@ class _OperatingSystemSelectionState extends State<OperatingSystemSelection> {
               itemCount: list.length,
               itemBuilder: (context, index) {
                 var item = list[index];
-                var icon = SvgPicture.asset(
-                  "assets/quickemu-icons/${item.code}.svg",
-                  width: 32,
-                  height: 32,
-                );
+                Widget icon;
+
+                try {
+                  icon = SvgPicture.asset(
+                    "assets/quickemu-icons/${item.code}.svg",
+                    width: 32,
+                    height: 32,
+                  );
+                } catch (e) {
+                  // Replace with generic icon
+                  icon = const Icon(Icons.computer, size: 32);
+                }
                 return Card(
                   child: ListTile(
                     title: Text(item.name),
