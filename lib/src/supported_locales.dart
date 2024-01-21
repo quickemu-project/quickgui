@@ -29,6 +29,7 @@ final supportedLocales = [
   'nl',
   'no',
   //'oc',
+  'pl',
   'pt_PT',
   'ru',
   'ja',
