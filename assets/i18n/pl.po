@@ -1,0 +1,140 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: quickgui\n"
+"POT-Creation-Date: 2024-01-21 13:45+0100\n"
+"PO-Revision-Date: 2024-01-21 13:43+0100\n"
+"Last-Translator: c0m4r\n"
+"Language-Team: \n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.4.2\n"
+"X-Poedit-Basepath: .\n"
+
+msgid "Quickgui : a Flutter frontend for Quickget and Quickemu"
+msgstr "Quickgui : interfejs Flutter dla Quickget i Quickemu"
+
+msgid "Main menu"
+msgstr "Menu główne"
+
+msgid "Use dark mode"
+msgstr "Używaj trybu ciemnego"
+
+msgid "Cancel"
+msgstr "Anuluj"
+
+msgid "Click to use SPICE display"
+msgstr "Kliknij, aby skorzystać z wyświetlacza SPICE"
+
+msgid "Create new machines"
+msgstr "Utwórz nowe maszyny"
+
+msgid "Dismiss"
+msgstr "Zamknij"
+
+msgid "Done !"
+msgstr "Gotowe !"
+
+msgid "Download"
+msgstr "Pobierz"
+
+msgid "Download finished."
+msgstr "Pobieranie ukończone."
+
+msgid "Downloader"
+msgstr "Menadżer pobierania"
+
+msgid "Downloading (no progress available)..."
+msgstr "Pobieranie (postęp niedostępny)..."
+
+msgid "Downloading...{0}%"
+msgstr "Pobieranie...{0}%"
+
+msgid "Downloading {0}"
+msgstr "Pobieranie {0}"
+
+msgid "Download cancelled"
+msgstr "Pobieranie anulowane"
+
+msgid "Download complete"
+msgstr "Pobieranie ukończone"
+
+msgid "Download of {0} has completed."
+msgstr "Pobieranie {0} zostało ukończone."
+
+msgid "Download of {0} has been cancelled."
+msgstr "Pobieranie {0} zostało anulowane."
+
+msgid "Manage existing machines"
+msgstr "Zarządzaj istniejącymi maszynami"
+
+msgid "Manager"
+msgstr "Menadżer"
+
+msgid "{0} Mbs downloaded"
+msgstr "{0} Mbs pobrano"
+
+msgid "Now run {0} to start the VM"
+msgstr "Teraz uruchom {0}, aby uruchomić VM"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Operating system"
+msgstr "System operacyjny"
+
+msgid "Search operating system"
+msgstr "Szukaj systemu operacyjnego"
+
+msgid "Search option"
+msgstr "Szukaj opcji"
+
+msgid "Select operating system"
+msgstr "Wybierz system operacyjny"
+
+msgid "Select option"
+msgstr "Wybierz opcję"
+
+msgid "Select version for {0}"
+msgstr "Wybierz wersję dla {0}"
+
+msgid "Select..."
+msgstr "Wybierz..."
+
+msgid "SPICE port"
+msgstr "SPICE port"
+
+msgid "SSH port"
+msgstr "SSH port"
+
+msgid "Stop The Virtual Machine?"
+msgstr "Zatrzymać maszynę wirtualną?"
+
+msgid "Target folder : {0}"
+msgstr "Folder docelowy : {0}"
+
+msgid "Use SPICE display"
+msgstr "Użyj ekranu SPICE"
+
+msgid "Using SPICE display"
+msgstr "Używany jest ekran SPICE"
+
+msgid "Version"
+msgstr "Wersja"
+
+msgid "Waiting for download to start"
+msgstr "Oczekiwanie na rozpoczęcie pobierania"
+
+msgid "You are about to terminate the virtual machine {0}"
+msgstr "Zamierzasz zakończyć pracę maszyny wirtualnej {0}"
+
+msgid "Language"
+msgstr "Język"
+
+msgid "Directory where the machines are stored"
+msgstr "Katalog, w którym przechowywane są maszyny"
+
+msgid "Search version"
+msgstr "Szukaj wersji"
