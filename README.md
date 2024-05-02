@@ -4,7 +4,7 @@
   Quickgui
 </h1>
 
-<p align="center">A Flutter frontend for <kbd>quickget</kbd> and <a href="https://github.com/wimpysworld/quickemu">quickemu</a>.</p>
+<p align="center">A Flutter frontend for <kbd>quickget</kbd> and <a href="https://github.com/quickemu-project/quickemu">quickemu</a>.</p>
 <div align="center"><img src="assets/github/screenshot1.png" alt="Quickgui screenshot"></div>
 
 This project is discussed mainly on [![Discord](https://img.shields.io/discord/712850672223125565?color=87a556&label=WimpysWorld%20Discord&logo=discord&logoColor=ffffff&style=flat-square)](https://discord.gg/sNmz3uw) server
@@ -15,28 +15,28 @@ This project is discussed mainly on [![Discord](https://img.shields.io/discord/7
 
 For this tool to work, you need to have `quickget`, from the `quickemu` 
 package, in your current `path`.
-Go to the `quickemu` [github page](https://github.com/wimpysworld/quickemu)
+Go to the `quickemu` [github page](https://github.com/quickemu-project/quickemu)
 for more information about installing the tool.
 
 ### Standard package
 
 On Ubuntu, `quickgui` can be installed as a standard package.
 
-First, add this ppa (this only needs to be done once) :
+First, add this ppa (this only needs to be done once):
 
 ```
 sudo add-apt-repository ppa:yannick-mauray/quickgui
 sudo apt update
 ```
 
-Then, install the pacakge : 
+Then, install the package: 
 ```
 sudo apt install quickgui
 ```
 
 ### Pre-compiled binary
 
-* [Download](https://github.com/quickgui/quickgui/releases/) the binary.
+* [Download](https://github.com/quickemu-project/quickgui/releases) the binary.
 * Uncompress the tarball wherever you want.
 * From anywhere on the filesystem, run the app.
 
@@ -46,7 +46,7 @@ tar xvf quickgui-a.b.c-d.tar
 /path/to/quickgui
 ```
 
-Alternativelly, use `update-alternatives` to install `quickgui` system-wide :
+Alternatively, use `update-alternatives` to install `quickgui` system-wide:
 
 ```bash
 sudo update-alternatives --install /usr/local/bin/quickgui quickgui /path/to/quickgui 50
@@ -54,7 +54,7 @@ sudo update-alternatives --install /usr/local/bin/quickgui quickgui /path/to/qui
 
 ## Build
 
-If you don't want to run the binary, you can rebuild the application yourself :
+If you don't want to run the binary, you can rebuild the application yourself:
 
 * [Set up Flutter](https://ubuntu.com/blog/getting-started-with-flutter-on-ubuntu)
 * Clone this repo,
@@ -84,17 +84,17 @@ From the main screen, select the operating system you want to use. The list can 
 
 <div align="center"><img src="assets/github/screenshot3.png" alt="Search a distribution"></div>
 
-Then, select the version :
+Then, select the version:
 
 <div align="center"><img src="assets/github/screenshot4.png" alt="Main screen after selection of the operating system"></div>
 
 <div align="center"><img src="assets/github/screenshot5.png" alt="Versions of the selected operating system"></div>
 
-If there are some options (Windows language, Pop!_OS nvidia or Intel, etc..), they will be displayed :
+If there are some options (Windows language, Pop!_OS nvidia or Intel, etc..), they will be displayed:
 
 <div align="center"><img src="assets/github/screenshot8.png" alt="Choose an option"></div>
 
-<div align="center"><img src="assets/github/screenshot9.png" alt="Option is diplayed"></div>
+<div align="center"><img src="assets/github/screenshot9.png" alt="Option is displayed"></div>
 
 Then click "Download". The ISO will be downloaded in the current working directory, in 99% of cases that will be the directory where `quickgui` was invoked from.
 
@@ -112,7 +112,7 @@ VMs can be launched by clicking the "Play" (▶) button. Running VMs will have t
 
 When a VM is running, the host's ports mapped to SPICE and SSH on the guest will be displayed. If you close the SPICE display and wish to reconnect, you can click the "Connect display with SPICE" button. To open an SSH session, you can click the "Connect with SSH" button.
 
-If the "Connect display with SPICE" button is disabled, the `spicy` client could not be found. Ensure it is installed, and in your PATH (it should have been installed with `quickemu`)
+If the "Connect display with SPICE" button is disabled, the `spicy` client could not be found. Ensure it is installed, and in your PATH (it should have been installed with `quickemu`).
 
 If the "Connect with SSH" button is disabled, an SSH server could not be detected on the guest. Most guest operating systems will not install an SSH server by default, so if it was not an option during install, you will need to install one yourself. It must be listening on port 22 (the default SSH port). Once a server is installed and running, it should be detected automatically.
 
