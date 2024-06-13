@@ -72,12 +72,12 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
             const Divider(
               thickness: 2,
             ),
-            Row(
+            const Row(
               children: [
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
+                    children: [
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 12),
                         child: HomePageButtonGroup(),

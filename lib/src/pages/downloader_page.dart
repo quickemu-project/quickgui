@@ -13,8 +13,8 @@ class DownloaderPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(context.t('Downloader')),
       ),
-      body: Column(
-        children: const [
+      body: const Column(
+        children: [
           Logo(),
           DownloaderMenu(),
         ],

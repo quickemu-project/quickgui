@@ -28,8 +28,8 @@ class _MainPageState extends State<MainPage> {
         title: Text(context.t('Main menu')),
       ),
       drawer: const LeftMenu(),
-      body: Column(
-        children: const [
+      body: const Column(
+        children: [
           Logo(),
           MainMenu(),
         ],
