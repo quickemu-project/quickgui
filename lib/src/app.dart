@@ -22,6 +22,26 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> with PreferencesMixin {
+  // Define the primary dark grey color.
+  static const int _darkGreyPrimaryValue = 0xFF424242;
+
+  // Create a map of shades for the dark grey color.
+  static const MaterialColor darkGrey = MaterialColor(
+    _darkGreyPrimaryValue,
+    <int, Color>{
+      50: Color(0xFFE0E0E0),
+      100: Color(0xFFBDBDBD),
+      200: Color(0xFF9E9E9E),
+      300: Color(0xFF757575),
+      400: Color(0xFF616161),
+      500: Color(_darkGreyPrimaryValue),
+      600: Color(0xFF3D3D3D),
+      700: Color(0xFF333333),
+      800: Color(0xFF2B2B2B),
+      900: Color(0xFF1C1C1C),
+    },
+  );
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<SharedPreferences>(
@@ -39,8 +59,21 @@ class _AppState extends State<App> with PreferencesMixin {
           }
           return Consumer<AppSettings>(
             builder: (context, appSettings, _) => MaterialApp(
-              theme: ThemeData(primarySwatch: Colors.pink),
-              darkTheme: ThemeData.dark(),
+              theme: ThemeData(
+                  useMaterial3: true,
+                  colorScheme:  ColorScheme.fromSwatch(
+                    primarySwatch: Colors.pink,
+                    backgroundColor: Colors.white,
+                  )
+              ),
+              darkTheme: ThemeData(
+                useMaterial3: true,
+                colorScheme: ColorScheme.fromSwatch(
+                  primarySwatch: darkGrey,
+                  backgroundColor: darkGrey.shade700,
+                  brightness: Brightness.dark,
+                ),
+              ),
               themeMode: appSettings.themeMode,
               home: AppVersion.packageInfo == null
                   ? const DebgetNotFoundPage()

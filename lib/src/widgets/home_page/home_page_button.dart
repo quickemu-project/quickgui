@@ -32,10 +32,8 @@ class HomePageButton extends StatelessWidget {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).canvasColor,
-                foregroundColor: Theme.of(context).brightness == Brightness.dark
-                    ? Colors.white70
-                    : Theme.of(context).colorScheme.primary,
+                backgroundColor: Theme.of(context).colorScheme.surface,
+                foregroundColor: Theme.of(context).colorScheme.onSurface,
               ),
               onPressed: onPressed,
               child: Padding(
