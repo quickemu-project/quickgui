@@ -58,11 +58,15 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
                       child: Container(),
                     ),
                     Switch(
-                      value: Theme.of(context).brightness == Brightness.dark,
+                      value: Theme.of(context).colorScheme.brightness == Brightness.dark,
                       onChanged: (value) {
                         appSettings.useDarkMode = value;
                         savePreference(prefThemeMode, value);
                       },
+                      activeColor: Colors.white,
+                      activeTrackColor: Colors.black26,
+                      inactiveThumbColor: Theme.of(context).colorScheme.onPrimary,
+                      inactiveTrackColor: Theme.of(context).colorScheme.primary,
                     ),
                   ],
                 ),

@@ -31,9 +31,7 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        color: Theme.of(context).brightness == Brightness.dark
-            ? Theme.of(context).colorScheme.surface
-            : Theme.of(context).colorScheme.primary,
+        color: Theme.of(context).colorScheme.primaryContainer,
         child: Column(
           children: [
             Padding(
@@ -44,9 +42,7 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
                   Text(
                     "${context.t('Directory where the machines are stored')}:",
                     style: TextStyle(
-                      color: Theme.of(context).brightness == Brightness.dark
-                        ? Theme.of(context).colorScheme.onSurface
-                        : Theme.of(context).colorScheme.onPrimary,
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
                     ),
                   ),
                   const SizedBox(
@@ -54,10 +50,8 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white70
-                          : Theme.of(context).colorScheme.primary,
-                      backgroundColor: Theme.of(context).canvasColor,
+                      foregroundColor: Theme.of(context).colorScheme.onSurface,
+                      backgroundColor: Theme.of(context).colorScheme.surface,
                     ),
                     onPressed: () async {
                       var folder = await FilePicker.platform

@@ -35,10 +35,8 @@ class DownloaderPageButton extends StatelessWidget {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                foregroundColor: Theme.of(context).brightness == Brightness.dark
-                    ? Colors.white70
-                    : Theme.of(context).colorScheme.primary,
-                backgroundColor: Theme.of(context).canvasColor,
+                foregroundColor: Theme.of(context).colorScheme.onSurface,
+                backgroundColor: Theme.of(context).colorScheme.surface,
               ),
               onPressed: onPressed,
               child: Padding(

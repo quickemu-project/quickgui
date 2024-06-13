@@ -174,9 +174,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
 
   Widget _buildVmList() {
     List<Widget> widgetList = [];
-    final Color buttonColor = Theme.of(context).brightness == Brightness.dark
-        ? Colors.white70
-        : Theme.of(context).colorScheme.primary;
+    final Color buttonColor = Theme.of(context).colorScheme.primary;
     widgetList.addAll(
       [
         Padding(
@@ -186,30 +184,30 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
             children: [
               Text(
                 "${context.t('Directory where the machines are stored')}:",
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
               ),
               const SizedBox(
                 width: 8,
               ),
-              Text.rich(
-                TextSpan(
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () async {
-                      String? result =
-                          await FilePicker.platform.getDirectoryPath();
-                      if (result != null) {
-                        setState(() {
-                          Directory.current = result;
-                        });
-
-                        savePreference(
-                            prefWorkingDirectory, Directory.current.path);
-                        _getVms(context);
-                      }
-                    },
-                  text: Directory.current.path,
-                  style:
-                      TextStyle(color: Theme.of(context).colorScheme.primary),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Theme.of(context).colorScheme.onSurface,
+                  backgroundColor: Theme.of(context).colorScheme.surface,
                 ),
+                onPressed: () async {
+                  var folder = await FilePicker.platform
+                      .getDirectoryPath(dialogTitle: "Pick a folder");
+                  if (folder != null) {
+                    setState(() {
+                      Directory.current = folder;
+                    });
+                    savePreference(
+                        prefWorkingDirectory, Directory.current.path);
+                  }
+                },
+                child: Text(Directory.current.path),
               ),
             ],
           ),
