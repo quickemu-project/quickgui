@@ -1,13 +1,13 @@
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
 
 import '../../globals.dart';
 import '../../mixins/preferences_mixin.dart';
 import '../home_page/home_page_button_group.dart';
+
 
 class DownloaderMenu extends StatefulWidget {
   const DownloaderMenu({Key? key}) : super(key: key);
@@ -43,29 +43,35 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
                 children: [
                   Text(
                     "${context.t('Directory where the machines are stored')}:",
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.dark
+                        ? Theme.of(context).colorScheme.onSurface
+                        : Theme.of(context).colorScheme.onPrimary,
+                    ),
                   ),
                   const SizedBox(
                     width: 8,
                   ),
-                  Text.rich(
-                    TextSpan(
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () async {
-                          var folder = await FilePicker.platform
-                              .getDirectoryPath(dialogTitle: "Pick a folder");
-                          if (folder != null) {
-                            setState(() {
-                              Directory.current = folder;
-                            });
-                            savePreference(
-                                prefWorkingDirectory, Directory.current.path);
-                          }
-                        },
-                      text: Directory.current.path,
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white70
+                          : Theme.of(context).colorScheme.primary,
+                      backgroundColor: Theme.of(context).canvasColor,
                     ),
-                  ),
+                    onPressed: () async {
+                      var folder = await FilePicker.platform
+                          .getDirectoryPath(dialogTitle: "Pick a folder");
+                      if (folder != null) {
+                        setState(() {
+                          Directory.current = folder;
+                        });
+                        savePreference(
+                            prefWorkingDirectory, Directory.current.path);
+                      }
+                    },
+                    child: Text(Directory.current.path),
+                  ),                
                 ],
               ),
             ),
