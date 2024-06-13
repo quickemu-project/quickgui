@@ -17,24 +17,24 @@ dependencies:
       ref: 03d957e8b5c99fc83cd4a781031b154ab3de8753
   quiver: ^3.0.1+1
   tuple: ^2.0.0
-  file_picker: ^4.1.6
+  file_picker: ^8.0.5
   shared_preferences: ^2.0.8
-  package_info_plus: ^1.3.0
+  package_info_plus: ^8.0.0
   provider: ^6.0.1
-  intl: ^0.17.0
+  intl: ^0.19.0
   gettext: ^1.2.0
   gettext_parser: ^0.2.0
   flutter_localizations: 
     sdk: flutter
   desktop_notifications: ^0.6.1
-  flutter_svg: ^0.23.0
+  flutter_svg: ^2.0.10+1
   gettext_i18n: ^1.0.2
   url_launcher: ^6.1.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
+  flutter_lints: ^4.0.0
 
 flutter:
   uses-material-design: true
