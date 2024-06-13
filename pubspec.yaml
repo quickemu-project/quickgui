@@ -30,6 +30,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   gettext_i18n: ^1.0.2
   url_launcher: ^6.1.6
+  process_run: ^0.14.2
 
 dev_dependencies:
   flutter_test:

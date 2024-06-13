@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
 import 'package:path/path.dart' as path;
+import 'package:process_run/shell.dart';
 
 import '../globals.dart';
 import '../mixins/preferences_mixin.dart';
@@ -78,10 +79,10 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
 
   void _getTerminalEmulator() async {
     // Find out which terminal emulator we have set as the default.
-    ProcessResult result = await Process.run('which', ['x-terminal-emulator']);
-    if (result.exitCode == 0) {
+    String result = whichSync('x-terminal-emulator') ?? '';
+    if (result.isNotEmpty) {
       String terminalEmulator =
-          await File(result.stdout.toString().trim()).resolveSymbolicLinks();
+          await File(result).resolveSymbolicLinks();
       terminalEmulator = path.basenameWithoutExtension(terminalEmulator);
       if (_supportedTerminalEmulators.contains(terminalEmulator)) {
         setState(() {
@@ -92,9 +93,9 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
   }
 
   void _detectSpice() async {
-    ProcessResult result = await Process.run('which', ['spicy']);
+    var result = whichSync('spicy') ?? '';
     setState(() {
-      _spicy = result.exitCode == 0;
+      _spicy = result.isNotEmpty ;
     });
   }
 
@@ -272,11 +273,12 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                       ? null
                       : () async {
                           Map<String, VmInfo> activeVms = _activeVms;
-                          List<String> args = ['--vm', currentVm + '.conf'];
+                          List<String> command = ['quickemu', '--vm', '$currentVm.conf'];
                           if (_spicy) {
-                            args.addAll(['--display', 'spice']);
+                            command.addAll(['--display', 'spice']);
                           }
-                          await Process.start('quickemu', args);
+                          var shell = Shell();
+                          await shell.run(command.join(' '));
                           VmInfo info = _parseVmInfo(currentVm);
                           activeVms[currentVm] = info;
                           setState(() {
@@ -313,7 +315,8 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                         ).then((result) {
                           result = result ?? false;
                           if (result) {
-                            Process.run('killall', [currentVm]);
+                            var shell = Shell();
+                            shell.run(['killall', currentVm].join(' '));
                             setState(() {
                               _activeVms.remove(currentVm);
                             });
@@ -352,12 +355,14 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                         ).then((result) async {
                           result = result ?? 'cancel';
                           if (result != 'cancel') {
-                            List<String> args = [
+                            List<String> command = [
+                              'quickemu',
                               '--vm',
-                              currentVm + '.conf',
-                              '--delete-' + result
+                              '$currentVm.conf',
+                              '--delete-$result'
                             ];
-                            await Process.start('quickemu', args);
+                            var shell = Shell();
+                            await shell.run(command.join(' '));
                           }
                         });
                       },
@@ -380,7 +385,8 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                 onPressed: !_spicy
                     ? null
                     : () {
-                        Process.start('spicy', ['-p', vmInfo.spicePort!]);
+                        var shell = Shell();
+                        shell.run(['spicy', '-p', vmInfo.spicePort!].join(' '));
                       },
               ),
               IconButton(
@@ -455,7 +461,9 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                                 sshArgs = ['-e', command];
                                 break;
                             }
-                            Process.start(_terminalEmulator!, sshArgs);
+                            sshArgs.insert(0, _terminalEmulator!);
+                            var shell = Shell();
+                            shell.run(sshArgs.join(' '));
                           }
                         });
                       },
