@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
 
 import '../model/operating_system.dart';
+import '../model/osicons.dart';
 
 class OperatingSystemSelection extends StatefulWidget {
   const OperatingSystemSelection({Key? key}) : super(key: key);
@@ -76,13 +77,13 @@ class _OperatingSystemSelectionState extends State<OperatingSystemSelection> {
                 var item = list[index];
                 Widget icon;
 
-                try {
+                if (osIcons.containsKey(item.code)) {
                   icon = SvgPicture.asset(
-                    "assets/quickemu-icons/${item.code}.svg",
+                    osIcons[item.code]!,
                     width: 32,
                     height: 32,
                   );
-                } catch (e) {
+                } else {
                   // Replace with generic icon
                   icon = const Icon(Icons.computer, size: 32);
                 }

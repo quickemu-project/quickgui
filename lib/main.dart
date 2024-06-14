@@ -1,10 +1,12 @@
 import 'dart:io';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 import 'package:window_size/window_size.dart';
+import 'package:flutter/services.dart';
 
 import 'src/app.dart';
 import 'src/mixins/app_version.dart';
@@ -12,6 +14,7 @@ import 'src/model/app_settings.dart';
 import 'src/model/operating_system.dart';
 import 'src/model/option.dart';
 import 'src/model/version.dart';
+import 'src/model/osicons.dart';
 
 Future<List<OperatingSystem>> loadOperatingSystems(bool showUbuntus) async {
   var process = await Process.run('quickget', ['list_csv']);
@@ -54,6 +57,22 @@ Future<List<OperatingSystem>> loadOperatingSystems(bool showUbuntus) async {
   return output;
 }
 
+Future<void> getIcons() async {
+  final manifestContent = await rootBundle.loadString('AssetManifest.json');
+  final Map<String, dynamic> manifestMap = json.decode(manifestContent);
+  final imagePaths = manifestMap.keys
+      .where((String key) => key.contains('quickemu-icons/'))
+      .where((String key) => key.contains('.svg'))
+      .toList();
+  for (final imagePath in imagePaths) {
+    String filename = imagePath
+        .split('/')
+        .last;
+    String id = filename.substring(0, filename.lastIndexOf('.'));
+    osIcons[id] = imagePath;
+  }
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Don't forget to also change the size in linux/my_application.cc:50
@@ -62,6 +81,7 @@ void main() async {
   final foundQuickGet = await Process.run('which', ['quickget']);
   if (foundQuickGet.exitCode == 0) {
     gOperatingSystems = await loadOperatingSystems(false);
+    getIcons();
     AppVersion.packageInfo = await PackageInfo.fromPlatform();
   }
   runApp(

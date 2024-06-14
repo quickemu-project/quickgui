@@ -4,7 +4,6 @@ import 'dart:core';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
@@ -14,6 +13,7 @@ import 'package:process_run/shell.dart';
 import '../globals.dart';
 import '../mixins/preferences_mixin.dart';
 import '../model/vminfo.dart';
+import '../model/osicons.dart';
 
 /// VM manager page.
 /// Displays a list of available VMs, running state and connection info,
@@ -255,8 +255,22 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
         });
       }
     }
+    String vmStem = currentVm;
+    SvgPicture? osIcon;
+    while(vmStem.contains('-')) {
+      vmStem = vmStem.substring(0, vmStem.lastIndexOf('-'));
+      if (osIcons.containsKey(vmStem)) {
+        osIcon = SvgPicture.asset(
+          osIcons[vmStem]!,
+          width: 32,
+          height: 32,
+        );
+        break;
+      }
+    }
     return <Widget>[
       ListTile(
+          leading: osIcon ?? const Icon(Icons.computer, size: 32),
           title: Text(currentVm),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
