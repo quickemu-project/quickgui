@@ -80,7 +80,7 @@ void main() async {
   setWindowMaxSize(const Size(692, 580));
   final foundQuickGet = await Process.run('which', ['quickget']);
   if (foundQuickGet.exitCode == 0) {
-    gOperatingSystems = await loadOperatingSystems(false);
+    gOperatingSystems = loadOperatingSystems(false);
     getIcons();
     AppVersion.packageInfo = await PackageInfo.fromPlatform();
   }
