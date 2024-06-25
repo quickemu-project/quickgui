@@ -4,10 +4,13 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.2.8-1
 
 environment:
-  sdk: ">=2.15.0 <3.0.0"
+  sdk: ">=3.2.0 <4.0.0"
+  flutter: "3.22.2"
 
 dependencies:
   flutter:
+    sdk: flutter
+  flutter_localizations:
     sdk: flutter
   cupertino_icons: ^1.0.2
   window_size: 
@@ -23,8 +26,6 @@ dependencies:
   provider: ^6.0.1
   gettext: ^1.2.0
   gettext_parser: ^0.2.0
-  flutter_localizations: 
-    sdk: flutter
   desktop_notifications: ^0.6.1
   flutter_svg: ^2.0.10+1
   gettext_i18n: ^1.0.2
