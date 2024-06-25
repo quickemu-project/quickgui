@@ -1,0 +1,40 @@
+name: Build Quickgui 🏗️
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+# TODO: arm64 runner
+# https://github.blog/changelog/2024-06-03-actions-arm-based-linux-and-windows-runners-are-now-in-public-beta/
+
+jobs:
+  build-linux-x64:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          architecture: x64
+          flutter-version-file: pubspec.yaml
+      - name: Install system dependencies 📦️
+        run: sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-0 libgtk-3-dev libblkid1 liblzma5
+      - name: Install Flutter dependencies 🦋
+        run: flutter pub get
+      - name: Enable Linux build 🐧
+        run: flutter config --enable-linux-desktop
+      - name: Build artifacts 🏗️
+        run: flutter build linux --release
+      - name: Build output 🌳
+        run: tree build/linux/x64/release/bundle
+      - name: Upload artifacts ⤴️
+        uses: actions/upload-artifact@v4
+        with:
+          name: Quickgui-${{github.run_number}}-linux.zip
+          path: build/linux/x64/release/bundle
+          overwrite: true
