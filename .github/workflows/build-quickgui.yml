@@ -38,3 +38,18 @@ jobs:
           name: Quickgui-${{github.run_number}}-linux-x64
           path: build/linux/x64/release/bundle
           overwrite: true
+
+  build-with-nix:
+    runs-on: ubuntu-22.04
+    permissions:
+      id-token: "write"
+      contents: "read"
+    steps:
+      - uses: "actions/checkout@v4"
+      - uses: "DeterminateSystems/nix-installer-action@v12"
+      - uses: "DeterminateSystems/magic-nix-cache-action@v7"
+      - name: "Build with Nix ❄️"
+        run: |
+          nix build .#quickgui
+          tree ./result
+
