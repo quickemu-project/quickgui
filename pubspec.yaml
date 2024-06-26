@@ -19,7 +19,7 @@ dependencies:
       path: plugins/window_size
       ref: 03d957e8b5c99fc83cd4a781031b154ab3de8753
   quiver: ^3.2.1
-  tuple: ^2.0.0
+  tuple: ^2.0.2
   file_picker: ^8.0.5
   shared_preferences: ^2.0.8
   package_info_plus: ^8.0.0
