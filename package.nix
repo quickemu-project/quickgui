@@ -21,7 +21,7 @@ flutter.buildFlutterApplication rec {
   pubspecLock = lib.importJSON ./pubspec.lock.json;
 
   gitHashes = {
-    window_size = "sha256-mn1UFA4Vqh3f5MqlTy9LueWr6qvCOHLujVoEQi0KMNw=";
+    window_size = "sha256-XelNtp7tpZ91QCEcvewVphNUtgQX7xrp5QP0oFo6DgM=";
   };
 
   # These things are added to LD_LIBRARY_PATH, but not PATH
