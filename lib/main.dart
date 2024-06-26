@@ -34,7 +34,7 @@ Future<List<OperatingSystem>> loadOperatingSystems(bool showUbuntus) async {
     Tuple5 supportedVersion;
     if (chunks.length == 4) // Legacy version of quickget
     {
-      supportedVersion = Tuple5.fromList([...chunks, "wget"]);
+      supportedVersion = Tuple5.fromList([...chunks, "curl"]);
     } else {
       var t5 = [chunks[0], chunks[1], chunks[2], chunks[3], chunks[4]].toList();
       supportedVersion = Tuple5.fromList(t5);

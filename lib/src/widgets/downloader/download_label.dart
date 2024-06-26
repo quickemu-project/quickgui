@@ -21,7 +21,7 @@ class DownloadLabel extends StatelessWidget {
           ? Text(context.t('Download finished.'))
           : data != null
               ? downloader != 'zsync'
-                  ? downloader == 'wget' || downloader == 'aria2c'
+                  ? downloader == 'curl' || downloader == ''
                       ? Text(context.t('Downloading... {0}%',
                           args: [(data! * 100).toInt()]))
                       : Text(context.t('{0} Mbs downloaded', args: [data!]))
