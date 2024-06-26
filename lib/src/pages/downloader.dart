@@ -31,7 +31,7 @@ class Downloader extends StatefulWidget {
 
 class _DownloaderState extends State<Downloader> {
   final notificationsClient = NotificationsClient();
-  final wgetPattern = RegExp("( [0-9.]+%)");
+  final curlPattern = RegExp("( [0-9.]+%)");
   late final Stream<double> _progressStream;
   bool _downloadFinished = false;
   var controller = StreamController<double>();
@@ -43,8 +43,8 @@ class _DownloaderState extends State<Downloader> {
     super.initState();
   }
 
-  void parseWgetProgress(String line) {
-    var matches = wgetPattern.allMatches(line).toList();
+  void parseCurlProgress(String line) {
+    var matches = curlPattern.allMatches(line).toList();
     if (matches.isNotEmpty) {
       var percent = matches[0].group(1);
       if (percent != null) {
@@ -60,9 +60,9 @@ class _DownloaderState extends State<Downloader> {
       options.add(widget.option!.option);
     }
     Process.start('quickget', options).then((process) {
-      if (widget.option!.downloader == 'wget') {
-        process.stderr.transform(utf8.decoder).forEach(parseWgetProgress);
-      } else if (widget.option!.downloader == 'zsync') {
+      if (widget.option!.downloader != 'zsync') {
+        process.stderr.transform(utf8.decoder).forEach(parseCurlProgress);
+      } else {
         controller.add(-1);
       }
 
@@ -118,7 +118,7 @@ class _DownloaderState extends State<Downloader> {
               stream: _progressStream,
               builder: (context, AsyncSnapshot<double> snapshot) {
                 var data = !snapshot.hasData ||
-                        widget.option!.downloader != 'wget'
+                        widget.option!.downloader != 'curl'
                     ? null
                     : snapshot.data;
                 return Column(
