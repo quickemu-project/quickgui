@@ -23,7 +23,7 @@ dependencies:
   file_picker: ^8.0.5
   shared_preferences: ^2.2.3
   package_info_plus: ^8.0.0
-  provider: ^6.0.1
+  provider: ^6.1.2
   gettext: ^1.2.0
   gettext_parser: ^0.2.0
   desktop_notifications: ^0.6.1
