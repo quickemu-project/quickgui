@@ -8,23 +8,16 @@
 }:
 let
   runtimeBinDependencies = [ gnome.zenity ];
-  versionMatches =
-    builtins.match ''
-      .*
-      version:[[:blank:]]"([[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+)"
-      .*
-    '' (builtins.readFile ./pubspec.yaml);
+  versionMatches = builtins.match ''
+    .*
+    .*version:[[:blank:]]([[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+\+?[[:digit:]]*)
+    .*
+  '' (builtins.readFile ./pubspec.yaml);
 in
 flutter.buildFlutterApplication rec {
   pname = "quickgui";
   version = builtins.concatStringsSep "" versionMatches;
-  src = fetchFromGitHub {
-    owner = "quickemu-project";
-    repo = "quickgui";
-    #rev = version;
-    rev = "d4893b5d2cb2e7ef271e4c2d66683e30d70352e2";
-    hash = "sha256-V9wSENva/5Khqzor+Umj7BooWecDqn91Bj+waDMMPyY=";
-  };
+  src = lib.cleanSource ./.;
   pubspecLock = lib.importJSON ./pubspec.lock.json;
 
   gitHashes = {
