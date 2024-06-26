@@ -4,8 +4,8 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.2.9+1
 
 environment:
-  sdk: ">=3.2.0 <4.0.0"
   flutter: "3.22.0"
+  sdk: ">=3.2.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -13,24 +13,24 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   cupertino_icons: ^1.0.8
+  desktop_notifications: ^0.6.3
+  file_picker: ^8.0.5
+  flutter_svg: ^2.0.10+1
+  gettext: ^1.2.0
+  gettext_i18n: ^1.0.5
+  gettext_parser: ^0.2.0
+  package_info_plus: ^8.0.0
+  process_run: ^0.14.2
+  provider: ^6.1.2
+  quiver: ^3.2.1
+  url_launcher: ^6.3.0
+  shared_preferences: ^2.2.3
+  tuple: ^2.0.2
   window_size:
     git:
       url: https://github.com/google/flutter-desktop-embedding.git
       path: plugins/window_size
       ref: eb3964990cf19629c89ff8cb4a37640c7b3d5601
-  quiver: ^3.2.1
-  tuple: ^2.0.2
-  file_picker: ^8.0.5
-  shared_preferences: ^2.2.3
-  package_info_plus: ^8.0.0
-  provider: ^6.1.2
-  gettext: ^1.2.0
-  gettext_parser: ^0.2.0
-  desktop_notifications: ^0.6.3
-  flutter_svg: ^2.0.10+1
-  gettext_i18n: ^1.0.5
-  url_launcher: ^6.3.0
-  process_run: ^0.14.2
 
 dev_dependencies:
   flutter_test:
