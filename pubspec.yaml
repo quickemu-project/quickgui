@@ -29,7 +29,7 @@ dependencies:
   desktop_notifications: ^0.6.3
   flutter_svg: ^2.0.10+1
   gettext_i18n: ^1.0.2
-  url_launcher: ^6.1.6
+  url_launcher: ^6.3.0
   process_run: ^0.14.2
 
 dev_dependencies:
