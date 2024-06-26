@@ -45,7 +45,7 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
           child: ListView(
             children: [
               ListTile(
-                title: Text("quickgui $_version",
+                title: Text("Quickgui $_version",
                     style: Theme.of(context).textTheme.titleLarge),
               ),
               /*
