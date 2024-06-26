@@ -17,7 +17,7 @@ import 'src/model/version.dart';
 import 'src/model/osicons.dart';
 
 Future<List<OperatingSystem>> loadOperatingSystems(bool showUbuntus) async {
-  var process = await Process.run('quickget', ['list_csv']);
+  var process = await Process.run('quickget', ['--list-csv']);
   var stdout = process.stdout as String;
   var output = <OperatingSystem>[];
 
