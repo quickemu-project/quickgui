@@ -30,11 +30,11 @@ jobs:
         run: flutter config --enable-linux-desktop
       - name: Build artifacts 🏗️
         run: flutter build linux --release
-      - name: Build output 🌳
+      - name: Show artifacts 👀
         run: tree build/linux/x64/release/bundle
       - name: Upload artifacts ⤴️
         uses: actions/upload-artifact@v4
         with:
-          name: Quickgui-${{github.run_number}}-linux.zip
+          name: Quickgui-${{github.run_number}}-linux-x64
           path: build/linux/x64/release/bundle
           overwrite: true

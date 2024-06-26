@@ -1,0 +1,25 @@
+appId: com.github.quickemu-project.quickgui
+display_name: Quickgui
+icon: assets/images/logo_pink.png
+
+keywords:
+  - QEMU
+  - quickemu
+  - quickget
+  - Virtual Machine
+  - Hypervisor
+  - macOS
+  - Windows
+
+generic_name: Desktop frontend for Quickget and Quickemu
+
+categories:
+  - System
+  - Development
+  - Emulator
+
+startup_notify: true
+
+# You can also specify [metainfo](https://freedesktop.org/software/appstream/docs/chap-Quickstart.html) file
+# which contains metadata of the app.
+# metainfo: linux/packaging/myappid.appdata.xml

@@ -1,0 +1,14 @@
+output: dist/
+releases:
+  - name: dev
+    jobs:
+      - name: quickgui-dev-linux
+        package:
+          platform: linux
+          target: deb
+          build_args:
+            flavor: dev
+            target-platform: linux-x86
+            dart-define:
+              APP_ENV: dev
+        publish_to: none

@@ -1,0 +1,93 @@
+name: Publish Quickgui 🏷️
+
+on:
+  push:
+    tags:
+      - "v?[0-9]+.[0-9]+.[0-9]+*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "The existing tag to publish"
+        type: "string"
+        required: true
+
+# TODO: arm64 runner
+# https://github.blog/changelog/2024-06-03-actions-arm-based-linux-and-windows-runners-are-now-in-public-beta/
+
+jobs:
+  version-check:
+    # The git tag and pubspec.yaml version must be identical.
+    name: "Check versions ⚖️"
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: "Compare App and Git versions 🟰"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          APP_VERSION=$(grep "^version" pubspec.yaml | cut -d' ' -f2)
+          GIT_VERSION=$(git describe --tags | cut -d'-' -f1)
+          echo "App version: ${REL_VERSION}"
+          echo "Git version: ${GIT_VERSION}"
+          if [ "${APP_VERSION}" != "${GIT_VERSION}" ]; then
+              echo "ERROR! Version mismatch.";
+              exit 1
+          fi
+
+  build-linux-x64:
+    needs: [version-check]
+    name: "Build Linux x64 🏗️"
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          architecture: x64
+          flutter-version-file: pubspec.yaml
+      - name: Install system dependencies 📦️
+        run: sudo apt-get install -y clang cmake libblkid1 liblzma5 libgtk-3-0 libgtk-3-dev ninja-build pkg-config
+      - name: Install Flutter dependencies 🦋
+        run: flutter pub get
+      - name: Activate flutter_distributor 🚀
+        run: dart pub global activate flutter_distributor
+      - name: Build AppImage 🐧
+        run: |
+          sudo apt-get install -y libfuse-dev locate
+          wget -q "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage" -O /usr/local/bin/appimagetool
+          chmod +x /usr/local/bin/appimagetool
+          flutter_distributor package --platform=linux --targets=appimage
+      - name: Build .deb 🍥
+        run: |
+          sudo apt-get install -y dpkg
+          flutter_distributor package --platform=linux --targets=deb
+      - name: Build .rpm 🎩
+        run: |
+          sudo apt-get install -y patchelf rpm
+          flutter_distributor package --platform=linux --targets=rpm
+      - name: Build .zip 🤐
+        run: flutter_distributor package --platform=linux --targets=zip
+      - name: Show artifacts 👀
+        run: tree dist/
+
+  publish-release:
+    needs: [build-linux-x64]
+    name: "Publish Release 📤️"
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v4
+    - name: Publish release ${{ github.ref }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        REL_VER=$(grep "^version" pubspec.yaml | cut -d' ' -f2)
+        gh release create "${{ github.ref }}" --draft --generate-notes
+        for PKG in AppImage deb rpm zip; do
+          gh release upload "${{ github.ref }}" "dist/${REL_VER}/quickgui-${REL_VER}-linux.${PKG}" --clobber
+        done
+        if [ "$(gh release view "${{ github.ref }}" --json assets --template '{{len .assets}}')" -lt 0 ]; then
+          exit 1
+        fi
+        gh release edit "${{ github.ref }}" --draft=false

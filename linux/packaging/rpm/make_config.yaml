@@ -1,0 +1,32 @@
+display_name: Quickgui
+group: Application/Emulator
+vendor: Quickemu Project
+packager: Martin Wimpress
+packagerEmail: code@wimpress.io
+license: MIT
+url: https://github.com/quickemu-project/quickgui
+icon: assets/images/logo_pink.png
+requires:
+  - zenity
+
+keywords:
+  - QEMU
+  - quickemu
+  - quickget
+  - Virtual Machine
+  - Hypervisor
+  - macOS
+  - Windows
+
+summary: Desktop frontend for Quickget and Quickemu
+
+categories:
+  - System
+  - Development
+  - Emulator
+
+startup_notify: true
+
+# You can also specify [metainfo](https://freedesktop.org/software/appstream/docs/chap-Quickstart.html) file
+# which contains metadata of the app.
+# metainfo: linux/packaging/myappid.appdata.xml
