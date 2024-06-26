@@ -28,7 +28,7 @@ dependencies:
   gettext_parser: ^0.2.0
   desktop_notifications: ^0.6.3
   flutter_svg: ^2.0.10+1
-  gettext_i18n: ^1.0.2
+  gettext_i18n: ^1.0.5
   url_launcher: ^6.3.0
   process_run: ^0.14.2
 
