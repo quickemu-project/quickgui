@@ -13,7 +13,7 @@ This project is discussed mainly on [![Discord](https://img.shields.io/discord/7
 
 ### quickemu
 
-For this tool to work, you need to have `quickget`, from the `quickemu` 
+For this tool to work, you need to have `quickget`, from the `quickemu`
 package, in your current `path`.
 Go to the `quickemu` [github page](https://github.com/quickemu-project/quickemu)
 for more information about installing the tool.
@@ -29,7 +29,7 @@ sudo add-apt-repository ppa:yannick-mauray/quickgui
 sudo apt update
 ```
 
-Then, install the package: 
+Then, install the package:
 ```
 sudo apt install quickgui
 ```
