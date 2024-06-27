@@ -74,8 +74,14 @@ Future<void> getIcons() async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Don't forget to also change the size in linux/my_application.cc:50
-  setWindowMinSize(const Size(692, 580));
-  setWindowMaxSize(const Size(692, 580));
+  // Don't forget to also change the size in macos/Runner/MainFlutterWindow.swift:7
+  if (Platform.isMacOS) {
+    setWindowMinSize(const Size(692 + 2, 580 + 30));
+    setWindowMaxSize(const Size(692 + 2, 580 + 30));
+  } else {
+    setWindowMinSize(const Size(692, 580));
+    setWindowMaxSize(const Size(692, 580));
+  }
   final foundQuickGet = await Process.run('which', ['quickget']);
   if (foundQuickGet.exitCode == 0) {
     gOperatingSystems = loadOperatingSystems(false);
