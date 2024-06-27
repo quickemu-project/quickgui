@@ -1,13 +1,15 @@
 display_name: Quickgui
-group: Application/Emulator
-vendor: Quickemu Project
+summary: An elegant virtual machine manager for the desktop
+icon: assets/images/logo_pink.png
 packager: Martin Wimpress
 packagerEmail: code@wimpress.io
-license: MIT
-url: https://github.com/quickemu-project/quickgui
-icon: assets/images/logo_pink.png
+
+vendor: Quickemu Project
 requires:
   - zenity
+group: Application/Emulator
+license: MIT
+url: https://github.com/quickemu-project/quickgui
 
 keywords:
   - QEMU
@@ -18,12 +20,9 @@ keywords:
   - macOS
   - Windows
 
-summary: Desktop frontend for Quickget and Quickemu
-
 categories:
   - System
   - Development
-  - Emulator
 
 startup_notify: true
 

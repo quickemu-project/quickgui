@@ -1,5 +1,6 @@
-appId: com.github.quickemu-project.quickgui
 display_name: Quickgui
+appId: com.github.quickemu-project.quickgui
+generic_name: An elegant virtual machine manager for the desktop
 icon: assets/images/logo_pink.png
 
 keywords:
@@ -11,12 +12,9 @@ keywords:
   - macOS
   - Windows
 
-generic_name: Desktop frontend for Quickget and Quickemu
-
 categories:
   - System
   - Development
-  - Emulator
 
 startup_notify: true
 
