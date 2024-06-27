@@ -4,7 +4,7 @@ import 'package:gettext_i18n/gettext_i18n.dart';
 import '../model/version.dart';
 
 class OptionSelection extends StatefulWidget {
-  const OptionSelection(this.version, {Key? key}) : super(key: key);
+  const OptionSelection(this.version, {super.key});
 
   final Version version;
 

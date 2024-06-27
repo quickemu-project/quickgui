@@ -7,7 +7,7 @@ import '../widgets/home_page/main_menu.dart';
 import '../widgets/left_menu.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+  const MainPage({super.key});
 
   @override
   State<MainPage> createState() => _MainPageState();

@@ -20,7 +20,7 @@ import '../model/osicons.dart';
 /// Displays a list of available VMs, running state and connection info,
 /// with buttons to start and stop VMs.
 class Manager extends StatefulWidget {
-  const Manager({Key? key}) : super(key: key);
+  const Manager({super.key});
 
   @override
   State<Manager> createState() => _ManagerState();
