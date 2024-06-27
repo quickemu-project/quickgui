@@ -6,7 +6,7 @@ import '../model/operating_system.dart';
 import '../model/osicons.dart';
 
 class OperatingSystemSelection extends StatefulWidget {
-  const OperatingSystemSelection({Key? key}) : super(key: key);
+  const OperatingSystemSelection({super.key});
 
   @override
   State<OperatingSystemSelection> createState() =>

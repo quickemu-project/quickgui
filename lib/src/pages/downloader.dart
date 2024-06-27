@@ -15,11 +15,11 @@ import '../widgets/downloader/download_progress_bar.dart';
 
 class Downloader extends StatefulWidget {
   const Downloader({
-    Key? key,
     required this.operatingSystem,
     required this.version,
     this.option,
-  }) : super(key: key);
+    super.key,
+  });
 
   final OperatingSystem operatingSystem;
   final Version version;
