@@ -13,7 +13,7 @@ import '../../pages/version_selection.dart';
 import 'downloader_page_button.dart';
 
 class HomePageButtonGroup extends StatefulWidget {
-  const HomePageButtonGroup({Key? key}) : super(key: key);
+  const HomePageButtonGroup({super.key});
 
   @override
   State<HomePageButtonGroup> createState() => _HomePageButtonGroupState();
@@ -26,10 +26,10 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
 
   @override
   Widget build(BuildContext context) {
-    var _versionButtonLabel =
+    var versionButtonLabel =
         _selectedVersion?.version ?? context.t('Select...');
     if (_selectedOption?.option.isNotEmpty ?? false) {
-      _versionButtonLabel = "$_versionButtonLabel (${_selectedOption!.option})";
+      versionButtonLabel = "$versionButtonLabel (${_selectedOption!.option})";
     }
     return Row(
       children: [
@@ -60,7 +60,7 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
         ),
         DownloaderPageButton(
           label: context.t('Version'),
-          text: _versionButtonLabel, //_selectedVersion?.version ?? 'Select...',
+          text: versionButtonLabel, //_selectedVersion?.version ?? 'Select...',
           onPressed: (_selectedOperatingSystem != null)
               ? () {
                   Navigator.of(context)

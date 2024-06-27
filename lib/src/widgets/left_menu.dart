@@ -38,14 +38,14 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
 
   @override
   Widget build(BuildContext context) {
-    var _version = AppVersion.packageInfo!.version;
+    var version = AppVersion.packageInfo!.version;
     return Consumer<AppSettings>(
       builder: (context, appSettings, _) {
         return Drawer(
           child: ListView(
             children: [
               ListTile(
-                title: Text("Quickgui $_version",
+                title: Text("Quickgui $version",
                     style: Theme.of(context).textTheme.titleLarge),
               ),
               /*
@@ -86,7 +86,7 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
                       value: currentLocale,
                       items: supportedLocales
                           .map(
-                              (e) => DropdownMenuItem(child: Text(e), value: e))
+                              (e) => DropdownMenuItem(value: e, child: Text(e)))
                           .toList(),
                       onChanged: (value) {
                         setState(() {
