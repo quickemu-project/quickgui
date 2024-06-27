@@ -61,11 +61,10 @@ class _AppState extends State<App> with PreferencesMixin {
             builder: (context, appSettings, _) => MaterialApp(
               theme: ThemeData(
                   useMaterial3: true,
-                  colorScheme:  ColorScheme.fromSwatch(
+                  colorScheme: ColorScheme.fromSwatch(
                     primarySwatch: Colors.pink,
                     backgroundColor: Colors.white,
-                  )
-              ),
+                  )),
               darkTheme: ThemeData(
                 useMaterial3: true,
                 colorScheme: ColorScheme.fromSwatch(
