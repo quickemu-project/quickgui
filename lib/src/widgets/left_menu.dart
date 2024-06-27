@@ -9,7 +9,7 @@ import '../mixins/preferences_mixin.dart';
 import '../model/app_settings.dart';
 
 class LeftMenu extends StatefulWidget {
-  const LeftMenu({Key? key}) : super(key: key);
+  const LeftMenu({super.key});
 
   @override
   State<LeftMenu> createState() => _LeftMenuState();

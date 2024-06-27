@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class HomePageButton extends StatelessWidget {
   const HomePageButton({
-    Key? key,
     this.label,
     required this.text,
     this.onPressed,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String? label;
   final String text;

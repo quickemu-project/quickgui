@@ -3,10 +3,10 @@ import 'package:gettext_i18n/gettext_i18n.dart';
 
 class CancelDismissButton extends StatelessWidget {
   const CancelDismissButton({
-    Key? key,
     required this.downloadFinished,
     required this.onCancel,
-  }) : super(key: key);
+    super.key,
+  });
 
   final bool downloadFinished;
   final VoidCallback onCancel;

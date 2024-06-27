@@ -6,7 +6,7 @@ import '../../pages/manager.dart';
 import '../home_page/home_page_button.dart';
 
 class MainMenu extends StatelessWidget {
-  const MainMenu({Key? key}) : super(key: key);
+  const MainMenu({super.key});
 
   @override
   Widget build(BuildContext context) {
