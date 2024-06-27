@@ -1,22 +1,24 @@
 display_name: Quickgui
 package_name: quickgui
+generic_name: An elegant virtual machine manager for the desktop
+icon: assets/images/logo_pink.png
+
 maintainer:
-  name: Mark Johnson
-  email: mark@barrenfrozenwasteland.com
+  name: Martin Wimpress
+  email: code@wimpress.io
 co_authors:
-  - name: Martin Wimpress
-    email: code@wimpress.io
+  - name: Mark Johnson
+    email: mark@barrenfrozenwasteland.com
   - name:  Yannick Mauray
     email: yannick.mauray@gmail.com
-priority: optional
-section: x11
-installed_size: 16777216
-essential: false
-icon: assets/images/logo_pink.png
 dependencies:
   - zenity
 recommended_dependencies:
   - quickemu
+priority: optional
+section: x11
+installed_size: 16777216
+essential: false
 
 keywords:
   - QEMU
@@ -27,12 +29,9 @@ keywords:
   - macOS
   - Windows
 
-generic_name: Desktop frontend for Quickget and Quickemu
-
 categories:
   - System
   - Development
-  - Emulator
 
 startup_notify: true
 
