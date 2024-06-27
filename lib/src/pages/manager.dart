@@ -32,6 +32,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
   final List<String> _sshVms = [];
   String? _terminalEmulator;
   final List<String> _supportedTerminalEmulators = [
+    'alacritty',
     'cool-retro-term',
     'gnome-terminal',
     'guake',
@@ -463,6 +464,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                               case 'mate-terminal':
                                 sshArgs.insert(0, '--');
                                 break;
+                              case 'alacritty':
                               case 'xterm':
                               case 'lxterm':
                               case 'uxterm':
