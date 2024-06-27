@@ -64,7 +64,7 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
                       }
                     },
                     child: Text(Directory.current.path),
-                  ),                
+                  ),
                 ],
               ),
             ),

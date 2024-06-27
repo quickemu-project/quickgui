@@ -43,7 +43,7 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
 
   @override
   Widget build(BuildContext context) {
-    var _version = AppVersion.packageInfo!.version;
+    var version = AppVersion.packageInfo!.version;
     return Consumer<AppSettings>(
       builder: (context, appSettings, _) {
         return Drawer(

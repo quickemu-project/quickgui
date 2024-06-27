@@ -1,20 +1,20 @@
-import 'dart:io';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 import 'package:window_size/window_size.dart';
-import 'package:flutter/services.dart';
 
 import 'src/app.dart';
 import 'src/mixins/app_version.dart';
 import 'src/model/app_settings.dart';
 import 'src/model/operating_system.dart';
 import 'src/model/option.dart';
-import 'src/model/version.dart';
 import 'src/model/osicons.dart';
+import 'src/model/version.dart';
 
 Future<List<OperatingSystem>> loadOperatingSystems(bool showUbuntus) async {
   var process = await Process.run('quickget', ['--list-csv']);
@@ -65,9 +65,7 @@ Future<void> getIcons() async {
       .where((String key) => key.contains('.svg'))
       .toList();
   for (final imagePath in imagePaths) {
-    String filename = imagePath
-        .split('/')
-        .last;
+    String filename = imagePath.split('/').last;
     String id = filename.substring(0, filename.lastIndexOf('.'));
     osIcons[id] = imagePath;
   }
