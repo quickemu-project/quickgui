@@ -89,6 +89,18 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
           _terminalEmulator = path.basename(terminalEmulator);
         });
       }
+    } else {
+      // If x-terminal-emulator doesn't exist or returns empty, look for
+      // supported terminals in the PATH
+      for (String terminal in _supportedTerminalEmulators) {
+        String? terminalPath = whichSync(terminal);
+        if (terminalPath != null) {
+          setState(() {
+            _terminalEmulator = terminal;
+          });
+          break;
+        }
+      }
     }
   }
 
