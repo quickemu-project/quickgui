@@ -138,3 +138,17 @@ msgstr ""
 
 msgid "Search version"
 msgstr ""
+
+msgid "quickemu was not found in your PATH"
+msgstr ""
+
+msgid "Please install it and try again."
+msgstr ""
+
+# The complete sentence is "See github.com/quickemu-project/quickemu for more information"
+msgid "See"
+msgstr ""
+
+# The complete sentence is "See github.com/quickemu-project/quickemu for more information"
+msgid "for more information"
+msgstr ""
