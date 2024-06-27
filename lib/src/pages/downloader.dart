@@ -30,7 +30,7 @@ class Downloader extends StatefulWidget {
 }
 
 class _DownloaderState extends State<Downloader> {
-  final notificationsClient = NotificationsClient();
+  final notificationsClient = Platform.isMacOS ? null : NotificationsClient();
   final curlPattern = RegExp("( [0-9.]+%)");
   late final Stream<double> _progressStream;
   bool _downloadFinished = false;
@@ -71,7 +71,7 @@ class _DownloaderState extends State<Downloader> {
         controller.close();
         setState(() {
           _downloadFinished = true;
-          notificationsClient.notify(
+          notificationsClient?.notify(
             _cancelled
                 ? context.t('Download cancelled')
                 : context.t('Download complete'),
