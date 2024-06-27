@@ -4,7 +4,7 @@
   Quickgui
 </h1>
 
-<p align="center">A Flutter frontend for <kbd>quickget</kbd> and <a href="https://github.com/quickemu-project/quickemu">quickemu</a>.</p>
+<p align="center">An elegant virtual machine manager for the desktop</p>
 <div align="center"><img src="assets/github/screenshot1.png" alt="Quickgui screenshot"></div>
 
 This project is discussed mainly on [![Discord](https://img.shields.io/discord/712850672223125565?color=87a556&label=WimpysWorld%20Discord&logo=discord&logoColor=ffffff&style=flat-square)](https://discord.gg/sNmz3uw) server
