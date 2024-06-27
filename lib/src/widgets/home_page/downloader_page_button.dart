@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class DownloaderPageButton extends StatelessWidget {
   const DownloaderPageButton({
-    Key? key,
     this.label,
     required this.text,
     this.onPressed,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String? label;
   final String text;
