@@ -1,5 +1,9 @@
 name: Publish Quickgui 🏷️
-
+# To release a new version:
+# - Make sure pubspec.yaml version: has been revved and is in the format "X.Y.Z+n"
+# - Create a git tag with the format "X.Y.Z" and push it
+# - The build and publish will run automatically if the git tag matches the
+#   pubspec.yaml version without the +n suffix
 on:
   push:
     tags:
@@ -27,9 +31,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          APP_VERSION=$(grep "^version" pubspec.yaml | cut -d' ' -f2)
+          APP_VERSION=$(grep "^version" pubspec.yaml | cut -d' ' -f2 | sed 's/+.*//')
           GIT_VERSION=$(git describe --tags | cut -d'-' -f1)
-          echo "App version: ${REL_VERSION}"
+          echo "App version: ${APP_VERSION}"
           echo "Git version: ${GIT_VERSION}"
           if [ "${APP_VERSION}" != "${GIT_VERSION}" ]; then
               echo "ERROR! Version mismatch.";
@@ -41,31 +45,34 @@ jobs:
     name: "Build Linux x64 🏗️"
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - name: "Checkout 🥡"
+        uses: actions/checkout@v4
+      - name: "Install Flutter 🦋"
+        uses: subosito/flutter-action@v2
         with:
           channel: stable
           architecture: x64
           flutter-version-file: pubspec.yaml
       - name: Install system dependencies 📦️
-        run: sudo apt-get install -y clang cmake libblkid1 liblzma5 libgtk-3-0 libgtk-3-dev ninja-build pkg-config
+        run: |
+          sudo apt-get -y install clang cmake libblkid1 liblzma5 libgtk-3-0 libgtk-3-dev ninja-build pkg-config
       - name: Install Flutter dependencies 🦋
         run: flutter pub get
       - name: Activate flutter_distributor 🚀
         run: dart pub global activate flutter_distributor
       - name: Build AppImage 🐧
         run: |
-          sudo apt-get install -y libfuse-dev locate
+          sudo apt-get -y install libfuse-dev locate
           wget -q "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage" -O /usr/local/bin/appimagetool
           chmod +x /usr/local/bin/appimagetool
           flutter_distributor package --platform=linux --targets=appimage
       - name: Build .deb 🍥
         run: |
-          sudo apt-get install -y dpkg
+          sudo apt-get -y install dpkg
           flutter_distributor package --platform=linux --targets=deb
       - name: Build .rpm 🎩
         run: |
-          sudo apt-get install -y patchelf rpm
+          sudo apt-get -y install patchelf rpm
           flutter_distributor package --platform=linux --targets=rpm
       - name: Build .zip 🤐
         run: flutter_distributor package --platform=linux --targets=zip
@@ -110,3 +117,63 @@ jobs:
           visibility: "public"
           name: "quickemu-project/quickgui"
           tag: "${{ inputs.tag }}"
+
+  publish-ppa-x64:
+    needs: [version-check]
+    runs-on: ubuntu-22.04
+    steps:
+      - name: "Checkout 🥡"
+        uses: actions/checkout@v4
+      - name: "Install Flutter 🦋"
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          architecture: x64
+          flutter-version-file: pubspec.yaml
+      - name: "Install dependencies 💾"
+        run: |
+          sudo apt-get -y install clang cmake ninja-build pkg-config libgtk-3-0 libgtk-3-dev libblkid1 liblzma5
+          sudo apt-get -y install debhelper-compat distro-info dput devscripts rsync
+      - name: Install Flutter dependencies 🦋
+        run: flutter pub get
+      - name: Enable Linux Desktop 🐧
+        run: flutter config --enable-linux-desktop
+      - name: Build artifacts 🏗️
+        run: flutter build linux --release
+      - name: "Import gpg key 🔑"
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.PPA_GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PPA_GPG_PASSPHRASE }}
+      - name: "Upload to PPA ⤴️"
+        env:
+          DEBEMAIL: ${{ secrets.DEBEMAIL }}
+          DEBFULLNAME: ${{ secrets.DEBFULLNAME }}
+        run: |
+          # Version variables
+          DEB_VER=$(grep "^version" pubspec.yaml | cut -d' ' -f2 | sed 's/+/-/')
+          TAR_VER=$(grep "^version" pubspec.yaml | cut -d' ' -f2 | sed 's/+.*//')
+          STAMP=$(date +%y%j.%H%M)
+          # Create a "fake" orig.tar.xz
+          mkdir -p ubuntu/build
+          cp -a build/linux/x64/release/bundle/* ubuntu/build/
+          cp -a assets/resources/quickgui.desktop ubuntu/build/
+          for SIZE in 16 32 48 64 128 256 512; do
+            mkdir -p ubuntu/build/icons/hicolor/${SIZE}x${SIZE}/apps/
+            cp -av assets/resources/quickgui_${SIZE}.png ubuntu/build/icons/hicolor/${SIZE}x${SIZE}/apps/quickgui.png
+          done
+          tar cvf "ubuntu/quickgui_${TAR_VER}.orig.tar" --directory ubuntu/build .
+          xz -vv -fz "ubuntu/quickgui_${TAR_VER}.orig.tar"
+          # Make a debian "source" package
+          mkdir -p ubuntu/build/debian
+          cp -a linux/packaging/debian/* ubuntu/build/debian/
+          sed -i 's/Architecture: any/Architecture: amd64/g' ubuntu/build/debian/control
+          cd ubuntu/build
+          for CODENAME in $(distro-info --supported); do
+            rm debian/changelog
+            dch --package quickgui --newversion="${DEB_VER}~${CODENAME}${STAMP}" --distribution=${CODENAME} "New upstream release." --create
+            dpkg-buildpackage -d -S -sa
+            dput ppa:flexiondotorg/quickemu ../quickgui_${DEB_VER}~${CODENAME}${STAMP}_source.changes
+          done
+      - name: Show artifacts 👀
+        run: tree ubuntu/

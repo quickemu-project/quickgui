@@ -13,20 +13,23 @@ on:
 # https://github.blog/changelog/2024-06-03-actions-arm-based-linux-and-windows-runners-are-now-in-public-beta/
 
 jobs:
-  build-linux-x64:
+  test-build-linux-x64:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - name: "Checkout 🥡"
+        uses: actions/checkout@v4
+      - name: "Install Flutter 🦋"
+        uses: subosito/flutter-action@v2
         with:
           channel: stable
           architecture: x64
           flutter-version-file: pubspec.yaml
-      - name: Install system dependencies 📦️
-        run: sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-0 libgtk-3-dev libblkid1 liblzma5
+      - name: "Install dependencies 💾"
+        run: |
+          sudo apt-get -y install clang cmake ninja-build pkg-config libgtk-3-0 libgtk-3-dev libblkid1 liblzma5
       - name: Install Flutter dependencies 🦋
         run: flutter pub get
-      - name: Enable Linux build 🐧
+      - name: Enable Linux Desktop 🐧
         run: flutter config --enable-linux-desktop
       - name: Build artifacts 🏗️
         run: flutter build linux --release
@@ -39,15 +42,77 @@ jobs:
           path: build/linux/x64/release/bundle
           overwrite: true
 
-  build-with-nix:
+  test-build-ppa-x64:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: "Checkout 🥡"
+        uses: actions/checkout@v4
+      - name: "Install Flutter 🦋"
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          architecture: x64
+          flutter-version-file: pubspec.yaml
+      - name: "Install dependencies 💾"
+        run: |
+          sudo apt-get -y install clang cmake ninja-build pkg-config libgtk-3-0 libgtk-3-dev libblkid1 liblzma5
+          sudo apt-get -y install debhelper-compat distro-info dput devscripts rsync
+      - name: Install Flutter dependencies 🦋
+        run: flutter pub get
+      - name: Enable Linux Desktop 🐧
+        run: flutter config --enable-linux-desktop
+      - name: Build artifacts 🏗️
+        run: flutter build linux --release
+      - name: "Import gpg key 🔑"
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.PPA_GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PPA_GPG_PASSPHRASE }}
+      - name: "Upload to PPA ⤴️"
+        env:
+          DEBEMAIL: ${{ secrets.DEBEMAIL }}
+          DEBFULLNAME: ${{ secrets.DEBFULLNAME }}
+        run: |
+          # Version variables
+          DEB_VER=$(grep "^version" pubspec.yaml | cut -d' ' -f2 | sed 's/+/-/')
+          TAR_VER=$(grep "^version" pubspec.yaml | cut -d' ' -f2 | sed 's/+.*//')
+          STAMP=$(date +%y%j.%H%M)
+          # Create a "fake" orig.tar.xz
+          mkdir -p ubuntu/build
+          cp -a build/linux/x64/release/bundle/* ubuntu/build/
+          cp -a assets/resources/quickgui.desktop ubuntu/build/
+          for SIZE in 16 32 48 64 128 256 512; do
+            mkdir -p ubuntu/build/icons/hicolor/${SIZE}x${SIZE}/apps/
+            cp -av assets/resources/quickgui_${SIZE}.png ubuntu/build/icons/hicolor/${SIZE}x${SIZE}/apps/quickgui.png
+          done
+          tar cvf "ubuntu/quickgui_${TAR_VER}.orig.tar" --directory ubuntu/build .
+          xz -vv -fz "ubuntu/quickgui_${TAR_VER}.orig.tar"
+          # Make a debian "source" package
+          mkdir -p ubuntu/build/debian
+          cp -a linux/packaging/debian/* ubuntu/build/debian/
+          sed -i 's/Architecture: any/Architecture: amd64/g' ubuntu/build/debian/control
+          cd ubuntu/build
+          for CODENAME in $(distro-info --supported); do
+            rm debian/changelog
+            dch --package quickgui --newversion="${DEB_VER}~${CODENAME}${STAMP}" --distribution=${CODENAME} "New upstream release." --create
+            dpkg-buildpackage -d -S -sa
+            #dput ppa:flexiondotorg/rubbish ../quickgui_${DEB_VER}~${CODENAME}${STAMP}_source.changes
+          done
+      - name: Show artifacts 👀
+        run: tree ubuntu/
+
+  test-build-nix-x64:
     runs-on: ubuntu-22.04
     permissions:
       id-token: "write"
       contents: "read"
     steps:
-      - uses: "actions/checkout@v4"
-      - uses: "DeterminateSystems/nix-installer-action@v12"
-      - uses: "DeterminateSystems/magic-nix-cache-action@v7"
+      - name: "Checkout 🥡"
+        uses: "actions/checkout@v4"
+      - name: "Install Nix ❄️"
+        uses: "DeterminateSystems/nix-installer-action@v12"
+      - name: "Enable Magic Nix Cache 🪄"
+        uses: "DeterminateSystems/magic-nix-cache-action@v7"
       - name: "Build with Nix ❄️"
         run: |
           nix build .#quickgui
