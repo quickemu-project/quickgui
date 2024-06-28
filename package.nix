@@ -31,8 +31,10 @@ flutter.buildFlutterApplication rec {
   nativeBuildInputs = [ copyDesktopItems ];
 
   postFixup = ''
-    mkdir -p $out/share/pixmaps
-    cp $out/app/data/flutter_assets/assets/images/logo_pink.png $out/share/pixmaps/quickemu.png
+    for SIZE in 16 32 48 64 128 256 512; do
+      mkdir -p $out/share/icons/hicolor/$SIZEx$SIZE/apps/
+      cp -av assets/resources/quickgui_$SIZE.png $out/share/icons/hicolor/$SIZEx$SIZE/apps/quickgui.png
+    done
   '';
 
   desktopItems = [
@@ -41,12 +43,13 @@ flutter.buildFlutterApplication rec {
       exec = "quickgui";
       icon = "quickgui";
       desktopName = "Quickgui";
+      comment = "An elegant virtual machine manager for the desktop";
       categories = [ "Development" "System" ];
     })
   ];
 
   meta = with lib; {
-    description = "Flutter frontend for quickemu";
+    description = "An elegant virtual machine manager for the desktop";
     homepage = "https://github.com/quickemu-project/quickgui";
     changelog = "https://github.com/quickemu-project/quickgui/releases/";
     license = licenses.mit;
