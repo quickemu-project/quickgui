@@ -50,7 +50,7 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
             children: [
               ListTile(
                 title: Text("Quickgui $_version",
-                    style: Theme.of(context).textTheme.titleLarge),
+                  style: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold)),
               ),
               const Divider(),
               Padding(
