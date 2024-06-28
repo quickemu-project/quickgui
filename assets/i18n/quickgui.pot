@@ -152,3 +152,38 @@ msgstr ""
 # The complete sentence is "See github.com/quickemu-project/quickemu for more information"
 msgid "for more information"
 msgstr ""
+
+msgid "Delete {0}"
+msgstr ""
+
+msgid "You are about to delete {0}. This cannot be undone. Would you like to delete the disk image but keep the configuration, or delete the whole VM?"
+msgstr ""
+
+msgid "Delete disk image"
+msgstr ""
+
+msgid "Delete whole VM"
+msgstr ""
+
+msgid "Connect display with SPICE"
+msgstr ""
+
+msgid "SPICE client not found"
+msgstr ""
+
+msgid "Connect with SSH"
+msgstr ""
+
+msgid "SSH server not detected on guest"
+msgstr ""
+
+msgid "Launch SSH connection to {0}"
+msgstr ""
+
+msgid "SSH username"
+msgstr ""
+
+# Connect to the VM via SSH
+msgid "Connect"
+msgstr ""
+

@@ -359,20 +359,25 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                         showDialog<String?>(
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
-                            title: Text('Delete $currentVm'),
-                            content: Text('You are about to delete $currentVm. This cannot be undone. Would you like to delete the disk image but keep the configuration, or delete the whole VM?'),
+                            title: Text(
+                                context.t('Delete {0}', args: [currentVm])),
+                            content: Text(
+                              context.t(
+                                  'You are about to delete {0}. This cannot be undone. Would you like to delete the disk image but keep the configuration, or delete the whole VM?',
+                                  args: [currentVm]),
+                            ),
                             actions: [
                               TextButton(
-                                child: const Text('Cancel'),
+                                child: Text(context.t('Cancel')),
                                 onPressed: () =>
                                     Navigator.pop(context, 'cancel'),
                               ),
                               TextButton(
-                                child: const Text('Delete disk image'),
+                                child: Text(context.t('Delete disk image')),
                                 onPressed: () => Navigator.pop(context, 'disk'),
                               ),
                               TextButton(
-                                child: const Text('Delete whole VM'),
+                                child: Text(context.t('Delete whole VM')),
                                 onPressed: () => Navigator.pop(context, 'vm'),
                               ) // set up the AlertDialog
                             ],
@@ -405,8 +410,8 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                   semanticLabel: 'Connect display with SPICE',
                 ),
                 tooltip: _spicy
-                    ? 'Connect display with SPICE'
-                    : 'SPICE client not found',
+                    ? context.t('Connect display with SPICE')
+                    : context.t('SPICE client not found'),
                 onPressed: !_spicy
                     ? null
                     : () {
@@ -420,8 +425,8 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                     colorFilter: ColorFilter.mode(sshy ? buttonColor : Colors.grey, BlendMode.srcIn)
                 ),
                 tooltip: sshy
-                    ? 'Connect with SSH'
-                    : 'SSH server not detected on guest',
+                    ? context.t('Connect with SSH')
+                    : context.t('SSH server not detected on guest'),
                 onPressed: !sshy
                     ? null
                     : () {
@@ -430,20 +435,25 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                         showDialog<bool>(
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
-                            title: Text('Launch SSH connection to $currentVm'),
+                            title: Text(
+                              context.t(
+                                'Launch SSH connection to {0}',
+                                args: [currentVm],
+                              ),
+                            ),
                             content: TextField(
                               controller: usernameController,
-                              decoration: const InputDecoration(
-                                  hintText: "SSH username"),
+                              decoration: InputDecoration(
+                                  hintText: context.t("SSH username")),
                             ),
                             actions: <Widget>[
                               TextButton(
                                 onPressed: () => Navigator.pop(context, false),
-                                child: const Text('Cancel'),
+                                child: Text(context.t('Cancel')),
                               ),
                               TextButton(
                                 onPressed: () => Navigator.pop(context, true),
-                                child: const Text('Connect'),
+                                child: Text(context.t('Connect')),
                               ),
                             ],
                           ),
