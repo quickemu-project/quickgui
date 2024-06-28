@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:quickgui/src/supported_locales.dart';
 
 class AppSettings extends ChangeNotifier {
-  ThemeMode? _themeMode;
+  ThemeMode _themeMode = ThemeMode.light;
   String? _activeLocale;
 
-  ThemeMode get themeMode => _themeMode ?? ThemeMode.system;
+  ThemeMode get themeMode => _themeMode;
 
   String get activeLocale => _activeLocale ?? Platform.localeName;
 
@@ -38,8 +38,7 @@ class AppSettings extends ChangeNotifier {
   }
 
   set useDarkModeSilently(bool useDarkMode) {
-    //_themeMode = useDarkMode ? ThemeMode.dark : ThemeMode.light;
-    _themeMode = ThemeMode.light;
+    _themeMode = useDarkMode ? ThemeMode.dark : ThemeMode.light;
   }
 
   set useDarkMode(bool useDarkMode) {
