@@ -1,0 +1,27 @@
+Source: quickgui
+Section: utils
+Priority: optional
+Maintainer: Martin Wimpress <code@wimpress.io>
+Build-Depends:
+ debhelper-compat (= 12),
+Standards-Version: 4.5.1
+Homepage: https://github.com/quickemu-project/quickgui
+Vcs-Browser: https://github.com/quickemu-project/quickgui
+Vcs-Git: https://github.com/quickemu-project/quickgui.git
+Rules-Requires-Root: no
+
+Package: quickgui
+Architecture: any
+Depends:
+ zenity,
+ ${misc:Depends},
+ ${shlibs:Depends},
+Recommends:
+ quickemu,
+Description: An elegant virtual machine manager for the desktop
+ An elegant desktop application to quickly create an run optimised virtual
+ machines using Quickget and Quickemu. 
+ .
+ Nearly 1000 operating systems supported including Windows, macOS, BSDs, and
+ 100s of Linux distros. All with automated download and configuration.
+ .

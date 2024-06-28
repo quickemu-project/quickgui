@@ -1,9 +1,9 @@
 [Desktop Entry]
 Version=1.0
-Name=quickgui
-Comment=A Flutter frontend for quickemu
-Exec=/usr/bin/quickgui
+Name=Quickgui
+Comment=An elegant virtual machine manager for the desktop
+Exec=quickgui
 Terminal=false
 Type=Application
-Icon=quickgui_512.png
-Categories=System;
+Icon=quickgui
+Categories=Development;System;

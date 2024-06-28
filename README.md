@@ -4,7 +4,7 @@
   Quickgui
 </h1>
 
-<p align="center">A Flutter frontend for <kbd>quickget</kbd> and <a href="https://github.com/quickemu-project/quickemu">quickemu</a>.</p>
+<p align="center">An elegant virtual machine manager for the desktop</p>
 <div align="center"><img src="assets/github/screenshot1.png" alt="Quickgui screenshot"></div>
 
 This project is discussed mainly on [![Discord](https://img.shields.io/discord/712850672223125565?color=87a556&label=WimpysWorld%20Discord&logo=discord&logoColor=ffffff&style=flat-square)](https://discord.gg/sNmz3uw) server
@@ -13,7 +13,7 @@ This project is discussed mainly on [![Discord](https://img.shields.io/discord/7
 
 ### quickemu
 
-For this tool to work, you need to have `quickget`, from the `quickemu` 
+For this tool to work, you need to have `quickget`, from the `quickemu`
 package, in your current `path`.
 Go to the `quickemu` [github page](https://github.com/quickemu-project/quickemu)
 for more information about installing the tool.
@@ -29,7 +29,7 @@ sudo add-apt-repository ppa:yannick-mauray/quickgui
 sudo apt update
 ```
 
-Then, install the package: 
+Then, install the package:
 ```
 sudo apt install quickgui
 ```

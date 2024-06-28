@@ -1,0 +1,5 @@
+quickgui usr/share/quickgui
+data/ usr/share/quickgui
+lib/ usr/share/quickgui
+icons/ usr/share
+quickgui.desktop usr/share/applications
