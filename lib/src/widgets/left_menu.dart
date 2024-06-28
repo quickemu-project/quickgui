@@ -16,11 +16,15 @@ class LeftMenu extends StatefulWidget {
 }
 
 class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
+  List<DropdownMenuItem<String>> _dropdownMenuItems = [];
   late String currentLocale;
 
   @override
   void initState() {
     super.initState();
+    _dropdownMenuItems = supportedLocales
+      .map((e) => DropdownMenuItem(child: Text(e), value: e))
+      .toList();
   }
 
   @override
@@ -93,10 +97,7 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
                     ),
                     DropdownButton<String>(
                       value: currentLocale,
-                      items: supportedLocales
-                          .map(
-                              (e) => DropdownMenuItem(child: Text(e), value: e))
-                          .toList(),
+                      items: _dropdownMenuItems,
                       onChanged: (value) {
                         setState(() {
                           currentLocale = value!;
