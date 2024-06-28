@@ -5,7 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
 import 'package:provider/provider.dart';
 import 'package:quickgui/src/mixins/app_version.dart';
-import 'package:quickgui/src/pages/deget_not_found_page.dart';
+import 'package:quickgui/src/pages/debget_not_found_page.dart';
 import 'package:quickgui/src/supported_locales.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

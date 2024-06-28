@@ -138,3 +138,15 @@ msgstr "Dossier ou sont enregistrées les machines"
 
 msgid "Search version"
 msgstr "Chercher une option"
+
+msgid "quickemu was not found in your PATH"
+msgstr "quickemu n'est pas dans votre PATH"
+
+msgid "Please install it and try again."
+msgstr "Veuillez l'installer, et essayer de nouveau."
+
+msgid "See"
+msgstr "Voir"
+
+msgid "for more information"
+msgstr "pour plus d'informations"
