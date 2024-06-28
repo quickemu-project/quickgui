@@ -1,119 +1,156 @@
-<h1 align="center">
-  <img src=".github/logo.png" alt="Quickgui" width="256" />
-  <br />
-  Quickgui
-</h1>
+<div align="center">
+<img src=".github/logo.png" alt="Quickgui" width="256" />
 
-<p align="center">An elegant virtual machine manager for the desktop</p>
-<div align="center"><img src="assets/github/screenshot1.png" alt="Quickgui screenshot"></div>
+# Quickgui
 
-This project is discussed mainly on [![Discord](https://img.shields.io/discord/712850672223125565?color=87a556&label=WimpysWorld%20Discord&logo=discord&logoColor=ffffff&style=flat-square)](https://discord.gg/sNmz3uw) server
+**An elegant virtual machine manager for the desktop**
 
-## Install
+**Made with 💝 for <img src=".github/tux.png" align="top" width="24" alt="Tux (Linux)"/>**
+<!--& <img src=".github/apple.png" align="top" width="24" alt="Apple (macOS)"/>-->
+</div>
 
-### quickemu
 
-For this tool to work, you need to have `quickget`, from the `quickemu`
-package, in your current `path`.
-Go to the `quickemu` [github page](https://github.com/quickemu-project/quickemu)
-for more information about installing the tool.
+<p align="center">
+  &nbsp;<a href="https://wimpysworld.io/discord" target="_blank"><img alt="Discord" src="https://img.shields.io/discord/712850672223125565?style=for-the-badge&logo=discord&logoColor=%23ffffff&label=Discord&labelColor=%234253e8&color=%23e4e2e2"></a>
+</p>
 
-### Standard package
+# Introduction
 
-On Ubuntu, `quickgui` can be installed as a standard package.
+Quickgui is a graphical user interface for the [Quickemu](https://github.com/quickemu-project/quickemu) virtual machine manager.
+Quickgui enables you to create and manage virtual machines from a simple and elegant interface.
+Nearly 1000 operating systems supported including Windows, macOS, BSDs, and 100s of Linux distros. All with automated downloads and configuration.
 
-First, add this ppa (this only needs to be done once):
+# Install
 
+Quickgui depends on Quickemu. Most package managers will automatically install Quickemu when you install Quickgui.
+
+If you don't have Quickemu installed then go and follow the Quickemu installation steps for your operating system:
+
+- [**Quickemu Installation**](https://github.com/quickemu-project/quickemu/wiki/01-Installation)
+
+## Debian
+
+A .deb package is available for Debian on our [release page](https://github.com/quickemu-project/quickgui/releases).
+
+- Download the latest .deb package
+- Install it with `apt-get install ./quickgui-1.2.9+1-linux.deb`
+
+## Fedora
+
+A .rpm package is available for Fedora on our [release page](https://github.com/quickemu-project/quickgui/releases).
+
+## NixOS
+
+### Flake
+
+[![FlakeHub](https://img.shields.io/endpoint?url=https://flakehub.com/f/quickemu-project/quickgui/badge)](https://flakehub.com/flake/quickemu-project/quickgui)
+
+Stable releases of Quickgui are published to FlakeHub for NixOS users. See the Quickemu flake on FlakeHub for more details:
+
+- <https://flakehub.com/flake/quickemu-project/quickgui>
+
+### Nixpkgs
+
+Add Quickgui to your `systemPackages`. For example:
+
+```nix
+systemPackages = with pkgs; [
+  quickgui
+];
 ```
-sudo add-apt-repository ppa:yannick-mauray/quickgui
-sudo apt update
+
+## Ubuntu
+
+Ubuntu users can install Quickgui using the [.deb package described above for Debian](#debian) or from our PPA.
+
+```shell
+sudo add-apt-repository ppa:flexiondotorg/quickgui
+sudo apt-get update
+sudo apt-get install quickgui
 ```
 
-Then, install the package:
-```
-sudo apt install quickgui
-```
+## Other Linux
+
+We provide an AppImage and a pre-compiled binary of Quickemu in a .zip file.
+
+### AppImage
+
+The AppImage should work on most Linux distributions.
+
+* [Download](https://github.com/quickemu-project/quickgui/releases) the latest AppImage.
+* `chmod +x quickgui-1.2.9+1-linux.AppImage`
+* `./quickgui-1.2.9+1-linux.AppImage`
 
 ### Pre-compiled binary
 
-* [Download](https://github.com/quickemu-project/quickgui/releases) the binary.
-* Uncompress the tarball wherever you want.
-* From anywhere on the filesystem, run the app.
+* [Download](https://github.com/quickemu-project/quickgui/releases) the latest .zip file.
+* `unzip quickgui-1.2.9+1-linux.zip`
+* `cd quickgui-1.2.9+1-linux`
+* `chmod +x quickgui`
+* `./quickgui`
 
-```bash
-xz quickgui-a.b.c-d.tar.xz
-tar xvf quickgui-a.b.c-d.tar
-/path/to/quickgui
-```
+# Compile
 
-Alternatively, use `update-alternatives` to install `quickgui` system-wide:
+To compile the Quickgui yourself:
 
-```bash
-sudo update-alternatives --install /usr/local/bin/quickgui quickgui /path/to/quickgui 50
-```
+* [Install Flutter](https://docs.flutter.dev/get-started/install/linux/desktop)
+* `git clone https://github.com/quickemu-project/quickgui.git`
+* `cd quickgui`
+* `flutter pub get`
+* `flutter config --enable-linux-desktop`
+* `flutter build linux --release`
 
-## Build
+The compiled binary will be in `build/linux/x64/release/bundle/quickgui`.
+You can run it with:
 
-If you don't want to run the binary, you can rebuild the application yourself:
-
-* [Set up Flutter](https://ubuntu.com/blog/getting-started-with-flutter-on-ubuntu)
-* Clone this repo,
-* Switch to the project's directory,
-* Build the project,
-* Run the app.
-
-```bash
-git clone https://github.com/quickgui/quickgui.git
-cd quickgui
-flutter build linux --release
+```shell
 ./build/linux/x64/release/bundle/quickgui
 ```
 
-You can also use `update-alternatives` for easier access to the app.
+# Usage
 
-## Usage
+<div align="center">
+<small><b>Main Screen</b></small><br /><br />
+<img src="assets/github/screenshot_01_main.png" width="346" height="290" alt="Quickgui Main screen">
+</div>
 
-### Downloading VMs
+## Downloader
 
-From the main screen, select the operating system you want to use. The list can be filtered.
+- From the main screen, click "Create new machines"
+- Select the Operating System you want to install
+- Select the Version of the operating system you want to use.
+- Click the "Download" button.
+  - The ISO will be downloaded
+- When the download is complete, click the "Dismiss" button.
 
+<div align="center">
+<small><b>Downloader</b></small><br />
+<img src="assets/github/screenshot_02_downloader.png" width="346" height="290" alt="Quickgui Downloader">
+</div>
 
-<div align="center"><img src="assets/github/screenshot1.png" alt="Main screen"></div>
+## Manager
 
-<div align="center"><img src="assets/github/screenshot2.png" alt="List of supported operating systems"></div>
+- From the main screen, click "Manage existing machines"
+- The Manager screen will list available Quickemu VMs in the directory you have chosen to store them.
+- Start a VM by clicking the "Play" (▶) button.
+- Kill a running VM by clicking the "Stop" (■) button.
+- Clicking the "Trash" (🗑) button will prompt you to delete the whole VM or just its disk image.
 
-<div align="center"><img src="assets/github/screenshot3.png" alt="Search a distribution"></div>
+<div align="center">
+<small><b>Manager</b></small><br />
+<img src="assets/github/screenshot_03_manager.png" width="346" height="290" alt="Quickgui Manager">
+</div>
 
-Then, select the version:
+When a VM is running, Quickgui will display the host ports that are mapped to the SPICE and SSH ports on the guest. These ports are used to connect to the guest for display and SSH access.
 
-<div align="center"><img src="assets/github/screenshot4.png" alt="Main screen after selection of the operating system"></div>
+### SPICE
 
-<div align="center"><img src="assets/github/screenshot5.png" alt="Versions of the selected operating system"></div>
+If you close the SPICE display and wish to reconnect, you can click the "Connect display with SPICE" button. To open an SSH session, you can click the "Connect with SSH" button.
 
-If there are some options (Windows language, Pop!_OS nvidia or Intel, etc..), they will be displayed:
+If the "Connect display with SPICE" button is disabled, the `spicy` client cannot be found. Ensure it is installed, and in your PATH (it should have been installed with `quickemu`).
 
-<div align="center"><img src="assets/github/screenshot8.png" alt="Choose an option"></div>
+### SSH
 
-<div align="center"><img src="assets/github/screenshot9.png" alt="Option is displayed"></div>
+If the "Connect with SSH" button is disabled, an SSH server cannot be detected on the guest. Most guest operating systems will not install an SSH server by default, so if it was not an option during installation, you will need to install one yourself. It must be listening on port 22 (the default SSH port). Once a server is installed and running, it should be detected automatically.
 
-Then click "Download". The ISO will be downloaded in the current working directory, in 99% of cases that will be the directory where `quickgui` was invoked from.
-
-<div align="center"><img src="assets/github/screenshot10.png" alt="Waiting for download"></div>
-
-<div align="center"><img src="assets/github/screenshot11.png" alt="Downloading"></div>
-
-<div align="center"><img src="assets/github/screenshot12.png" alt="Download finished"></div>
-
-### Managing VMs
-
-The "Manage running VMs" screen will list available Quickemu VMs in the current working directory.
-
-VMs can be launched by clicking the "Play" (▶) button. Running VMs will have the "Play" and "Stop" buttons highlighted in green and red respectively, and pressing "Stop" (■) will kill the running VM.
-
-When a VM is running, the host's ports mapped to SPICE and SSH on the guest will be displayed. If you close the SPICE display and wish to reconnect, you can click the "Connect display with SPICE" button. To open an SSH session, you can click the "Connect with SSH" button.
-
-If the "Connect display with SPICE" button is disabled, the `spicy` client could not be found. Ensure it is installed, and in your PATH (it should have been installed with `quickemu`).
-
-If the "Connect with SSH" button is disabled, an SSH server could not be detected on the guest. Most guest operating systems will not install an SSH server by default, so if it was not an option during install, you will need to install one yourself. It must be listening on port 22 (the default SSH port). Once a server is installed and running, it should be detected automatically.
-
-"Connect with SSH" will use the terminal emulator symlinked to `x-terminal-emulator`. Several common terminal emulators are supported. If yours is not, please raise an issue on this repository.
+"Connect with SSH" will open a terminal and attempt to connect to the guest. If the connection is successful, you will be prompted for the password. If the connection is unsuccessful, you might need to remove the host key for the guest from your `~/.ssh/known_hosts` file using something like `ssh-keygen -R [localhost]:22220`.
