@@ -150,3 +150,37 @@ msgstr "See"
 
 msgid "for more information"
 msgstr "for more information"
+
+msgid "Delete {0}"
+msgstr "Delete {0}"
+
+msgid "You are about to delete {0}. This cannot be undone. Would you like to delete the disk image but keep the configuration, or delete the whole VM?"
+msgstr "You are about to delete {0}. This cannot be undone. Would you like to delete the disk image but keep the configuration, or delete the whole VM?"
+
+msgid "Delete disk image"
+msgstr "Delete disk image"
+
+msgid "Delete whole VM"
+msgstr "Delete whole VM"
+
+msgid "Connect display with SPICE"
+msgstr "Connect display with SPICE"
+
+msgid "SPICE client not found"
+msgstr "SPICE client not found"
+
+msgid "Connect with SSH"
+msgstr "Connect with SSH"
+
+msgid "SSH server not detected on guest"
+msgstr "SSH server not detected on guest"
+
+msgid "Launch SSH connection to {0}"
+msgstr "Launch SSH connection to {0}"
+
+msgid "SSH username"
+msgstr "SSH username"
+
+# Connect to the VM via SSH
+msgid "Connect"
+msgstr "Connect"
