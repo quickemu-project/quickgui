@@ -40,9 +40,9 @@ jobs:
               exit 1
           fi
 
-  build-linux-x64:
+  publish-linux-x64:
     needs: [version-check]
-    name: "Build Linux x64 🏗️"
+    name: "Publish Linux (x64) 🐙"
     runs-on: ubuntu-22.04
     steps:
       - name: "Checkout 🥡"
@@ -78,26 +78,19 @@ jobs:
         run: flutter_distributor package --platform=linux --targets=zip
       - name: Show artifacts 👀
         run: tree dist/
-
-  publish-release:
-    needs: [build-linux-x64]
-    name: "Publish Release 📤️"
-    runs-on: ubuntu-22.04
-    steps:
-    - uses: actions/checkout@v4
-    - name: Publish release ${{ github.ref }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        REL_VER=$(grep "^version" pubspec.yaml | cut -d' ' -f2)
-        gh release create "${{ github.ref }}" --draft --generate-notes
-        for PKG in AppImage deb rpm zip; do
-          gh release upload "${{ github.ref }}" "dist/${REL_VER}/quickgui-${REL_VER}-linux.${PKG}" --clobber
-        done
-        if [ "$(gh release view "${{ github.ref }}" --json assets --template '{{len .assets}}')" -lt 0 ]; then
-          exit 1
-        fi
-        gh release edit "${{ github.ref }}" --draft=false
+      - name: "Publish Release 📤️"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          REL_VER=$(grep "^version" pubspec.yaml | cut -d' ' -f2)
+          gh release create "${{ github.ref }}" --draft --generate-notes
+          for PKG in AppImage deb rpm zip; do
+            gh release upload "${{ github.ref }}" "dist/${REL_VER}/quickgui-${REL_VER}-linux.${PKG}" --clobber
+          done
+          if [ "$(gh release view "${{ github.ref }}" --json assets --template '{{len .assets}}')" -lt 0 ]; then
+            exit 1
+          fi
+          gh release edit "${{ github.ref }}" --draft=false
 
   publish-flakehub:
     needs: [version-check]
@@ -120,6 +113,7 @@ jobs:
 
   publish-ppa-x64:
     needs: [version-check]
+    name: "Publish PPA (x64) 🟠"
     runs-on: ubuntu-22.04
     steps:
       - name: "Checkout 🥡"
