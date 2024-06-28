@@ -52,7 +52,9 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
                 title: Text("Quickgui $_version",
                   style: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold)),
               ),
-              const Divider(),
+              Container(
+                height: 4.0,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
@@ -86,7 +88,9 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
                   ],
                 ),
               ),
-              const Divider(),
+              Container(
+                height: 4.0,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
