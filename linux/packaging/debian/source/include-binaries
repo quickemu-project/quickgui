@@ -1,0 +1,4 @@
+lib/libapp.so
+lib/libflutter_linux_gtk.so
+lib/liburl_launcher_linux_plugin.so
+lib/libwindow_size_plugin.so
