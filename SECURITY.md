@@ -13,6 +13,6 @@ Here are the versions of Quickgui currently being supported with security update
 
 If you discover a vulnerability in Quickgui then [file an issue](https://github.com/quickemu-project/quickgui/issues/new) and click *Report a vulnerability*.
 
-- Quickemu is a spare-time hobby project.
+- Quickgui is a spare-time hobby project.
 - We do not have SLAs for responding to security issues.
 - It is a best-efforts basis.
