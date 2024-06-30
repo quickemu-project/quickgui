@@ -47,6 +47,14 @@ mkShell rec {
   # Packages installed via `dart pub global activate package_name` are
   # located in the `$PUB_CACHE/bin` directory.
   shellHook = ''
+    flutter pub get
+    yq eval pubspec.lock -o=json -P > pubspec.lock.json
+    flutter config --enable-linux-desktop
+    dart pub global activate flutter_distributor
+    echo "**********************************************************************"
+    echo "* flutter build linux --release                                      *"
+    echo "* flutter_distributor package --platform=linux --targets=zip         *"
+    echo "**********************************************************************"
     if [ -z "$PUB_CACHE" ]; then
       export PATH="$PATH":"$HOME/.pub-cache/bin"
     else
