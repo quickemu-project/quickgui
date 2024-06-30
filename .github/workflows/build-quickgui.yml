@@ -4,9 +4,19 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - pubspec.yaml
+      - assets/**
+      - lib/**
+      - linux/**
   push:
     branches:
       - main
+    paths:
+      - pubspec.yaml
+      - assets/**
+      - lib/**
+      - linux/**
   workflow_dispatch:
 
 # TODO: arm64 runner
