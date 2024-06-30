@@ -20,7 +20,7 @@ dependencies:
   gettext_i18n: ^1.0.5
   gettext_parser: ^0.2.0
   package_info_plus: ^8.0.0
-  process_run: ^0.14.2
+  process_run: ^1.0.0+1
   provider: ^6.1.2
   quiver: ^3.2.1
   url_launcher: ^6.3.0

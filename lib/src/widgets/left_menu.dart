@@ -16,11 +16,15 @@ class LeftMenu extends StatefulWidget {
 }
 
 class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
+  List<DropdownMenuItem<String>> _dropdownMenuItems = [];
   late String currentLocale;
 
   @override
   void initState() {
     super.initState();
+    _dropdownMenuItems = supportedLocales
+      .map((e) => DropdownMenuItem(child: Text(e), value: e))
+      .toList();
   }
 
   @override
@@ -45,21 +49,32 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
           child: ListView(
             children: [
               ListTile(
-                title: Text("Quickgui $version",
-                    style: Theme.of(context).textTheme.titleLarge),
+                title: Text("Quickgui $_version",
+                  style: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold)),
               ),
-              /*
-              const Divider(),
+              Container(
+                height: 4.0,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
                   children: [
-                    Text(context.t('Use dark mode')),
+                    Text(context.t('Use dark mode'),
+                      style: TextStyle(
+                        color: Colors.grey[300],
+                      ),
+                    ),
                     Expanded(
                       child: Container(),
                     ),
                     Switch(
                       value: Theme.of(context).colorScheme.brightness == Brightness.dark,
+                      onChanged: null,
+                      activeColor: Colors.grey[300],
+                      activeTrackColor: Colors.grey[300],
+                      inactiveThumbColor: Colors.grey[300],
+                      inactiveTrackColor: Colors.grey[300],
+                      /*
                       onChanged: (value) {
                         appSettings.useDarkMode = value;
                         savePreference(prefThemeMode, value);
@@ -68,12 +83,14 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
                       activeTrackColor: Colors.black26,
                       inactiveThumbColor: Theme.of(context).colorScheme.onPrimary,
                       inactiveTrackColor: Theme.of(context).colorScheme.primary,
+                      */
                     ),
                   ],
                 ),
               ),
-              */
-              const Divider(),
+              Container(
+                height: 4.0,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
@@ -84,10 +101,7 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
                     ),
                     DropdownButton<String>(
                       value: currentLocale,
-                      items: supportedLocales
-                          .map(
-                              (e) => DropdownMenuItem(value: e, child: Text(e)))
-                          .toList(),
+                      items: _dropdownMenuItems,
                       onChanged: (value) {
                         setState(() {
                           currentLocale = value!;
