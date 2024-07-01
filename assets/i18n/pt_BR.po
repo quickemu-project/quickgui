@@ -49,8 +49,8 @@ msgstr "Downloader"
 msgid "Downloading (no progress available)..."
 msgstr "Baixando (progresso não disponível)..."
 
-msgid "Downloading...{0}%"
-msgstr "Baixando...{0}%"
+msgid "Downloading... {0}%"
+msgstr "Baixando... {0}%"
 
 msgid "Downloading {0}"
 msgstr "Baixando {0}"

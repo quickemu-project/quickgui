@@ -49,8 +49,8 @@ msgstr "Gestionnaire de téléchargements"
 msgid "Downloading (no progress available)..."
 msgstr "Téléchargement (pas de barre de progression)..."
 
-msgid "Downloading...{0}%"
-msgstr "Téléchargement...{0}%"
+msgid "Downloading... {0}%"
+msgstr "Téléchargement... {0}%"
 
 msgid "Downloading {0}"
 msgstr "Téléchargement de {0}"

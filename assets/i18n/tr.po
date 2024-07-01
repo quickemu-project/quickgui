@@ -49,8 +49,8 @@ msgstr "Yükleyici"
 msgid "Downloading (no progress available)..."
 msgstr "Yükleniyor (ilerleme yok)..."
 
-msgid "Downloading...{0}%"
-msgstr "Yükleniyor...{0}%"
+msgid "Downloading... {0}%"
+msgstr "Yükleniyor... {0}%"
 
 msgid "Downloading {0}"
 msgstr "Yükleniyor {0}"

@@ -48,7 +48,7 @@ msgstr "Telecargador"
 msgid "Downloading (no progress available)..."
 msgstr "Telecargament (cap de barra de progression pas disponibla)..."
 
-msgid "Downloading...{0}%"
+msgid "Downloading... {0}%"
 msgstr "Telecargament... {0} %"
 
 msgid "Downloading {0}"

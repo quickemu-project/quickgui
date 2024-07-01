@@ -62,8 +62,8 @@ msgid "Downloading (no progress available)..."
 msgstr "Descargando (progreso no disponible)..."
 
 #, fuzzy
-msgid "Downloading...{0}%"
-msgstr "Descargando...{0}%"
+msgid "Downloading... {0}%"
+msgstr "Descargando... {0}%"
 
 #, fuzzy
 msgid "Downloading {0}"

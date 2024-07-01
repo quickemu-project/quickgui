@@ -55,8 +55,8 @@ msgstr "Nedlaster"
 msgid "Downloading (no progress available)..."
 msgstr "Nedlasting (ingen fremgang tilgjengelig)..."
 
-msgid "Downloading...{0}%"
-msgstr "Laster ned...{0}%"
+msgid "Downloading... {0}%"
+msgstr "Laster ned... {0}%"
 
 msgid "Downloading {0}"
 msgstr "Laster ned {0}"
