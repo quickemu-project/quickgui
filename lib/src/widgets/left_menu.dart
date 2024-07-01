@@ -99,7 +99,7 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
                       onChanged: null,
                       activeColor: Colors.grey[300],
                       activeTrackColor: Colors.grey[300],
-                      inactiveThumbColor: Colors.grey[300],
+                      inactiveThumbColor: Colors.grey[500],
                       inactiveTrackColor: Colors.grey[300],
                       /*
                       onChanged: (value) {
