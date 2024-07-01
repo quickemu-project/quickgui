@@ -24,8 +24,8 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
     super.initState();
     fetchQuickemuVersion();
     _dropdownMenuItems = supportedLocales
-      .map((e) => DropdownMenuItem(child: Text(e), value: e))
-      .toList();
+        .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+        .toList();
   }
 
   @override
@@ -54,7 +54,7 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
                 padding: EdgeInsets.only(bottom: 0).add(EdgeInsets.symmetric(horizontal: 16)),
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 4.0),
-                  child: Text("Quickgui $_version",
+                  child: Text("Quickgui $version",
                     style: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold)),
                 ),
               ),
@@ -86,7 +86,8 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
                   children: [
-                    Text(context.t('Use dark mode'),
+                    Text(
+                      context.t('Use dark mode'),
                       style: TextStyle(
                         color: Colors.grey[300],
                       ),
@@ -95,7 +96,8 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
                       child: Container(),
                     ),
                     Switch(
-                      value: Theme.of(context).colorScheme.brightness == Brightness.dark,
+                      value: Theme.of(context).colorScheme.brightness ==
+                          Brightness.dark,
                       onChanged: null,
                       activeColor: Colors.grey[300],
                       activeTrackColor: Colors.grey[300],
