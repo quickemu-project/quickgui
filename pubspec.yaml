@@ -1,5 +1,5 @@
 name: quickgui
-description: Desktop frontend for Quickget and Quickemu
+description: An elegant virtual machine manager for the desktop
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.2.9+1
 
