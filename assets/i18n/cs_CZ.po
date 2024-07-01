@@ -49,8 +49,8 @@ msgstr "Správce stahování"
 msgid "Downloading (no progress available)..."
 msgstr "Probíhá stahování (průběh není k dispozici) …"
 
-msgid "Downloading...{0}%"
-msgstr "Probíhá stahování …{0}%"
+msgid "Downloading... {0}%"
+msgstr "Probíhá stahování … {0}%"
 
 msgid "Downloading {0}"
 msgstr "Probíhá stahování {0}"

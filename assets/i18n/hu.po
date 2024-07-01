@@ -49,8 +49,8 @@ msgstr "Letöltő"
 msgid "Downloading (no progress available)..."
 msgstr "Letöltés (a haladásról nincs visszajelzés)..."
 
-msgid "Downloading...{0}%"
-msgstr "Letöltés...{0}%"
+msgid "Downloading... {0}%"
+msgstr "Letöltés... {0}%"
 
 msgid "Downloading {0}"
 msgstr "Letöltés {0}"

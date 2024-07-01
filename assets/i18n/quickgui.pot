@@ -49,7 +49,7 @@ msgstr ""
 msgid "Downloading (no progress available)..."
 msgstr ""
 
-msgid "Downloading...{0}%"
+msgid "Downloading... {0}%"
 msgstr ""
 
 msgid "Downloading {0}"
@@ -186,4 +186,3 @@ msgstr ""
 # Connect to the VM via SSH
 msgid "Connect"
 msgstr ""
-
