@@ -22,6 +22,7 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
   @override
   void initState() {
     super.initState();
+    fetchQuickemuVersion();
     _dropdownMenuItems = supportedLocales
       .map((e) => DropdownMenuItem(child: Text(e), value: e))
       .toList();
@@ -48,9 +49,35 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
         return Drawer(
           child: ListView(
             children: [
-              ListTile(
-                title: Text("Quickgui $_version",
-                  style: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold)),
+              Padding(
+                // Minimal bottom padding
+                padding: EdgeInsets.only(bottom: 0).add(EdgeInsets.symmetric(horizontal: 16)),
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 4.0),
+                  child: Text("Quickgui $_version",
+                    style: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold)),
+                ),
+              ),
+              FutureBuilder<String>(
+                future: fetchQuickemuVersion(),
+                builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator(); // or some other widget while waiting
+                  } else {
+                    String poweredByText = context.t('Powered by') + " Quickemu";
+                    if (snapshot.hasData) {
+                      poweredByText += " ${snapshot.data}";
+                    }
+                    return Padding(
+                      // Minimal top padding
+                      padding: EdgeInsets.only(top: 0).add(EdgeInsets.symmetric(horizontal: 16)),
+                      child: Container(
+                        child: Text(poweredByText,
+                          style: const TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold)),
+                        ),
+                    );
+                  }
+                },
               ),
               Container(
                 height: 4.0,
