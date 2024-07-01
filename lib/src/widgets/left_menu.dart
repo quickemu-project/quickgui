@@ -22,6 +22,7 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
   @override
   void initState() {
     super.initState();
+    fetchQuickemuVersion();
     _dropdownMenuItems = supportedLocales
       .map((e) => DropdownMenuItem(child: Text(e), value: e))
       .toList();
@@ -48,9 +49,35 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
         return Drawer(
           child: ListView(
             children: [
-              ListTile(
-                title: Text("Quickgui $_version",
-                  style: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold)),
+              Padding(
+                // Minimal bottom padding
+                padding: EdgeInsets.only(bottom: 0).add(EdgeInsets.symmetric(horizontal: 16)),
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 4.0),
+                  child: Text("Quickgui $_version",
+                    style: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold)),
+                ),
+              ),
+              FutureBuilder<String>(
+                future: fetchQuickemuVersion(),
+                builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator(); // or some other widget while waiting
+                  } else {
+                    String poweredByText = context.t('Powered by') + " Quickemu";
+                    if (snapshot.hasData) {
+                      poweredByText += " ${snapshot.data}";
+                    }
+                    return Padding(
+                      // Minimal top padding
+                      padding: EdgeInsets.only(top: 0).add(EdgeInsets.symmetric(horizontal: 16)),
+                      child: Container(
+                        child: Text(poweredByText,
+                          style: const TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold)),
+                        ),
+                    );
+                  }
+                },
               ),
               Container(
                 height: 4.0,
@@ -72,7 +99,7 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
                       onChanged: null,
                       activeColor: Colors.grey[300],
                       activeTrackColor: Colors.grey[300],
-                      inactiveThumbColor: Colors.grey[300],
+                      inactiveThumbColor: Colors.grey[500],
                       inactiveTrackColor: Colors.grey[300],
                       /*
                       onChanged: (value) {
@@ -109,6 +136,38 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
                           savePreference(prefCurrentLocale, currentLocale);
                         });
                       },
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: 32.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  children: [
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        style: DefaultTextStyle.of(context).style,
+                        children: <TextSpan>[
+                          TextSpan(text: 'Authors\n', style: TextStyle(fontWeight: FontWeight.bold)),
+                          TextSpan(text: 'Yannick Mauray\n'),
+                          TextSpan(text: 'Mark Johnson\n'),
+                          TextSpan(text: 'Martin Wimpress\n'),
+                        ],
+                      ),
+                    ),
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        style: DefaultTextStyle.of(context).style,
+                        children: <TextSpan>[
+                          TextSpan(text: '© 2021 - 2024\n'),
+                          TextSpan(text: 'Quickemu Project\n', style: TextStyle(fontWeight: FontWeight.bold)),
+                        ],
+                      ),
                     ),
                   ],
                 ),

@@ -1,5 +1,5 @@
 {
-  description = "Quickemu flake";
+  description = "Quickgui flake";
   inputs = {
     flake-schemas.url = "https://flakehub.com/f/DeterminateSystems/flake-schemas/*.tar.gz";
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";

@@ -9,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
 import 'package:path/path.dart' as path;
 import 'package:process_run/shell.dart';
+import 'package:version/version.dart';
 
 import '../globals.dart';
 import '../mixins/preferences_mixin.dart';
@@ -337,11 +338,18 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                               ),
                             ],
                           ),
-                        ).then((result) {
+                        ).then((result) async {
                           result = result ?? false;
                           if (result) {
                             var shell = Shell();
-                            shell.run(['killall', currentVm].join(' '));
+                            // If Quickemu is newer than 4.9.6, use the new --kill option
+                            // which is macOS compatible.
+                            var quickemuVersion = Version.parse(await fetchQuickemuVersion());
+                            if (quickemuVersion >= Version(4, 9, 6)) {
+                              shell.run(['quickemu', '--vm', '$currentVm.conf', '--kill'].join(' '));
+                            } else {
+                              shell.run(['killall', currentVm].join(' '));
+                            }
                             setState(() {
                               _activeVms.remove(currentVm);
                             });

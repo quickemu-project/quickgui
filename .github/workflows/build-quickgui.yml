@@ -36,7 +36,7 @@ jobs:
           flutter-version-file: pubspec.yaml
       - name: "Install dependencies 💾"
         run: |
-          sudo apt-get -y install clang cmake ninja-build pkg-config libgtk-3-0 libgtk-3-dev libblkid1 liblzma5
+          sudo apt-get -y install clang cmake libblkid1 liblzma5 libgtk-3-0 libgtk-3-dev ninja-build pkg-config
       - name: Install Flutter dependencies 🦋
         run: flutter pub get
       - name: Enable Linux Desktop 🐧
@@ -65,7 +65,7 @@ jobs:
           flutter-version-file: pubspec.yaml
       - name: "Install dependencies 💾"
         run: |
-          sudo apt-get -y install clang cmake ninja-build pkg-config libgtk-3-0 libgtk-3-dev libblkid1 liblzma5
+          sudo apt-get -y install clang cmake libblkid1 liblzma5 libgtk-3-0 libgtk-3-dev ninja-build pkg-config
           sudo apt-get -y install debhelper-compat distro-info dput devscripts rsync
       - name: Install Flutter dependencies 🦋
         run: flutter pub get
