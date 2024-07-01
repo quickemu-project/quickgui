@@ -140,6 +140,38 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
                   ],
                 ),
               ),
+              Container(
+                height: 32.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  children: [
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        style: DefaultTextStyle.of(context).style,
+                        children: <TextSpan>[
+                          TextSpan(text: 'Authors\n', style: TextStyle(fontWeight: FontWeight.bold)),
+                          TextSpan(text: 'Yannick Mauray\n'),
+                          TextSpan(text: 'Mark Johnson\n'),
+                          TextSpan(text: 'Martin Wimpress\n'),
+                        ],
+                      ),
+                    ),
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        style: DefaultTextStyle.of(context).style,
+                        children: <TextSpan>[
+                          TextSpan(text: '© 2021 - 2024\n'),
+                          TextSpan(text: 'Quickemu Project\n', style: TextStyle(fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         );
