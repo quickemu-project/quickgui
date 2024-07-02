@@ -281,10 +281,10 @@ packages:
     dependency: "direct main"
     description:
       name: gettext_i18n
-      sha256: e15f1a6bd5b79435377d8245359e68750af5091d30f571abe36fd10ba5cc5eee
+      sha256: "1acdb7f6bb7c06aaa69016a248de20123ac9af2e1a29321244012fbf6f2d4bdd"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.5"
+    version: "1.0.7"
   gettext_parser:
     dependency: "direct main"
     description:

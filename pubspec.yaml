@@ -17,7 +17,7 @@ dependencies:
   file_picker: ^8.0.6
   flutter_svg: ^2.0.10+1
   gettext: ^1.2.0
-  gettext_i18n: ^1.0.5
+  gettext_i18n: ^1.0.7
   gettext_parser: ^0.2.0
   package_info_plus: ^8.0.0
   process_run: ^1.0.0+1
