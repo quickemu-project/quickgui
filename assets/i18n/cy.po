@@ -55,7 +55,7 @@ msgstr "Dadlwythwr"
 msgid "Downloading (no progress available)..."
 msgstr "Llwytho i lawr (dim cynnydd ar gael)..."
 
-msgid "Downloading...{0}%"
+msgid "Downloading... {0}%"
 msgstr "Llwytho i lawr... {0}%"
 
 msgid "Downloading {0}"

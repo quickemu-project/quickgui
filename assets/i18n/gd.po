@@ -51,8 +51,8 @@ msgstr "Inneal luchdachadh sìos"
 msgid "Downloading (no progress available)..."
 msgstr "A ’luchdachadh sìos (chan eil adhartas ri fhaighinn)"
 
-msgid "Downloading...{0}%"
-msgstr "A ’luchdachadh sìos...{0}%"
+msgid "Downloading... {0}%"
+msgstr "A ’luchdachadh sìos... {0}%"
 
 msgid "Downloading {0}"
 msgstr "Thèid {0} a luchdachadh sìos"

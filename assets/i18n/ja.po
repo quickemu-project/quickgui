@@ -49,8 +49,8 @@ msgstr "ダウンローダ"
 msgid "Downloading (no progress available)..."
 msgstr "ダウンロード中(進行状況を推定中)..."
 
-msgid "Downloading...{0}%"
-msgstr "ダウンロード中...{0}%"
+msgid "Downloading... {0}%"
+msgstr "ダウンロード中... {0}%"
 
 msgid "Downloading {0}"
 msgstr "{0}をダウンロード中"

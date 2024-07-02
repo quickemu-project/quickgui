@@ -52,7 +52,7 @@ msgstr "Nerladdare"
 msgid "Downloading (no progress available)..."
 msgstr "Laddar ner (inget förlopp tillgängligt)..."
 
-msgid "Downloading...{0}%"
+msgid "Downloading... {0}%"
 msgstr "Laddar ner... {0}%"
 
 msgid "Downloading {0}"

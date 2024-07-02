@@ -49,8 +49,8 @@ msgstr "Transferidor"
 msgid "Downloading (no progress available)..."
 msgstr "A transferir (progresso não disponível)..."
 
-msgid "Downloading...{0}%"
-msgstr "A transferir...{0}%"
+msgid "Downloading... {0}%"
+msgstr "A transferir... {0}%"
 
 msgid "Downloading {0}"
 msgstr "A transferir {0}"

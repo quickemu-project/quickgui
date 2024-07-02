@@ -55,8 +55,8 @@ msgstr "Загрузчик"
 msgid "Downloading (no progress available)..."
 msgstr "Загрузка (нет прогресса)..."
 
-msgid "Downloading...{0}%"
-msgstr "Загрузка...{0}%"
+msgid "Downloading... {0}%"
+msgstr "Загрузка... {0}%"
 
 msgid "Downloading {0}"
 msgstr "Загрузка {0}"
