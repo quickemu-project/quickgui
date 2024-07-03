@@ -472,7 +472,10 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                                 child: Text(context.t('Cancel')),
                               ),
                               TextButton(
-                                onPressed: () => Navigator.pop(context, true),
+                                onPressed: () {
+                                  if (usernameController.text.isEmpty) return;
+                                  Navigator.of(context).pop(true);
+                                },
                                 child: Text(context.t('Connect')),
                               ),
                             ],
