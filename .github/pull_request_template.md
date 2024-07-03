@@ -25,7 +25,7 @@ Please include a summary of the changes along with any relevant motivation and c
 - [ ] I have performed a self-review of my code
 - [ ] I have tested my code in common scenarios and confirmed there are no regressions
 - [ ] I have added comments to my code, particularly in hard-to-understand sections
-- [ ] I have made corresponding changes to the documentation (*remove if no documentation changes were required*)
+- [ ] I have made corresponding changes to the documentation
 - [ ] I have updated and committed `pubspec.yaml` and `pubspec.lock`
   - `flutter pub get`
 - [ ] I have updated and committed `pubspec.lock.json` (*required for Nix*)
