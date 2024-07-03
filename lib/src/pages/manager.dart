@@ -33,6 +33,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
   final List<String> _sshVms = [];
   String? _terminalEmulator;
   final List<String> _supportedTerminalEmulators = [
+    if (Platform.isMacOS) 'osascript',
     'alacritty',
     'cool-retro-term',
     'gnome-terminal',
@@ -49,7 +50,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     'uxrvt',
     'xfce4-terminal',
     'xrvt',
-    'xterm'
+    'xterm',
   ];
   Timer? refreshTimer;
 
@@ -489,6 +490,11 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                             // Strip the extension as x-terminal-emulator may point to a .wrapper
                             switch (path
                                 .basenameWithoutExtension(_terminalEmulator!)) {
+                              case 'osascript':
+                                sshArgs = [
+                                  '-e \'tell app "Terminal" to do script "${sshArgs.join(' ')}"\''
+                                ];
+                                break;
                               case 'gnome-terminal':
                               case 'mate-terminal':
                                 sshArgs.insert(0, '--');
