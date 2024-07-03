@@ -186,3 +186,6 @@ msgstr ""
 # Connect to the VM via SSH
 msgid "Connect"
 msgstr ""
+
+msgid "Loading available downloads"
+msgstr ""

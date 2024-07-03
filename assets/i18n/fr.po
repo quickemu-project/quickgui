@@ -184,3 +184,6 @@ msgstr "Nom d'utilisateur SSH"
 # Connect to the VM via SSH
 msgid "Connect"
 msgstr "Connecter"
+
+msgid "Loading available downloads"
+msgstr "Chargement des téléchargements disponibles"

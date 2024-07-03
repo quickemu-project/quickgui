@@ -13,8 +13,8 @@ import 'package:version/version.dart';
 
 import '../globals.dart';
 import '../mixins/preferences_mixin.dart';
-import '../model/vminfo.dart';
 import '../model/osicons.dart';
+import '../model/vminfo.dart';
 
 /// VM manager page.
 /// Displays a list of available VMs, running state and connection info,
@@ -83,8 +83,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     // Find out which terminal emulator we have set as the default.
     String result = whichSync('x-terminal-emulator') ?? '';
     if (result.isNotEmpty) {
-      String terminalEmulator =
-          await File(result).resolveSymbolicLinks();
+      String terminalEmulator = await File(result).resolveSymbolicLinks();
       terminalEmulator = path.basenameWithoutExtension(terminalEmulator);
       if (_supportedTerminalEmulators.contains(terminalEmulator)) {
         setState(() {
@@ -109,7 +108,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
   void _detectSpice() async {
     var result = whichSync('spicy') ?? '';
     setState(() {
-      _spicy = result.isNotEmpty ;
+      _spicy = result.isNotEmpty;
     });
   }
 
@@ -273,7 +272,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     }
     String vmStem = currentVm;
     SvgPicture? osIcon;
-    while(vmStem.contains('-')) {
+    while (vmStem.contains('-')) {
       vmStem = vmStem.substring(0, vmStem.lastIndexOf('-'));
       if (osIcons.containsKey(vmStem)) {
         osIcon = SvgPicture.asset(
@@ -301,7 +300,11 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                       ? null
                       : () async {
                           Map<String, VmInfo> activeVms = _activeVms;
-                          List<String> command = ['quickemu', '--vm', '$currentVm.conf'];
+                          List<String> command = [
+                            'quickemu',
+                            '--vm',
+                            '$currentVm.conf'
+                          ];
                           if (_spicy) {
                             command.addAll(['--display', 'spice']);
                           }
@@ -327,7 +330,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                           builder: (BuildContext context) => AlertDialog(
                             title: Text(context.t('Stop The Virtual Machine?')),
                             content: Text(context.t(
-                                'You are about to terminate the virtual machine',
+                                'You are about to terminate the virtual machine {0}',
                                 args: [currentVm])),
                             actions: <Widget>[
                               TextButton(
@@ -346,9 +349,15 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                             var shell = Shell();
                             // If Quickemu is newer than 4.9.6, use the new --kill option
                             // which is macOS compatible.
-                            var quickemuVersion = Version.parse(await fetchQuickemuVersion());
+                            var quickemuVersion =
+                                Version.parse(await fetchQuickemuVersion());
                             if (quickemuVersion >= Version(4, 9, 6)) {
-                              shell.run(['quickemu', '--vm', '$currentVm.conf', '--kill'].join(' '));
+                              shell.run([
+                                'quickemu',
+                                '--vm',
+                                '$currentVm.conf',
+                                '--kill'
+                              ].join(' '));
                             } else {
                               shell.run(['killall', currentVm].join(' '));
                             }
@@ -432,8 +441,8 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
               IconButton(
                 icon: SvgPicture.asset('assets/images/console.svg',
                     semanticsLabel: 'Connect with SSH',
-                    colorFilter: ColorFilter.mode(sshy ? buttonColor : Colors.grey, BlendMode.srcIn)
-                ),
+                    colorFilter: ColorFilter.mode(
+                        sshy ? buttonColor : Colors.grey, BlendMode.srcIn)),
                 tooltip: sshy
                     ? context.t('Connect with SSH')
                     : context.t('SSH server not detected on guest'),
