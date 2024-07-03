@@ -156,8 +156,10 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
         File pidFile = File('$name/$name.pid');
         if (pidFile.existsSync()) {
           String pid = pidFile.readAsStringSync().trim();
-          Directory procDir = Directory('/proc/$pid');
-          if (procDir.existsSync()) {
+          // Check if the process is still running using kill -0, which is
+          // a portable way to check if a process is running on macOS and Linux.
+          ProcessResult result = Process.runSync('kill', ['-0', pid]);
+          if (result.exitCode == 0) {
             if (_activeVms.containsKey(name)) {
               activeVms[name] = _activeVms[name]!;
             } else {
