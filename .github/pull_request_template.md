@@ -2,7 +2,7 @@
 
 Please include a summary of the changes along with any relevant motivation and context.
 
-<!-- Close any related issues. Delete if not relevant -->
+<!-- Delete if not relevant -->
 
 - Closes #
 - Fixes #
@@ -20,13 +20,15 @@ Please include a summary of the changes along with any relevant motivation and c
 
 # Checklist:
 
+<!-- Delete any that are not relevant -->
+
 - [ ] I have performed a self-review of my code
 - [ ] I have tested my code in common scenarios and confirmed there are no regressions
 - [ ] I have added comments to my code, particularly in hard-to-understand sections
-- [ ] I have made corresponding changes to the documentation (*remove if no documentation changes were required*)
-- [ ] I have updated and committed `pubspec.yaml` and `pubspec.lock` and `pubspec.lock.json` (*remove if no pubspec changes were required*)
+- [ ] I have made corresponding changes to the documentation
+- [ ] I have updated and committed `pubspec.yaml` and `pubspec.lock`
   - `flutter pub get`
-- [ ] I have updated and committed `pubspec.lock.json` (*remove if no pubspec changes were required*)
+- [ ] I have updated and committed `pubspec.lock.json` (*required for Nix*)
   - `yq eval pubspec.lock -o=json -P > pubspec.lock.json`
 
-`yq` above is [yq-go](https://github.com/mikefarah/yq)
+*`yq` above is [yq-go](https://github.com/mikefarah/yq)*
