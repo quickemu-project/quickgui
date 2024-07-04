@@ -50,12 +50,12 @@
         ]
       },
       "locked": {
-        "lastModified": 1719316513,
-        "narHash": "sha256-9EQMWByMD0K0mRFKO+CtTFRWREaePB6xU6jBmtVhF3U=",
-        "rev": "1c89f520f2c7d10cc9cc1d15b8cae32215359224",
-        "revCount": 1992,
+        "lastModified": 1720106666,
+        "narHash": "sha256-zzD9nRkbYWg1vAW8QclJfrTePq1Y0h6lcIay+bv56iY=",
+        "rev": "ca8f81f7fbabaa00e21e5e94519f9cc1fd7dcf1f",
+        "revCount": 2038,
         "type": "tarball",
-        "url": "https://api.flakehub.com/f/pinned/quickemu-project/quickemu/4.9.5/01904f50-5263-7e22-b58e-a1dae34d5486/source.tar.gz"
+        "url": "https://api.flakehub.com/f/pinned/quickemu-project/quickemu/4.9.6/01907e69-af19-7432-9708-89c294672e35/source.tar.gz"
       },
       "original": {
         "type": "tarball",
