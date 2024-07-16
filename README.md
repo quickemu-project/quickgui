@@ -78,14 +78,14 @@ We provide an AppImage and a pre-compiled binary of Quickemu in a .zip file.
 The AppImage should work on most Linux distributions.
 
 * [Download](https://github.com/quickemu-project/quickgui/releases) the latest AppImage.
-* `chmod +x quickgui-1.2.9+1-linux.AppImage`
-* `./quickgui-1.2.9+1-linux.AppImage`
+* `chmod +x quickgui-1.2.10+1-linux.AppImage`
+* `./quickgui-1.2.10+1-linux.AppImage`
 
 ### Pre-compiled binary
 
 * [Download](https://github.com/quickemu-project/quickgui/releases) the latest .zip file.
-* `unzip quickgui-1.2.9+1-linux.zip`
-* `cd quickgui-1.2.9+1-linux`
+* `unzip quickgui-1.2.10+1-linux.zip`
+* `cd quickgui-1.2.10+1-linux`
 * `chmod +x quickgui`
 * `./quickgui`
 
