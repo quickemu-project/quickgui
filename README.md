@@ -33,7 +33,7 @@ If you don't have Quickemu installed then go and follow the Quickemu installatio
 A .deb package is available for Debian on our [release page](https://github.com/quickemu-project/quickgui/releases).
 
 - Download the latest .deb package
-- Install it with `apt-get install ./quickgui-1.2.9+1-linux.deb`
+- Install it with `apt-get install ./quickgui-1.2.10+1-linux.deb`
 
 ## Fedora
 
