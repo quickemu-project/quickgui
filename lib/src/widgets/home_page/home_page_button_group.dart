@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
+import 'package:quickgui/src/globals.dart';
+import 'package:quickgui/src/mixins/preferences_mixin.dart';
 import 'package:tuple/tuple.dart';
 
 import '../../model/operating_system.dart';
@@ -19,7 +21,8 @@ class HomePageButtonGroup extends StatefulWidget {
   State<HomePageButtonGroup> createState() => _HomePageButtonGroupState();
 }
 
-class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
+class _HomePageButtonGroupState extends State<HomePageButtonGroup>
+    with PreferencesMixin {
   OperatingSystem? _selectedOperatingSystem;
   Version? _selectedVersion;
   Option? _selectedOption;
@@ -85,16 +88,50 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup> {
           text: context.t('Download'),
           onPressed: (_selectedVersion == null)
               ? null
-              : () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => Downloader(
-                        operatingSystem: _selectedOperatingSystem!,
-                        version: _selectedVersion!,
-                        option: _selectedOption,
+              : () async {
+                  final workingDirectory =
+                      await getPreference<String>(prefWorkingDirectory);
+                  final tmpFile = File("$workingDirectory/modecheck.tmp");
+                  if (tmpFile.existsSync()) {
+                    tmpFile.deleteSync();
+                  }
+                  try {
+                    tmpFile.createSync();
+                  } catch (e) {
+                    // Do nothing
+                  }
+                  if (tmpFile.existsSync()) {
+                    tmpFile.deleteSync();
+
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => Downloader(
+                          operatingSystem: _selectedOperatingSystem!,
+                          version: _selectedVersion!,
+                          option: _selectedOption,
+                        ),
                       ),
-                    ),
-                  );
+                    );
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text(context.t('Error')),
+                        content: Text(
+                          context.t(
+                              'Could not write to the working directory. Please check the permissions.'),
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text(context.t('OK')),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
                 },
         ),
       ],

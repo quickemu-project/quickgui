@@ -185,6 +185,12 @@ msgstr "Nom d'utilisateur SSH"
 msgid "Connect"
 msgstr "Connecter"
 
+msgid "Error"
+msgstr "Erreur"
+
+msgid "Could not write to the working directory. Please check the permissions."
+msgstr "Impossible d'écrire dans le répertoire de travail. Veuillez vérifier les permissions."
+
 msgid "Loading available downloads"
 msgstr "Chargement des téléchargements disponibles"
 
