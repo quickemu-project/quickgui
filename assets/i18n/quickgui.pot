@@ -187,6 +187,12 @@ msgstr ""
 msgid "Connect"
 msgstr ""
 
+msgid "Error"
+msgstr ""
+
+msgid "Could not write to the working directory. Please check the permissions."
+msgstr ""
+
 msgid "Loading available downloads"
 msgstr ""
 

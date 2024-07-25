@@ -190,3 +190,9 @@ msgstr "Loading available downloads"
 
 msgid "Powered by"
 msgstr "Powered by"
+
+msgid "Error"
+msgstr "Error"
+
+msgid "Could not write to the working directory. Please check the permissions."
+msgstr "Could not write to the working directory. Please check the permissions."
