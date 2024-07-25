@@ -189,3 +189,6 @@ msgstr ""
 
 msgid "Loading available downloads"
 msgstr ""
+
+msgid "Powered by"
+msgstr ""

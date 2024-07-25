@@ -187,3 +187,6 @@ msgstr "Connect"
 
 msgid "Loading available downloads"
 msgstr "Loading available downloads"
+
+msgid "Powered by"
+msgstr "Powered by"

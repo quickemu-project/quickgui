@@ -187,3 +187,6 @@ msgstr "Connecter"
 
 msgid "Loading available downloads"
 msgstr "Chargement des téléchargements disponibles"
+
+msgid "Powered by"
+msgstr "Propulsé par"
