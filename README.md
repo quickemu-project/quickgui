@@ -64,7 +64,7 @@ systemPackages = with pkgs; [
 Ubuntu users can install Quickgui using the [.deb package described above for Debian](#debian) or from our PPA.
 
 ```shell
-sudo add-apt-repository ppa:flexiondotorg/quickgui
+sudo apt-add-repository ppa:flexiondotorg/quickemu
 sudo apt-get update
 sudo apt-get install quickgui
 ```
