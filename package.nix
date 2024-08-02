@@ -7,7 +7,7 @@
 , quickemu
 }:
 let
-  runtimeBinDependencies = [ gnome.zenity ];
+  runtimeBinDependencies = [ quickemu gnome.zenity ];
   versionMatches = builtins.match ''
     .*
     .*version:[[:blank:]]([[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+\+?[[:digit:]]*)
@@ -25,7 +25,6 @@ flutter.buildFlutterApplication rec {
   };
 
   # These things are added to LD_LIBRARY_PATH, but not PATH
-  runtimeDependencies = [ quickemu ];
   extraWrapProgramArgs = "--prefix PATH : ${lib.makeBinPath runtimeBinDependencies}";
 
   nativeBuildInputs = [ copyDesktopItems ];
