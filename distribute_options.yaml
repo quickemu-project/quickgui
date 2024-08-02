@@ -12,3 +12,10 @@ releases:
             dart-define:
               APP_ENV: dev
         publish_to: none
+  - name: macos-dev
+    jobs:
+      - name: quickgui-dev-macos
+        package:
+          platform: macos
+          target: dmg
+        publish_to: none

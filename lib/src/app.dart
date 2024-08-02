@@ -15,7 +15,7 @@ import 'model/app_settings.dart';
 import 'pages/main_page.dart';
 
 class App extends StatefulWidget {
-  const App({Key? key}) : super(key: key);
+  const App({super.key});
 
   @override
   State<App> createState() => _AppState();
@@ -61,11 +61,10 @@ class _AppState extends State<App> with PreferencesMixin {
             builder: (context, appSettings, _) => MaterialApp(
               theme: ThemeData(
                   useMaterial3: true,
-                  colorScheme:  ColorScheme.fromSwatch(
+                  colorScheme: ColorScheme.fromSwatch(
                     primarySwatch: Colors.pink,
                     backgroundColor: Colors.white,
-                  )
-              ),
+                  )),
               darkTheme: ThemeData(
                 useMaterial3: true,
                 colorScheme: ColorScheme.fromSwatch(

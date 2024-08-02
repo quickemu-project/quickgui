@@ -13,14 +13,14 @@ import 'package:version/version.dart';
 
 import '../globals.dart';
 import '../mixins/preferences_mixin.dart';
-import '../model/vminfo.dart';
 import '../model/osicons.dart';
+import '../model/vminfo.dart';
 
 /// VM manager page.
 /// Displays a list of available VMs, running state and connection info,
 /// with buttons to start and stop VMs.
 class Manager extends StatefulWidget {
-  const Manager({Key? key}) : super(key: key);
+  const Manager({super.key});
 
   @override
   State<Manager> createState() => _ManagerState();
@@ -33,6 +33,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
   final List<String> _sshVms = [];
   String? _terminalEmulator;
   final List<String> _supportedTerminalEmulators = [
+    if (Platform.isMacOS) 'osascript',
     'alacritty',
     'cool-retro-term',
     'gnome-terminal',
@@ -49,7 +50,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     'uxrvt',
     'xfce4-terminal',
     'xrvt',
-    'xterm'
+    'xterm',
   ];
   Timer? refreshTimer;
 
@@ -83,8 +84,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     // Find out which terminal emulator we have set as the default.
     String result = whichSync('x-terminal-emulator') ?? '';
     if (result.isNotEmpty) {
-      String terminalEmulator =
-          await File(result).resolveSymbolicLinks();
+      String terminalEmulator = await File(result).resolveSymbolicLinks();
       terminalEmulator = path.basenameWithoutExtension(terminalEmulator);
       if (_supportedTerminalEmulators.contains(terminalEmulator)) {
         setState(() {
@@ -109,7 +109,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
   void _detectSpice() async {
     var result = whichSync('spicy') ?? '';
     setState(() {
-      _spicy = result.isNotEmpty ;
+      _spicy = result.isNotEmpty;
     });
   }
 
@@ -273,7 +273,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     }
     String vmStem = currentVm;
     SvgPicture? osIcon;
-    while(vmStem.contains('-')) {
+    while (vmStem.contains('-')) {
       vmStem = vmStem.substring(0, vmStem.lastIndexOf('-'));
       if (osIcons.containsKey(vmStem)) {
         osIcon = SvgPicture.asset(
@@ -301,7 +301,11 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                       ? null
                       : () async {
                           Map<String, VmInfo> activeVms = _activeVms;
-                          List<String> command = ['quickemu', '--vm', '$currentVm.conf'];
+                          List<String> command = [
+                            'quickemu',
+                            '--vm',
+                            '$currentVm.conf'
+                          ];
                           if (_spicy) {
                             command.addAll(['--display', 'spice']);
                           }
@@ -327,7 +331,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                           builder: (BuildContext context) => AlertDialog(
                             title: Text(context.t('Stop The Virtual Machine?')),
                             content: Text(context.t(
-                                'You are about to terminate the virtual machine',
+                                'You are about to terminate the virtual machine {0}',
                                 args: [currentVm])),
                             actions: <Widget>[
                               TextButton(
@@ -346,9 +350,15 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                             var shell = Shell();
                             // If Quickemu is newer than 4.9.6, use the new --kill option
                             // which is macOS compatible.
-                            var quickemuVersion = Version.parse(await fetchQuickemuVersion());
+                            var quickemuVersion =
+                                Version.parse(await fetchQuickemuVersion());
                             if (quickemuVersion >= Version(4, 9, 6)) {
-                              shell.run(['quickemu', '--vm', '$currentVm.conf', '--kill'].join(' '));
+                              shell.run([
+                                'quickemu',
+                                '--vm',
+                                '$currentVm.conf',
+                                '--kill'
+                              ].join(' '));
                             } else {
                               shell.run(['killall', currentVm].join(' '));
                             }
@@ -432,8 +442,8 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
               IconButton(
                 icon: SvgPicture.asset('assets/images/console.svg',
                     semanticsLabel: 'Connect with SSH',
-                    colorFilter: ColorFilter.mode(sshy ? buttonColor : Colors.grey, BlendMode.srcIn)
-                ),
+                    colorFilter: ColorFilter.mode(
+                        sshy ? buttonColor : Colors.grey, BlendMode.srcIn)),
                 tooltip: sshy
                     ? context.t('Connect with SSH')
                     : context.t('SSH server not detected on guest'),
@@ -462,7 +472,10 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                                 child: Text(context.t('Cancel')),
                               ),
                               TextButton(
-                                onPressed: () => Navigator.pop(context, true),
+                                onPressed: () {
+                                  if (usernameController.text.isEmpty) return;
+                                  Navigator.of(context).pop(true);
+                                },
                                 child: Text(context.t('Connect')),
                               ),
                             ],
@@ -480,6 +493,11 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                             // Strip the extension as x-terminal-emulator may point to a .wrapper
                             switch (path
                                 .basenameWithoutExtension(_terminalEmulator!)) {
+                              case 'osascript':
+                                sshArgs = [
+                                  '-e \'tell app "Terminal" to do script "${sshArgs.join(' ')}"\''
+                                ];
+                                break;
                               case 'gnome-terminal':
                               case 'mate-terminal':
                                 sshArgs.insert(0, '--');

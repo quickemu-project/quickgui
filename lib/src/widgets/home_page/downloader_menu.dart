@@ -8,9 +8,8 @@ import '../../globals.dart';
 import '../../mixins/preferences_mixin.dart';
 import '../home_page/home_page_button_group.dart';
 
-
 class DownloaderMenu extends StatefulWidget {
-  const DownloaderMenu({Key? key}) : super(key: key);
+  const DownloaderMenu({super.key});
 
   @override
   State<DownloaderMenu> createState() => _DownloaderMenuState();
@@ -65,7 +64,7 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
                       }
                     },
                     child: Text(Directory.current.path),
-                  ),                
+                  ),
                 ],
               ),
             ),

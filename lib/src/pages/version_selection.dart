@@ -8,8 +8,7 @@ import '../model/version.dart';
 import 'option_selection.dart';
 
 class VersionSelection extends StatefulWidget {
-  const VersionSelection({Key? key, required this.operatingSystem})
-      : super(key: key);
+  const VersionSelection({required this.operatingSystem, super.key});
 
   final OperatingSystem operatingSystem;
 

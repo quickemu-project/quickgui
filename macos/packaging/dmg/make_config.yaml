@@ -1,0 +1,10 @@
+title: quickgui
+contents:
+  - x: 456
+    y: 200
+    type: link
+    path: "/Applications"
+  - x: 200
+    y: 200
+    type: file
+    path: quickgui.app
