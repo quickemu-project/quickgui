@@ -24,7 +24,7 @@ dependencies:
   provider: ^6.1.2
   quiver: ^3.2.1
   url_launcher: ^6.3.0
-  shared_preferences: ^2.2.3
+  shared_preferences: ^2.3.1
   tuple: ^2.0.2
   version: ^3.0.2
   window_size:
