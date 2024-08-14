@@ -1,11 +1,11 @@
 # Swedish translation for quickgui.
-# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2022.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2022, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: quickgui\n"
 "POT-Creation-Date: 2021-09-29 09:59+0200\n"
-"PO-Revision-Date: 2022-06-13 13:19+0200\n"
+"PO-Revision-Date: 2024-08-14 21:09+0200\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1\n"
+"X-Generator: Poedit 3.4.4\n"
 "X-Poedit-Basepath: .\n"
 
 msgid "Quickgui : a Flutter frontend for Quickget and Quickemu"
@@ -135,3 +135,74 @@ msgstr "Du är på väg att stoppa den virtuella maskinen {0}"
 
 msgid "Language"
 msgstr "Språk"
+
+msgid "Directory where the machines are stored"
+msgstr "Plats där maskinerna lagras"
+
+msgid "Search version"
+msgstr "Sök version"
+
+msgid "quickemu was not found in your PATH"
+msgstr "quickemu kunde inte hittas i din PATH"
+
+msgid "Please install it and try again."
+msgstr "Installera det och försök igen."
+
+# The complete sentence is "See github.com/quickemu-project/quickemu for more information"
+msgid "See"
+msgstr "Se"
+
+# The complete sentence is "See github.com/quickemu-project/quickemu for more information"
+msgid "for more information"
+msgstr "för mer information"
+
+msgid "Delete {0}"
+msgstr "Ta bort {0}"
+
+msgid ""
+"You are about to delete {0}. This cannot be undone. Would you like to delete "
+"the disk image but keep the configuration, or delete the whole VM?"
+msgstr ""
+"Du är på väg att ta bort {0}. Detta kan inte ångras. Vill du ta bort "
+"diskavbildningen men behålla konfigurationen eller ta bort hela den "
+"virtuella datorn?"
+
+msgid "Delete disk image"
+msgstr "Ta bor diskavbilden"
+
+msgid "Delete whole VM"
+msgstr "Ta bort hela den virtuella datorn"
+
+msgid "Connect display with SPICE"
+msgstr "Anslut skärm med SPICE"
+
+msgid "SPICE client not found"
+msgstr "Ingen SPICE-klient hittades"
+
+msgid "Connect with SSH"
+msgstr "Anslut via SSH"
+
+msgid "SSH server not detected on guest"
+msgstr "Ingen SSH-server identifierad på gästen"
+
+msgid "Launch SSH connection to {0}"
+msgstr "Starta SSH-anslutning till {0}"
+
+msgid "SSH username"
+msgstr "SSH-användarnamn"
+
+# Connect to the VM via SSH
+msgid "Connect"
+msgstr "Anslut"
+
+msgid "Error"
+msgstr "Fel"
+
+msgid "Could not write to the working directory. Please check the permissions."
+msgstr "Kunde inte skriva till arbetsmappen. Kontrollera rättigheterna."
+
+msgid "Loading available downloads"
+msgstr "Läser in tillgängliga nerladdningar"
+
+msgid "Powered by"
+msgstr "Drivs av"
