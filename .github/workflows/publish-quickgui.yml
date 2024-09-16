@@ -105,7 +105,7 @@ jobs:
           ref: "${{ (inputs.tag != null) && format('refs/tags/{0}', inputs.tag) || '' }}"
       - uses: "DeterminateSystems/nix-installer-action@v13"
       - uses: "DeterminateSystems/magic-nix-cache-action@v7"
-      - uses: "DeterminateSystems/flakehub-push@v4"
+      - uses: "DeterminateSystems/flakehub-push@v5"
         with:
           visibility: "public"
           name: "quickemu-project/quickgui"
