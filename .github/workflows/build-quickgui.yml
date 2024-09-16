@@ -122,7 +122,7 @@ jobs:
       - name: "Install Nix ❄️"
         uses: "DeterminateSystems/nix-installer-action@v13"
       - name: "Enable Magic Nix Cache 🪄"
-        uses: "DeterminateSystems/magic-nix-cache-action@v7"
+        uses: "DeterminateSystems/magic-nix-cache-action@v8"
       - name: "Build with Nix ❄️"
         run: |
           nix build .#quickgui
