@@ -19,11 +19,18 @@ class VersionSelection extends StatefulWidget {
 class _VersionSelectionState extends State<VersionSelection> {
   var term = "";
   final focusNode = FocusNode();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     focusNode.requestFocus();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -73,41 +80,37 @@ class _VersionSelectionState extends State<VersionSelection> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ListView.builder(
-              padding: const EdgeInsets.only(top: 4),
-              shrinkWrap: true,
-              itemCount: list.length,
-              itemBuilder: (context, index) {
-                var item = list[index];
-                return Card(
-                  child: ListTile(
-                    title: Text(item.version),
-                    onTap: () {
-                      if (item.options.length > 1) {
+      body: Scrollbar(
+        controller: _scrollController,
+        child: ListView.builder(
+          controller: _scrollController,
+          padding: const EdgeInsets.only(top: 4),
+          itemCount: list.length,
+          itemBuilder: (context, index) {
+            var item = list[index];
+            return Card(
+              child: ListTile(
+                title: Text(item.version),
+                onTap: () {
+                  if (item.options.length > 1) {
+                    Navigator.of(context)
+                        .push<Option>(MaterialPageRoute(
+                            fullscreenDialog: true,
+                            builder: (context) => OptionSelection(list[index])))
+                        .then((selection) {
+                      if (selection != null) {
                         Navigator.of(context)
-                            .push<Option>(MaterialPageRoute(
-                                fullscreenDialog: true,
-                                builder: (context) =>
-                                    OptionSelection(list[index])))
-                            .then((selection) {
-                          if (selection != null) {
-                            Navigator.of(context)
-                                .pop(Tuple2<Version, Option?>(item, selection));
-                          }
-                        });
-                      } else {
-                        Navigator.of(context).pop(Tuple2<Version, Option?>(
-                            item, list[index].options[0]));
+                            .pop(Tuple2<Version, Option?>(item, selection));
                       }
-                    },
-                  ),
-                );
-              },
-            ),
-          ],
+                    });
+                  } else {
+                    Navigator.of(context).pop(
+                        Tuple2<Version, Option?>(item, list[index].options[0]));
+                  }
+                },
+              ),
+            );
+          },
         ),
       ),
     );
