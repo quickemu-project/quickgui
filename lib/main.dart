@@ -79,7 +79,7 @@ void main() async {
     setWindowMaxSize(const Size(692 + 2, 580 + 30));
   } else {
     setWindowMinSize(const Size(692, 580));
-    setWindowMaxSize(const Size(692, 580));
+    setWindowMaxSize(const Size(800, 720));
   }
   final foundQuickGet = await Process.run('which', ['quickget']);
   if (foundQuickGet.exitCode == 0) {
