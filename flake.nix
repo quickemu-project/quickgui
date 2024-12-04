@@ -16,7 +16,7 @@
       # Define supported systems and a helper function for generating system-specific outputs
       #TODO: Add the following as quickemu/quickgui/GitHub builders support them:
       #      aarch64-darwin aarch64-linux x86_64-darwin
-      supportedSystems = [ "x86_64-linux" ];
+      supportedSystems = [ "aarch64-linux" "x86_64-linux" ];
 
       forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
         system = system;
