@@ -19,7 +19,7 @@ dependencies:
   gettext: ^1.2.0
   gettext_i18n: ^1.0.7
   gettext_parser: ^0.2.0
-  package_info_plus: ^8.0.2
+  package_info_plus: ^8.1.2
   process_run: ^1.1.0
   provider: ^6.1.2
   quiver: ^3.2.2
