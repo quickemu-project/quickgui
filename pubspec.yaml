@@ -15,7 +15,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   desktop_notifications: ^0.6.3
   file_picker: ^8.0.6
-  flutter_svg: ^2.0.10+1
+  flutter_svg: ^2.0.17
   gettext: ^1.2.0
   gettext_i18n: ^1.0.7
   gettext_parser: ^0.2.0
