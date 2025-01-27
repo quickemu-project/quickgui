@@ -104,7 +104,7 @@ jobs:
         with:
           ref: "${{ (inputs.tag != null) && format('refs/tags/{0}', inputs.tag) || '' }}"
       - uses: "DeterminateSystems/nix-installer-action@v16"
-      - uses: "DeterminateSystems/magic-nix-cache-action@v7"
+      - uses: "DeterminateSystems/magic-nix-cache-action@v9"
       - uses: "DeterminateSystems/flakehub-push@v5"
         with:
           visibility: "public"
