@@ -100,6 +100,17 @@ To compile the Quickgui yourself:
 * `flutter config --enable-linux-desktop`
 * `flutter build linux --release`
 
+## Macos
+This requires flutter to be installed as well as xcode development for macos nad cocoapods.
+It will install quickgui app in the applications and after running the command below you should be able to search for it through spotlight
+```bash
+git clone https://github.com/quickemu-project/quickgui.git
+cd quickgui
+flutter pub get
+flutter config --enable-macos-desktop
+flutter build macos --release
+```
+
 The compiled binary will be in `build/linux/x64/release/bundle/quickgui`.
 You can run it with:
 
