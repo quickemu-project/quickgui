@@ -68,7 +68,7 @@ class _AppState extends State<App> with PreferencesMixin {
               darkTheme: ThemeData(
                 useMaterial3: true,
                 colorScheme: ColorScheme.fromSwatch(
-                  primarySwatch: darkGrey,
+                  primarySwatch: Colors.pink,
                   backgroundColor: darkGrey.shade700,
                   brightness: Brightness.dark,
                 ),
