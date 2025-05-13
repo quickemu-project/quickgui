@@ -5,12 +5,10 @@ import 'package:quickgui/src/pages/manager.dart';
 class ManageMachinesAfterDownloadButton extends StatelessWidget {
   const ManageMachinesAfterDownloadButton({
     required this.downloadFinished,
-    required this.vmName,
     super.key,
   });
 
   final bool downloadFinished;
-  final String vmName;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +28,7 @@ class ManageMachinesAfterDownloadButton extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Manager(
-                          newVmName: vmName,
-                        ),
+                        builder: (context) => const Manager(),
                       ),
                     );
                   },

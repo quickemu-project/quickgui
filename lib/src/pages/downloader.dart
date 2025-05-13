@@ -5,8 +5,10 @@ import 'dart:io';
 import 'package:desktop_notifications/desktop_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
-import 'package:quickgui/src/widgets/downloader/run_image_button.dart';
+import 'package:quickgui/src/globals.dart';
+import 'package:quickgui/src/widgets/downloader/manage_machines_after_download_button.dart';
 import 'package:path/path.dart' as p;
+import 'package:quickgui/src/mixins/preferences_mixin.dart';
 
 import '../model/operating_system.dart';
 import '../model/option.dart';
@@ -31,14 +33,13 @@ class Downloader extends StatefulWidget {
   _DownloaderState createState() => _DownloaderState();
 }
 
-class _DownloaderState extends State<Downloader> {
+class _DownloaderState extends State<Downloader> with PreferencesMixin {
   final notificationsClient = Platform.isMacOS ? null : NotificationsClient();
   final curlPattern = RegExp("( [0-9.]+%)");
   late final Stream<double> _progressStream;
   bool _downloadFinished = false;
   var controller = StreamController<double>();
   Process? _process;
-  String? _newestVmFolderName;
 
   @override
   void initState() {
@@ -57,7 +58,7 @@ class _DownloaderState extends State<Downloader> {
     }
   }
 
-  Future<String?> findNewestFolder() async {
+  Future<void> addNewestVmToPrefs() async {
     final dir = Directory.current;
     final folders = await dir
         .list()
@@ -68,7 +69,18 @@ class _DownloaderState extends State<Downloader> {
     folders
         .sort((a, b) => b.statSync().modified.compareTo(a.statSync().modified));
 
-    return folders.isNotEmpty ? p.basename(folders.first.path) : null;
+    // Update the prefNewlyInstalledVms with the newest folder
+    if (folders.isNotEmpty) {
+      String newestFolder = p.basename(folders.first.path);
+
+      final List<String> newVmNames =
+          await getPreference<List<String>>(prefNewlyInstalledVms) ??
+              <String>[];
+
+      newVmNames.add(newestFolder);
+
+      savePreference(prefNewlyInstalledVms, newVmNames);
+    }
   }
 
   Stream<double> progressStream() {
@@ -86,31 +98,29 @@ class _DownloaderState extends State<Downloader> {
 
       process.exitCode.then((value) {
         bool _cancelled = value.isNegative;
+
         controller.close();
-        findNewestFolder().then(
-          (path) {
-            setState(() {
-              _downloadFinished = true;
-              _newestVmFolderName = path;
-              notificationsClient?.notify(
-                _cancelled
-                    ? context.t('Download cancelled')
-                    : context.t('Download complete'),
-                body: _cancelled
-                    ? context.t(
-                        'Download of {0} has been canceled.',
-                        args: [widget.operatingSystem.name],
-                      )
-                    : context.t(
-                        'Download of {0} has completed.',
-                        args: [widget.operatingSystem.name],
-                      ),
-                appName: 'Quickgui',
-                expireTimeoutMs: 10000, /* 10 seconds */
-              );
-            });
-          },
-        );
+        addNewestVmToPrefs();
+        setState(() {
+          _downloadFinished = true;
+
+          notificationsClient?.notify(
+            _cancelled
+                ? context.t('Download cancelled')
+                : context.t('Download complete'),
+            body: _cancelled
+                ? context.t(
+                    'Download of {0} has been canceled.',
+                    args: [widget.operatingSystem.name],
+                  )
+                : context.t(
+                    'Download of {0} has completed.',
+                    args: [widget.operatingSystem.name],
+                  ),
+            appName: 'Quickgui',
+            expireTimeoutMs: 10000, /* 10 seconds */
+          );
+        });
       });
 
       setState(() {
@@ -165,7 +175,6 @@ class _DownloaderState extends State<Downloader> {
           ),
           ManageMachinesAfterDownloadButton(
             downloadFinished: _downloadFinished,
-            vmName: _newestVmFolderName ?? '',
           ),
           CancelDismissButton(
             onCancel: () {

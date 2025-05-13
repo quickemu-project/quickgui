@@ -21,9 +21,7 @@ import '../model/vminfo.dart';
 /// Displays a list of available VMs, running state and connection info,
 /// with buttons to start and stop VMs.
 class Manager extends StatefulWidget {
-  const Manager({super.key, this.newVmName});
-
-  final String? newVmName;
+  const Manager({super.key});
 
   @override
   State<Manager> createState() => _ManagerState();
@@ -56,12 +54,14 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     'xterm',
   ];
   Timer? refreshTimer;
+  List<String> newVmNames = <String>[];
 
   @override
   void initState() {
     super.initState();
     _getTerminalEmulator();
     _detectSpice();
+    _setNewVmName();
     getPreference<String>(prefWorkingDirectory).then((pref) {
       setState(() {
         if (pref == null) {
@@ -81,6 +81,13 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
   void dispose() {
     refreshTimer?.cancel();
     super.dispose();
+  }
+
+  Future<void> _setNewVmName() async {
+    newVmNames =
+        await getPreference<List<String>>(prefNewlyInstalledVms) ?? <String>[];
+    // Delete prefNewlyInstalledVms to only display once
+    savePreference(prefNewlyInstalledVms, <String>[]);
   }
 
   void _getTerminalEmulator() async {
@@ -253,7 +260,12 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     final bool active = _activeVms.containsKey(currentVm);
     final bool sshy = _sshVms.contains(currentVm);
 
-    final bool newVM = widget.newVmName == currentVm;
+    print('currentVm: $currentVm');
+    print('newVmNames: $newVmNames');
+
+    final bool newVM = newVmNames.contains(currentVm);
+
+    print('newVM $newVM');
 
     VmInfo vmInfo = VmInfo();
     String connectInfo = '';

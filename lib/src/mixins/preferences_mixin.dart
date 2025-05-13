@@ -27,7 +27,7 @@ mixin PreferencesMixin {
         return prefs.getInt(key) as T;
       } else if (T == String) {
         return prefs.getString(key) as T;
-      } else if (T == List) {
+      } else if (T == List<String>) {
         return prefs.getStringList(key) as T;
       }
     }
