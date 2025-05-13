@@ -9,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
 import 'package:path/path.dart' as path;
 import 'package:process_run/shell.dart';
+import 'package:quickgui/src/widgets/manager/new_vm_tag.dart';
 import 'package:version/version.dart';
 
 import '../globals.dart';
@@ -20,7 +21,9 @@ import '../model/vminfo.dart';
 /// Displays a list of available VMs, running state and connection info,
 /// with buttons to start and stop VMs.
 class Manager extends StatefulWidget {
-  const Manager({super.key});
+  const Manager({super.key, this.newVmName});
+
+  final String? newVmName;
 
   @override
   State<Manager> createState() => _ManagerState();
@@ -249,6 +252,9 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
   List<Widget> _buildRow(String currentVm, Color buttonColor) {
     final bool active = _activeVms.containsKey(currentVm);
     final bool sshy = _sshVms.contains(currentVm);
+
+    final bool newVM = widget.newVmName == currentVm;
+
     VmInfo vmInfo = VmInfo();
     String connectInfo = '';
     if (active) {
@@ -287,7 +293,12 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     return <Widget>[
       ListTile(
           leading: osIcon ?? const Icon(Icons.computer, size: 32),
-          title: Text(currentVm),
+          title: Row(
+            children: [
+              Text(currentVm),
+              newVM ? const NewVmTag() : const SizedBox.shrink()
+            ],
+          ),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[

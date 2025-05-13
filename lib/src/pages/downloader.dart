@@ -5,6 +5,8 @@ import 'dart:io';
 import 'package:desktop_notifications/desktop_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
+import 'package:quickgui/src/widgets/downloader/run_image_button.dart';
+import 'package:path/path.dart' as p;
 
 import '../model/operating_system.dart';
 import '../model/option.dart';
@@ -36,6 +38,7 @@ class _DownloaderState extends State<Downloader> {
   bool _downloadFinished = false;
   var controller = StreamController<double>();
   Process? _process;
+  String? _newestVmFolderName;
 
   @override
   void initState() {
@@ -54,11 +57,26 @@ class _DownloaderState extends State<Downloader> {
     }
   }
 
+  Future<String?> findNewestFolder() async {
+    final dir = Directory.current;
+    final folders = await dir
+        .list()
+        .where((entity) => entity is Directory)
+        .cast<Directory>()
+        .toList();
+
+    folders
+        .sort((a, b) => b.statSync().modified.compareTo(a.statSync().modified));
+
+    return folders.isNotEmpty ? p.basename(folders.first.path) : null;
+  }
+
   Stream<double> progressStream() {
     var options = [widget.operatingSystem.code, widget.version.version];
     if (widget.option != null) {
       options.add(widget.option!.option);
     }
+
     Process.start('quickget', options).then((process) {
       if (widget.option!.downloader != 'zsync') {
         process.stderr.transform(utf8.decoder).forEach(parseCurlProgress);
@@ -69,25 +87,30 @@ class _DownloaderState extends State<Downloader> {
       process.exitCode.then((value) {
         bool _cancelled = value.isNegative;
         controller.close();
-        setState(() {
-          _downloadFinished = true;
-          notificationsClient?.notify(
-            _cancelled
-                ? context.t('Download cancelled')
-                : context.t('Download complete'),
-            body: _cancelled
-                ? context.t(
-                    'Download of {0} has been canceled.',
-                    args: [widget.operatingSystem.name],
-                  )
-                : context.t(
-                    'Download of {0} has completed.',
-                    args: [widget.operatingSystem.name],
-                  ),
-            appName: 'Quickgui',
-            expireTimeoutMs: 10000, /* 10 seconds */
-          );
-        });
+        findNewestFolder().then(
+          (path) {
+            setState(() {
+              _downloadFinished = true;
+              _newestVmFolderName = path;
+              notificationsClient?.notify(
+                _cancelled
+                    ? context.t('Download cancelled')
+                    : context.t('Download complete'),
+                body: _cancelled
+                    ? context.t(
+                        'Download of {0} has been canceled.',
+                        args: [widget.operatingSystem.name],
+                      )
+                    : context.t(
+                        'Download of {0} has completed.',
+                        args: [widget.operatingSystem.name],
+                      ),
+                appName: 'Quickgui',
+                expireTimeoutMs: 10000, /* 10 seconds */
+              );
+            });
+          },
+        );
       });
 
       setState(() {
@@ -103,10 +126,7 @@ class _DownloaderState extends State<Downloader> {
       appBar: AppBar(
         title: Text(
           context.t('Downloading {0}', args: [
-            '${widget.operatingSystem.name} ${widget.version.version}' +
-                (widget.option!.option.isNotEmpty
-                    ? ' (${widget.option!.option})'
-                    : '')
+            '${widget.operatingSystem.name} ${widget.version.version}${widget.option!.option.isNotEmpty ? ' (${widget.option!.option})' : ''}'
           ]),
         ),
         automaticallyImplyLeading: false,
@@ -117,10 +137,10 @@ class _DownloaderState extends State<Downloader> {
             child: StreamBuilder(
               stream: _progressStream,
               builder: (context, AsyncSnapshot<double> snapshot) {
-                var data = !snapshot.hasData ||
-                        widget.option!.downloader != 'curl'
-                    ? null
-                    : snapshot.data;
+                var data =
+                    !snapshot.hasData || widget.option!.downloader != 'curl'
+                        ? null
+                        : snapshot.data;
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -142,6 +162,10 @@ class _DownloaderState extends State<Downloader> {
                 );
               },
             ),
+          ),
+          ManageMachinesAfterDownloadButton(
+            downloadFinished: _downloadFinished,
+            vmName: _newestVmFolderName ?? '',
           ),
           CancelDismissButton(
             onCancel: () {
