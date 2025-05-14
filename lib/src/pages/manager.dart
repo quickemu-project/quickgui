@@ -54,7 +54,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     'xterm',
   ];
   Timer? refreshTimer;
-  List<String> newVmNames = <String>[];
+  List<String> _newVmNames = <String>[];
 
   @override
   void initState() {
@@ -84,7 +84,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
   }
 
   Future<void> _setNewVmName() async {
-    newVmNames =
+    _newVmNames =
         await getPreference<List<String>>(prefNewlyInstalledVms) ?? <String>[];
     // Delete prefNewlyInstalledVms to only display once
     savePreference(prefNewlyInstalledVms, <String>[]);
@@ -259,13 +259,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
   List<Widget> _buildRow(String currentVm, Color buttonColor) {
     final bool active = _activeVms.containsKey(currentVm);
     final bool sshy = _sshVms.contains(currentVm);
-
-    print('currentVm: $currentVm');
-    print('newVmNames: $newVmNames');
-
-    final bool newVM = newVmNames.contains(currentVm);
-
-    print('newVM $newVM');
+    final bool newVM = _newVmNames.contains(currentVm);
 
     VmInfo vmInfo = VmInfo();
     String connectInfo = '';
