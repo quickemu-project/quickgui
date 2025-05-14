@@ -9,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gettext_i18n/gettext_i18n.dart';
 import 'package:path/path.dart' as path;
 import 'package:process_run/shell.dart';
+import 'package:quickgui/src/widgets/manager/new_vm_tag.dart';
 import 'package:version/version.dart';
 
 import '../globals.dart';
@@ -53,12 +54,14 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     'xterm',
   ];
   Timer? refreshTimer;
+  List<String> _newVmNames = <String>[];
 
   @override
   void initState() {
     super.initState();
     _getTerminalEmulator();
     _detectSpice();
+    _setNewVmName();
     getPreference<String>(prefWorkingDirectory).then((pref) {
       setState(() {
         if (pref == null) {
@@ -78,6 +81,13 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
   void dispose() {
     refreshTimer?.cancel();
     super.dispose();
+  }
+
+  Future<void> _setNewVmName() async {
+    _newVmNames =
+        await getPreference<List<String>>(prefNewlyInstalledVms) ?? <String>[];
+    // Delete prefNewlyInstalledVms to only display once
+    savePreference(prefNewlyInstalledVms, <String>[]);
   }
 
   void _getTerminalEmulator() async {
@@ -249,6 +259,8 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
   List<Widget> _buildRow(String currentVm, Color buttonColor) {
     final bool active = _activeVms.containsKey(currentVm);
     final bool sshy = _sshVms.contains(currentVm);
+    final bool newVM = _newVmNames.contains(currentVm);
+
     VmInfo vmInfo = VmInfo();
     String connectInfo = '';
     if (active) {
@@ -287,7 +299,12 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     return <Widget>[
       ListTile(
           leading: osIcon ?? const Icon(Icons.computer, size: 32),
-          title: Text(currentVm),
+          title: Row(
+            children: [
+              Text(currentVm),
+              newVM ? const NewVmTag() : const SizedBox.shrink()
+            ],
+          ),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
