@@ -24,7 +24,7 @@ jobs:
     name: "Check versions ⚖️"
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: "Compare App and Git versions 🟰"
@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: "Checkout 🥡"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: "Install Flutter 🦋"
         uses: subosito/flutter-action@v2
         with:
@@ -100,7 +100,7 @@ jobs:
       id-token: "write"
       contents: "read"
     steps:
-      - uses: "actions/checkout@v4"
+      - uses: "actions/checkout@v6"
         with:
           ref: "${{ (inputs.tag != null) && format('refs/tags/{0}', inputs.tag) || '' }}"
       - uses: "DeterminateSystems/nix-installer-action@v22"
@@ -117,7 +117,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: "Checkout 🥡"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: "Install Flutter 🦋"
         uses: subosito/flutter-action@v2
         with:
