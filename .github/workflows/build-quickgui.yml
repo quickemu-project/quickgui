@@ -46,7 +46,7 @@ jobs:
       - name: Show artifacts 👀
         run: tree build/linux/x64/release/bundle
       - name: Upload artifacts ⤴️
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Quickgui-${{github.run_number}}-linux-x64
           path: build/linux/x64/release/bundle
