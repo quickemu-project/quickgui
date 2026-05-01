@@ -15,6 +15,7 @@ import '../globals.dart';
 import '../mixins/preferences_mixin.dart';
 import '../model/osicons.dart';
 import '../model/vminfo.dart';
+import '../pages/vm_config_editor.dart';
 
 /// VM manager page.
 /// Displays a list of available VMs, running state and connection info,
@@ -28,6 +29,7 @@ class Manager extends StatefulWidget {
 
 class _ManagerState extends State<Manager> with PreferencesMixin {
   List<String> _currentVms = [];
+  Map<String, String> _vmConfFiles = {};
   Map<String, VmInfo> _activeVms = {};
   bool _spicy = false;
   final List<String> _sshVms = [];
@@ -146,6 +148,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
 
   void _getVms(context) async {
     List<String> currentVms = [];
+    Map<String, String> vmConfFiles = {};
     Map<String, VmInfo> activeVms = {};
 
     await for (var entity
@@ -153,6 +156,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
       if ((entity.path.endsWith('.conf')) && (_isValidConf(entity.path))) {
         String name = path.basenameWithoutExtension(entity.path);
         currentVms.add(name);
+        vmConfFiles[name] = entity.path;
         File pidFile = File('$name/$name.pid');
         if (pidFile.existsSync()) {
           String pid = pidFile.readAsStringSync().trim();
@@ -172,6 +176,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     currentVms.sort();
     setState(() {
       _currentVms = currentVms;
+      _vmConfFiles = vmConfFiles;
       _activeVms = activeVms;
     });
   }
@@ -291,6 +296,21 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
+              IconButton(
+                icon: const Icon(Icons.settings, semanticLabel: 'Settings'),
+                tooltip: context.t('Edit configuration'),
+                onPressed: active
+                    ? null
+                    : () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => VmConfigEditorDialog(
+                          vmName: currentVm,
+                          confPath: _vmConfFiles[currentVm]!,
+                        ),
+                      );
+                    },
+              ),
               IconButton(
                   icon: Icon(
                     active ? Icons.play_arrow : Icons.play_arrow_outlined,
