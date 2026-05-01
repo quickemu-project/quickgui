@@ -15,11 +15,18 @@ class OptionSelection extends StatefulWidget {
 class _OptionSelectionState extends State<OptionSelection> {
   var term = "";
   final focusNode = FocusNode();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     focusNode.requestFocus();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -68,25 +75,22 @@ class _OptionSelectionState extends State<OptionSelection> {
                 ),
               ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: list.length,
-              itemBuilder: (context, index) {
-                var item = list[index];
-                return Card(
-                  child: ListTile(
-                    title: Text(item.option),
-                    onTap: () {
-                      Navigator.of(context).pop(item);
-                    },
-                  ),
-                );
-              },
-            ),
-          ],
+      body: Scrollbar(
+        controller: _scrollController,
+        child: ListView.builder(
+          controller: _scrollController,
+          itemCount: list.length,
+          itemBuilder: (context, index) {
+            var item = list[index];
+            return Card(
+              child: ListTile(
+                title: Text(item.option),
+                onTap: () {
+                  Navigator.of(context).pop(item);
+                },
+              ),
+            );
+          },
         ),
       ),
     );
