@@ -1,0 +1,204 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: quickgui\n"
+"POT-Creation-Date: 2021-09-29 09:59+0200\n"
+"PO-Revision-Date: 2026-01-25 09:23+0100\n"
+"Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
+"Language-Team: Georgian <(nothing)>\n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.8\n"
+"X-Poedit-Basepath: .\n"
+
+msgid "Quickgui : a Flutter frontend for Quickget and Quickemu"
+msgstr "Quickgui : Flutter-ის წინაბოლო Quickget-ისთვის და Quickemu-ისთვის"
+
+msgid "Main menu"
+msgstr "მთავარი მენიუ"
+
+msgid "Use dark mode"
+msgstr "მუქი რეჟიმის გამოყენება"
+
+msgid "Cancel"
+msgstr "გაუქმება"
+
+msgid "Click to use SPICE display"
+msgstr "დააწკაპუნეთ SPICE ეკრანის გამოსაყენებლად"
+
+msgid "Create new machines"
+msgstr "ახალი მანქანების შექმნა"
+
+msgid "Dismiss"
+msgstr "მოცილება"
+
+msgid "Done !"
+msgstr "მზადაა !"
+
+msgid "Download"
+msgstr "გადმოწერა"
+
+msgid "Download finished."
+msgstr "გადმოწერა დასრულდა."
+
+msgid "Downloader"
+msgstr "გადმომწერი"
+
+msgid "Downloading (no progress available)..."
+msgstr "გადმოწერა (მიმდინარეობა ხელმისაწვდომი არაა)..."
+
+msgid "Downloading... {0}%"
+msgstr "გადმოწერა... {0}%"
+
+msgid "Downloading {0}"
+msgstr "{0}-ის გადმოწერა"
+
+msgid "Download cancelled"
+msgstr "გადმოწერა გაუქმდა"
+
+msgid "Download complete"
+msgstr "გადმოწერა დასრულებულია"
+
+msgid "Download of {0} has completed."
+msgstr "{0}-ის გადმოწერა დასრულდა."
+
+msgid "Download of {0} has been cancelled."
+msgstr "{0}-ის გადმოწერა გაუქმდა."
+
+msgid "Manage existing machines"
+msgstr "არსებული მანქანების მართვა"
+
+msgid "Manager"
+msgstr "მმართველი"
+
+msgid "{0} Mbs downloaded"
+msgstr "{0} მბ გადმოწერილია"
+
+msgid "Now run {0} to start the VM"
+msgstr "ვმ-ის გასაშვებად გაუშვით {0}"
+
+msgid "OK"
+msgstr "დიახ"
+
+msgid "Operating system"
+msgstr "ოპერაციული სისტემა"
+
+msgid "Search operating system"
+msgstr "ოპერაციული სისტემის ძებნა"
+
+msgid "Search option"
+msgstr "ძებნის პარამეტრი"
+
+msgid "Select operating system"
+msgstr "აირჩიეთ ოპერაციული სისტემა"
+
+msgid "Select option"
+msgstr "აირჩიეთ პარამეტრი"
+
+msgid "Select version for {0}"
+msgstr "აირჩიეთ {0}-ის ვერსია"
+
+msgid "Select..."
+msgstr "აირჩიეთ..."
+
+msgid "SPICE port"
+msgstr "SPICE-ის პორტი"
+
+msgid "SSH port"
+msgstr "SSH პორტი"
+
+msgid "Stop The Virtual Machine?"
+msgstr "გავაჩერო ვირტუალური მანქანა?"
+
+msgid "Target folder : {0}"
+msgstr "სამიზნე საქაღალდე: {0}"
+
+msgid "Use SPICE display"
+msgstr "SPICE ეკრანის გამოყენება"
+
+msgid "Using SPICE display"
+msgstr "გამოიყენება SPICE ეკრანი"
+
+msgid "Version"
+msgstr "ვერსია"
+
+msgid "Waiting for download to start"
+msgstr "გადმოწერის დაწყების მოლოდინი"
+
+msgid "You are about to terminate the virtual machine {0}"
+msgstr "აპირებთ, შეწყვიტოთ ვირტუალური მანქანა {0}"
+
+msgid "Language"
+msgstr "ენა"
+
+msgid "Directory where the machines are stored"
+msgstr "საქაღალდე, სადაც მანქანებია შენახული"
+
+msgid "Search version"
+msgstr "ვერსიის ძებნა"
+
+msgid "quickemu was not found in your PATH"
+msgstr "quickemu აღმოჩენილი არაა თქვენს გარემოს ცვლადში PATH"
+
+msgid "Please install it and try again."
+msgstr "დააყენეთ ის და თავიდან სცადეთ."
+
+# The complete sentence is "See github.com/quickemu-project/quickemu for more information"
+msgid "See"
+msgstr "იხილეთ"
+
+# The complete sentence is "See github.com/quickemu-project/quickemu for more information"
+msgid "for more information"
+msgstr "მეტი ინფორმაციისთვის"
+
+msgid "Delete {0}"
+msgstr "{0}-ის წაშლა"
+
+msgid ""
+"You are about to delete {0}. This cannot be undone. Would you like to delete "
+"the disk image but keep the configuration, or delete the whole VM?"
+msgstr ""
+"აპირებთ, წაშალოთ {0}. ეს ქმედება შეუქცევადია. გნებავთ, წაშალოთ დისკის ასლის "
+"ფაილები, მაგრამ შეინარჩუნოთ კონფიგურაცია, თუ მთელ ვმ-ს წაშლით?"
+
+msgid "Delete disk image"
+msgstr "დისკის ასლის ფაილის წაშლა"
+
+msgid "Delete whole VM"
+msgstr "მთლიანი ვმ-ის წაშლა"
+
+msgid "Connect display with SPICE"
+msgstr "ეკრანის დაკავშირება SPICE-ით"
+
+msgid "SPICE client not found"
+msgstr "SPICE-ის კლიენტი აღმოჩენილი არაა"
+
+msgid "Connect with SSH"
+msgstr "დაკავშირება SSH-ით"
+
+msgid "SSH server not detected on guest"
+msgstr "სტუმარზე SSH სერვერი აღმოჩენილი არაა"
+
+msgid "Launch SSH connection to {0}"
+msgstr "SSH-ით დაკავშირება {0}-ისთან"
+
+msgid "SSH username"
+msgstr "SSH მომხმარებლის სახელი"
+
+# Connect to the VM via SSH
+msgid "Connect"
+msgstr "დაკავშირება"
+
+msgid "Error"
+msgstr "შეცდომა"
+
+msgid "Could not write to the working directory. Please check the permissions."
+msgstr "სამუშაო საქაღალდეში ჩაწერა შეუძლებელია. გადაამოწმეთ წვდომები."
+
+msgid "Loading available downloads"
+msgstr "ხელმისაწვდომი გადმოწერების ჩატვირთვა"
+
+msgid "Powered by"
+msgstr "კვება ვისგან"
