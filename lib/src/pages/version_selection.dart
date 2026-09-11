@@ -13,7 +13,7 @@ class VersionSelection extends StatefulWidget {
   final OperatingSystem operatingSystem;
 
   @override
-  _VersionSelectionState createState() => _VersionSelectionState();
+  State<VersionSelection> createState() => _VersionSelectionState();
 }
 
 class _VersionSelectionState extends State<VersionSelection> {
@@ -29,22 +29,26 @@ class _VersionSelectionState extends State<VersionSelection> {
   @override
   Widget build(BuildContext context) {
     var list = widget.operatingSystem.versions
-        .where((version) =>
-            version.version.toLowerCase().contains(term.toLowerCase()))
+        .where(
+          (version) =>
+              version.version.toLowerCase().contains(term.toLowerCase()),
+        )
         .toList();
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(context
-            .t('Select version for {0}', args: [widget.operatingSystem.name])),
+        title: Text(
+          context.t(
+            'Select version for {0}',
+            args: [widget.operatingSystem.name],
+          ),
+        ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(kToolbarHeight),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).canvasColor,
-              ),
+              decoration: BoxDecoration(color: Theme.of(context).canvasColor),
               child: Padding(
                 padding: const EdgeInsets.all(8),
                 child: Material(
@@ -88,19 +92,27 @@ class _VersionSelectionState extends State<VersionSelection> {
                     onTap: () {
                       if (item.options.length > 1) {
                         Navigator.of(context)
-                            .push<Option>(MaterialPageRoute(
+                            .push<Option>(
+                              MaterialPageRoute(
                                 fullscreenDialog: true,
                                 builder: (context) =>
-                                    OptionSelection(list[index])))
+                                    OptionSelection(list[index]),
+                              ),
+                            )
                             .then((selection) {
-                          if (selection != null) {
-                            Navigator.of(context)
-                                .pop(Tuple2<Version, Option?>(item, selection));
-                          }
-                        });
+                              if (selection != null && context.mounted) {
+                                Navigator.of(context).pop(
+                                  Tuple2<Version, Option?>(item, selection),
+                                );
+                              }
+                            });
                       } else {
-                        Navigator.of(context).pop(Tuple2<Version, Option?>(
-                            item, list[index].options[0]));
+                        Navigator.of(context).pop(
+                          Tuple2<Version, Option?>(
+                            item,
+                            list[index].options[0],
+                          ),
+                        );
                       }
                     },
                   ),

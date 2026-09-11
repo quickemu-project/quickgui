@@ -2,27 +2,48 @@ name: Build Quickgui 🏗️
 
 on:
   pull_request:
-    branches:
-      - main
-    paths:
-      - pubspec.yaml
-      - assets/**
-      - lib/**
-      - linux/**
+    branches: [main]
   push:
-    branches:
-      - main
-    paths:
-      - pubspec.yaml
-      - assets/**
-      - lib/**
-      - linux/**
+    branches: [main]
   workflow_dispatch:
 
-# TODO: arm64 runner
-# https://github.blog/changelog/2024-06-03-actions-arm-based-linux-and-windows-runners-are-now-in-public-beta/
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
+  analyze-and-test:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version-file: pubspec.yaml
+      - run: flutter pub get --enforce-lockfile
+      - run: dart format --output=none --set-exit-if-changed lib test
+      - run: flutter analyze
+      - run: flutter test
+
+  test-build-macos:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v6
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version-file: pubspec.yaml
+      - run: flutter pub get --enforce-lockfile
+      - run: flutter build macos --release
+      - uses: actions/upload-artifact@v7
+        with:
+          name: Quickgui-macos
+          path: build/macos/Build/Products/Release/quickgui.app
+          if-no-files-found: error
+
   test-build-linux-x64:
     runs-on: ubuntu-22.04
     steps:
@@ -53,6 +74,7 @@ jobs:
           overwrite: true
 
   test-build-ppa-x64:
+    if: github.repository == 'quickemu-project/quickgui' && github.event_name != 'pull_request'
     runs-on: ubuntu-22.04
     steps:
       - name: "Checkout 🥡"
@@ -127,4 +149,3 @@ jobs:
         run: |
           nix build .#quickgui
           tree ./result
-

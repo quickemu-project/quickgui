@@ -55,56 +55,57 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
                     .add(const EdgeInsets.symmetric(horizontal: 16)),
                 child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: Text("Quickgui $version",
-                      style: const TextStyle(
-                          fontSize: 24.0, fontWeight: FontWeight.bold)),
+                  child: Text(
+                    "Quickgui $version",
+                    style: const TextStyle(
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
               FutureBuilder<String>(
                 future: fetchQuickemuVersion(),
                 builder:
                     (BuildContext context, AsyncSnapshot<String> snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const CircularProgressIndicator(); // or some other widget while waiting
-                  } else {
-                    String poweredByText =
-                        "${context.t('Powered by')} Quickemu";
-                    if (snapshot.hasData) {
-                      poweredByText += " ${snapshot.data}";
-                    }
-                    return Padding(
-                      // Minimal top padding
-                      padding: const EdgeInsets.only(top: 0)
-                          .add(const EdgeInsets.symmetric(horizontal: 16)),
-                      child: Container(
-                        child: Text(poweredByText,
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator(); // or some other widget while waiting
+                      } else {
+                        String poweredByText =
+                            "${context.t('Powered by')} Quickemu";
+                        if (snapshot.hasData) {
+                          poweredByText += " ${snapshot.data}";
+                        }
+                        return Padding(
+                          // Minimal top padding
+                          padding: const EdgeInsets.only(top: 0)
+                              .add(const EdgeInsets.symmetric(horizontal: 16)),
+                          child: Text(
+                            poweredByText,
                             style: const TextStyle(
-                                fontSize: 12.0, fontWeight: FontWeight.bold)),
-                      ),
-                    );
-                  }
-                },
+                              fontSize: 12.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        );
+                      }
+                    },
               ),
-              Container(
-                height: 4.0,
-              ),
+              Container(height: 4.0),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
                   children: [
                     Text(
                       context.t('Use dark mode'),
-                      style: TextStyle(
-                        color: Colors.grey[300],
-                      ),
+                      style: TextStyle(color: Colors.grey[300]),
                     ),
-                    Expanded(
-                      child: Container(),
-                    ),
+                    Expanded(child: Container()),
                     Switch(
-                      value: Theme.of(context).colorScheme.brightness ==
+                      value:
+                          Theme.of(context).colorScheme.brightness ==
                           Brightness.dark,
-                      activeColor: Colors.black26,
+                      activeThumbColor: Colors.black26,
                       activeTrackColor: Theme.of(context).colorScheme.primary,
                       inactiveThumbColor: Colors.grey[500],
                       inactiveTrackColor: Colors.grey[300],
@@ -122,17 +123,13 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
                   ],
                 ),
               ),
-              Container(
-                height: 4.0,
-              ),
+              Container(height: 4.0),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
                   children: [
                     Text(context.t('Language')),
-                    Expanded(
-                      child: Container(),
-                    ),
+                    Expanded(child: Container()),
                     DropdownButton<String>(
                       value: currentLocale,
                       items: _dropdownMenuItems,
@@ -147,9 +144,7 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
                   ],
                 ),
               ),
-              Container(
-                height: 32.0,
-              ),
+              Container(height: 32.0),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
@@ -160,8 +155,9 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
                         style: DefaultTextStyle.of(context).style,
                         children: const <TextSpan>[
                           TextSpan(
-                              text: 'Authors\n',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
+                            text: 'Authors\n',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           TextSpan(text: 'Yannick Mauray\n'),
                           TextSpan(text: 'Mark Johnson\n'),
                           TextSpan(text: 'Martin Wimpress\n'),
@@ -175,8 +171,9 @@ class _LeftMenuState extends State<LeftMenu> with PreferencesMixin {
                         children: const <TextSpan>[
                           TextSpan(text: '© 2021 - 2024\n'),
                           TextSpan(
-                              text: 'Quickemu Project\n',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
+                            text: 'Quickemu Project\n',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                         ],
                       ),
                     ),

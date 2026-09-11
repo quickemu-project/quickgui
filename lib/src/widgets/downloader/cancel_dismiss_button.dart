@@ -31,7 +31,7 @@ class CancelDismissButton extends StatelessWidget {
             child: downloadFinished
                 ? Text(context.t('Dismiss'))
                 : Text(context.t('Cancel')),
-          )
+          ),
         ],
       ),
     );

@@ -10,15 +10,8 @@ class DownloaderPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.t('Downloader')),
-      ),
-      body: const Column(
-        children: [
-          Logo(),
-          DownloaderMenu(),
-        ],
-      ),
+      appBar: AppBar(title: Text(context.t('Downloader'))),
+      body: const Column(children: [Logo(), DownloaderMenu()]),
     );
   }
 }

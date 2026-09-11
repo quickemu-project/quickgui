@@ -26,9 +26,7 @@ class DownloaderPageButton extends StatelessWidget {
               child: Center(
                 child: Text(
                   label?.toUpperCase() ?? '',
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleSmall
+                  style: Theme.of(context).textTheme.titleSmall
                       ?.copyWith(color: Colors.white),
                 ),
               ),

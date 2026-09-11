@@ -51,8 +51,8 @@ class _AppState extends State<App> with PreferencesMixin {
             snapshot.data != null) {
           var appSettings = context.read<AppSettings>();
           appSettings.setActiveLocaleSilently(
-              snapshot.data?.getString(prefCurrentLocale) ??
-                  Platform.localeName);
+            snapshot.data?.getString(prefCurrentLocale) ?? Platform.localeName,
+          );
           var pref = snapshot.data!.getBool(prefThemeMode);
           if (pref != null) {
             appSettings.useDarkModeSilently = pref;
@@ -60,11 +60,12 @@ class _AppState extends State<App> with PreferencesMixin {
           return Consumer<AppSettings>(
             builder: (context, appSettings, _) => MaterialApp(
               theme: ThemeData(
-                  useMaterial3: true,
-                  colorScheme: ColorScheme.fromSwatch(
-                    primarySwatch: Colors.pink,
-                    backgroundColor: Colors.white,
-                  )),
+                useMaterial3: true,
+                colorScheme: ColorScheme.fromSwatch(
+                  primarySwatch: Colors.pink,
+                  backgroundColor: Colors.white,
+                ),
+              ),
               darkTheme: ThemeData(
                 useMaterial3: true,
                 colorScheme: ColorScheme.fromSwatch(
@@ -77,27 +78,34 @@ class _AppState extends State<App> with PreferencesMixin {
               home: AppVersion.packageInfo == null
                   ? const DebgetNotFoundPage()
                   : const MainPage(),
-              supportedLocales: supportedLocales.map((s) => s.contains("_")
-                  ? Locale(s.split("_")[0], s.split("_")[1])
-                  : Locale(s)),
+              supportedLocales: supportedLocales.map(
+                (s) => s.contains("_")
+                    ? Locale(s.split("_")[0], s.split("_")[1])
+                    : Locale(s),
+              ),
               localizationsDelegates: [
                 GettextLocalizationsDelegate(),
                 ...GlobalMaterialLocalizations.delegates,
                 GlobalWidgetsLocalizations.delegate,
               ],
-              locale:
-                  Locale(appSettings.languageCode!, appSettings.countryCode),
+              locale: Locale(
+                appSettings.languageCode!,
+                appSettings.countryCode,
+              ),
               localeListResolutionCallback: (locales, supportedLocales) {
                 if (locales != null) {
                   for (var locale in locales) {
-                    var supportedLocale = supportedLocales.where((element) =>
-                        element.languageCode == locale.languageCode &&
-                        element.countryCode == locale.countryCode);
+                    var supportedLocale = supportedLocales.where(
+                      (element) =>
+                          element.languageCode == locale.languageCode &&
+                          element.countryCode == locale.countryCode,
+                    );
                     if (supportedLocale.isNotEmpty) {
                       return supportedLocale.first;
                     }
-                    supportedLocale = supportedLocales.where((element) =>
-                        element.languageCode == locale.languageCode);
+                    supportedLocale = supportedLocales.where(
+                      (element) => element.languageCode == locale.languageCode,
+                    );
                     if (supportedLocale.isNotEmpty) {
                       return supportedLocale.first;
                     }
@@ -108,9 +116,7 @@ class _AppState extends State<App> with PreferencesMixin {
             ),
           );
         } else {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const Center(child: CircularProgressIndicator());
         }
       },
     );

@@ -16,9 +16,7 @@ class DownloadProgressBar extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
         width: 200,
-        child: LinearProgressIndicator(
-          value: downloadFinished ? 1 : data,
-        ),
+        child: LinearProgressIndicator(value: downloadFinished ? 1 : data),
       ),
     );
   }

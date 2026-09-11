@@ -3,11 +3,11 @@
 , copyDesktopItems
 , lib
 , flutter
-, gnome
+, zenity
 , quickemu
 }:
 let
-  runtimeBinDependencies = [ quickemu gnome.zenity ];
+  runtimeBinDependencies = [ quickemu zenity ];
   versionMatches = builtins.match ''
     .*
     .*version:[[:blank:]]([[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+\+?[[:digit:]]*)

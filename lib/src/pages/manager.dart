@@ -60,17 +60,20 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     _getTerminalEmulator();
     _detectSpice();
     getPreference<String>(prefWorkingDirectory).then((pref) {
+      if (!mounted) return;
       setState(() {
         if (pref == null) {
           return;
         }
         Directory.current = pref;
       });
-      Future.delayed(Duration.zero,
-          () => _getVms(context)); // Reload VM list when we enter the page.
+      Future.delayed(
+        Duration.zero,
+        () => _getVms(),
+      ); // Reload VM list when we enter the page.
     });
     refreshTimer = Timer.periodic(const Duration(seconds: 5), (Timer t) {
-      _getVms(context);
+      _getVms();
     }); // Reload VM list every 5 seconds.
   }
 
@@ -113,9 +116,9 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     });
   }
 
-  VmInfo _parseVmInfo(name) {
+  VmInfo _parseVmInfo(String name) {
     VmInfo info = VmInfo();
-    File portsFile = File(name + '/' + name + '.ports');
+    File portsFile = File('$name/$name.ports');
     if (portsFile.existsSync()) {
       List<String> lines = portsFile.readAsLinesSync();
       for (var line in lines) {
@@ -133,7 +136,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     return info;
   }
 
-  bool _isValidConf(conf) {
+  bool _isValidConf(String conf) {
     List<String> lines = File(conf).readAsLinesSync();
     for (var line in lines) {
       List<String> parts = line.split('=');
@@ -144,12 +147,14 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     return false;
   }
 
-  void _getVms(context) async {
+  void _getVms() async {
     List<String> currentVms = [];
     Map<String, VmInfo> activeVms = {};
 
-    await for (var entity
-        in Directory.current.list(recursive: false, followLinks: true)) {
+    await for (var entity in Directory.current.list(
+      recursive: false,
+      followLinks: true,
+    )) {
       if ((entity.path.endsWith('.conf')) && (_isValidConf(entity.path))) {
         String name = path.basenameWithoutExtension(entity.path);
         currentVms.add(name);
@@ -191,48 +196,40 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
   Widget _buildVmList() {
     List<Widget> widgetList = [];
     final Color buttonColor = Theme.of(context).colorScheme.primary;
-    widgetList.addAll(
-      [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "${context.t('Directory where the machines are stored')}:",
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
+    widgetList.addAll([
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "${context.t('Directory where the machines are stored')}:",
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+            ),
+            const SizedBox(width: 8),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Theme.of(context).colorScheme.onSurface,
+                backgroundColor: Theme.of(context).colorScheme.surface,
               ),
-              const SizedBox(
-                width: 8,
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Theme.of(context).colorScheme.onSurface,
-                  backgroundColor: Theme.of(context).colorScheme.surface,
-                ),
-                onPressed: () async {
-                  var folder = await FilePicker.platform
-                      .getDirectoryPath(dialogTitle: "Pick a folder");
-                  if (folder != null) {
-                    setState(() {
-                      Directory.current = folder;
-                    });
-                    savePreference(
-                        prefWorkingDirectory, Directory.current.path);
-                  }
-                },
-                child: Text(Directory.current.path),
-              ),
-            ],
-          ),
+              onPressed: () async {
+                var folder = await FilePicker.getDirectoryPath(
+                  dialogTitle: "Pick a folder",
+                );
+                if (folder != null) {
+                  setState(() {
+                    Directory.current = folder;
+                  });
+                  savePreference(prefWorkingDirectory, Directory.current.path);
+                }
+              },
+              child: Text(Directory.current.path),
+            ),
+          ],
         ),
-        const Divider(
-          thickness: 2,
-        ),
-      ],
-    );
+      ),
+      const Divider(thickness: 2),
+    ]);
     List<List<Widget>> rows = _currentVms.map((vm) {
       return _buildRow(vm, buttonColor);
     }).toList();
@@ -240,10 +237,7 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
       widgetList.addAll(row);
     }
 
-    return ListView(
-      padding: const EdgeInsets.all(16.0),
-      children: widgetList,
-    );
+    return ListView(padding: const EdgeInsets.all(16.0), children: widgetList);
   }
 
   List<Widget> _buildRow(String currentVm, Color buttonColor) {
@@ -276,153 +270,162 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
     while (vmStem.contains('-')) {
       vmStem = vmStem.substring(0, vmStem.lastIndexOf('-'));
       if (osIcons.containsKey(vmStem)) {
-        osIcon = SvgPicture.asset(
-          osIcons[vmStem]!,
-          width: 32,
-          height: 32,
-        );
+        osIcon = SvgPicture.asset(osIcons[vmStem]!, width: 32, height: 32);
         break;
       }
     }
     return <Widget>[
       ListTile(
-          leading: osIcon ?? const Icon(Icons.computer, size: 32),
-          title: Text(currentVm),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              IconButton(
-                  icon: Icon(
-                    active ? Icons.play_arrow : Icons.play_arrow_outlined,
-                    color: active ? Colors.green : buttonColor,
-                    semanticLabel: active ? 'Running' : 'Run',
-                  ),
-                  onPressed: active
-                      ? null
-                      : () async {
-                          Map<String, VmInfo> activeVms = _activeVms;
-                          List<String> command = [
-                            'quickemu',
-                            '--vm',
-                            '$currentVm.conf'
-                          ];
-                          if (_spicy) {
-                            command.addAll(['--display', 'spice']);
-                          }
-                          var shell = Shell();
-                          await shell.run(command.join(' '));
-                          VmInfo info = _parseVmInfo(currentVm);
-                          activeVms[currentVm] = info;
-                          setState(() {
-                            _activeVms = activeVms;
-                          });
-                        }),
-              IconButton(
-                icon: Icon(
-                  active ? Icons.stop : Icons.stop_outlined,
-                  color: active ? Colors.red : null,
-                  semanticLabel: active ? 'Stop' : 'Not running',
-                ),
-                onPressed: !active
-                    ? null
-                    : () {
-                        showDialog<bool>(
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                            title: Text(context.t('Stop The Virtual Machine?')),
-                            content: Text(context.t(
-                                'You are about to terminate the virtual machine {0}',
-                                args: [currentVm])),
-                            actions: <Widget>[
-                              TextButton(
-                                onPressed: () => Navigator.pop(context, false),
-                                child: Text(context.t('Cancel')),
-                              ),
-                              TextButton(
-                                onPressed: () => Navigator.pop(context, true),
-                                child: Text(context.t('OK')),
-                              ),
-                            ],
+        leading: osIcon ?? const Icon(Icons.computer, size: 32),
+        title: Text(currentVm),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            IconButton(
+              icon: Icon(
+                active ? Icons.play_arrow : Icons.play_arrow_outlined,
+                color: active ? Colors.green : buttonColor,
+                semanticLabel: active ? 'Running' : 'Run',
+              ),
+              onPressed: active
+                  ? null
+                  : () async {
+                      Map<String, VmInfo> activeVms = _activeVms;
+                      List<String> command = [
+                        'quickemu',
+                        '--vm',
+                        '$currentVm.conf',
+                      ];
+                      if (_spicy) {
+                        command.addAll(['--display', 'spice']);
+                      }
+                      var shell = Shell();
+                      await shell.run(command.join(' '));
+                      VmInfo info = _parseVmInfo(currentVm);
+                      activeVms[currentVm] = info;
+                      setState(() {
+                        _activeVms = activeVms;
+                      });
+                    },
+            ),
+            IconButton(
+              icon: Icon(
+                active ? Icons.stop : Icons.stop_outlined,
+                color: active ? Colors.red : null,
+                semanticLabel: active ? 'Stop' : 'Not running',
+              ),
+              onPressed: !active
+                  ? null
+                  : () {
+                      showDialog<bool>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: Text(context.t('Stop The Virtual Machine?')),
+                          content: Text(
+                            context.t(
+                              'You are about to terminate the virtual machine {0}',
+                              args: [currentVm],
+                            ),
                           ),
-                        ).then((result) async {
-                          result = result ?? false;
-                          if (result) {
-                            var shell = Shell();
-                            // If Quickemu is newer than 4.9.6, use the new --kill option
-                            // which is macOS compatible.
-                            var quickemuVersion =
-                                Version.parse(await fetchQuickemuVersion());
-                            if (quickemuVersion >= Version(4, 9, 6)) {
-                              shell.run([
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, false),
+                              child: Text(context.t('Cancel')),
+                            ),
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, true),
+                              child: Text(context.t('OK')),
+                            ),
+                          ],
+                        ),
+                      ).then((result) async {
+                        result = result ?? false;
+                        if (result) {
+                          var shell = Shell();
+                          // If Quickemu is newer than 4.9.6, use the new --kill option
+                          // which is macOS compatible.
+                          var quickemuVersion = Version.parse(
+                            await fetchQuickemuVersion(),
+                          );
+                          if (quickemuVersion >= Version(4, 9, 6)) {
+                            shell.run(
+                              [
                                 'quickemu',
                                 '--vm',
                                 '$currentVm.conf',
-                                '--kill'
-                              ].join(' '));
-                            } else {
-                              shell.run(['killall', currentVm].join(' '));
-                            }
-                            setState(() {
-                              _activeVms.remove(currentVm);
-                            });
+                                '--kill',
+                              ].join(' '),
+                            );
+                          } else {
+                            shell.run(['killall', currentVm].join(' '));
                           }
-                        });
-                      },
+                          setState(() {
+                            _activeVms.remove(currentVm);
+                          });
+                        }
+                      });
+                    },
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.delete,
+                color: active ? null : buttonColor,
+                semanticLabel: 'Delete',
               ),
-              IconButton(
-                icon: Icon(Icons.delete,
-                    color: active ? null : buttonColor,
-                    semanticLabel: 'Delete'),
-                onPressed: active
-                    ? null
-                    : () {
-                        showDialog<String?>(
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                            title: Text(
-                                context.t('Delete {0}', args: [currentVm])),
-                            content: Text(
-                              context.t(
-                                  'You are about to delete {0}. This cannot be undone. Would you like to delete the disk image but keep the configuration, or delete the whole VM?',
-                                  args: [currentVm]),
-                            ),
-                            actions: [
-                              TextButton(
-                                child: Text(context.t('Cancel')),
-                                onPressed: () =>
-                                    Navigator.pop(context, 'cancel'),
-                              ),
-                              TextButton(
-                                child: Text(context.t('Delete disk image')),
-                                onPressed: () => Navigator.pop(context, 'disk'),
-                              ),
-                              TextButton(
-                                child: Text(context.t('Delete whole VM')),
-                                onPressed: () => Navigator.pop(context, 'vm'),
-                              ) // set up the AlertDialog
-                            ],
+              onPressed: active
+                  ? null
+                  : () {
+                      showDialog<String?>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: Text(
+                            context.t('Delete {0}', args: [currentVm]),
                           ),
-                        ).then((result) async {
-                          result = result ?? 'cancel';
-                          if (result != 'cancel') {
-                            List<String> command = [
-                              'quickemu',
-                              '--vm',
-                              '$currentVm.conf',
-                              '--delete-$result'
-                            ];
-                            var shell = Shell();
-                            await shell.run(command.join(' '));
-                          }
-                        });
-                      },
-              ),
-            ],
-          )),
+                          content: Text(
+                            context.t(
+                              'You are about to delete {0}. This cannot be undone. Would you like to delete the disk image but keep the configuration, or delete the whole VM?',
+                              args: [currentVm],
+                            ),
+                          ),
+                          actions: [
+                            TextButton(
+                              child: Text(context.t('Cancel')),
+                              onPressed: () => Navigator.pop(context, 'cancel'),
+                            ),
+                            TextButton(
+                              child: Text(context.t('Delete disk image')),
+                              onPressed: () => Navigator.pop(context, 'disk'),
+                            ),
+                            TextButton(
+                              child: Text(context.t('Delete whole VM')),
+                              onPressed: () => Navigator.pop(context, 'vm'),
+                            ), // set up the AlertDialog
+                          ],
+                        ),
+                      ).then((result) async {
+                        result = result ?? 'cancel';
+                        if (result != 'cancel') {
+                          List<String> command = [
+                            'quickemu',
+                            '--vm',
+                            '$currentVm.conf',
+                            '--delete-$result',
+                          ];
+                          var shell = Shell();
+                          await shell.run(command.join(' '));
+                        }
+                      });
+                    },
+            ),
+          ],
+        ),
+      ),
       if (connectInfo.isNotEmpty)
         ListTile(
-            title: Text(connectInfo, style: const TextStyle(fontSize: 12)),
-            trailing: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
+          title: Text(connectInfo, style: const TextStyle(fontSize: 12)),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
               IconButton(
                 icon: Icon(
                   Icons.monitor,
@@ -440,10 +443,14 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                       },
               ),
               IconButton(
-                icon: SvgPicture.asset('assets/images/console.svg',
-                    semanticsLabel: 'Connect with SSH',
-                    colorFilter: ColorFilter.mode(
-                        sshy ? buttonColor : Colors.grey, BlendMode.srcIn)),
+                icon: SvgPicture.asset(
+                  'assets/images/console.svg',
+                  semanticsLabel: 'Connect with SSH',
+                  colorFilter: ColorFilter.mode(
+                    sshy ? buttonColor : Colors.grey,
+                    BlendMode.srcIn,
+                  ),
+                ),
                 tooltip: sshy
                     ? context.t('Connect with SSH')
                     : context.t('SSH server not detected on guest'),
@@ -464,7 +471,8 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                             content: TextField(
                               controller: usernameController,
                               decoration: InputDecoration(
-                                  hintText: context.t("SSH username")),
+                                hintText: context.t("SSH username"),
+                              ),
                             ),
                             actions: <Widget>[
                               TextButton(
@@ -487,15 +495,16 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                               'ssh',
                               '-p',
                               vmInfo.sshPort!,
-                              '${usernameController.text}@localhost'
+                              '${usernameController.text}@localhost',
                             ];
                             // Set the arguments to execute the ssh command in the default terminal.
                             // Strip the extension as x-terminal-emulator may point to a .wrapper
-                            switch (path
-                                .basenameWithoutExtension(_terminalEmulator!)) {
+                            switch (path.basenameWithoutExtension(
+                              _terminalEmulator!,
+                            )) {
                               case 'osascript':
                                 sshArgs = [
-                                  '-e \'tell app "Terminal" to do script "${sshArgs.join(' ')}"\''
+                                  '-e \'tell app "Terminal" to do script "${sshArgs.join(' ')}"\'',
                                 ];
                                 break;
                               case 'gnome-terminal':
@@ -532,17 +541,17 @@ class _ManagerState extends State<Manager> with PreferencesMixin {
                         });
                       },
               ),
-            ])),
-      const Divider()
+            ],
+          ),
+        ),
+      const Divider(),
     ];
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.t('Manager')),
-      ),
+      appBar: AppBar(title: Text(context.t('Manager'))),
       body: _buildVmList(),
     );
   }

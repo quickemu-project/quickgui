@@ -15,27 +15,17 @@ class DebgetNotFoundPage extends StatelessWidget {
           children: [
             Text(
               context.t('quickemu was not found in your PATH'),
-              style: const TextStyle(
-                fontSize: 24,
-              ),
+              style: const TextStyle(fontSize: 24),
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            const SizedBox(height: 16),
             Text(
               context.t('Please install it and try again.'),
-              style: const TextStyle(
-                fontSize: 24,
-              ),
+              style: const TextStyle(fontSize: 24),
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            const SizedBox(height: 16),
             Text.rich(
               TextSpan(
-                style: const TextStyle(
-                  fontSize: 16,
-                ),
+                style: const TextStyle(fontSize: 16),
                 text: context.t('See'),
                 children: [
                   TextSpan(
@@ -43,7 +33,8 @@ class DebgetNotFoundPage extends StatelessWidget {
                       ..onTap = () {
                         launchUrl(
                           Uri.parse(
-                              'https://github.com/quickemu-project/quickemu'),
+                            'https://github.com/quickemu-project/quickemu',
+                          ),
                         );
                       },
                     text: ' github.com/quickemu-project/quickemu ',

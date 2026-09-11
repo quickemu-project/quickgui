@@ -14,15 +14,15 @@ class AppSettings extends ChangeNotifier {
   String? get languageCode => _activeLocale?.split("_")[0];
   String? get countryCode =>
       ((_activeLocale != null) && (_activeLocale!.contains("_")))
-          ? _activeLocale!.split("_")[1]
-          : null;
+      ? _activeLocale!.split("_")[1]
+      : null;
 
   set activeLocale(String locale) {
     _activeLocale = locale;
     notifyListeners();
   }
 
-  setActiveLocaleSilently(String locale) {
+  void setActiveLocaleSilently(String locale) {
     _activeLocale = locale;
     if (_activeLocale!.contains(".")) {
       _activeLocale = _activeLocale!.split(".")[0];
