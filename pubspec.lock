@@ -226,10 +226,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_app_packager
-      sha256: "93ec9ecc30f43f764a8388d68ea8aed66ce9bbf76f482e0120c6f45add6eea21"
+      sha256: "2ca7c64362291c117258d897b6a232d9fc39355bcf3bcc7e24aff7b2cf711b3b"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.5"
+    version: "0.6.8"
   flutter_app_publisher:
     dependency: transitive
     description:
@@ -242,10 +242,10 @@ packages:
     dependency: "direct dev"
     description:
       name: flutter_distributor
-      sha256: e139769ab3e7d58bd29c17e7da6f9001c626b0d50a375b5a374ba7bc91114037
+      sha256: f7556ef4d423d26200dd2ed99bf6905e450fd84b6d9e11bbb0aed6af8f5e5c29
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.6"
+    version: "0.6.8"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -822,10 +822,10 @@ packages:
     dependency: transitive
     description:
       name: unified_distributor
-      sha256: "4adea66430c915b46a498364fa31070ce86ad798e322d10621461c9fb2bc03be"
+      sha256: be8acdf0409aff17e295b2e9f682ecb48bce085a1f1518ca99b6ac80539374e8
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.6"
+    version: "0.2.8"
   url_launcher:
     dependency: "direct main"
     description:
