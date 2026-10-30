@@ -41,24 +41,28 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup>
           text: _selectedOperatingSystem?.name ?? context.t('Select...'),
           onPressed: () {
             Navigator.of(context)
-                .push<OperatingSystem>(MaterialPageRoute(
+                .push<OperatingSystem>(
+                  MaterialPageRoute(
                     fullscreenDialog: true,
-                    builder: (context) => const OperatingSystemSelection()))
+                    builder: (context) => const OperatingSystemSelection(),
+                  ),
+                )
                 .then((selection) {
-              if (selection != null) {
-                setState(() {
-                  _selectedOperatingSystem = selection;
-                  if (selection.versions.length == 1 &&
-                      selection.versions.first.options.length == 1) {
-                    _selectedVersion = selection.versions.first;
-                    _selectedOption = selection.versions.first.options.first;
-                  } else {
-                    _selectedVersion = null;
-                    _selectedOption = null;
+                  if (selection != null) {
+                    setState(() {
+                      _selectedOperatingSystem = selection;
+                      if (selection.versions.length == 1 &&
+                          selection.versions.first.options.length == 1) {
+                        _selectedVersion = selection.versions.first;
+                        _selectedOption =
+                            selection.versions.first.options.first;
+                      } else {
+                        _selectedVersion = null;
+                        _selectedOption = null;
+                      }
+                    });
                   }
                 });
-              }
-            });
           },
         ),
         DownloaderPageButton(
@@ -67,19 +71,22 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup>
           onPressed: (_selectedOperatingSystem != null)
               ? () {
                   Navigator.of(context)
-                      .push<Tuple2<Version, Option?>>(MaterialPageRoute(
-                    fullscreenDialog: true,
-                    builder: (context) => VersionSelection(
-                        operatingSystem: _selectedOperatingSystem!),
-                  ))
+                      .push<Tuple2<Version, Option?>>(
+                        MaterialPageRoute(
+                          fullscreenDialog: true,
+                          builder: (context) => VersionSelection(
+                            operatingSystem: _selectedOperatingSystem!,
+                          ),
+                        ),
+                      )
                       .then((selection) {
-                    if (selection != null) {
-                      setState(() {
-                        _selectedVersion = selection.item1;
-                        _selectedOption = selection.item2;
+                        if (selection != null) {
+                          setState(() {
+                            _selectedVersion = selection.item1;
+                            _selectedOption = selection.item2;
+                          });
+                        }
                       });
-                    }
-                  });
                 }
               : null,
         ),
@@ -89,8 +96,9 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup>
           onPressed: (_selectedVersion == null)
               ? null
               : () async {
-                  final workingDirectory =
-                      await getPreference<String>(prefWorkingDirectory);
+                  final workingDirectory = await getPreference<String>(
+                    prefWorkingDirectory,
+                  );
                   final tmpFile = File("$workingDirectory/modecheck.tmp");
                   if (tmpFile.existsSync()) {
                     tmpFile.deleteSync();
@@ -103,6 +111,7 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup>
                   if (tmpFile.existsSync()) {
                     tmpFile.deleteSync();
 
+                    if (!context.mounted) return;
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => Downloader(
@@ -113,13 +122,15 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup>
                       ),
                     );
                   } else {
+                    if (!context.mounted) return;
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
                         title: Text(context.t('Error')),
                         content: Text(
                           context.t(
-                              'Could not write to the working directory. Please check the permissions.'),
+                            'Could not write to the working directory. Please check the permissions.',
+                          ),
                         ),
                         actions: [
                           TextButton(
@@ -156,20 +167,18 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup>
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 32),
-                  child: Text(context.t('Downloading...'),
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge
-                          ?.copyWith(color: Colors.white)),
+                  child: Text(
+                    context.t('Downloading...'),
+                    style: Theme.of(context).textTheme.bodyLarge
+                        ?.copyWith(color: Colors.white),
+                  ),
                 ),
                 const CircularProgressIndicator(),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 32),
                   child: Text(
                     'Target : ${Directory.current.absolute.path}',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge
+                    style: Theme.of(context).textTheme.bodyLarge
                         ?.copyWith(color: Colors.white),
                   ),
                 ),
@@ -185,8 +194,10 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup>
     Navigator.of(context).pop();
   }
 
-  void showDoneDialog(
-      {required String operatingSystem, required String version}) {
+  void showDoneDialog({
+    required String operatingSystem,
+    required String version,
+  }) {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -204,19 +215,20 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup>
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 32),
-                  child: Text(context.t('Done !'),
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge
-                          ?.copyWith(color: Colors.white)),
+                  child: Text(
+                    context.t('Done !'),
+                    style: Theme.of(context).textTheme.bodyLarge
+                        ?.copyWith(color: Colors.white),
+                  ),
                 ),
                 Text(
-                    context.t('Now run {0} to start the VM',
-                        args: ["quickemu --vm $operatingSystem-$version"]),
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge
-                        ?.copyWith(color: Colors.white)),
+                  context.t(
+                    'Now run {0} to start the VM',
+                    args: ["quickemu --vm $operatingSystem-$version"],
+                  ),
+                  style: Theme.of(context).textTheme.bodyLarge
+                      ?.copyWith(color: Colors.white),
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 32),
                   child: ElevatedButton(
@@ -225,9 +237,7 @@ class _HomePageButtonGroupState extends State<HomePageButtonGroup>
                     },
                     child: Text(
                       'Dismiss',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge
+                      style: Theme.of(context).textTheme.bodyLarge
                           ?.copyWith(color: Colors.white),
                     ),
                   ),

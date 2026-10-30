@@ -58,24 +58,24 @@ jobs:
           sudo apt-get -y install clang cmake libblkid1 liblzma5 libgtk-3-0 libgtk-3-dev ninja-build pkg-config
       - name: Install Flutter dependencies 🦋
         run: flutter pub get
-      - name: Activate flutter_distributor 🚀
-        run: dart pub global activate flutter_distributor
+      - name: Activate fastforge 🚀
+        run: dart pub global activate fastforge 0.6.12
       - name: Build AppImage 🐧
         run: |
           sudo apt-get -y install libfuse-dev locate
           wget -q "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage" -O /usr/local/bin/appimagetool
           chmod +x /usr/local/bin/appimagetool
-          flutter_distributor package --platform=linux --targets=appimage
+          fastforge package --platform=linux --targets=appimage
       - name: Build .deb 🍥
         run: |
           sudo apt-get -y install dpkg
-          flutter_distributor package --platform=linux --targets=deb
+          fastforge package --platform=linux --targets=deb
       - name: Build .rpm 🎩
         run: |
           sudo apt-get -y install patchelf rpm
-          flutter_distributor package --platform=linux --targets=rpm
+          fastforge package --platform=linux --targets=rpm
       - name: Build .zip 🤐
-        run: flutter_distributor package --platform=linux --targets=zip
+        run: fastforge package --platform=linux --targets=zip
       - name: Show artifacts 👀
         run: tree dist/
       - name: "Publish Release 📤️"
@@ -93,6 +93,7 @@ jobs:
           gh release edit "${{ github.ref }}" --draft=false
 
   publish-flakehub:
+    if: github.repository == 'quickemu-project/quickgui'
     needs: [version-check]
     name: "Publish FlakeHub ❄️"
     runs-on: "ubuntu-22.04"
@@ -112,6 +113,7 @@ jobs:
           tag: "${{ inputs.tag }}"
 
   publish-ppa-x64:
+    if: github.repository == 'quickemu-project/quickgui'
     needs: [version-check]
     name: "Publish PPA (x64) 🟠"
     runs-on: ubuntu-22.04

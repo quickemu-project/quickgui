@@ -44,23 +44,24 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
                       color: Theme.of(context).colorScheme.onPrimaryContainer,
                     ),
                   ),
-                  const SizedBox(
-                    width: 8,
-                  ),
+                  const SizedBox(width: 8),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Theme.of(context).colorScheme.onSurface,
                       backgroundColor: Theme.of(context).colorScheme.surface,
                     ),
                     onPressed: () async {
-                      var folder = await FilePicker.platform
-                          .getDirectoryPath(dialogTitle: "Pick a folder");
+                      var folder = await FilePicker.getDirectoryPath(
+                        dialogTitle: "Pick a folder",
+                      );
                       if (folder != null) {
                         setState(() {
                           Directory.current = folder;
                         });
                         savePreference(
-                            prefWorkingDirectory, Directory.current.path);
+                          prefWorkingDirectory,
+                          Directory.current.path,
+                        );
                       }
                     },
                     child: Text(Directory.current.path),
@@ -68,9 +69,7 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
                 ],
               ),
             ),
-            const Divider(
-              thickness: 2,
-            ),
+            const Divider(thickness: 2),
             const Row(
               children: [
                 Expanded(
@@ -80,7 +79,7 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 12),
                         child: HomePageButtonGroup(),
-                      )
+                      ),
                     ],
                   ),
                 ),

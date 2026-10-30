@@ -34,3 +34,6 @@ list.csv
 *.mo
 RELEASING.md
 BUILDING.md
+
+# macOS Finder metadata
+.DS_Store

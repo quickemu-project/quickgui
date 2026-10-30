@@ -11,7 +11,7 @@
   dpkg,
   flutter,
   git,
-  gnome,
+  zenity,
   gtk3,
   ninja,
   patchelf,
@@ -32,7 +32,7 @@ mkShell rec {
     dpkg
     flutter
     git
-    gnome.zenity
+    zenity
     gtk3
     ninja
     patchelf
@@ -50,10 +50,10 @@ mkShell rec {
     flutter pub get
     yq eval pubspec.lock -o=json -P > pubspec.lock.json
     flutter config --enable-linux-desktop
-    dart pub global activate flutter_distributor
+    dart pub global activate fastforge 0.6.12
     echo "**********************************************************************"
     echo "* flutter build linux --release                                      *"
-    echo "* flutter_distributor package --platform=linux --targets=zip         *"
+    echo "* fastforge package --platform=linux --targets=zip                  *"
     echo "**********************************************************************"
     if [ -z "$PUB_CACHE" ]; then
       export PATH="$PATH":"$HOME/.pub-cache/bin"

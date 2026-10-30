@@ -18,7 +18,8 @@ class _MainPageState extends State<MainPage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     setWindowTitle(
-        context.t('Quickgui : a Flutter frontend for Quickget and Quickemu'));
+      context.t('Quickgui : a Flutter frontend for Quickget and Quickemu'),
+    );
   }
 
   @override
@@ -31,12 +32,7 @@ class _MainPageState extends State<MainPage> {
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
       ),
       drawer: const LeftMenu(),
-      body: const Column(
-        children: [
-          Logo(),
-          MainMenu(),
-        ],
-      ),
+      body: const Column(children: [Logo(), MainMenu()]),
     );
   }
 }

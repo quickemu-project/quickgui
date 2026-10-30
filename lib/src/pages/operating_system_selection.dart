@@ -33,9 +33,7 @@ class _OperatingSystemSelectionState extends State<OperatingSystemSelection> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).canvasColor,
-              ),
+              decoration: BoxDecoration(color: Theme.of(context).canvasColor),
               child: Padding(
                 padding: const EdgeInsets.all(8),
                 child: Material(
@@ -47,7 +45,8 @@ class _OperatingSystemSelectionState extends State<OperatingSystemSelection> {
                         child: TextField(
                           focusNode: focusNode,
                           decoration: InputDecoration.collapsed(
-                              hintText: context.t('Search operating system')),
+                            hintText: context.t('Search operating system'),
+                          ),
                           onChanged: (value) {
                             setState(() {
                               term = value;
@@ -71,7 +70,10 @@ class _OperatingSystemSelectionState extends State<OperatingSystemSelection> {
               builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
                 if (snapshot.hasData) {
                   List list = snapshot.data!
-                      .where((os) => os.name.toLowerCase().contains(term.toLowerCase()))
+                      .where(
+                        (os) =>
+                            os.name.toLowerCase().contains(term.toLowerCase()),
+                      )
                       .toList();
                   return ListView.builder(
                     padding: const EdgeInsets.only(top: 4),
@@ -109,18 +111,18 @@ class _OperatingSystemSelectionState extends State<OperatingSystemSelection> {
                       Column(
                         children: [
                           const Padding(
-                              padding: EdgeInsets.all(16.0),
-                              child: CircularProgressIndicator()
+                            padding: EdgeInsets.all(16.0),
+                            child: CircularProgressIndicator(),
                           ),
                           Text(context.t('Loading available downloads')),
                         ],
-                      )
+                      ),
                     ],
                   );
                 }
-              }
+              },
             ),
-          ]
+          ],
         ),
       ),
     );

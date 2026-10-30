@@ -52,7 +52,8 @@ class _OptionSelectionState extends State<OptionSelection> {
                               child: TextField(
                                 focusNode: focusNode,
                                 decoration: InputDecoration.collapsed(
-                                    hintText: context.t('Search option')),
+                                  hintText: context.t('Search option'),
+                                ),
                                 onChanged: (value) {
                                   setState(() {
                                     term = value;
