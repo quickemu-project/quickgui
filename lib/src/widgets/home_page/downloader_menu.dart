@@ -16,13 +16,18 @@ class DownloaderMenu extends StatefulWidget {
 }
 
 class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
+  String _currentPath = Directory.current.path;
+
   @override
   void initState() {
     super.initState();
     getPreference<String>(prefWorkingDirectory).then((pref) {
-      setState(() {
-        Directory.current = pref;
-      });
+      if (pref != null && pref.isNotEmpty && Directory(pref).existsSync()) {
+        setState(() {
+          Directory.current = pref;
+          _currentPath = pref;
+        });
+      }
     });
   }
 
@@ -44,9 +49,7 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
                       color: Theme.of(context).colorScheme.onPrimaryContainer,
                     ),
                   ),
-                  const SizedBox(
-                    width: 8,
-                  ),
+                  const SizedBox(width: 8),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Theme.of(context).colorScheme.onSurface,
@@ -55,22 +58,20 @@ class _DownloaderMenuState extends State<DownloaderMenu> with PreferencesMixin {
                     onPressed: () async {
                       var folder = await FilePicker.platform
                           .getDirectoryPath(dialogTitle: "Pick a folder");
-                      if (folder != null) {
+                      if (folder != null && folder.isNotEmpty) {
                         setState(() {
                           Directory.current = folder;
+                          _currentPath = folder;
                         });
-                        savePreference(
-                            prefWorkingDirectory, Directory.current.path);
+                        savePreference(prefWorkingDirectory, folder);
                       }
                     },
-                    child: Text(Directory.current.path),
+                    child: Text(_currentPath),
                   ),
                 ],
               ),
             ),
-            const Divider(
-              thickness: 2,
-            ),
+            const Divider(thickness: 2),
             const Row(
               children: [
                 Expanded(
