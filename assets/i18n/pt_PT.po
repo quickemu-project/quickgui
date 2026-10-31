@@ -2,16 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: quickgui\n"
 "POT-Creation-Date: 2021-09-29 09:59+0200\n"
-"PO-Revision-Date: 2021-12-16 16:53+0000\n"
-"Last-Translator: Ricardo Simões - XM Corporation <xm.corporation@gmail.com>\n"
+"PO-Revision-Date: 2026-10-03 22:47+0100\n"
+"Last-Translator: Ricardo Simões - xmcorporation.com <xmcorporation@gmail.com>\n"
 "Language-Team: Ricardo Simões - XM Corporation\n"
 "Language: pt_PT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
-"X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.9\n"
+"X-Poedit-Basepath: .\n"
 
 msgid "Quickgui : a Flutter frontend for Quickget and Quickemu"
 msgstr "Quickgui: um interface gráfico feito em Flutter para Quickget e Quickemu"
@@ -63,6 +63,9 @@ msgstr "Transferência completada"
 
 msgid "Download of {0} has completed."
 msgstr "Transferência de {0} completou."
+
+msgid "Download of {0} has been cancelled."
+msgstr "A transferência de {0} foi cancelada."
 
 msgid "Manage existing machines"
 msgstr "Gerir máquinas existentes"
@@ -129,3 +132,73 @@ msgstr "Está prestes a pôr termo à máquina virtual {0}"
 
 msgid "Language"
 msgstr "Idioma"
+
+msgid "Directory where the machines are stored"
+msgstr "Diretório onde as máquinas estão guardadas"
+
+msgid "Search version"
+msgstr "Pesquisar versão"
+
+msgid "quickemu was not found in your PATH"
+msgstr "O quickemu não foi encontrado no seu PATH"
+
+msgid "Please install it and try again."
+msgstr "Por favor, instale-o e tente novamente."
+
+# The complete sentence is "See github.com/quickemu-project/quickemu for more information"
+msgid "See"
+msgstr "Consulte"
+
+# The complete sentence is "See github.com/quickemu-project/quickemu for more information"
+msgid "for more information"
+msgstr "para mais informações"
+
+msgid "Delete {0}"
+msgstr "Eliminar {0}"
+
+msgid ""
+"You are about to delete {0}. This cannot be undone. Would you like to delete the disk image "
+"but keep the configuration, or delete the whole VM?"
+msgstr ""
+"Está prestes a eliminar {0}. Esta ação não pode ser anulada. Pretende eliminar a imagem de "
+"disco mas manter a configuração, ou eliminar toda a máquina virtual?"
+
+msgid "Delete disk image"
+msgstr "Eliminar imagem de disco"
+
+msgid "Delete whole VM"
+msgstr "Eliminar toda a VM"
+
+msgid "Connect display with SPICE"
+msgstr "Ligar ecrã com SPICE"
+
+msgid "SPICE client not found"
+msgstr "Cliente SPICE não encontrado"
+
+msgid "Connect with SSH"
+msgstr "Ligar com SSH"
+
+msgid "SSH server not detected on guest"
+msgstr "Servidor SSH não detetado no sistema convidado"
+
+msgid "Launch SSH connection to {0}"
+msgstr "Iniciar ligação SSH para {0}"
+
+msgid "SSH username"
+msgstr "Nome de utilizador SSH"
+
+# Connect to the VM via SSH
+msgid "Connect"
+msgstr "Ligar"
+
+msgid "Error"
+msgstr "Erro"
+
+msgid "Could not write to the working directory. Please check the permissions."
+msgstr "Não foi possível escrever no diretório de trabalho. Por favor, verifique as permissões."
+
+msgid "Loading available downloads"
+msgstr "A carregar transferências disponíveis"
+
+msgid "Powered by"
+msgstr "Alimentado por"
