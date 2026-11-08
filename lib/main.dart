@@ -20,7 +20,6 @@ Future<List<OperatingSystem>> loadOperatingSystems(bool showUbuntus) async {
   var process = await Process.run('quickget', ['--list-csv']);
   var stdout = process.stdout as String;
   var output = <OperatingSystem>[];
-
   OperatingSystem? currentOperatingSystem;
   Version? currentVersion;
 
@@ -32,8 +31,7 @@ Future<List<OperatingSystem>> loadOperatingSystems(bool showUbuntus) async {
       .forEach((element) {
     var chunks = element.split(",");
     Tuple5 supportedVersion;
-    if (chunks.length == 4) // Legacy version of quickget
-    {
+    if (chunks.length == 4) {
       supportedVersion = Tuple5.fromList([...chunks, "curl"]);
     } else {
       var t5 = [chunks[0], chunks[1], chunks[2], chunks[3], chunks[4]].toList();
@@ -46,10 +44,12 @@ Future<List<OperatingSystem>> loadOperatingSystems(bool showUbuntus) async {
       output.add(currentOperatingSystem!);
       currentVersion = null;
     }
+
     if (currentVersion?.version != supportedVersion.item3) {
       currentVersion = Version(supportedVersion.item3);
       currentOperatingSystem!.versions.add(currentVersion!);
     }
+
     currentVersion!.options
         .add(Option(supportedVersion.item4, supportedVersion.item5));
   });
@@ -58,22 +58,30 @@ Future<List<OperatingSystem>> loadOperatingSystems(bool showUbuntus) async {
 }
 
 Future<void> getIcons() async {
-  final manifestContent = await rootBundle.loadString('AssetManifest.json');
-  final Map<String, dynamic> manifestMap = json.decode(manifestContent);
-  final imagePaths = manifestMap.keys
-      .where((String key) => key.contains('quickemu-icons/'))
-      .where((String key) => key.contains('.svg'))
-      .toList();
-  for (final imagePath in imagePaths) {
-    String filename = imagePath.split('/').last;
-    String id = filename.substring(0, filename.lastIndexOf('.'));
-    osIcons[id] = imagePath;
+  try {
+    final manifestContent = await rootBundle.loadString('AssetManifest.json');
+    final Map<String, dynamic> manifestMap = json.decode(manifestContent);
+    final imagePaths = manifestMap.keys
+        .where((String key) => key.contains('quickemu-icons/'))
+        .where((String key) => key.contains('.svg'))
+        .toList();
+
+    for (final imagePath in imagePaths) {
+      String filename = imagePath.split('/').last;
+      String id = filename.substring(0, filename.lastIndexOf('.'));
+      osIcons[id] = imagePath;
+    }
+  } on FlutterError catch (e) {
+    debugPrint('Warning: Could not load AssetManifest.json: $e');
+    // Icons will use fallback/default when not found
+  } catch (e) {
+    debugPrint('Warning: Failed to load icons: $e');
   }
 }
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Don't forget to also change the size in linux/my_application.cc:50
+
   if (Platform.isMacOS) {
     setWindowMinSize(const Size(692 + 2, 580 + 30));
     setWindowMaxSize(const Size(692 + 2, 580 + 30));
@@ -81,12 +89,18 @@ void main() async {
     setWindowMinSize(const Size(692, 580));
     setWindowMaxSize(const Size(800, 720));
   }
+
   final foundQuickGet = await Process.run('which', ['quickget']);
   if (foundQuickGet.exitCode == 0) {
     gOperatingSystems = loadOperatingSystems(false);
-    getIcons();
-    AppVersion.packageInfo = await PackageInfo.fromPlatform();
+    await getIcons(); // Added await for proper error handling
+    try {
+      AppVersion.packageInfo = await PackageInfo.fromPlatform();
+    } catch (e) {
+      debugPrint('Warning: Could not get package info: $e');
+    }
   }
+
   runApp(
     MultiProvider(
       providers: [
